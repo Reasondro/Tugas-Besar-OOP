@@ -19,3 +19,4 @@ public class App {
         System.out.println(WordUtils.capitalize(result));
     }
 }
+//? kita harus gradle build di file yg ada si buildny. 
