@@ -1,16 +1,18 @@
 import Plants.*;
 import Zombies.*;
+import java.util.*;
 public class App { 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
-    Lilypad lilypad = new Lilypad();
-    lilypad.displayStatus();
-    lilypad.useAbility();
+        Scanner input = new Scanner(System.in);
+        String x = input.nextLine();
+        System.out.println("Hasil:");
+        System.out.println(x);
 
-    ConeheadZombie coneheadZombie = new ConeheadZombie();
-    coneheadZombie.displayStatus();
-    coneheadZombie.useAbility();
-
+        input.close();
+        // Lilypad lilypad = new Lilypad();
+        // lilypad.displayStatus();
+        // lilypad.useAbility();
 
     }
 }
