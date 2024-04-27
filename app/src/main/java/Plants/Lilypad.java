@@ -7,5 +7,10 @@ public class Lilypad extends Plant{
         super("Lilypad", 25, 100, 0, 0, 0, 10);
     }
     
+    @Override
+    public void useAbility()
+    {
+        System.out.println("Lilypad floats!");
+    }
    
 }

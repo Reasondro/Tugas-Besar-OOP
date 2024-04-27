@@ -7,5 +7,10 @@ public class Snowpea extends Plant{
         super("Snow pea", 50, 100, 25, 1, -1, 10);
     }
     
+    @Override
+    public void useAbility()
+    {
+        System.out.println("Snow pea shoots frozen peas!");
+    }
 
 }

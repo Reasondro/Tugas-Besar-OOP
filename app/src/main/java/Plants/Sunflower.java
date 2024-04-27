@@ -11,6 +11,11 @@ public class Sunflower extends Plant{
     // {
     //     System.out.println("Sunflower generates sunlight");
     // }
+
+    @Override
+    public void useAbility() {
+        System.out.println("Sunflower generates sunlight");
+    }
     
 
 }

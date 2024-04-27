@@ -1,6 +1,6 @@
 package Zombies;
 
-public abstract class Zombie {
+public abstract class Zombie implements Abilities.Ability{
 
     private String name;
     private int health;

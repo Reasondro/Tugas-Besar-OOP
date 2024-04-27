@@ -1,7 +1,8 @@
 package Plants;
 
-public abstract class Plant {
-    
+
+public abstract class Plant  implements Abilities.Ability {
+
     private String name;
     private int cost;
     private int health;

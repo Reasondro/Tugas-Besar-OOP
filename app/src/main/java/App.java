@@ -1,10 +1,16 @@
 import Plants.*;
-
+import Zombies.*;
 public class App { 
     public static void main(String[] args) {
 
     Lilypad lilypad = new Lilypad();
     lilypad.displayStatus();
+    lilypad.useAbility();
+
+    ConeheadZombie coneheadZombie = new ConeheadZombie();
+    coneheadZombie.displayStatus();
+    coneheadZombie.useAbility();
+
 
     }
 }
