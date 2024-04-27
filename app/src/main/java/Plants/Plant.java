@@ -1,9 +1,10 @@
 package Plants;
 
 import Position.*;
+import Abilities.*;
 
 
-public abstract class Plant  implements Abilities.Ability {
+public abstract class Plant  implements Ability {
 
     private String name;
     private int cost;

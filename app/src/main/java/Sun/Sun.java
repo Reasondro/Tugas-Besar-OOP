@@ -2,6 +2,8 @@ package Sun;
 
 public class Sun {
     
+    //TODO make a list of suns in the game and implement it dengan sun class ato Sunflower
+
     private static int sunPoints;
     
     public Sun()
