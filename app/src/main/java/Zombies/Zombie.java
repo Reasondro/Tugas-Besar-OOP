@@ -1,4 +1,5 @@
 package Zombies;
+import Position.*;
 
 public abstract class Zombie implements Abilities.Ability{
 
@@ -7,14 +8,18 @@ public abstract class Zombie implements Abilities.Ability{
     private int attack_damage;
     private int attack_speed;
     private boolean is_aquatic;
+    private Positition pos;
 
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic)
+    //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
+
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Positition pos)
     {
         this.name = name;
         this.health = health;
         this.attack_damage = attack_damage;
         this.attack_speed = attack_speed;
         this.is_aquatic = is_aquatic;
+        this.pos = pos;
     }
 
     public void displayStatus()
@@ -24,6 +29,7 @@ public abstract class Zombie implements Abilities.Ability{
         System.out.println("Attack Damage: " + attack_damage);
         System.out.println("Attack Speed: " + attack_speed);
         System.out.println("Is Aquatic: " + is_aquatic);
+        System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
     }
 
 }

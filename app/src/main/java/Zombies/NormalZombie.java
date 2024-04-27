@@ -1,10 +1,12 @@
 package Zombies;
 
+import Position.Positition;
+
 public class NormalZombie extends Zombie{
 
     public NormalZombie()
     {
-        super("Normal Zombie", 125, 100, 1, false);
+        super("Normal Zombie", 125, 100, 1, false,  new Positition(0, 0));
     }
 
     @Override

@@ -4,17 +4,14 @@ import java.util.*;
 public class App { 
     public static void main(String[] args)  {
 
-        // Scanner input = new Scanner(System.in);
-        // String x = input.nextLine();
-        // System.out.println("Hasil:");
-        // System.out.println(x);
+        Lilypad lilypad = new Lilypad();
+        lilypad.displayStatus();
+        lilypad.useAbility();
+        NormalZombie normalZombie = new NormalZombie();
+        normalZombie.displayStatus();
+        normalZombie.useAbility();
 
-        // input.close();
-        // Lilypad lilypad = new Lilypad();
-        // lilypad.displayStatus();
-        // lilypad.useAbility();
-
-        Game.main(args);
+        // Game.main(args);
 
     }
 }

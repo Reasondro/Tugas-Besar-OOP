@@ -1,5 +1,7 @@
 package Plants;
 
+import Position.*;
+
 
 public abstract class Plant  implements Abilities.Ability {
 
@@ -10,8 +12,11 @@ public abstract class Plant  implements Abilities.Ability {
     private int attack_speed;
     private int range;
     private int cooldown;
+    Positition pos;
 
-    public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown )
+    //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
+
+    public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown, Positition pos )
     {
         this.name = name;
         this.cost = cost;
@@ -20,6 +25,7 @@ public abstract class Plant  implements Abilities.Ability {
         this.attack_speed = attack_speed;
         this.range = range;
         this.cooldown = cooldown;
+        this.pos = pos;
     }
 
     public void displayStatus()
@@ -31,6 +37,7 @@ public abstract class Plant  implements Abilities.Ability {
         System.out.println("Attack Speed: " + attack_speed);
         System.out.println("Range: " + range);
         System.out.println("Cooldown: " + cooldown);
+        System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
     }
 
 }
