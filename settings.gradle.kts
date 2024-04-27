@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "Tugas-Besar-OOP"
-include("app", "list", "utilities")
+include("app", "list", "Plants", "Zombie", "Game")
