@@ -35,6 +35,6 @@ public class Game {
     }
 
     public void gameLoop() {
-        System.out.println("Game Loop");
+        // System.out.println("Game Loop");
     }
 }
