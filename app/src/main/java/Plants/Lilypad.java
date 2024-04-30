@@ -14,7 +14,4 @@ public class Lilypad extends Plant{
     {
         System.out.println("Lilypad floats!");
     }
-
-    public void reduceCooldown(){
-    } 
 }

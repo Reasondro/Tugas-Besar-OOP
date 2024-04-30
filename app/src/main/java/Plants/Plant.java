@@ -1,6 +1,7 @@
 package Plants;
 
 import Position.*;
+import Zombies.Zombie;
 import Abilities.*;
 
 
@@ -43,5 +44,9 @@ public abstract class Plant  implements Ability {
 
     public void reduceCooldown(){
         cooldown-= 1;
+    }
+
+    public void specialAbility(Zombie zomb){
+        zomb.decreaseHP(this);
     }
 }
