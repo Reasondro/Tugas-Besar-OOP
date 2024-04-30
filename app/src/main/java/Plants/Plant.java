@@ -70,8 +70,12 @@ public abstract class Plant  implements Ability {
         return health;
     }
 
-    public void setHealth(int health){
-        this.health = health;
+    public void setHealth (int health) throws Exception{
+        if (health > 0){
+            this.health = health;
+        } else {
+            throw new Exception(String.format("Health sudah mencapai batas bawah, yaitu 0"));
+        }
     }
 
 
@@ -103,8 +107,12 @@ public abstract class Plant  implements Ability {
         return cooldown;
     }
 
-    public void setCooldown(int cooldown){
-        this.cooldown = cooldown;
+    public void setCooldown(int cooldown) throws Exception{
+        if (cooldown > 0){
+            this.cooldown = cooldown;
+        }else {
+            throw new Exception(String.format("Cooldown sudah mencapai batas bawah, yaitu 0"));
+        }
     }
 
     public Positition getPos(){
@@ -115,6 +123,6 @@ public abstract class Plant  implements Ability {
         this.pos = pos;
     }
 
-    
+
 
 }
