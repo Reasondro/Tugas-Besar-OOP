@@ -41,4 +41,7 @@ public abstract class Plant  implements Ability {
         System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
     }
 
+    public void reduceCooldown(){
+        cooldown-= 1;
+    }
 }
