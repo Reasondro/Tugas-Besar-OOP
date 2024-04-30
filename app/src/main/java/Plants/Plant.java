@@ -122,7 +122,4 @@ public abstract class Plant  implements Ability {
     public void setPos(Positition pos){
         this.pos = pos;
     }
-
-
-
 }
