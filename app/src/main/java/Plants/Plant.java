@@ -49,4 +49,72 @@ public abstract class Plant  implements Ability {
     public void specialAbility(Zombie zomb){
         zomb.decreaseHP(this);
     }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+
+    public void setCost(int cost){
+        this.cost = cost;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void setHealth(int health){
+        this.health = health;
+    }
+
+
+    public int getAttack_damage(){
+        return attack_damage;
+    }
+
+    public void setAttack_damage(int attack_damage){
+        this.attack_damage = attack_damage;
+    }
+
+    public int getAttack_speed(){
+        return attack_speed;
+    }
+
+    public void setAttack_speed(int attack_speed){
+        this.attack_speed = attack_speed;
+    }
+
+    public int getRange(){
+        return range;
+    }
+
+    public void setRange(int range){
+        this.range = range;
+    }
+    
+    public int getCooldown(){
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown){
+        this.cooldown = cooldown;
+    }
+
+    public Positition getPos(){
+        return pos;
+    }
+
+    public void setPos(Positition pos){
+        this.pos = pos;
+    }
+
+    
+
 }
