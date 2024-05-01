@@ -1,12 +1,12 @@
 package Plants;
 
-import Position.Positition;
+import Position.Position;
 
 public class Wallnut extends Plant{
     
     public Wallnut()
     {
-        super("Wall nut", 50, 1000, 0, 0, 0, 20,  new Positition(0, 0));
+        super("Wall nut", 50, 1000, 0, 0, 0, 20,  new Position(0, 0));
     }
 
     @Override

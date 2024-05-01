@@ -8,11 +8,11 @@ public abstract class Zombie implements Abilities.Ability{
     private int attack_damage;
     private int attack_speed;
     private boolean is_aquatic;
-    private Positition pos;
+    private Position pos;
 
     //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
 
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Positition pos)
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Position pos)
     {
         this.name = name;
         this.health = health;

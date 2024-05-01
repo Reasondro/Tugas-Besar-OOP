@@ -1,12 +1,12 @@
 package Plants;
 
-import Position.Positition;
+import Position.Position;
 
 public class Sunflower extends Plant{
     
     public Sunflower()
     {
-        super("Sunflower", 50, 100, 0, 0, 0, 10,  new Positition(0, 0));
+        super("Sunflower", 50, 100, 0, 0, 0, 10,  new Position(0, 0));
     }
     
     // public void generate_sunlight()

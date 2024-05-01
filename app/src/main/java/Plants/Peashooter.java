@@ -1,12 +1,12 @@
 package Plants;
 
-import Position.Positition;
+import Position.Position;
 
 public class Peashooter extends Plant{
     
     public Peashooter()
     {
-        super("Peashooter", 100, 100, 25, 1, -1, 10,  new Positition(0, 0));
+        super("Peashooter", 100, 100, 25, 1, -1, 10,  new Position(0, 0));
     }
     
     public void useAbility()

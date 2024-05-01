@@ -13,11 +13,11 @@ public abstract class Plant  implements Ability {
     private int attack_speed;
     private int range;
     private int cooldown;
-    Positition pos;
+    Position pos;
 
     //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
 
-    public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown, Positition pos )
+    public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown, Position pos )
     {
         this.name = name;
         this.cost = cost;
