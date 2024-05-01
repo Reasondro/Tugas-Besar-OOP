@@ -1,5 +1,9 @@
 package Creature;
 
+
+//TODO Make position an attribute of Creature
+//TODO Clean the attributes and methods of this class
+
 public abstract class Creature {
     private String name;
     private int health;
