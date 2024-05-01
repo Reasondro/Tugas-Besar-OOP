@@ -32,4 +32,56 @@ public abstract class Zombie implements Abilities.Ability{
         System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setHealth(int health){
+        this.health = health;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void setAttackDamage(int attack_damage){
+        this.attack_damage = attack_damage;
+    }
+
+    public int getAttackDamage(){
+        return attack_damage;
+    }
+
+    public void setAttackSpeed(int attack_speed){
+        this.attack_speed = attack_speed;
+    }
+
+    public int getAttackSpeed(){
+        return attack_speed;
+    }
+
+    public void setAquatic(boolean is_aquatic){
+        this.is_aquatic = is_aquatic;
+    }
+
+    public boolean getAquatic(){
+        return is_aquatic;
+    }
+
+    public void setPosition(Positition pos){
+        this.pos = pos;
+    }
+
+    public Positition getPosition(){
+        return pos;
+    }
+
+    public void decreaseHP(Plant plant){
+        health -= plant.getAttack_damage();
+    }
+    
 }
