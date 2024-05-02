@@ -1,5 +1,6 @@
 import Plants.*;
 import Zombies.*;
+import Sun.*;
 import java.util.*;
 public class App { 
     public static void main(String[] args)  {
@@ -22,10 +23,13 @@ public class App {
         z.attackPlant(p);
         System.out.println("Plant Health:" + p.getHealth());
 
-    
+        Sun sun = new Sun();
+        sun.displayStatus();
 
+        Sunflower sunflower = new Sunflower();
+        sunflower.useAbility();
 
-
+        sun.displayStatus();
 
 
         // Game.main(args);

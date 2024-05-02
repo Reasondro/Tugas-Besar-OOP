@@ -17,6 +17,7 @@ public class Sunflower extends Plant implements PlantAbility  {
     @Override
     public void useAbility() 
     {
+        //TODO implemetn to only use ability if cooldown is 0 (this might be needed if in the game logic this wont)
         // if(sunCooldown > 0)
         // {
         //     sunCooldown--;
