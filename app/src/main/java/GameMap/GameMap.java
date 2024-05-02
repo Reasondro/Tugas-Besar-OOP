@@ -74,12 +74,26 @@ public class GameMap {
         for(int i = 0; i < rows; i++) 
         {
             for(int j = 0; j < columns; j++) {
-                map[i][j].printPos();
-                map[i][j].printType();
+             
+                if(j == columns-1)
+                {
+                    map[i][j].printCreatures();
+                    System.out.println();
+                }
+                else
+                {
+                    map[i][j].printCreatures();
+                    System.out.print(", ");
+                }
             }
         }
     }
 
-    
+    public Petak getPetak(Position pos)
+    {
+        return map[pos.getX()-1][pos.getY()];
+    }
+
 
 }
+

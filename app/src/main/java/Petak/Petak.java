@@ -62,7 +62,19 @@ public class Petak {
     // }
 
 
-    public void printCreature() {
+    public void printCreatures() {
+
+        if(type == "Zombie Base")  //TODO Delete this if when implementing the zombie spawn logic
+        {
+            System.out.print("[Zombie Base]");
+            return;
+        }
+        else if(type == "Protected") {
+            System.out.print("[Protected]");
+            return;
+        }
+        
+
         System.out.print("[");
         for (int i = 0; i < creatures.size(); i++) {
             System.out.print(creatures.get(i).getName());
@@ -70,7 +82,7 @@ public class Petak {
                 System.out.print(", ");
             }
         }
-        System.out.println("]");
+        System.out.print("]");
     }
 }
 
