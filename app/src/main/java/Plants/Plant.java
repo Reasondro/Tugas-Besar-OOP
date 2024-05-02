@@ -41,7 +41,7 @@ public abstract class Plant  implements Ability {
         System.out.println("Cooldown: " + cooldown);
         System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
     }
-
+// #TES
     public void reduceCooldown(){
         cooldown-= 1;
     }
@@ -49,6 +49,8 @@ public abstract class Plant  implements Ability {
     public void specialAbility(Zombie zomb){
         zomb.decreaseHP(this);
     }
+     zombie attackdamage, dahayu buat getattackdamaege return attackk damage 
+    public void decreaseHP()
 
     public String getName(){
         return name;
