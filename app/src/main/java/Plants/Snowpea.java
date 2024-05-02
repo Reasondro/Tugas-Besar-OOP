@@ -4,12 +4,14 @@ import Position.Position;
 
 import PlantAbility.*;
 import Zombies.Zombie;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Snowpea extends Plant  implements PlantAbility{
 
-    private List<Zombie> targets;
+    private List<Zombie> targets = new ArrayList<>();
 
     public Snowpea()
     {
@@ -21,6 +23,15 @@ public class Snowpea extends Plant  implements PlantAbility{
         this.targets = targets;
     }
 
+    public void addTarget(Zombie z)
+    {
+        targets.add(z);
+    }
+
+    public void removeTarget(Zombie z)
+    {
+        targets.remove(z);
+    }
     @Override
     public void useAbility( )
     {

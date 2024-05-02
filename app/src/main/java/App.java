@@ -7,16 +7,23 @@ public class App {
         // Lilypad lilypad = new Lilypad();
         // lilypad.displayStatus();
 
-        Peashooter peashooter = new Peashooter();
-        // peashooter.displayStatus();
-
-        // lilypad.useAbility();
-        NormalZombie normalZombie = new NormalZombie();
+        Squash p = new Squash();
+        // p.displayStatus();
+        
+        NormalZombie z = new NormalZombie();
         // normalZombie.displayStatus();
-        // normalZombie.useAbility();
-        System.out.println(peashooter.getHealth());
-        normalZombie.attackPlant(peashooter);
-        System.out.println(peashooter.getHealth());
+
+        System.out.println("Zombie Health :" + z.getHealth());
+        p.addTarget(z);
+        p.useAbility();
+        System.out.println("Zombie Health :" + z.getHealth());
+
+        System.out.println("Plant Health:" + p.getHealth());
+        z.attackPlant(p);
+        System.out.println("Plant Health:" + p.getHealth());
+
+    
+
 
 
 

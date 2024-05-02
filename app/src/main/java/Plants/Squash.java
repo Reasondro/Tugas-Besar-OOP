@@ -4,13 +4,14 @@ import Position.Position;
 
 import PlantAbility.*;
 import Zombies.Zombie;
-import java.util.List;
 
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Squash  extends Plant implements PlantAbility{
 
-    private List<Zombie> targets;
+    private List<Zombie> targets = new ArrayList<>();
 
     
     public Squash()
@@ -21,6 +22,16 @@ public class Squash  extends Plant implements PlantAbility{
     public void setTargets(List<Zombie> targets)
     {
         this.targets = targets;
+    }
+
+    public void addTarget(Zombie z)
+    {
+        targets.add(z);
+    }
+
+    public void removeTarget(Zombie z)
+    {
+        targets.remove(z);
     }
 
     @Override
