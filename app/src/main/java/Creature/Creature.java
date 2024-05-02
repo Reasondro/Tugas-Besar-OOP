@@ -36,6 +36,10 @@ public abstract class Creature {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public void reduceHealth(int damage) {
+        health -= damage;
+    }
     
     public int getAttackDamage() {
         return attack_damage;

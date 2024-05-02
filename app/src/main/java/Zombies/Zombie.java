@@ -1,6 +1,7 @@
 package Zombies;
 import Position.*;
 import Creature.*;
+import Plants.Plant;
 
 
 public abstract class Zombie extends Creature{
@@ -8,6 +9,8 @@ public abstract class Zombie extends Creature{
 
     private int walkSpeed;
     private boolean is_aquatic;
+    private boolean frozen = false;
+    private int frozenTimer = 0;
     private Position pos;
 
     //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
@@ -36,6 +39,40 @@ public abstract class Zombie extends Creature{
         this.is_aquatic = is_aquatic;
     }
 
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
+
+    public int getFrozenTimer() {
+        return frozenTimer;
+    }
+
+    public void setFrozenTimer(int frozenTimer) {
+        this.frozenTimer = frozenTimer;
+    }
+
+    public void reduceFrozenTimer()
+    {
+        if(frozenTimer < 0)
+        {
+            return;
+        }
+        else if(frozenTimer == 0)
+        {
+            setFrozen(false);
+            setWalkSpeed(5);
+        }
+        else if(frozenTimer > 0)
+        {
+            frozenTimer--;
+        }
+
+    }
+
     public Position getPos() {
         return pos;
     }
@@ -44,8 +81,12 @@ public abstract class Zombie extends Creature{
         this.pos = pos;
     }
 
-    public void attack(); //TODO masukin logic yg kmrin ke attack sini
-    public void walk(); //TODO ini sama aku aja yg walk
+    public void attackPlant(Plant p)
+    {
+        p.reduceHealth(getAttackDamage());
+    }
+
+    // public void walk(); //TODO ini sama aku aja yg walk
 
 
     public void displayStatus()

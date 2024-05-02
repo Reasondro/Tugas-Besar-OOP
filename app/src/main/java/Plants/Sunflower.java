@@ -2,9 +2,12 @@ package Plants;
 
 import Position.Position;
 import PlantAbility.*;
+import Sun.*;
 
 
 public class Sunflower extends Plant implements PlantAbility  {
+
+    // private int sunCooldown = 0;
     
     public Sunflower()
     {
@@ -12,8 +15,20 @@ public class Sunflower extends Plant implements PlantAbility  {
     }
     
     @Override
-    public void useAbility() {
-        System.out.println("Sunflower generates sunlight");
+    public void useAbility() 
+    {
+        // if(sunCooldown > 0)
+        // {
+        //     sunCooldown--;
+        //     return;
+        // }
+        // else if(sunCooldown == 0)
+        // {
+        //     sunCooldown = 5;
+        // }
+        Sun sun = Sun.getInstance();
+        sun.addSunPoints(25);
+    
     }
     
 

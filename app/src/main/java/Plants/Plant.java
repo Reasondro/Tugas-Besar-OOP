@@ -10,6 +10,7 @@ public abstract class Plant extends Creature {
     private int cost;
     private int range;
     private int cooldown;
+    private int original_cooldown;
     Position pos;
 
     //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
@@ -21,6 +22,7 @@ public abstract class Plant extends Creature {
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;
+        this.original_cooldown = cooldown;
         this.pos = pos;
     }
 
@@ -50,9 +52,25 @@ public abstract class Plant extends Creature {
 
     public void reduceCooldown()
     {
+        if(cooldown<0)
+        {
+            return;
+        }
+        else if(cooldown == 0)
+        {
+            refreshCooldown();
+        }
+        else if(cooldown > 0) //TODO implement a way so if user haven't planted the plant/card yet, the cooldown will not be reduced
+        {
         cooldown--;
+        }
+        
     }
 
+    public void refreshCooldown()
+    {
+        cooldown = original_cooldown;
+    }
 
     public Position getPos() {
         return pos;
