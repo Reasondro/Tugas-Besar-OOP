@@ -9,10 +9,5 @@ public class NormalZombie extends Zombie{
         super("Normal Zombie", 125, 100, 1, false,  new Position(0, 0));
     }
 
-    @Override
-    public void useAbility()
-    {
-        System.out.println("Normal Zombie walks slowly.");
-    }
     
 }

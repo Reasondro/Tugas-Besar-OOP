@@ -1,8 +1,10 @@
 package Plants;
 
 import Position.Position;
+import PlantAbility.*;
 
-public class Snowpea extends Plant{
+
+public class Snowpea extends Plant  implements PlantAbility{
 
     public Snowpea()
     {

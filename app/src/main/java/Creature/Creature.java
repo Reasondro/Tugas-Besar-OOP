@@ -7,13 +7,17 @@ package Creature;
 public abstract class Creature {
     private String name;
     private int health;
-    private int attackPower;
+    private int attack_damage;
+    private int attack_speed;
+
     
     // Constructor
-    public Creature(String name, int health, int attackPower) {
+    public Creature(String name, int health, int attack_damage, int attack_speed) {
         this.name = name;
         this.health = health;
-        this.attackPower = attackPower;
+        this.attack_damage = attack_damage;
+        this.attack_speed = attack_speed;
+
     }
     
     // Getters and Setters
@@ -33,14 +37,20 @@ public abstract class Creature {
         this.health = health;
     }
     
-    public int getAttackPower() {
-        return attackPower;
+    public int getAttackDamage() {
+        return attack_damage;
     }
     
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
+    public void setAttackDamage(int attack_damage) {
+        this.attack_damage = attack_damage;
+    }
+
+    public int getAttackSpeed() {
+        return attack_speed;
+    }
+
+    public void setAttackSpeed(int attack_speed) {
+        this.attack_speed = attack_speed;
     }
     
-    // Abstract method
-    public abstract void attack();
 }

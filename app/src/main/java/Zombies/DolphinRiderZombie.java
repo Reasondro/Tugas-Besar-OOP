@@ -1,8 +1,9 @@
 package Zombies;
 
 import Position.Position;
+import ZombieAbility.*;
 
-public class DolphinRiderZombie extends Zombie{
+public class DolphinRiderZombie extends Zombie implements ZombieAbility{
 
     public DolphinRiderZombie()
     {

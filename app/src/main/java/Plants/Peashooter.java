@@ -2,7 +2,9 @@ package Plants;
 
 import Position.Position;
 
-public class Peashooter extends Plant{
+import PlantAbility.*;
+
+public class Peashooter extends Plant implements PlantAbility{
     
     public Peashooter()
     {

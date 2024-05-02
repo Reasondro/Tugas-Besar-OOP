@@ -9,10 +9,5 @@ public class BucketheadZombie extends Zombie{
         super("Buckethead Zombie", 300, 100, 1, false,  new Position(0, 0));
     }
 
-    @Override
-    public void useAbility()
-    {
-        System.out.println("Buckethead Zombie has a bucket on its head!");
-    }
     
 }
