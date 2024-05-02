@@ -1,8 +1,8 @@
 package Plants;
 
-import Position.*;
-// import PlantAbility.*;
 import Creature.*;
+import Position.*;
+
 
 
 public abstract class Plant extends Creature {
@@ -11,19 +11,18 @@ public abstract class Plant extends Creature {
     private int range;
     private int cooldown;
     private int original_cooldown;
-    Position pos;
+    // private boolean isPlanted = false;
+    
 
-    //TODO tambahin input user buat ngatur posisi di konstruktor (ga default 0 , 0)
 
     public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown, Position pos )
     {
 
-        super(name, health, attack_damage, attack_speed);
+        super(name, health, attack_damage, attack_speed, pos);
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;
         this.original_cooldown = cooldown;
-        this.pos = pos;
     }
 
     public int getCost() {
@@ -72,14 +71,6 @@ public abstract class Plant extends Creature {
         cooldown = original_cooldown;
     }
 
-    public Position getPos() {
-        return pos;
-    }
-
-    public void setPos(Position pos) {
-        this.pos = pos;
-    }
-
 
     public void displayStatus()
     {
@@ -90,7 +81,7 @@ public abstract class Plant extends Creature {
         System.out.println("Attack Speed: " + getAttackSpeed());
         System.out.println("Range: " + getRange());
         System.out.println("Cooldown: " + getCooldown());
-        System.out.printf("Position: X = %d, Y = %d\n", pos.getX(), pos.getY());
+        System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
     }
 
 }

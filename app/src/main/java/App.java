@@ -9,15 +9,17 @@ public class App {
         // lilypad.displayStatus();
 
         Squash p = new Squash();
-        // p.displayStatus();
+        p.displayStatus();
         
         NormalZombie z = new NormalZombie();
-        // normalZombie.displayStatus();
+        z.displayStatus();
 
         System.out.println("Zombie Health :" + z.getHealth());
         p.addTarget(z);
         p.useAbility();
         System.out.println("Zombie Health :" + z.getHealth());
+
+        //? Yes, correct zombinya masi bisa attack padahal sudah dead. SEKEDAR testing untuk sementara, implementasi nanti akan diubah
 
         System.out.println("Plant Health:" + p.getHealth());
         z.attackPlant(p);

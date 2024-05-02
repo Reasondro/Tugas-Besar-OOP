@@ -1,5 +1,8 @@
 package Creature;
 
+import Position.*;
+
+
 
 //TODO Make position an attribute of Creature
 //TODO Clean the attributes and methods of this class
@@ -9,14 +12,16 @@ public abstract class Creature {
     private int health;
     private int attack_damage;
     private int attack_speed;
+    private Position pos;
 
     
     // Constructor
-    public Creature(String name, int health, int attack_damage, int attack_speed) {
+    public Creature(String name, int health, int attack_damage, int attack_speed, Position pos) {
         this.name = name;
         this.health = health;
         this.attack_damage = attack_damage;
         this.attack_speed = attack_speed;
+        this.pos = pos;
 
     }
     
@@ -55,6 +60,14 @@ public abstract class Creature {
 
     public void setAttackSpeed(int attack_speed) {
         this.attack_speed = attack_speed;
+    }
+
+    public Position getPos() {
+        return pos;
+    }
+
+    public void setPos(Position pos) {
+        this.pos = pos;
     }
     
 }
