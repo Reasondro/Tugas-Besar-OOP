@@ -31,7 +31,8 @@ public class Petak {
     }
 
     // Add a creature to the list
-    public void addCreature(Creature creature) {
+    public void addCreature(Creature creature) //? TODO Allow Game logic to add the creature to petak
+    {
         creatures.add(creature);
         creature.setPos(pos);
     }
