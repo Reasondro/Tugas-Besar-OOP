@@ -4,7 +4,7 @@ import Zombies.Zombie;
 import Zombies.PoleVaultingZombie;
 
 
-public class PoleVaultingZombieFactory {
+public class PoleVaultingZombieFactory extends ZombieFactory {
     
     private static int poleVaultingZombieCount = 0;
     public Zombie createZombie()

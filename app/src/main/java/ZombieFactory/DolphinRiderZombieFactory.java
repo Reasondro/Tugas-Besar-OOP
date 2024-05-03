@@ -3,7 +3,7 @@ package ZombieFactory;
 import Zombies.Zombie;
 import Zombies.DolphinRiderZombie;
 
-public class DolphinRiderZombieFactory {
+public class DolphinRiderZombieFactory extends ZombieFactory {
 
     private static int dolphinRiderZombieCount = 0;
     public Zombie createZombie()
