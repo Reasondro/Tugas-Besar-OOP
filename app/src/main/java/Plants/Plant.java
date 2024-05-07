@@ -46,11 +46,19 @@ public abstract class Plant  implements Ability {
         cooldown-= 1;
     }
 
-    public void specialAbility(Zombie zomb){
-        zomb.decreaseHP(this);
+    public void specialAbility(Zombie z){
+        z.decreaseHP(this);
     }
-     zombie attackdamage, dahayu buat getattackdamaege return attackk damage 
-    public void decreaseHP()
+
+    public void attackZombie(Zombie z)
+    {
+        z.reduceHealth(getAttackDamage());
+    }
+    
+    
+    public void decreaseHP(Zombie z){
+        health -= z.getAttack_damage();
+    }
 
     public String getName(){
         return name;
