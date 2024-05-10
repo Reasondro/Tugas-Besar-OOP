@@ -3,6 +3,9 @@ package GameMap;
 import java.util.*;
 import Petak.Petak;
 import Position.Position;
+import Creature.Creature;
+import Zombies.Zombie;
+import Plants.Plant;
 
 public class GameMap {
 
@@ -104,6 +107,64 @@ public class GameMap {
                 }
             }
         }
+    }
+
+    public List<Petak> getRow(int row)
+    {
+        List<Petak> rowList = new ArrayList<>();
+        for(int i = 0; i < columns; i++)
+        {
+            rowList.add(map[row][i]);
+        }
+        return rowList;
+    }
+
+    public List<Petak> getRowBasedOnPlantRange(Plant p) //TODO use only Creature Parameter
+    {
+        List<Petak> rowList = new ArrayList<>();
+        Position pos = p.getPos();
+        int range = p.getRange();
+        
+        int row = pos.getX()-1;
+        int column = pos.getY();
+
+        if(range == -1) //? if -1 then it has unlimited range
+        {
+
+            for(int i = column; i < columns; i++)
+            {
+                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 99)
+                {
+                    break;
+                }
+                    rowList.add(map[row][i]);
+            }
+        }
+        else
+        {
+          for(int i = column; i <= column+range; i++)
+            {
+                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 99)
+                {
+                    break;
+                }
+            
+                    rowList.add(map[row][i]);
+            }
+        }
+
+
+        return rowList;
+    }
+
+    public List<Petak> getColumn(int column)
+    {
+        List<Petak> columnList = new ArrayList<>();
+        for(int i = 0; i < rows; i++)
+        {
+            columnList.add(map[i][column]);
+        }
+        return columnList;
     }
 
     public Petak getPetak(Position pos)

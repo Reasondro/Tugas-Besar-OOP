@@ -3,6 +3,11 @@ import Position.Position;
 import PlantAbility.*;
 import Zombies.Zombie;
 import Bullet.Bullet;
+import GameMap.GameMap;
+import Petak.Petak;
+
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class BulletPlant extends Plant implements PlantAbility{
@@ -11,7 +16,7 @@ public class BulletPlant extends Plant implements PlantAbility{
 
     public BulletPlant()
     {
-        super("Bullet Plant", 100, 100, 100, 1, -1, 10,  new Position(0, 0));
+        super("Bullet Plant", 100, 100, 100, 1, 3, 10,  new Position(0, 0));
         bullet = new Bullet(getAttackDamage(), getRange());
     }
 
@@ -23,6 +28,8 @@ public class BulletPlant extends Plant implements PlantAbility{
     @Override
     public void useAbility()
     {
+        // List<Petak> row=  GameMap.getInstance().getRow(getAttackDamage())
+
         
     }
 

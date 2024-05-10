@@ -53,13 +53,16 @@ public class GameAle{
         // Position posZ2 = new Position(3, 8);
         // map.getPetak(posZ2).addCreature(new ConeheadZombie());
         
-        Position posP = new Position(1, 1);
+        Position posP11 = new Position(1, 1);
 
-        Peashooter myPeashooter = new Peashooter();
         Snowpea mySnowpea = new Snowpea();
         BulletPlant myBulletPlant = new BulletPlant();
 
-        map.getPetak(posP).addCreature(mySnowpea);
+        map.getPetak(posP11).addCreature(myBulletPlant);
+
+        Position posP16 = new Position(1, 6);
+        Peashooter myPeashooter = new Peashooter();
+        map.getPetak(posP16).addCreature(myPeashooter);
 
         // Position posP2 = new Position(3, 2);
         // map.getPetak(posP2).addCreature(new Sunflower());
@@ -83,16 +86,36 @@ public class GameAle{
         // myPeashooter.useAbility();
         // myPeashooter.useAbility();
 
-        mySnowpea.setTargets(map.getPetak(posZ).getZombies());
-        mySnowpea.useAbility();
+        // mySnowpea.setTargets(map.getPetak(posZ).getZombies());
+        // mySnowpea.useAbility();
 
-        myZombie.displayStatus();
-        System.out.println("After using ability");
+        // myZombie.displayStatus();
+        // System.out.println("After using ability");
         map.refreshMap();
-        map.printMap();
+        map.printMap(); 
+        // myBulletPlant.displayStatus();
+        List<Petak> test = map.getRowBasedOnPlantRange(myBulletPlant);
+        System.out.println("Petak yang bisa dijangkau Bullet Plant");
+        for(Petak p : test)
+        {
+            
+            System.out.println(p.getPos().getX() + " " + p.getPos().getY());
+        }
+        
+        List<Petak> test2 = map.getRowBasedOnPlantRange(myPeashooter);
+        System.out.println("Petak yang bisa dijangkau Peashooter");
+        for(Petak p : test2)
+        {
+            
+            System.out.println(p.getPos().getX() + " " + p.getPos().getY());
+        }
+
+ 
+    }
+}
 
 
-    //     Game concurrency = new Game();
+   //     Game concurrency = new Game();
     //     Thread thread = new Thread(() -> {
     //         try {
     //             while (true) {
@@ -125,5 +148,3 @@ public class GameAle{
 
     // public void gameLoop() {
     //     System.out.println("Game Loop");
-    }
-}

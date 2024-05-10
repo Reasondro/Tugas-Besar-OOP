@@ -7,7 +7,7 @@ public class DolphinRiderZombie extends Zombie implements ZombieAbility{
 
     public DolphinRiderZombie()
     {
-        super("Dolphin Rider Zombie", 175, 100, 1, true,  new Position(0, 0));
+        super("Dolphin Rider Zombie", 175, 100, 1, 1,true,  new Position(0, 0));
     }
 
     @Override

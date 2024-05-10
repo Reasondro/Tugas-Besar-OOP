@@ -8,19 +8,19 @@ import Position.*;
 public abstract class Plant extends Creature {
 
     private int cost;
-    private int range;
+    // private int range;
     private float cooldown;
     private float originalCooldown;
     // private boolean isPlanted = false;
     
 
 
-    public Plant(String name, int cost, int health, int attackDamage, float attackSpeed, int range, int cooldown, Position pos )
+    public Plant(String name, int cost, int health, int attackDamage, float attackSpeed, int range, float cooldown, Position pos )
     {
 
-        super(name, health, attackDamage, attackSpeed, pos);
+        super(name, health, attackDamage, attackSpeed,range , pos);
         this.cost = cost;
-        this.range = range;
+        // this.range = range;
         this.cooldown = cooldown;
         this.originalCooldown = cooldown;
     }
@@ -33,13 +33,13 @@ public abstract class Plant extends Creature {
         this.cost = cost;
     }
 
-    public int getRange() {
-        return range;
-    }
+    // public int getRange() {
+    //     return range;
+    // }
 
-    public void setRange(int range) {
-        this.range = range;
-    }
+    // public void setRange(int range) {
+    //     this.range = range;
+    // }
 
     public float getCooldown() {
         return cooldown;
