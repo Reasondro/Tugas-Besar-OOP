@@ -3,14 +3,18 @@ package Petak;
 import Position.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 import Creature.Creature;
+
+import Zombies.Zombie;
+
 
 
 public class Petak {
 
     private String type; //? type of petak (Protected, Normal, Pool, ZombieSpawnArea)
     private Position pos;
-    private List<Creature> creatures;
+    private List<Creature> creatures =  new ArrayList<>();
 
     public Petak(String type ,Position pos) {
         this.type = type; //? TODO initialize pas generate map
@@ -37,14 +41,45 @@ public class Petak {
         creature.setPos(pos);
     }
 
+
     // Remove a creature from the list
     public void removeCreature(Creature creature) {
         creatures.remove(creature);
     }
 
+    // public void refreshPetak() {
+    //     for (Creature creature : creatures) {
+    //         if(creature.getHealth() == 0)
+    //         {
+                // System.out.println("Creature " + creature.getName() + " has been removed from the petak");
+    //             removeCreature(creature);
+    //         }
+    //     }
+    // }
+
+    public void refreshPetak() {
+        Iterator<Creature> iterator = creatures.iterator();
+        while (iterator.hasNext()) {
+            Creature creature = iterator.next();
+            if (creature.getHealth() == 0) {
+                iterator.remove();
+            }
+        }
+    }
+
     // Get all creatures in the petak
     public List<Creature> getCreatures() {
         return creatures;
+    }
+
+    public List<Zombie> getZombies() {
+        List<Zombie> zombies = new ArrayList<>();
+        for (Creature creature : creatures) {
+            if (creature instanceof Zombie) {
+                zombies.add((Zombie) creature);
+            }
+        }
+        return zombies;
     }
 
     public Position getPos() {

@@ -93,6 +93,16 @@ public class GameMap {
     {
         return map[pos.getX()-1][pos.getY()];
     }
+    
+    public void refreshMap()
+    {
+        for(int i = 0; i < rows; i++) 
+        {
+            for(int j = 0; j < columns; j++) {
+                map[i][j].refreshPetak();
+            }
+        }
+    }
 
 
 }
