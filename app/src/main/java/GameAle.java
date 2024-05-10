@@ -55,8 +55,9 @@ public class GameAle{
         
         Position posP = new Position(1, 1);
         Peashooter myPeashooter = new Peashooter();
+        Snowpea mySnowpea = new Snowpea();
 
-        map.getPetak(posP).addCreature(myPeashooter);
+        map.getPetak(posP).addCreature(mySnowpea);
 
         // Position posP2 = new Position(3, 2);
         // map.getPetak(posP2).addCreature(new Sunflower());
@@ -70,16 +71,20 @@ public class GameAle{
 
 
         // System.out.println("After adding creature");
-        System.out.println("Before using ability");
-        map.printMap();
-        
-        myPeashooter.setTargets(map.getPetak(posZ).getZombies());
-        myPeashooter.useAbility();
-        myPeashooter.useAbility();
-        myPeashooter.useAbility();
-        myPeashooter.useAbility();
-        myPeashooter.useAbility();
+        // System.out.println("Before using ability");
+        // map.printMap();
 
+        // myPeashooter.setTargets(map.getPetak(posZ).getZombies());
+        // myPeashooter.useAbility();
+        // myPeashooter.useAbility();
+        // myPeashooter.useAbility();
+        // myPeashooter.useAbility();
+        // myPeashooter.useAbility();
+
+        mySnowpea.setTargets(map.getPetak(posZ).getZombies());
+        mySnowpea.useAbility();
+
+        myZombie.displayStatus();
         System.out.println("After using ability");
         map.refreshMap();
         map.printMap();

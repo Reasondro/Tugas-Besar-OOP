@@ -11,12 +11,12 @@ public abstract class Creature {
     private String name;
     private int health;
     private int attackDamage;
-    private int attackSpeed;
+    private float attackSpeed;
     private Position pos;
 
     
     // Constructor
-    public Creature(String name, int health, int attackDamage, int attackSpeed, Position pos) {
+    public Creature(String name, int health, int attackDamage, float attackSpeed, Position pos) {
         this.name = name;
         this.health = health;
         this.attackDamage = attackDamage;
@@ -54,11 +54,11 @@ public abstract class Creature {
         this.attackDamage = attackDamage;
     }
 
-    public int getAttackSpeed() {
+    public float getAttackSpeed() {
         return attackSpeed;
     }
 
-    public void setAttackSpeed(int attackSpeed) {
+    public void setAttackSpeed(float attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
