@@ -1,23 +1,32 @@
 package Bullet;
+import Petak.Petak;
 
-public class Bullet {
+public abstract class Bullet {
 
     private int damage;
-    private int range;
+    private boolean wornOut = false;
 
-
-    public Bullet(int damage,int range) {
+    public Bullet(int damage) {
         this.damage = damage;
-        this.range = range;
     }
 
     public int getDamage() {
         return damage;
     }
 
-    public int getRange() {
-        return range;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
+
+    public boolean isWornOut() {
+        return wornOut;
+    }
+
+    public void setWornOut(boolean wornOut) {
+        this.wornOut = wornOut;
+    }
+
+    public abstract void hit(Petak petak);
 
     
 }
