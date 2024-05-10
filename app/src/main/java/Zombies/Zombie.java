@@ -140,8 +140,22 @@ public abstract class Zombie extends Creature{
         return pos;
     }
 
-    public void decreaseHP(Plant plant){
-        health -= plant.getAttack_damage();
+    public void attackPlant(Plant p)
+    {
+        p.reduceHealth(getAttackDamage());
+    }
+
+    // public void walk(); //TODO ini sama aku aja yg walk
+
+
+    public void displayStatus()
+    {
+        System.out.println("Name: " +  getName());
+        System.out.println("Health: " + getHealth());
+        System.out.println("Attack Damage: " + getAttackDamage());
+        System.out.println("Attack Speed: " + getAttackSpeed());
+        System.out.println("Is Aquatic: " + isAquatic());
+        System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
     }
     
 }
