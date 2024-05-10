@@ -5,12 +5,14 @@ import Petak.Petak;
 import Position.Position;
 
 public class GameMap {
+
+    private static volatile GameMap instance = null;
     
     private Petak[][] map;
     private int rows = 6;
     private int columns = 11;
     
-    public GameMap()
+    private GameMap()
     {
 
         map = new Petak[rows][columns];
@@ -56,6 +58,21 @@ public class GameMap {
                 map[i][10] = new Petak("Zombie Base", pos);
             }
         }   
+    }
+
+    public static GameMap getInstance()
+    {
+        if(instance == null)
+        {
+            synchronized(GameMap.class)
+            {
+                if(instance == null)
+                {
+                    instance = new GameMap();
+                }
+            }
+        }
+        return instance;
     }
 
     //? NOTE: Petak efektif untuk player mulai dari [0][1] (baris 1 kolom 1) sampai [5][9] (baris 6 kolom 9)

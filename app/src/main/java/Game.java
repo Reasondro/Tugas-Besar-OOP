@@ -42,7 +42,7 @@ public class Game {
         // petak.addCreature(new Sunflower());
         // petak.addCreature(new NormalZombie());
         // petak.printCreature();
-        GameMap map = new GameMap();
+        GameMap map = GameMap.getInstance();
         System.out.println("Before adding creature");
         map.printMap();
 

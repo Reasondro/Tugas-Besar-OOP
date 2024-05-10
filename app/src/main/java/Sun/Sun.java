@@ -7,7 +7,7 @@ public class Sun {
     private static volatile Sun instance = null;
     private static int sunPoints;
     
-    public Sun()
+    private Sun()
     {
         sunPoints = 25;
     }

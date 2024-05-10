@@ -42,7 +42,7 @@ public class GameAle{
         // petak.addCreature(new Sunflower());
         // petak.addCreature(new NormalZombie());
         // petak.printCreature();
-        GameMap map = new GameMap();
+        GameMap map = GameMap.getInstance();
         // System.out.println("Before adding creature");
         // map.printMap();
 
@@ -54,8 +54,10 @@ public class GameAle{
         // map.getPetak(posZ2).addCreature(new ConeheadZombie());
         
         Position posP = new Position(1, 1);
+
         Peashooter myPeashooter = new Peashooter();
         Snowpea mySnowpea = new Snowpea();
+        BulletPlant myBulletPlant = new BulletPlant();
 
         map.getPetak(posP).addCreature(mySnowpea);
 
