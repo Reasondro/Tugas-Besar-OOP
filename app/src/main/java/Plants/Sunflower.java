@@ -1,22 +1,35 @@
 package Plants;
 
-import Position.Positition;
+import Position.Position;
+import PlantAbility.*;
+import Sun.*;
 
-public class Sunflower extends Plant{
+
+public class Sunflower extends Plant implements PlantAbility  {
+
+    // private int sunCooldown = 0;
     
     public Sunflower()
     {
-        super("Sunflower", 50, 100, 0, 0, 0, 10,  new Positition(0, 0));
+        super("Sunflower", 50, 100, 0, 0, 0, 10,  new Position(0, 0));
     }
     
-    // public void generate_sunlight()
-    // {
-    //     System.out.println("Sunflower generates sunlight");
-    // }
-
     @Override
-    public void useAbility() {
-        System.out.println("Sunflower generates sunlight");
+    public void useAbility() 
+    {
+        //TODO implemetn to only use ability if cooldown is 0 (this might be needed if in the game logic this wont)
+        // if(sunCooldown > 0)
+        // {
+        //     sunCooldown--;
+        //     return;
+        // }
+        // else if(sunCooldown == 0)
+        // {
+        //     sunCooldown = 5;
+        // }
+        Sun sun = Sun.getInstance();
+        sun.addSunPoints(25);
+    
     }
     
 
