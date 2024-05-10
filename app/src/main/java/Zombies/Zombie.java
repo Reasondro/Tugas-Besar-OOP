@@ -9,24 +9,24 @@ import Plants.Plant;
 public abstract class Zombie extends Creature{
 
 
-    private int walkSpeed;
+    private float walkSpeed;
     private boolean aquatic;
     private boolean frozen = false;
-    private int frozenTimer = 0;
+    private float frozenTimer = 0;
   
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean aquatic, Position pos)
+    public Zombie(String name, int health, int attackDamage, float attackSpeed, boolean aquatic, Position pos)
     {
-        super(name, health, attack_damage, attack_speed, pos);
+        super(name, health, attackDamage, attackSpeed, pos);
         this.walkSpeed = 5;
         this.aquatic = aquatic;
    
     }
 
-    public int getWalkSpeed() {
+    public float getWalkSpeed() {
         return walkSpeed;
     }
 
-    public void setWalkSpeed(int walkSpeed) {
+    public void setWalkSpeed(float walkSpeed) {
         this.walkSpeed = walkSpeed;
     }
 
@@ -34,7 +34,7 @@ public abstract class Zombie extends Creature{
         return aquatic;
     }
 
-    public void setaquatic(boolean aquatic) {
+    public void setAquatic(boolean aquatic) {
         this.aquatic = aquatic;
     }
 
@@ -46,11 +46,11 @@ public abstract class Zombie extends Creature{
         this.frozen = frozen;
     }
 
-    public int getFrozenTimer() {
+    public float getFrozenTimer() {
         return frozenTimer;
     }
 
-    public void setFrozenTimer(int frozenTimer) {
+    public void setFrozenTimer(float frozenTimer) {
         this.frozenTimer = frozenTimer;
     }
 
@@ -89,6 +89,9 @@ public abstract class Zombie extends Creature{
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
         System.out.println("Is Aquatic: " + isAquatic());
+        System.out.println("Walk Speed: " + getWalkSpeed());
+        System.out.println("Is Frozen: " + isFrozen());
+        System.out.println("Frozen Timer: " + getFrozenTimer());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
     }
 

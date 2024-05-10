@@ -9,16 +9,16 @@ public abstract class Plant extends Creature {
 
     private int cost;
     private int range;
-    private int cooldown;
-    private int originalCooldown;
+    private float cooldown;
+    private float originalCooldown;
     // private boolean isPlanted = false;
     
 
 
-    public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int cooldown, Position pos )
+    public Plant(String name, int cost, int health, int attackDamage, float attackSpeed, int range, int cooldown, Position pos )
     {
 
-        super(name, health, attack_damage, attack_speed, pos);
+        super(name, health, attackDamage, attackSpeed, pos);
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;
@@ -41,11 +41,11 @@ public abstract class Plant extends Creature {
         this.range = range;
     }
 
-    public int getCooldown() {
+    public float getCooldown() {
         return cooldown;
     }
 
-    public void setCooldown(int cooldown) {
+    public void setCooldown(float cooldown) {
         this.cooldown = cooldown;
     }
 
