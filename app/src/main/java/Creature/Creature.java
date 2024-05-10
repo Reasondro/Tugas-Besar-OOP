@@ -10,17 +10,17 @@ import Position.*;
 public abstract class Creature {
     private String name;
     private int health;
-    private int attack_damage;
-    private int attack_speed;
+    private int attackDamage;
+    private int attackSpeed;
     private Position pos;
 
     
     // Constructor
-    public Creature(String name, int health, int attack_damage, int attack_speed, Position pos) {
+    public Creature(String name, int health, int attackDamage, int attackSpeed, Position pos) {
         this.name = name;
         this.health = health;
-        this.attack_damage = attack_damage;
-        this.attack_speed = attack_speed;
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
         this.pos = pos;
 
     }
@@ -47,19 +47,19 @@ public abstract class Creature {
     }
     
     public int getAttackDamage() {
-        return attack_damage;
+        return attackDamage;
     }
     
-    public void setAttackDamage(int attack_damage) {
-        this.attack_damage = attack_damage;
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
     }
 
     public int getAttackSpeed() {
-        return attack_speed;
+        return attackSpeed;
     }
 
-    public void setAttackSpeed(int attack_speed) {
-        this.attack_speed = attack_speed;
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
     public Position getPos() {

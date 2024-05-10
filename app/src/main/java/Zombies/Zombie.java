@@ -10,15 +10,15 @@ public abstract class Zombie extends Creature{
 
 
     private int walkSpeed;
-    private boolean is_aquatic;
+    private boolean aquatic;
     private boolean frozen = false;
     private int frozenTimer = 0;
   
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Position pos)
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean aquatic, Position pos)
     {
         super(name, health, attack_damage, attack_speed, pos);
         this.walkSpeed = 5;
-        this.is_aquatic = is_aquatic;
+        this.aquatic = aquatic;
    
     }
 
@@ -30,12 +30,12 @@ public abstract class Zombie extends Creature{
         this.walkSpeed = walkSpeed;
     }
 
-    public boolean isIs_aquatic() {
-        return is_aquatic;
+    public boolean isAquatic() {
+        return aquatic;
     }
 
-    public void setIs_aquatic(boolean is_aquatic) {
-        this.is_aquatic = is_aquatic;
+    public void setaquatic(boolean aquatic) {
+        this.aquatic = aquatic;
     }
 
     public boolean isFrozen() {
@@ -88,7 +88,7 @@ public abstract class Zombie extends Creature{
         System.out.println("Health: " + getHealth());
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
-        System.out.println("Is Aquatic: " + isIs_aquatic());
+        System.out.println("Is Aquatic: " + isAquatic());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
     }
 

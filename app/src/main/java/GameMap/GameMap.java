@@ -15,7 +15,7 @@ public class GameMap {
 
         map = new Petak[rows][columns];
 
-        //? NOTE: The map is 11 columns x 9 rows (including the protected base and zombie base)
+        //? NOTE: The map is 11 columns x 6 rows (including the protected base and zombie base)
         
         for(int i = 0; i < rows; i++) 
         {

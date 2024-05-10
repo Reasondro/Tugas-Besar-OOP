@@ -10,7 +10,7 @@ public abstract class Plant extends Creature {
     private int cost;
     private int range;
     private int cooldown;
-    private int original_cooldown;
+    private int originalCooldown;
     // private boolean isPlanted = false;
     
 
@@ -22,7 +22,7 @@ public abstract class Plant extends Creature {
         this.cost = cost;
         this.range = range;
         this.cooldown = cooldown;
-        this.original_cooldown = cooldown;
+        this.originalCooldown = cooldown;
     }
 
     public int getCost() {
@@ -68,7 +68,7 @@ public abstract class Plant extends Creature {
 
     public void refreshCooldown()
     {
-        cooldown = original_cooldown;
+        cooldown = originalCooldown;;
     }
 
 
