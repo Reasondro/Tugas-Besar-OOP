@@ -1,13 +1,15 @@
 package Zombies;
 
-import Position.Positition;
+import Position.Position;
+import ZombieAbility.*;
 
-public class PoleVaultingZombie extends Zombie{
+public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
     public PoleVaultingZombie()
     {
-        super("Pole Vaulting Zombie", 175, 100, 1, false,  new Positition(0, 0));
+        super("Pole Vaulting Zombie", 175, 100, 1, 1,false,  new Position(0, 0));
     }
+
 
     @Override
     public void useAbility()

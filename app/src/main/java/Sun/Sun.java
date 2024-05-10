@@ -4,13 +4,25 @@ public class Sun {
     
     //TODO make a list of suns in the game and implement it dengan sun class ato Sunflower
 
-    private static int sunPoints = 0;
+    private static volatile Sun instance = null;
+    private static int sunPoints;
     
-    public Sun()
+    private Sun()
     {
         sunPoints = 25;
     }
-    
+
+    public static Sun getInstance() {
+        if (instance == null) {
+            synchronized (Sun.class) {
+                if (instance == null) {
+                    instance = new Sun();
+                }
+            }
+        }
+        return instance;
+    }
+
     public int getSunPoints()
     {
         return sunPoints;
@@ -30,21 +42,10 @@ public class Sun {
     {
         Sun.sunPoints = sunPoints;
     }
-    
-    public void updateSunPoints()
+
+    public void displayStatus()
     {
-        sunPoints += 25;
-    }
-    
-    public void updateSunPoints(int sunPoints)
-    {
-        Sun.sunPoints += sunPoints;
-    }
-    
-    public void updateSunPoints(int sunPoints, int sunPoints2)
-    {
-        Sun.sunPoints += sunPoints;
-        Sun.sunPoints += sunPoints2;
+        System.out.println("Sun points: " + sunPoints);
     }
 
 

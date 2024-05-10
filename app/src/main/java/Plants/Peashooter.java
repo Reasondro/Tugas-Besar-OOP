@@ -1,18 +1,47 @@
 package Plants;
 
-import Position.Positition;
+import Position.Position;
 
+import PlantAbility.*;
+import Zombies.Zombie;
 
-public class Peashooter extends Plant{
+import java.util.List;
+import java.util.ArrayList;
+
+public class Peashooter extends Plant implements PlantAbility{
+
+    
+    private List<Zombie> targets = new ArrayList<>();
+
     
     public Peashooter()
     {
-        super("Peashooter", 100, 100, 25, 1, -1, 10,  new Positition(0, 0));
+        super("Peashooter", 100, 100, 25, 1, -1, 10,  new Position(0, 0));
     }
-    
-    public void useAbility()
+
+    public void setTargets(List<Zombie> targets)
     {
-        System.out.println("Peashooter shoots peas!");
+        this.targets = targets;
+    }
+
+    public void addTarget(Zombie z)
+    {
+        targets.add(z);
+    }
+
+    public void removeTarget(Zombie z)
+    {
+        targets.remove(z);
+    }
+
+    
+    @Override
+    public void useAbility( )
+    {
+        for(Zombie z : targets)
+        {
+           z.reduceHealth(getAttackDamage());
+        }
     }
 
 }
