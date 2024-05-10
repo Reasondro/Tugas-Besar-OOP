@@ -13,14 +13,18 @@ public abstract class Creature {
     private int attackDamage;
     private float attackSpeed;
     private Position pos;
+    private int range;
+
+    //TODO add Range as an attribute
 
     
     // Constructor
-    public Creature(String name, int health, int attackDamage, float attackSpeed, Position pos) {
+    public Creature(String name, int health, int attackDamage, float attackSpeed, int range, Position pos) {
         this.name = name;
         this.health = health;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
+        this.range = range;
         this.pos = pos;
 
     }
@@ -60,6 +64,14 @@ public abstract class Creature {
 
     public void setAttackSpeed(float attackSpeed) {
         this.attackSpeed = attackSpeed;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 
     public Position getPos() {

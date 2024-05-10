@@ -13,10 +13,11 @@ public abstract class Zombie extends Creature{
     private boolean aquatic;
     private boolean frozen = false;
     private float frozenTimer = 0;
+    //TODO add Range as an attribute
   
-    public Zombie(String name, int health, int attackDamage, float attackSpeed, boolean aquatic, Position pos)
+    public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
-        super(name, health, attackDamage, attackSpeed, pos);
+        super(name, health, attackDamage, attackSpeed, range, pos);
         this.walkSpeed = 5;
         this.aquatic = aquatic;
    
@@ -88,6 +89,7 @@ public abstract class Zombie extends Creature{
         System.out.println("Health: " + getHealth());
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
+        System.out.println("Range: " + getRange());
         System.out.println("Is Aquatic: " + isAquatic());
         System.out.println("Walk Speed: " + getWalkSpeed());
         System.out.println("Is Frozen: " + isFrozen());
