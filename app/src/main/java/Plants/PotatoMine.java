@@ -6,17 +6,18 @@ import PlantAbility.*;
 import Zombies.Zombie;
 
 import java.util.List;
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 
-public class Kernelpult extends Plant implements PlantAbility{
-   
+public class PotatoMine extends Plant implements PlantAbility{
+
     private List<Zombie> targets = new ArrayList<>();
-
-    public Kernelpult()
+    
+    public PotatoMine()
     {
-        super("Kernelpult", 200, 300, 100, 6, -1, 10,  new Position(0, 0)); // masih tentatif damage dia berapa
+        super("PotatoMine", 25, 400, 180, 1, -1, 0,  new Position(0, 0)); // masih tentatif damage dia berapa
     }
-
+    
     public void setTargets(List<Zombie> targets)
     {
         this.targets = targets;
@@ -37,14 +38,9 @@ public class Kernelpult extends Plant implements PlantAbility{
     {
         for(Zombie z : targets)
         {
-            z.reduceHealth(getAttackDamage());
-            z.setFrozenTimer(10);
-            if(z.isFrozen() == false)
-            {
-                z.setFrozen(true);
-                z.setWalkSpeed(z.getWalkSpeed() / 2);
-            }
+           z.reduceHealth(z.getHealth()); //? instant kill
         }
     }
-    
+
 }
+
