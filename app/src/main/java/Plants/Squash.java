@@ -47,7 +47,7 @@ public class Squash  extends Plant implements PlantAbility{
             } 
         }
         setAttackTimer(getAttackSpeed()); 
-        bullet.setWornOut(false);
+        bullet = new SquashBullet(getAttackDamage());
     }
 
 }

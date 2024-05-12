@@ -49,7 +49,7 @@ public class Snowpea extends Plant  implements PlantAbility{
                     }
             }
             setAttackTimer(getAttackSpeed()); 
-            bullet.setWornOut(false);
+            bullet = new SnowBullet(getAttackDamage());
         // }
         // else
         // {

@@ -50,7 +50,7 @@ public class Peashooter extends Plant implements PlantAbility{
         }
         }
     setAttackTimer(getAttackSpeed()); 
-    bullet.setWornOut(false);
+    bullet = new PeaBullet(getAttackDamage());
     }
 
 }

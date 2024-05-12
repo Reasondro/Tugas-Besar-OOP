@@ -49,7 +49,7 @@ public class BulletPlant extends Plant implements PlantAbility{
             }
         }
         setAttackTimer(getAttackSpeed()); 
-        bullet.setWornOut(false);
+        bullet = new BasicBullet(getAttackDamage());
     }
     
 }
