@@ -8,9 +8,10 @@ import Position.*;
 public abstract class Plant extends Creature {
 
     private int cost;
-    // private int range;
+
     private float cooldown;
     private float originalCooldown;
+
     // private boolean isPlanted = false;
     
 
@@ -33,13 +34,6 @@ public abstract class Plant extends Creature {
         this.cost = cost;
     }
 
-    // public int getRange() {
-    //     return range;
-    // }
-
-    // public void setRange(int range) {
-    //     this.range = range;
-    // }
 
     public float getCooldown() {
         return cooldown;
@@ -71,6 +65,13 @@ public abstract class Plant extends Creature {
         cooldown = originalCooldown;;
     }
 
+    public void refreshCreature()
+    {
+        super.refreshCreature();
+        //TODO implement this method with Threading
+        reduceCooldown();
+    }
+
 
     public void displayStatus()
     {
@@ -79,6 +80,8 @@ public abstract class Plant extends Creature {
         System.out.println("Health: " + getHealth());
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
+        System.out.println("Range: " + getRange());
+        System.out.println("Attack timer: " + getAttackTimer());
         System.out.println("Range: " + getRange());
         System.out.println("Cooldown: " + getCooldown());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());

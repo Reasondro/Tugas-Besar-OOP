@@ -29,8 +29,6 @@ public class SnowBullet {
 
     public void hit(Petak p)
     {
-       if(!(p.getZombies().isEmpty()))
-       {
            for(Zombie z : p.getZombies())
            {
             int originalHealth = z.getHealth();
@@ -48,11 +46,7 @@ public class SnowBullet {
             
            }
            setWornOut(true);
-       }
-    //    else //? use this if want to test the bullet when there is no zombie in the petak
-    //    {
-    //        System.out.println("No zombie in this petak");
-    //    }
+
     }
     
 }

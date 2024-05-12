@@ -11,8 +11,6 @@ public class BasicBullet extends Bullet{
         @Override
         public void hit(Petak p)
         {
-           if(!(p.getZombies().isEmpty()))
-           {
                for(Zombie z : p.getZombies())
                {
                 int originalHealth = z.getHealth();
@@ -26,5 +24,4 @@ public class BasicBullet extends Bullet{
         //    {
         //        System.out.println("No zombie in this petak");
         //    }
-        }
 }

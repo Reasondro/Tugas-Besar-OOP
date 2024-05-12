@@ -82,6 +82,12 @@ public abstract class Zombie extends Creature{
 
     // public void walk(); //TODO ini sama aku aja yg walk
 
+    public void refreshCreature()
+    {
+        super.refreshCreature();
+        //TODO implement this method with Threading
+        reduceFrozenTimer();
+    }
 
     public void displayStatus()
     {

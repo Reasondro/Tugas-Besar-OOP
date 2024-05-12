@@ -31,15 +31,19 @@ public class Squash  extends Plant implements PlantAbility{
         List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
         for(Petak p : reachablePetak)
         {
-            if(!(bullet.isWornOut()))
+            if(!(p.getZombies().isEmpty()))
             {
-             bullet.hit(p);
-            }
-            else
-            {
-                break;
-            }
+                if(!(bullet.isWornOut()))
+                {
+                bullet.hit(p);
+                }
+                else
+                {
+                    break;
+                }
+            } 
         }
+        bullet.setWornOut(false);
     }
 
 }

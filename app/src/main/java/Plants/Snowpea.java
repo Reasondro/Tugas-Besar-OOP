@@ -28,20 +28,32 @@ public class Snowpea extends Plant  implements PlantAbility{
     @Override
     public void useAbility( )
     {
-        List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
-        for(Petak p : reachablePetak)
-        {
-            if(!(bullet.isWornOut()))
+        //TODO extract reduce cooldown timer outside the useAbility method
+        // if(getAttackTimer() == 0)
+        // {
+            List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
+            for(Petak p : reachablePetak)
             {
-             bullet.hit(p);
+                    if(!(p.getZombies().isEmpty()))
+                    {
+                        if(!(bullet.isWornOut()))
+                        {
+                        bullet.hit(p);
+                        setAttackTimer(getAttackSpeed());   
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
             }
-            else
-            {
-                break;
-            }
-        }
-
-    }
+            bullet.setWornOut(false);
+        // }
+        // else
+        // {
+        //     setAttackTimer(getAttackTimer()-1);
+        // }
+}
     
 
 }

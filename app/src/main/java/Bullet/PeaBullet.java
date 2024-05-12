@@ -12,8 +12,6 @@ public class PeaBullet extends Bullet{
         @Override
         public void hit(Petak p)
         {
-           if(!(p.getZombies().isEmpty()))
-           {
                for(Zombie z : p.getZombies())
                {
                 int originalHealth = z.getHealth();
@@ -22,11 +20,10 @@ public class PeaBullet extends Bullet{
                 System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                }
                setWornOut(true);
-           }
         //    else //? use this if want to test the bullet when there is no zombie in the petak
         //    {
         //        System.out.println("No zombie in this petak");
         //    }
         }
-    
+        
 }

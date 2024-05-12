@@ -20,15 +20,17 @@ public class GameAle{
 
 
         
-        Position posP11 = new Position(1, 2);
+        Position posP11 = new Position(1, 1);
         // map.getPetak(posP11).addCreature(myBulletPlant);
-        map.getPetak(posP11).addCreature(mySquash);
-        // map.getPetak(posP11).addCreature(mySnowpea);
+        // map.getPetak(posP11).addCreature(mySquash);
+        map.getPetak(posP11).addCreature(mySnowpea);
         // map.getPetak(posP11).addCreature(myPeashooter);
 
-        Position posP12 = new Position(1, 2);
         ConeheadZombie myConeheadZombie = new ConeheadZombie();
         DolphinRiderZombie myDolphinRiderZombie = new DolphinRiderZombie();
+        PoleVaultingZombie myPolevaultingZombie = new PoleVaultingZombie();
+
+        Position posP12 = new Position(1, 2);
         map.getPetak(posP12).addCreature(myConeheadZombie);
         map.getPetak(posP12).addCreature(myDolphinRiderZombie);
 
@@ -37,16 +39,23 @@ public class GameAle{
         map.getPetak(posP13).addCreature(myNormalZombie);
 
         System.out.println("Before using ability");
+        mySnowpea.displayStatus();
         map.printMap(); 
 
         System.out.println("After using ability");
 
         // myBulletPlant.useAbility();
-        mySquash.useAbility();
-        // mySnowpea.useAbility();
+        // mySquash.useAbility();
+        mySnowpea.useAbility();
+        mySnowpea.useAbility();
         // myPeashooter.useAbility();
 
+        mySnowpea.displayStatus();
+
+
         map.refreshMap();
+        // map.getPetak(posP12).addCreature(myPolevaultingZombie);
+
         map.printMap();
 
 

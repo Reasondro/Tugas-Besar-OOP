@@ -33,15 +33,20 @@ public class Peashooter extends Plant implements PlantAbility{
         List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
         for(Petak p : reachablePetak)
         {
-            if(!(bullet.isWornOut()))
-            {
-             bullet.hit(p);
-            }
-            else
-            {
-                break;
-            }
+          if(!(p.getZombies().isEmpty()))
+           {           
+                if(!(bullet.isWornOut()))
+                {
+                bullet.hit(p);
+                }
+                else
+                {
+                    break;
+                }
         }
+    }
+    bullet.setWornOut(false);
+    
 
     }
 
