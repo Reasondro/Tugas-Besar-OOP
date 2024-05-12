@@ -47,7 +47,7 @@ public class GameAle{
         // myBulletPlant.useAbility();
         // mySquash.useAbility();
         mySnowpea.useAbility();
-        mySnowpea.useAbility();
+        // mySnowpea.useAbility();
         // myPeashooter.useAbility();
 
         mySnowpea.displayStatus();

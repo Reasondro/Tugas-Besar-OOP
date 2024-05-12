@@ -28,6 +28,9 @@ public class Squash  extends Plant implements PlantAbility{
     @Override
     public void useAbility( )
     {
+        //TODO extract reduce cooldown timer outside the useAbility method.
+        //TODO duplicate attackTimer check. One outside this class to check if to shoot.
+        //TODO The other one is to check if there's actually enemy to shoot, if there's none, then don't shoot.
         List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
         for(Petak p : reachablePetak)
         {
@@ -43,6 +46,7 @@ public class Squash  extends Plant implements PlantAbility{
                 }
             } 
         }
+        setAttackTimer(getAttackSpeed()); 
         bullet.setWornOut(false);
     }
 

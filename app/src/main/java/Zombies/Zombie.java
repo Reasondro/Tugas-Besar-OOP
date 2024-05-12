@@ -4,6 +4,7 @@ import Creature.*;
 import Position.*;
 
 import Plants.Plant;
+import GameMap.GameMap;
 
 
 public abstract class Zombie extends Creature{
