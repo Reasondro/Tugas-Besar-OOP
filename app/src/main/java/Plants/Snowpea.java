@@ -8,44 +8,39 @@ import Zombies.Zombie;
 import java.util.ArrayList;
 import java.util.List;
 
+import Bullet.Bullet;
+import Bullet.SnowBullet;
+import GameMap.GameMap;
+import Petak.Petak;
+
 
 public class Snowpea extends Plant  implements PlantAbility{
 
-    private List<Zombie> targets = new ArrayList<>();
+    private SnowBullet bullet;
 
     public Snowpea()
     {
         super("Snow pea", 50, 100, 25, 1, -1, 10,  new Position(0, 0));
+        bullet =  new SnowBullet(getAttackDamage());
     }
 
-    public void setTargets(List<Zombie> targets)
-    {
-        this.targets = targets;
-    }
-
-    public void addTarget(Zombie z)
-    {
-        targets.add(z);
-    }
-
-    public void removeTarget(Zombie z)
-    {
-        targets.remove(z);
-    }
 
     @Override
     public void useAbility( )
     {
-        for(Zombie z : targets)
+        List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
+        for(Petak p : reachablePetak)
         {
-            z.reduceHealth(getAttackDamage());
-            z.setFrozenTimer(3);
-            if(z.isFrozen() == false)
+            if(!(bullet.isWornOut()))
             {
-                z.setFrozen(true);
-                z.setWalkSpeed(z.getWalkSpeed() / 2);
+             bullet.hit(p);
+            }
+            else
+            {
+                break;
             }
         }
+
     }
     
 

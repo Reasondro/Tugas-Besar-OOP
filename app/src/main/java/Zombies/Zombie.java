@@ -18,7 +18,7 @@ public abstract class Zombie extends Creature{
     public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
         super(name, health, attackDamage, attackSpeed, range, pos);
-        this.walkSpeed = 5;
+        this.walkSpeed = 5.0f;
         this.aquatic = aquatic;
    
     }

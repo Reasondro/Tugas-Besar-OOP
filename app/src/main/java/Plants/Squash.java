@@ -8,38 +8,37 @@ import Zombies.Zombie;
 import java.util.List;
 import java.util.ArrayList;
 
+import Bullet.Bullet;
+import Bullet.SquashBullet;
+import GameMap.GameMap;
+import Petak.Petak;
+
 
 public class Squash  extends Plant implements PlantAbility{
 
-    private List<Zombie> targets = new ArrayList<>();
-
+    private SquashBullet bullet;
     
     public Squash()
     {
         super("Squash", 50, 100, 5000, 0, 1, 20,  new Position(0, 0));
+        bullet =  new SquashBullet(getAttackDamage());
     }
 
-    public void setTargets(List<Zombie> targets)
-    {
-        this.targets = targets;
-    }
-
-    public void addTarget(Zombie z)
-    {
-        targets.add(z);
-    }
-
-    public void removeTarget(Zombie z)
-    {
-        targets.remove(z);
-    }
 
     @Override
     public void useAbility( )
     {
-        for(Zombie z : targets)
+        List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
+        for(Petak p : reachablePetak)
         {
-           z.reduceHealth(z.getHealth()); //? instant kill
+            if(!(bullet.isWornOut()))
+            {
+             bullet.hit(p);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 
