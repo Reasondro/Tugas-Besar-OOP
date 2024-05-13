@@ -22,8 +22,8 @@ public class GameAle{
         
         Position posP11 = new Position(1, 1);
         // map.getPetak(posP11).addCreature(myBulletPlant);
-        // map.getPetak(posP11).addCreature(mySquash);
-        map.getPetak(posP11).addCreature(mySnowpea);
+        map.getPetak(posP11).addCreature(mySquash);
+        // map.getPetak(posP11).addCreature(mySnowpea);
         // map.getPetak(posP11).addCreature(myPeashooter);
 
         ConeheadZombie myConeheadZombie = new ConeheadZombie();
@@ -45,12 +45,13 @@ public class GameAle{
         System.out.println("After using ability");
 
         // myBulletPlant.useAbility();
-        // mySquash.useAbility();
-        mySnowpea.useAbility();
-        mySnowpea.useAbility();
+        mySquash.useAbility();
+        // mySnowpea.useAbility();
+        // mySnowpea.useAbility();
         // myPeashooter.useAbility();
 
-        mySnowpea.displayStatus();
+        // mySnowpea.displayStatus();
+        mySquash.displayStatus();
 
 
         map.refreshMap();

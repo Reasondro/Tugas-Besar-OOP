@@ -31,23 +31,33 @@ public class Squash  extends Plant implements PlantAbility{
         //TODO extract reduce cooldown timer outside the useAbility method.
         //TODO duplicate attackTimer check. One outside this class to check if to shoot.
         //TODO The other one is to check if there's actually enemy to shoot, if there's none, then don't shoot.
+        //TODO remove bullet implementation, use self as kamikaze
+
         List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
         for(Petak p : reachablePetak)
         {
             if(!(p.getZombies().isEmpty()))
             {
-                if(!(bullet.isWornOut()))
+                // if(!(bullet.isWornOut()))
+                // {
+                // bullet.hit(p);
+                // }
+                // else
+                // {
+                //     break;
+                // }
+                for(Zombie z : p.getZombies())
                 {
-                bullet.hit(p);
-                }
-                else
-                {
-                    break;
+                 int originalHealth = z.getHealth();
+                 z.reduceHealth(getAttackDamage());
+                 System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
+                 System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                 }
             } 
         }
-        setAttackTimer(getAttackSpeed()); 
-        bullet = new SquashBullet(getAttackDamage());
+        // setAttackTimer(getAttackSpeed()); 
+        // bullet = new SquashBullet(getAttackDamage());
+        reduceHealth(getHealth());
     }
 
 }
