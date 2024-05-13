@@ -31,8 +31,8 @@ public class GameAle{
         PoleVaultingZombie myPolevaultingZombie = new PoleVaultingZombie();
 
         Position posP12 = new Position(1, 2);
-        map.getPetak(posP12).addCreature(myConeheadZombie);
-        map.getPetak(posP12).addCreature(myDolphinRiderZombie);
+        // map.getPetak(posP12).addCreature(myConeheadZombie);
+        // map.getPetak(posP12).addCreature(myDolphinRiderZombie);
 
         Position posP13 = new Position(1, 3);
         NormalZombie myNormalZombie = new NormalZombie();

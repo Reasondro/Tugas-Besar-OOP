@@ -52,12 +52,12 @@ public class Squash  extends Plant implements PlantAbility{
                  z.reduceHealth(getAttackDamage());
                  System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                  System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+                 reduceHealth(getHealth());
                 }
             } 
         }
         // setAttackTimer(getAttackSpeed()); 
         // bullet = new SquashBullet(getAttackDamage());
-        reduceHealth(getHealth());
     }
 
 }
