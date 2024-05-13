@@ -11,53 +11,64 @@ import Position.*;
 public class GameAle{
     public static void main(String[] args)
     {
+        float seconds = 0.0f;
 
         GameMap map = GameMap.getInstance();
-        BulletPlant myBulletPlant = new BulletPlant();
+
+        Sun mySun = Sun.getInstance();
+
+        // BulletPlant myBulletPlant = new BulletPlant();
         Squash mySquash = new Squash();
         Snowpea mySnowpea = new Snowpea();
         Peashooter myPeashooter = new Peashooter();
+        Sunflower mySunflower = new Sunflower();
 
 
         
         Position posP11 = new Position(1, 1);
-        // map.getPetak(posP11).addCreature(myBulletPlant);
-        map.getPetak(posP11).addCreature(mySquash);
-        // map.getPetak(posP11).addCreature(mySnowpea);
-        // map.getPetak(posP11).addCreature(myPeashooter);
+        map.getPetak(posP11).addCreature(mySunflower);
+        map.getPetak(posP11).addCreature(myPeashooter);
 
         ConeheadZombie myConeheadZombie = new ConeheadZombie();
         DolphinRiderZombie myDolphinRiderZombie = new DolphinRiderZombie();
-        PoleVaultingZombie myPolevaultingZombie = new PoleVaultingZombie();
+        PoleVaultingZombie myPoleVaultingZombie = new PoleVaultingZombie();
 
-        Position posP12 = new Position(1, 2);
-        // map.getPetak(posP12).addCreature(myConeheadZombie);
-        // map.getPetak(posP12).addCreature(myDolphinRiderZombie);
-
-        Position posP13 = new Position(1, 3);
+        
+        Position posP19 = new Position(1, 9);
         NormalZombie myNormalZombie = new NormalZombie();
-        map.getPetak(posP13).addCreature(myNormalZombie);
+        map.getPetak(posP19).addCreature(myNormalZombie);
 
-        System.out.println("Before using ability");
-        mySnowpea.displayStatus();
+        Position posP22 = new Position(2, 2);
+        map.getPetak(posP22).addCreature(mySquash);
+
+        
+        Position posP23 = new Position(2, 3);
+        map.getPetak(posP23).addCreature(myConeheadZombie);
+        map.getPetak(posP23).addCreature(myDolphinRiderZombie);
+
+        Position posP51 = new Position(5, 1);
+        map.getPetak(posP51).addCreature(mySnowpea);
+
+        Position posP58 = new Position(5, 8);
+        map.getPetak(posP58).addCreature(myPoleVaultingZombie);
+
+        mySun.displayStatus();
         map.printMap(); 
 
-        System.out.println("After using ability");
 
         // myBulletPlant.useAbility();
+        mySunflower.useAbility();
         mySquash.useAbility();
-        // mySnowpea.useAbility();
-        // mySnowpea.useAbility();
-        // myPeashooter.useAbility();
+        mySnowpea.useAbility();
+        myPeashooter.useAbility();
 
-        // mySnowpea.displayStatus();
-        mySquash.displayStatus();
+        // mySquash.displayStatus();
 
 
         map.refreshMap();
-        // map.getPetak(posP12).addCreature(myPolevaultingZombie);
 
         map.printMap();
+        mySun.displayStatus();
 
 
     }

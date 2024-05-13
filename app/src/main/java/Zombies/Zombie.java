@@ -10,7 +10,7 @@ import GameMap.GameMap;
 public abstract class Zombie extends Creature{
 
 
-    private float walkSpeed;
+    private float walkSpeed = 5.0f;
     private boolean aquatic;
     private boolean frozen = false;
     private float frozenTimer = 0;
@@ -19,7 +19,6 @@ public abstract class Zombie extends Creature{
     public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
         super(name, health, attackDamage, attackSpeed, range, pos);
-        this.walkSpeed = 5.0f;
         this.aquatic = aquatic;
    
     }

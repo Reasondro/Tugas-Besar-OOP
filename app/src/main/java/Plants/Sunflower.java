@@ -7,11 +7,12 @@ import Sun.*;
 
 public class Sunflower extends Plant implements PlantAbility  {
 
-    // private int sunCooldown = 0;
+    private float sunCooldown;
     
     public Sunflower()
     {
         super("Sunflower", 50, 100, 0, 0, 0, 10,  new Position(0, 0));
+        sunCooldown = 0;
     }
     
     @Override
@@ -25,7 +26,7 @@ public class Sunflower extends Plant implements PlantAbility  {
         // }
         // else if(sunCooldown == 0)
         // {
-        //     sunCooldown = 5;
+        //     sunCooldown = 3;
         // }
         Sun sun = Sun.getInstance();
         sun.addSunPoints(25);
