@@ -6,7 +6,7 @@ import ZombieAbility.*;
 public class DancingZombie extends Zombie implements ZombieAbility {
     
     public DancingZombie(){
-        super("Flag Zombie", 150, 100, 1, 1,false,  new Position(0, 0));
+        super("Dancing Zombie", 150, 100, 1, 1,false,  new Position(0, 0));
     }
 
     @Override

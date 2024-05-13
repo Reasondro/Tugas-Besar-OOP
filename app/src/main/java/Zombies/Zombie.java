@@ -4,6 +4,7 @@ import Creature.*;
 import Position.*;
 
 import Plants.Plant;
+import GameMap.GameMap;
 
 
 public abstract class Zombie extends Creature{
@@ -18,7 +19,7 @@ public abstract class Zombie extends Creature{
     public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
         super(name, health, attackDamage, attackSpeed, range, pos);
-        this.walkSpeed = 5;
+        this.walkSpeed = 5.0f;
         this.aquatic = aquatic;
    
     }
@@ -82,6 +83,12 @@ public abstract class Zombie extends Creature{
 
     // public void walk(); //TODO ini sama aku aja yg walk
 
+    public void refreshCreature()
+    {
+        super.refreshCreature();
+        //TODO implement this method with Threading
+        reduceFrozenTimer();
+    }
 
     public void displayStatus()
     {

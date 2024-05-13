@@ -13,36 +13,51 @@ public class GameAle{
     {
 
         GameMap map = GameMap.getInstance();
+        BulletPlant myBulletPlant = new BulletPlant();
+        Squash mySquash = new Squash();
+        Snowpea mySnowpea = new Snowpea();
+        Peashooter myPeashooter = new Peashooter();
+
+
         
         Position posP11 = new Position(1, 1);
-        BulletPlant myBulletPlant = new BulletPlant();
-        map.getPetak(posP11).addCreature(myBulletPlant);
+        // map.getPetak(posP11).addCreature(myBulletPlant);
+        map.getPetak(posP11).addCreature(mySquash);
+        // map.getPetak(posP11).addCreature(mySnowpea);
+        // map.getPetak(posP11).addCreature(myPeashooter);
 
-        Position posP12 = new Position(1, 2);
         ConeheadZombie myConeheadZombie = new ConeheadZombie();
         DolphinRiderZombie myDolphinRiderZombie = new DolphinRiderZombie();
-        map.getPetak(posP12).addCreature(myConeheadZombie);
-        map.getPetak(posP12).addCreature(myDolphinRiderZombie);
+        PoleVaultingZombie myPolevaultingZombie = new PoleVaultingZombie();
+
+        Position posP12 = new Position(1, 2);
+        // map.getPetak(posP12).addCreature(myConeheadZombie);
+        // map.getPetak(posP12).addCreature(myDolphinRiderZombie);
 
         Position posP13 = new Position(1, 3);
         NormalZombie myNormalZombie = new NormalZombie();
         map.getPetak(posP13).addCreature(myNormalZombie);
 
-        Position posP16 = new Position(1, 6);
-        Peashooter myPeashooter = new Peashooter();
-        map.getPetak(posP16).addCreature(myPeashooter);
-
         System.out.println("Before using ability");
+        mySnowpea.displayStatus();
         map.printMap(); 
 
         System.out.println("After using ability");
-        myBulletPlant.useAbility();
-        map.refreshMap();
-        map.printMap();
 
-        // myConeheadZombie.displayStatus(); //? kalo mo liat nyawa nya manual
-        // myDolphinRiderZombie.displayStatus(); //? kalo mo liat nyawa nya manual
-        // myNormalZombie.displayStatus(); //? kalo mo liat nyawa nya manual
+        // myBulletPlant.useAbility();
+        mySquash.useAbility();
+        // mySnowpea.useAbility();
+        // mySnowpea.useAbility();
+        // myPeashooter.useAbility();
+
+        // mySnowpea.displayStatus();
+        mySquash.displayStatus();
+
+
+        map.refreshMap();
+        // map.getPetak(posP12).addCreature(myPolevaultingZombie);
+
+        map.printMap();
 
 
     }
