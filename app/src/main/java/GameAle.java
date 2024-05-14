@@ -17,13 +17,11 @@ public class GameAle{
 
         Sun mySun = Sun.getInstance();
 
-        // BulletPlant myBulletPlant = new BulletPlant();
+        BulletPlant myBulletPlant = new BulletPlant();
         Squash mySquash = new Squash();
         Snowpea mySnowpea = new Snowpea();
         Peashooter myPeashooter = new Peashooter();
         Sunflower mySunflower = new Sunflower();
-
-
         
         Position posP11 = new Position(1, 1);
         map.getPetak(posP11).addCreature(mySunflower);
@@ -52,33 +50,23 @@ public class GameAle{
         Position posP58 = new Position(5, 8);
         map.getPetak(posP58).addCreature(myPoleVaultingZombie);
 
+        Position posP62 = new Position(6, 2);
+        map.getPetak(posP62).addCreature(myBulletPlant);
+
         map.printMap(); 
 
+        mySunflower.checkToUseAbility();
+        myPeashooter.checkToUseAbility();
 
-        // myBulletPlant.useAbility();
-        // mySunflower.useAbility();
-        // mySquash.useAbility();
-        // mySnowpea.useAbility();
-        // myPeashooter.useAbility();
-
-        // mySquash.displayStatus();
-
-        // myNormalZombie.displayStatus();
-        // map.refreshMap();
-
-        myNormalZombie.walk();
         myConeheadZombie.walk();
+        mySquash.checkToUseAbility();
+        
+        mySnowpea.checkToUseAbility();
+        myBulletPlant.checkToUseAbility();
 
-        System.out.println("After Conehead walked");
         map.printMap();
+        mySun.displayStatus();
 
-        mySquash.useAbility();
-        System.out.println("After Squash used ability and killed Conehead");
-        map.printMap();
-
-        mySnowpea.useAbility();
-        System.out.println("After Snowpea used ability and slowed PoleVaultingZombie");
-        map.printMap();
     }
 }
 ///? Notes before adding bullet

@@ -6,6 +6,8 @@ import PlantAbility.*;
 import Zombies.Zombie;
 import Bullet.Bullet;
 import Bullet.PeaBullet;
+import Bullet.SnowBullet;
+
 import java.util.List;
 import java.util.ArrayList;
 import GameMap.GameMap;
@@ -15,8 +17,8 @@ import Petak.Petak;
 public class Peashooter extends Plant implements PlantAbility{
 
     
-    private List<Zombie> targets = new ArrayList<>();
     private PeaBullet bullet;
+    private List<Petak> reachablePetak = new ArrayList<Petak>();
 
     
     public Peashooter()
@@ -25,32 +27,67 @@ public class Peashooter extends Plant implements PlantAbility{
         bullet =  new PeaBullet(getAttackDamage());
     }
 
+    public List<Petak> getReachablePetak()
+    {
+        return reachablePetak;
+    }
+
+    public void setReachablePetak(List<Petak> reachablePetak)
+    {
+        this.reachablePetak = reachablePetak;
+    }
+
+    public boolean isZombiesInRange()
+    {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
+        for(Petak p : reachablePetak)
+        {
+            if(!(p.getZombies().isEmpty()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     
     @Override
-    public void useAbility( )
+    public void useAbility()
     {
-        //TODO extract reduce cooldown timer outside the useAbility method.
-        //TODO duplicate attackTimer check. One outside this class to check if to shoot.
-        //TODO The other one is to check if there's actually enemy to shoot, if there's none, then don't shoot.
-
-        List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
         for(Petak p : reachablePetak)
+            {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    if(!(bullet.isWornOut()))
+                    {
+                    bullet.hit(p);
+                    }
+                    else
+                    {
+                        break;
+                    }     
+                }
+            }
+            setAttackTimer(getAttackSpeed()); 
+            bullet = new PeaBullet(getAttackDamage());
+    }
+
+    @Override
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
         {
-          if(!(p.getZombies().isEmpty()))
-           {           
-                if(!(bullet.isWornOut()))
-                {
-                bullet.hit(p);
-                }
-                else
-                {
-                    break;
-                }
+            useAbility();
         }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
         }
-    setAttackTimer(getAttackSpeed()); 
-    bullet = new PeaBullet(getAttackDamage());
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            System.out.printf("No zombies in range for %s\n", getName());
+        }
     }
 
 }

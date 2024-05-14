@@ -15,5 +15,8 @@ public class DolphinRiderZombie extends Zombie implements ZombieAbility{
     {
         System.out.println("Dolphin Rider Zombie rides a dolphin!");
     }
+
+    @Override
+    public void checkToUseAbility(){}
     
 }

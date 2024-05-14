@@ -46,5 +46,8 @@ public class Kernelpult extends Plant implements PlantAbility{
         //     }
         // }
     }
+    @Override
+    public void checkToUseAbility(){}
+
     
 }

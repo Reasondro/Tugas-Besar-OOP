@@ -16,5 +16,8 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
     {
         System.out.println("Pole Vaulting Zombie vaults over plants!");
     }
+
+    @Override
+    public void checkToUseAbility(){}
     
 }

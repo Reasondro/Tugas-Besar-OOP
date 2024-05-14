@@ -41,6 +41,9 @@ public class Tangle extends Plant implements PlantAbility{
            z.reduceHealth(getAttackDamage());
         }
     }
+    @Override
+    public void checkToUseAbility(){}
+
 
 }
 

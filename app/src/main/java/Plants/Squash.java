@@ -17,6 +17,8 @@ import Petak.Petak;
 public class Squash  extends Plant implements PlantAbility{
 
     private SquashBullet bullet;
+    private List<Petak> reachablePetak = new ArrayList<Petak>();
+
     
     public Squash()
     {
@@ -24,40 +26,63 @@ public class Squash  extends Plant implements PlantAbility{
         bullet =  new SquashBullet(getAttackDamage());
     }
 
-
-    @Override
-    public void useAbility( )
+    public List<Petak> getReachablePetak()
     {
-        //TODO extract reduce cooldown timer outside the useAbility method.
-        //TODO duplicate attackTimer check. One outside this class to check if to shoot.
-        //TODO The other one is to check if there's actually enemy to shoot, if there's none, then don't shoot.
-        //TODO remove bullet implementation, use self as kamikaze
+        return reachablePetak;
+    }
 
-        List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
+    public void setReachablePetak(List<Petak> reachablePetak)
+    {
+        this.reachablePetak = reachablePetak;
+    }
+    
+    public boolean isZombiesInRange()
+    {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
         for(Petak p : reachablePetak)
         {
             if(!(p.getZombies().isEmpty()))
             {
-                // if(!(bullet.isWornOut()))
-                // {
-                // bullet.hit(p);
-                // }
-                // else
-                // {
-                //     break;
-                // }
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public void useAbility( )
+    {
+        for(Petak p : reachablePetak)
+        {
+            if(!(p.getZombies().isEmpty()))
+            {
                 for(Zombie z : p.getZombies())
                 {
                  int originalHealth = z.getHealth();
-                 z.reduceHealth(getAttackDamage());
+                 z.reduceHealth(getAttackDamage()); //? instant kill zombie
                  System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                  System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-                 reduceHealth(getHealth());
+                 reduceHealth(getHealth()); //? kill the squash
                 }
             } 
         }
-        // setAttackTimer(getAttackSpeed()); 
-        // bullet = new SquashBullet(getAttackDamage());
+    }
+    @Override
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
+        {
+            useAbility();
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            System.out.printf("No zombies in range for %s\n", getName());
+        }
     }
 
 }
