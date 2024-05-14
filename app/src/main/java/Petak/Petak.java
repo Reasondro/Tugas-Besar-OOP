@@ -7,6 +7,7 @@ import java.util.Iterator;
 import Creature.Creature;
 
 import Zombies.Zombie;
+import Plants.Plant;
 
 
 
@@ -81,6 +82,16 @@ public class Petak {
             }
         }
         return zombies;
+    }
+
+    public List<Plant> getPlants() {
+        List<Plant> plants = new ArrayList<>();
+        for (Creature creature : creatures) {
+            if (creature instanceof Plant) {
+                plants.add((Plant) creature);
+            }
+        }
+        return plants;
     }
 
     public Position getPos() {

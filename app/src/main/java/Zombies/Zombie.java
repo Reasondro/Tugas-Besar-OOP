@@ -10,8 +10,6 @@ import Petak.Petak;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.Position;
-
 
 public abstract class Zombie extends Creature
 {
@@ -89,9 +87,17 @@ public abstract class Zombie extends Creature
 
     public boolean isPlantsInSamePetak()
     {
-        return !(GameMap.getInstance().getPetak(getPos()).getPlants().isEmpty());
+       if(GameMap.getInstance().getPetak(getPos()).getPlants().isEmpty())
+       {
+           return false;
+       }
+       else
+       {
+           return true;
+       }
     }
 
+    //TODO getRowBasedOnCreatureRange
     public void attackPlant(List<Plant> plants)
     {
         for(Plant p : plants)
@@ -106,7 +112,7 @@ public abstract class Zombie extends Creature
 
     public void checkToAttack()
     {
-        if(getAttackTimer() == 0)
+        if(  isPlantsInSamePetak() &&  getAttackTimer() == 0)
         {
             attackPlant(GameMap.getInstance().getPetak(getPos()).getPlants());
             setAttackTimer(getAttackSpeed());
@@ -155,6 +161,7 @@ public abstract class Zombie extends Creature
         System.out.println("Health: " + getHealth());
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
+        System.out.println("Attack Timer: " + getAttackTimer());
         System.out.println("Range: " + getRange());
         System.out.println("Is Aquatic: " + isAquatic());
         System.out.println("Walk Speed: " + getWalkSpeedInSeconds());

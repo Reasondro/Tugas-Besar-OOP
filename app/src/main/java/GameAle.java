@@ -55,10 +55,12 @@ public class GameAle{
 
         map.printMap(); 
 
-        mySunflower.checkToUseAbility();
-        myPeashooter.checkToUseAbility();
+        // mySunflower.checkToUseAbility();
+        // myPeashooter.checkToUseAbility();
 
-        mySquash.checkToUseAbility();
+        // mySquash.checkToUseAbility();
+    myConeheadZombie.displayStatus();
+        System.out.println("After zombie attack");
 
         myConeheadZombie.checkToWalk(); //? walkTimer @ went from 0 - 5. WALKING
 
@@ -69,13 +71,12 @@ public class GameAle{
         myConeheadZombie.checkToWalk(); //? walkTimer @ went from 1 to 0. NOT WALKING
 
         myConeheadZombie.checkToWalk(); //? walkTimer @ went from 0 to 5. WALKING
-       
-        // myConeheadZombie.checkToAttack();
+        myConeheadZombie.checkToAttack();
 
 
         
-        mySnowpea.checkToUseAbility();
-        myBulletPlant.checkToUseAbility();
+        // mySnowpea.checkToUseAbility();
+        // myBulletPlant.checkToUseAbility();
 
         map.printMap();
         mySun.displayStatus();

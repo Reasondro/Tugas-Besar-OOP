@@ -157,6 +157,8 @@ public class GameMap {
         return rowList;
     }
 
+    //TODO getRowBasedOnCreatureRange
+
     public List<Petak> getColumn(int column)
     {
         List<Petak> columnList = new ArrayList<>();
