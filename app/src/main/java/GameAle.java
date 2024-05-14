@@ -58,8 +58,21 @@ public class GameAle{
         mySunflower.checkToUseAbility();
         myPeashooter.checkToUseAbility();
 
-        myConeheadZombie.walk();
         mySquash.checkToUseAbility();
+
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 0 - 5. WALKING
+
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 5 to 4. NOT WALKING
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 4 to 3. NOT WALKING
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 3 to 2. NOT WALKING
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 2 to 1. NOT WALKING 
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 1 to 0. NOT WALKING
+
+        myConeheadZombie.checkToWalk(); //? walkTimer @ went from 0 to 5. WALKING
+       
+        // myConeheadZombie.checkToAttack();
+
+
         
         mySnowpea.checkToUseAbility();
         myBulletPlant.checkToUseAbility();

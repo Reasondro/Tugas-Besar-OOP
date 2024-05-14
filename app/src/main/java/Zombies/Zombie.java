@@ -5,17 +5,22 @@ import Position.*;
 
 import Plants.Plant;
 import GameMap.GameMap;
+import Petak.Petak;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.Position;
 
 
-public abstract class Zombie extends Creature{
-
+public abstract class Zombie extends Creature
+{
 
     private float walkSpeedInSeconds = 5.0f;
     private float walkTimer = 0;
     private boolean aquatic;
     private boolean frozen = false;
     private float frozenTimer = 0;
-    //TODO add Range as an attribute
   
     public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
@@ -82,11 +87,34 @@ public abstract class Zombie extends Creature{
 
     }
 
-
-
-    public void attackPlant(Plant p)
+    public boolean isPlantsInSamePetak()
     {
-        p.reduceHealth(getAttackDamage());
+        return !(GameMap.getInstance().getPetak(getPos()).getPlants().isEmpty());
+    }
+
+    public void attackPlant(List<Plant> plants)
+    {
+        for(Plant p : plants)
+        {
+            int originalHealth = p.getHealth();
+            p.reduceHealth(getAttackDamage());
+            System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
+            System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
+        }
+        setAttackTimer(getAttackSpeed());
+    }
+
+    public void checkToAttack()
+    {
+        if(getAttackTimer() == 0)
+        {
+            attackPlant(GameMap.getInstance().getPetak(getPos()).getPlants());
+            setAttackTimer(getAttackSpeed());
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
     }
 
     public void walk()
@@ -99,9 +127,21 @@ public abstract class Zombie extends Creature{
         GameMap.getInstance().getPetak(pos).addCreature(this);
 
         setWalkTimer(getWalkSpeedInSeconds());
-
-
     }
+
+    public void checkToWalk()
+    {
+        if(getWalkTimer() == 0)
+        {
+            walk();
+        }
+        else if(getWalkTimer() > 0)
+        {
+            setWalkTimer(getWalkTimer()-1);
+        }
+    }
+
+
     public void refreshCreature()
     {
         super.refreshCreature();
