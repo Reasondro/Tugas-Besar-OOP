@@ -57,7 +57,8 @@ public class Petak {
     //     }
     // }
 
-    public void refreshPetak() {
+    public void refreshPetak() //! obsolete, already implemented in Creature.reduceHealth()
+    {
         Iterator<Creature> iterator = creatures.iterator();
         while (iterator.hasNext()) {
             Creature creature = iterator.next();

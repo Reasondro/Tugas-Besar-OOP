@@ -42,9 +42,9 @@ public class GameAle{
         map.getPetak(posP22).addCreature(mySquash);
 
         
-        Position posP23 = new Position(2, 3);
-        map.getPetak(posP23).addCreature(myConeheadZombie);
-        map.getPetak(posP23).addCreature(myDolphinRiderZombie);
+        Position posP24 = new Position(2, 4);
+        map.getPetak(posP24).addCreature(myConeheadZombie);
+        map.getPetak(posP24).addCreature(myDolphinRiderZombie);
 
         Position posP51 = new Position(5, 1);
         map.getPetak(posP51).addCreature(mySnowpea);
@@ -52,25 +52,33 @@ public class GameAle{
         Position posP58 = new Position(5, 8);
         map.getPetak(posP58).addCreature(myPoleVaultingZombie);
 
-        mySun.displayStatus();
         map.printMap(); 
 
 
         // myBulletPlant.useAbility();
-        mySunflower.useAbility();
-        mySquash.useAbility();
-        mySnowpea.useAbility();
-        myPeashooter.useAbility();
+        // mySunflower.useAbility();
+        // mySquash.useAbility();
+        // mySnowpea.useAbility();
+        // myPeashooter.useAbility();
 
         // mySquash.displayStatus();
 
+        // myNormalZombie.displayStatus();
+        // map.refreshMap();
 
-        map.refreshMap();
+        myNormalZombie.walk();
+        myConeheadZombie.walk();
 
+        System.out.println("After Conehead walked");
         map.printMap();
-        mySun.displayStatus();
 
+        mySquash.useAbility();
+        System.out.println("After Squash used ability and killed Conehead");
+        map.printMap();
 
+        mySnowpea.useAbility();
+        System.out.println("After Snowpea used ability and slowed PoleVaultingZombie");
+        map.printMap();
     }
 }
 ///? Notes before adding bullet

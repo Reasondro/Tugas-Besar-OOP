@@ -10,7 +10,8 @@ import GameMap.GameMap;
 public abstract class Zombie extends Creature{
 
 
-    private float walkSpeed = 5.0f;
+    private float walkSpeedInSeconds = 5.0f;
+    private float walkTimer = 0;
     private boolean aquatic;
     private boolean frozen = false;
     private float frozenTimer = 0;
@@ -23,12 +24,20 @@ public abstract class Zombie extends Creature{
    
     }
 
-    public float getWalkSpeed() {
-        return walkSpeed;
+    public float getWalkSpeedInSeconds() {
+        return walkSpeedInSeconds;
     }
 
-    public void setWalkSpeed(float walkSpeed) {
-        this.walkSpeed = walkSpeed;
+    public void setWalkSpeedInSeconds(float walkSpeedInSeconds) {
+        this.walkSpeedInSeconds = walkSpeedInSeconds;
+    }
+
+    public float getWalkTimer() {
+        return walkTimer;
+    }
+
+    public void setWalkTimer(float walkTimer) {
+        this.walkTimer = walkTimer;
     }
 
     public boolean isAquatic() {
@@ -64,7 +73,7 @@ public abstract class Zombie extends Creature{
         else if(frozenTimer == 0)
         {
             setFrozen(false);
-            setWalkSpeed(5);
+            setWalkSpeedInSeconds(5);
         }
         else if(frozenTimer > 0)
         {
@@ -80,8 +89,19 @@ public abstract class Zombie extends Creature{
         p.reduceHealth(getAttackDamage());
     }
 
-    // public void walk(); //TODO ini sama aku aja yg walk
+    public void walk()
+    {
+        GameMap map = GameMap.getInstance();
+        Position pos = getPos();
+        
+        GameMap.getInstance().getPetak(pos).removeCreature(this);
+        pos.setY(pos.getY() - 1);
+        GameMap.getInstance().getPetak(pos).addCreature(this);
 
+        setWalkTimer(getWalkSpeedInSeconds());
+
+
+    }
     public void refreshCreature()
     {
         super.refreshCreature();
@@ -97,7 +117,7 @@ public abstract class Zombie extends Creature{
         System.out.println("Attack Speed: " + getAttackSpeed());
         System.out.println("Range: " + getRange());
         System.out.println("Is Aquatic: " + isAquatic());
-        System.out.println("Walk Speed: " + getWalkSpeed());
+        System.out.println("Walk Speed: " + getWalkSpeedInSeconds());
         System.out.println("Is Frozen: " + isFrozen());
         System.out.println("Frozen Timer: " + getFrozenTimer());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());

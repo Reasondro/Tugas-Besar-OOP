@@ -1,5 +1,6 @@
 package Creature;
 
+import GameMap.GameMap;
 import Position.*;
 
 
@@ -50,9 +51,10 @@ public abstract class Creature {
     public void reduceHealth(int damage) {
         health -= damage;
 
-        if(health < 0)
+        if(health <= 0)
         {
             health = 0;
+            GameMap.getInstance().getPetak(pos).removeCreature(this);
         }
     }
     

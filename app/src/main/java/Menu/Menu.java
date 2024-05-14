@@ -26,16 +26,16 @@ public class Menu {
         listZombies.add(z);
     }
 
-    public static void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void clearTerminal() {
+    //     try {
+    //         if (System.getProperty("os.name").contains("Windows"))
+    //             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    //         else
+    //             Runtime.getRuntime().exec("clear");
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     public static void setAddZombie(boolean isAddZombie) {
         Menu.isAddZombie = isAddZombie;
@@ -55,34 +55,34 @@ public class Menu {
             
             switch (input1) {
                 case 1:
-                    clearTerminal();
+                    // clearTerminal();
                     NewGameOrLoadGame();
                     break;
                 case 2:
-                    clearTerminal();
+                    // clearTerminal();
                     help();
                     showGameMenu();
                     break;
                 case 0:
-                    clearTerminal();
+                    // clearTerminal();
                     System.out.println("Terima kasih telah bermain Plant VS Zombie!");
                     System.exit(0);
                     break;
                 default:
-                    clearTerminal();
+                    // clearTerminal();
                     System.out.println("Pilihan tidak tersedia.");
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
-                    clearTerminal();
+                    // clearTerminal();
                     showGameMenu();
                     break;
             }
         } catch (InputMismatchException e) {
-            clearTerminal();
+            // clearTerminal();
             System.out.println("Masukan tidak valid. Silakan masukkan angka.");
             System.out.println("Tekan Enter untuk melanjutkan...");
             input.nextLine();
-            clearTerminal();
+            // clearTerminal();
             showGameMenu();
         }
         input.close();
@@ -99,11 +99,11 @@ public class Menu {
             input.nextLine(); // hati-hati
             switch (input2) {
                 case 1:
-                    clearTerminal();
+                    // clearTerminal();
                     // addZombie();
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
-                    clearTerminal();
+                    // clearTerminal();
                     showInGameMenu();
                     break;
                 case 2:
@@ -111,26 +111,26 @@ public class Menu {
                     showInGameMenu();
                     break;
                 case 0:
-                    clearTerminal();
+                    // clearTerminal();
                     showGameMenu();
                     break;
                 default:
-                    clearTerminal();
+                    // clearTerminal();
                     System.out.println("Pilihan tidak tersedia.");
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
                     input.nextLine();
-                    clearTerminal();
+                    // clearTerminal();
                     NewGameOrLoadGame();
                     break;
             }
         } catch (InputMismatchException e) {
-            clearTerminal();
+            // clearTerminal();
             System.out.println("Masukan tidak valid. Silakan masukkan angka.");
             System.out.println("Tekan Enter untuk melanjutkan...");
             input.nextLine();
             input.nextLine();
-            clearTerminal();
+            // clearTerminal();
             NewGameOrLoadGame();
         }
     }
@@ -151,29 +151,29 @@ public class Menu {
 
             switch (input3) {
                 case 1:
-                    clearTerminal();
+                    // clearTerminal();
                     // sesuaiin sama getMenuoption
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
-                    clearTerminal();
+                    // clearTerminal();
                     showInGameMenu();
                     break;
                 case 2 : //tanya dulu
                 default:
-                        clearTerminal();
+                        // clearTerminal();
                         System.out.println("Pilihan tidak tersedia.");
                         System.out.println("Tekan Enter untuk melanjutkan...");
                         input.nextLine();
-                        clearTerminal();
+                        // clearTerminal();
                         showInGameMenu();
                         break;
                 }
             } catch (InputMismatchException e) {
-                clearTerminal();
+                // clearTerminal();
                 System.out.println("Input harus berupa angka!");
                 System.out.println("Tekan Enter untuk melanjutkan...");
                 input.nextLine();
-                clearTerminal();
+                // clearTerminal();
                 showInGameMenu();
             }
         }
