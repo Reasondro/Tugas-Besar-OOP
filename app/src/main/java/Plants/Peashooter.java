@@ -57,6 +57,8 @@ public class Peashooter extends Plant implements PlantAbility{
     {
         for(Petak p : reachablePetak)
             {
+                synchronized(p) //TODO add synchronized to objects that need(petak)
+                {
                 if(!(p.getZombies().isEmpty()))
                 {
                     if(!(bullet.isWornOut()))
@@ -67,6 +69,7 @@ public class Peashooter extends Plant implements PlantAbility{
                     {
                         break;
                     }     
+                }
                 }
             }
             setAttackTimer(getAttackSpeed()); 

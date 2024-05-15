@@ -8,6 +8,7 @@ import Creature.Creature;
 
 import Zombies.Zombie;
 import Plants.Plant;
+import Position.Position;
 
 
 
@@ -46,6 +47,16 @@ public class Petak {
     // Remove a creature from the list
     public void removeCreature(Creature creature) {
         creatures.remove(creature);
+    }
+
+    public void removeAllPlants() {
+        Iterator<Creature> iterator = creatures.iterator();
+        while (iterator.hasNext()) {
+            Creature creature = iterator.next();
+            if (creature instanceof Plant) {
+                iterator.remove();
+            }
+        }
     }
 
     // public void refreshPetak() {
