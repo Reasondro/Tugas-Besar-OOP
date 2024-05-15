@@ -38,11 +38,14 @@ public class BulletPlant extends Plant implements PlantAbility{
         setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
+            synchronized(p)
             {
-                return true;
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
             }
-        }
+    }
         return false;
     }
 
@@ -51,15 +54,18 @@ public class BulletPlant extends Plant implements PlantAbility{
     {
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
-           {
-                if(!(bullet.isWornOut()))
+            synchronized(p)
+            {
+                if(!(p.getZombies().isEmpty()))
                 {
-                bullet.hit(p);
-                }
-                else
-                {
-                    break;
+                    if(!(bullet.isWornOut()))
+                    {
+                    bullet.hit(p);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }

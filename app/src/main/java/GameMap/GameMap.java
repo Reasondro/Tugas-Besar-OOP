@@ -184,6 +184,41 @@ public class GameMap {
         }
     }
 
+    public boolean isZombieBaseEmpty()
+    {
+        boolean empty = true;
+        
+        for(int i = 0; i < rows; i++) 
+        {
+            if(!(map[i][10].getZombies().isEmpty()))
+            {
+                empty = false;
+                break;
+            }
+        }
+
+        return empty;
+    }
+
+    public boolean isProtectedBaseCompromised()
+    {
+        boolean compromised = false;
+        
+        for(int i = 0; i < rows; i++) 
+        {
+            if(!(map[i][0].getZombies().isEmpty()))
+            {
+                compromised = true;
+                System.out.println("Protected Base is compromised! Game Over!");
+                break;
+            }
+        }
+
+        return compromised;
+
+
+    }
+
 
 }
 
