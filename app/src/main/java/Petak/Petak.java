@@ -1,6 +1,5 @@
 package Petak;
 
-import Position.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -58,16 +57,6 @@ public class Petak {
             }
         }
     }
-
-    // public void refreshPetak() {
-    //     for (Creature creature : creatures) {
-    //         if(creature.getHealth() == 0)
-    //         {
-                // System.out.println("Creature " + creature.getName() + " has been removed from the petak");
-    //             removeCreature(creature);
-    //         }
-    //     }
-    // }
 
     public void refreshPetak() //! obsolete, already implemented in Creature.reduceHealth()
     {

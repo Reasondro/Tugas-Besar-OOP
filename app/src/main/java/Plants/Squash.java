@@ -41,11 +41,14 @@ public class Squash  extends Plant implements PlantAbility{
         setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
+            synchronized(p)
             {
-                return true;
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
             }
-        }
+    }
         return false;
     }
 
@@ -55,17 +58,20 @@ public class Squash  extends Plant implements PlantAbility{
     {
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
+            synchronized(p)
             {
-                for(Zombie z : p.getZombies())
+                if(!(p.getZombies().isEmpty()))
                 {
-                 int originalHealth = z.getHealth();
-                 z.reduceHealth(getAttackDamage()); //? instant kill zombie
-                 System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
-                 System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-                 reduceHealth(getHealth()); //? kill the squash
-                }
-            } 
+                    for(Zombie z : p.getZombies())
+                    {
+                    int originalHealth = z.getHealth();
+                    z.reduceHealth(getAttackDamage()); //? instant kill zombie
+                    System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
+                    System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+                    reduceHealth(getHealth()); //? kill the squash
+                    }
+                } 
+            }
         }
     }
     @Override

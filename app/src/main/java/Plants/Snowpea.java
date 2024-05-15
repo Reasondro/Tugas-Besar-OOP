@@ -21,7 +21,7 @@ public class Snowpea extends Plant  implements PlantAbility{
 
     public Snowpea()
     {
-        super("Snow pea", 50, 100, 25, 1, -1, 10,  new Position(0, 0));
+        super("Snow pea", 50, 100, 25, 4, -1, 10,  new Position(0, 0));
         bullet =  new SnowBullet(getAttackDamage());
     }
 
@@ -40,11 +40,14 @@ public class Snowpea extends Plant  implements PlantAbility{
         setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
+            synchronized(p)
             {
-                return true;
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
             }
-        }
+    }
         return false;
     }
 
@@ -54,18 +57,21 @@ public class Snowpea extends Plant  implements PlantAbility{
     {
         for(Petak p : reachablePetak)
             {
-                if(!(p.getZombies().isEmpty()))
+                synchronized(p)
                 {
-                    if(!(bullet.isWornOut()))
+                    if(!(p.getZombies().isEmpty()))
                     {
-                    bullet.hit(p);
+                        if(!(bullet.isWornOut()))
+                        {
+                        bullet.hit(p);
+                        }
+                        else
+                        {
+                            break;
+                        }     
                     }
-                    else
-                    {
-                        break;
-                    }     
                 }
-            }
+        }
             setAttackTimer(getAttackSpeed()); 
             bullet = new SnowBullet(getAttackDamage());
     }

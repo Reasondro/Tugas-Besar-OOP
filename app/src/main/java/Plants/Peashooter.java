@@ -23,7 +23,7 @@ public class Peashooter extends Plant implements PlantAbility{
     
     public Peashooter()
     {
-        super("Peashooter", 100, 100, 25, 1, -1, 10,  new Position(0, 0));
+        super("Peashooter", 100, 100, 25, 4, -1, 10,  new Position(0, 0));
         bullet =  new PeaBullet(getAttackDamage());
     }
 
@@ -42,11 +42,14 @@ public class Peashooter extends Plant implements PlantAbility{
         setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
         for(Petak p : reachablePetak)
         {
-            if(!(p.getZombies().isEmpty()))
+            synchronized(p)
             {
-                return true;
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
             }
-        }
+    }
         return false;
     }
 

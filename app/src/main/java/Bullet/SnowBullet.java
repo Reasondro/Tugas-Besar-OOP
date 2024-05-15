@@ -41,10 +41,9 @@ public class SnowBullet {
                 z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
             }
             System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
-            System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-            System.out.printf("%s is frozen\n", z.getName());
-            System.out.printf("%s's walk speed is now %.2f seconds/Petak\n", z.getName(), z.getWalkSpeedInSeconds());
-            
+            // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+            // System.out.printf("%s is frozen\n", z.getName());
+            // System.out.printf("%s's walk speed is now %.2f seconds/Petak\n", z.getName(), z.getWalkSpeedInSeconds());
            }
            setWornOut(true);
 
