@@ -3,7 +3,14 @@ package Zombies;
 import Position.Position;
 import ZombieAbility.*;
 
+import Position.Position;
+import Petak.Petak;
+import GameMap.GameMap;
+
 public class PoleVaultingZombie extends Zombie implements ZombieAbility {
+
+    private float abilityTimer = 0;
+    private Petak petakInFront;
 
     public PoleVaultingZombie()
     {
@@ -14,8 +21,10 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
     @Override
     public void useAbility()
     {
-        System.out.println("Pole Vaulting Zombie vaults over plants!");
-    }
+
+
+
+     }
 
     @Override
     public void checkToUseAbility(){}
