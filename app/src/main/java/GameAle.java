@@ -55,14 +55,20 @@ public class GameAle{
         Position posP62 = new Position(6, 2);
         map.getPetak(posP62).addCreature(myBulletPlant);
 
+        //? below for non thread testing
         map.printMap(); 
+
+        System.out.println("After removing all plants from petak 1,1 (sunflower and peashooter are gone)");
+        map.getPetak(posP11).removeAllPlants(); //? remove all plants from petak @mhmmdhakim
+        map.printMap(); 
+
+
 
         // mySunflower.checkToUseAbility();
         // myPeashooter.checkToUseAbility();
 
         // mySquash.checkToUseAbility();
 
-        //? below before thread testing
          // myConeheadZombie.displayStatus();
         // System.out.println("After zombie attack");
 
@@ -82,7 +88,7 @@ public class GameAle{
 
         // map.printMap();
         // mySun.displayStatus();
-        //? above before thread testing
+        //? above for non-thread testing
 
         final long  startTime =  System.currentTimeMillis();
         
@@ -121,7 +127,7 @@ public class GameAle{
                 }
             }
         };
-        thread.start();
+        // thread.start();
 
     }
 }
