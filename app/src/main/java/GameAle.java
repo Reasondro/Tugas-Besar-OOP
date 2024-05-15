@@ -72,14 +72,31 @@ public class GameAle{
 
         myConeheadZombie.checkToWalk(); //? walkTimer @ went from 0 to 5. WALKING
         myConeheadZombie.checkToAttack();
-
-
+   
         
         // mySnowpea.checkToUseAbility();
         // myBulletPlant.checkToUseAbility();
 
-        map.printMap();
-        mySun.displayStatus();
+        // map.printMap();
+        // mySun.displayStatus();
+
+        
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    // map.printMap();
+                    System.out.println("My Peashooter attack timer: " + myPeashooter.getAttackTimer());
+                    myPeashooter.checkToUseAbility();
+                    try {
+                        Thread.sleep(1000); // Sleep for 1 second
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
 
     }
 }
