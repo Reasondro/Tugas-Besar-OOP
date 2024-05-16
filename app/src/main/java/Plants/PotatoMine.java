@@ -40,12 +40,9 @@ public class PotatoMine extends Plant implements PlantAbility{
            z.reduceHealth(z.getHealth()); //? instant kill
         }
     }
-<<<<<<< HEAD
-=======
     @Override   
     public void checkToUseAbility(){}
 
->>>>>>> 3c614503baa78b1c0a548ebb882df6aaa8a29402
 
 }
 

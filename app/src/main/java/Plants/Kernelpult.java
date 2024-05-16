@@ -35,19 +35,6 @@ public class Kernelpult extends Plant implements PlantAbility{
     @Override
     public void useAbility( )
     {
-<<<<<<< HEAD
-        for(Zombie z : targets)
-        {
-            z.reduceHealth(getAttackDamage());
-            z.setFrozenTimer(10);
-            if(z.isFrozen() == false)
-            {
-                z.setFrozen(true);
-                z.setWalkSpeed(z.getWalkSpeed() / 2);
-            }
-        }
-    }
-=======
         // for(Zombie z : targets)
         // {
         //     z.reduceHealth(getAttackDamage());
@@ -62,6 +49,5 @@ public class Kernelpult extends Plant implements PlantAbility{
     @Override
     public void checkToUseAbility(){}
 
->>>>>>> 3c614503baa78b1c0a548ebb882df6aaa8a29402
     
 }
