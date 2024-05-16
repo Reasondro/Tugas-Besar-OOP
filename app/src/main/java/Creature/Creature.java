@@ -1,5 +1,6 @@
 package Creature;
 
+import GameMap.GameMap;
 import Position.*;
 
 
@@ -12,6 +13,7 @@ public abstract class Creature {
     private int health;
     private int attackDamage;
     private float attackSpeed;
+    private float attackTimer = 0;
     private Position pos;
     private int range;
 
@@ -48,6 +50,12 @@ public abstract class Creature {
 
     public void reduceHealth(int damage) {
         health -= damage;
+
+        if(health <= 0)
+        {
+            health = 0;
+            GameMap.getInstance().getPetak(pos).removeCreature(this);
+        }
     }
     
     public int getAttackDamage() {
@@ -66,6 +74,37 @@ public abstract class Creature {
         this.attackSpeed = attackSpeed;
     }
 
+    public float getAttackTimer() {
+        return attackTimer;
+    }
+
+    public void setAttackTimer(float attackTimer) {
+        this.attackTimer = attackTimer;
+        if(attackTimer < 0)
+        {
+            this.attackTimer = 0;
+        }
+    }
+
+    public void reduceAttackTimer()
+    {
+      
+        if(attackTimer < 0)
+        {
+            return;
+        }
+        else if(attackTimer == 0)
+        {
+            setAttackTimer(attackSpeed);
+        }
+        else if(attackTimer > 0)
+        {
+            attackTimer--;
+        }
+
+    }
+    
+
     public int getRange() {
         return range;
     }
@@ -80,6 +119,12 @@ public abstract class Creature {
 
     public void setPos(Position pos) {
         this.pos = pos;
+    }
+
+    public void refreshCreature()
+    {
+        //TODO implement this method with Threading
+        reduceAttackTimer();
     }
     
 }

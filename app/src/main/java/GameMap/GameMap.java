@@ -157,6 +157,14 @@ public class GameMap {
         return rowList;
     }
 
+    //TODO getRowBasedOnCreatureRange
+
+    public Petak getPetakInFrontOfZombie() //TODO FINISH THIS 
+    {
+        Petak petakInFront = new Petak("null", new Position(7, 2));
+        return petakInFront;
+    }
+
     public List<Petak> getColumn(int column)
     {
         List<Petak> columnList = new ArrayList<>();
@@ -180,6 +188,41 @@ public class GameMap {
                 map[i][j].refreshPetak();
             }
         }
+    }
+
+    public boolean isZombieBaseEmpty()
+    {
+        boolean empty = true;
+        
+        for(int i = 0; i < rows; i++) 
+        {
+            if(!(map[i][10].getZombies().isEmpty()))
+            {
+                empty = false;
+                break;
+            }
+        }
+
+        return empty;
+    }
+
+    public boolean isProtectedBaseCompromised()
+    {
+        boolean compromised = false;
+        
+        for(int i = 0; i < rows; i++) 
+        {
+            if(!(map[i][0].getZombies().isEmpty()))
+            {
+                compromised = true;
+                System.out.println("Protected Base is compromised! Game Over!");
+                break;
+            }
+        }
+
+        return compromised;
+
+
     }
 
 
