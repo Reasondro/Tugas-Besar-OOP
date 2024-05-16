@@ -159,6 +159,12 @@ public class GameMap {
 
     //TODO getRowBasedOnCreatureRange
 
+    public Petak getPetakInFrontOfZombie() //TODO FINISH THIS 
+    {
+        Petak petakInFront = new Petak("null", new Position(7, 2));
+        return petakInFront;
+    }
+
     public List<Petak> getColumn(int column)
     {
         List<Petak> columnList = new ArrayList<>();

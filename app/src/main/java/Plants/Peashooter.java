@@ -4,9 +4,7 @@ import Position.Position;
 
 import PlantAbility.*;
 import Zombies.Zombie;
-import Bullet.Bullet;
 import Bullet.PeaBullet;
-import Bullet.SnowBullet;
 
 import java.util.List;
 import java.util.ArrayList;

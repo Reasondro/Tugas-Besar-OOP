@@ -145,7 +145,11 @@ public abstract class Zombie extends Creature
 
     public void checkToWalk()
     {
-        if(getWalkTimer() == 0)
+        if (isPlantsInSamePetak())
+        {
+            checkToAttack();
+        }
+       else if(getWalkTimer() == 0)
         {
             walk();
         }

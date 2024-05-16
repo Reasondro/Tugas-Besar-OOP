@@ -102,20 +102,21 @@ public class GameAle{
             @Override
             public void run() {
                 while (true) {
-                    if(map.isProtectedBaseCompromised() || myPoleVaultingZombie.getHealth() == 0)
+                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0)
                     {
                         break;
                     }
-                    map.printMap();
                     final long currentTime = System.currentTimeMillis() - startTime;
                     final long elapsedSeconds = currentTime/1000;
                     final long secondsDisplay = elapsedSeconds % 60;
                     final long minutesDisplay = elapsedSeconds / 60;
                     System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+                    map.printMap();
                     // System.out.println("My Peashooter2 attack timer: " + mySnowpea.getAttackTimer() );
                     // myPeashooter2.checkToUseAbility();
                     // System.out.println("My Snowpea attack timer: " + mySnowpea.getAttackTimer());
-                    mySnowpea.checkToUseAbility();
+                    // mySnowpea.checkToUseAbility();
+                    myPeashooter.checkToUseAbility();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -131,7 +132,7 @@ public class GameAle{
             @Override
             public void run() {
                 while (true) {
-                    if(map.isProtectedBaseCompromised() || myPoleVaultingZombie.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
+                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
                     {
                         break;
                     }
@@ -142,9 +143,11 @@ public class GameAle{
                     // System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                     // System.out.println("My PoleVaultingZombie attack timer: " + myPoleVaultingZombie.getAttackTimer() );
                    
-                    myPoleVaultingZombie.checkToWalk();
-                    System.out.println("My PoleVaultingZombie walk timer: " + myPoleVaultingZombie.getWalkTimer());
-                    // System.out.println("My PoleVaultingZombie attack timer: " + myPoleVaultingZombie.getAttackTimer());
+                    // myPoleVaultingZombie.checkToWalk();
+                    // System.out.println("My PoleVaultingZombie walk timer: " + myPoleVaultingZombie.getWalkTimer());
+
+                    // myNormalZombie.checkToAttack();
+                    myNormalZombie.checkToWalk();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
