@@ -49,8 +49,8 @@ public class GameAle{
         map.getPetak(posP51).addCreature(mySnowpea);
         map.getPetak(posP51).addCreature(myPeashooter2);
 
-        Position posP58 = new Position(5, 8);
-        map.getPetak(posP58).addCreature(myPoleVaultingZombie);
+        Position posP52 = new Position(5, 2);
+        map.getPetak(posP52).addCreature(myPoleVaultingZombie);
 
         Position posP62 = new Position(6, 2);
         map.getPetak(posP62).addCreature(myBulletPlant);
@@ -126,8 +126,9 @@ public class GameAle{
             }
         };
 
-        plantThreadTest.start();
+        // plantThreadTest.start();
 
+        map.printMap();
         Thread zombieThreadTest = new Thread() {
             @Override
             public void run() {
@@ -156,8 +157,9 @@ public class GameAle{
                 }
             }
         };
-        zombieThreadTest.start();
+        // zombieThreadTest.start();
         //? above for plant thread testing
+        myPoleVaultingZombie.useAbility();
     }
 }
 ///? Notes before adding bullet

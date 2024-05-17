@@ -157,12 +157,17 @@ public class GameMap {
         return rowList;
     }
 
-    //TODO getRowBasedOnCreatureRange
 
-    public Petak getPetakInFrontOfZombie() //TODO FINISH THIS 
+
+    public Petak getPetakInFrontOfZombie(Zombie z) //TODO FINISH THIS 
     {
-        Petak petakInFront = new Petak("null", new Position(7, 2));
-        return petakInFront;
+      
+        Position zombiePos = z.getPos();
+        
+        Position inFrontOfZombiePos = new Position(zombiePos.getX(), zombiePos.getY()-1);
+        Petak inFrontOfZombiePetak = GameMap.getInstance().getPetak(inFrontOfZombiePos);
+
+        return inFrontOfZombiePetak;
     }
 
     public List<Petak> getColumn(int column)

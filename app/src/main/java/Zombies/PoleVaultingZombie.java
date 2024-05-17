@@ -6,10 +6,11 @@ import ZombieAbility.*;
 import Position.Position;
 import Petak.Petak;
 import GameMap.GameMap;
+import Creature.Creature;
+import Plants.Plant;
 
 public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
-    private float abilityTimer = 0;
     private Petak petakInFront;
     private boolean hasUseZombieAbility = false;
 
@@ -30,16 +31,34 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
     public boolean isPlantInFront()
     {
-        //TODO implement this
+        setPetakInFront(GameMap.getInstance().getPetakInFrontOfZombie(this));
+        
+        for(Creature c : petakInFront.getCreatures())
+        {
+            if(c instanceof Plant)
+            {
+                return true;
+            }
+        }
         return false;
-        // setPetakInFront(GameMap.getInstance());
     }
 
     @Override
     public void useAbility()
     {
 
+        if(isPlantInFront() && !hasUseZombieAbility)
+        {
+            Plant plant = (Plant) petakInFront.getCreatures().get(0);
 
+            int originalHealth = plant.getHealth();
+            plant.reduceHealth(plant.getHealth());
+
+            System.out.println("Pole Vaulting Zombie jumps over " + plant.getName());
+            System.out.printf("%S health went from %d to %d\n", plant.getName() ,originalHealth , plant.getHealth());
+
+            hasUseZombieAbility = true;
+        }
 
      }
 
