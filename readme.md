@@ -12,4 +12,4 @@ Cara run:
 
 UPDATE
 4. Ketik run di console. DAH INI AJA paling singkat (EXTRAAA RECOMMENDED)
->>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
+
