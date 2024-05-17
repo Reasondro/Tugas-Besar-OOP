@@ -49,7 +49,7 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
         if(isPlantInFront() && !hasUseZombieAbility)
         {
-            Plant plant = (Plant) petakInFront.getCreatures().get(0);
+            Plant plant = petakInFront.getPlants().get(0);
 
             int originalHealth = plant.getHealth();
             plant.reduceHealth(plant.getHealth());
