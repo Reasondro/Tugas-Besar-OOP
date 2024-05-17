@@ -5,31 +5,42 @@ import Position.*;
 
 import Plants.Plant;
 import GameMap.GameMap;
+import Petak.Petak;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public abstract class Zombie extends Creature{
+public abstract class Zombie extends Creature
+{
 
-
-    private float walkSpeed;
+    private float walkSpeedInSeconds = 5.0f;
+    private float walkTimer = 0;
     private boolean aquatic;
     private boolean frozen = false;
     private float frozenTimer = 0;
-    //TODO add Range as an attribute
   
     public Zombie(String name, int health, int attackDamage, float attackSpeed, int range, boolean aquatic, Position pos)
     {
         super(name, health, attackDamage, attackSpeed, range, pos);
-        this.walkSpeed = 5.0f;
         this.aquatic = aquatic;
    
     }
 
-    public float getWalkSpeed() {
-        return walkSpeed;
+    public float getWalkSpeedInSeconds() {
+        return walkSpeedInSeconds;
     }
 
-    public void setWalkSpeed(float walkSpeed) {
-        this.walkSpeed = walkSpeed;
+    public void setWalkSpeedInSeconds(float walkSpeedInSeconds) {
+        this.walkSpeedInSeconds = walkSpeedInSeconds;
+    }
+
+    public float getWalkTimer() {
+        return walkTimer;
+    }
+
+    public void setWalkTimer(float walkTimer) {
+        this.walkTimer = walkTimer;
     }
 
     public boolean isAquatic() {
@@ -65,7 +76,7 @@ public abstract class Zombie extends Creature{
         else if(frozenTimer == 0)
         {
             setFrozen(false);
-            setWalkSpeed(5);
+            setWalkSpeedInSeconds(5);
         }
         else if(frozenTimer > 0)
         {
@@ -74,14 +85,78 @@ public abstract class Zombie extends Creature{
 
     }
 
-
-
-    public void attackPlant(Plant p)
+    public boolean isPlantsInSamePetak()
     {
-        p.reduceHealth(getAttackDamage());
+       if(GameMap.getInstance().getPetak(getPos()).getPlants().isEmpty())
+       {
+           return false;
+       }
+       else
+       {
+           return true;
+       }
     }
 
-    // public void walk(); //TODO ini sama aku aja yg walk
+    //TODO getRowBasedOnCreatureRange
+    public void attackPlant(List<Plant> plants)
+    {
+        for(Plant p : plants)
+        {
+            int originalHealth = p.getHealth();
+            p.reduceHealth(getAttackDamage());
+            System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
+            System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
+        }
+        setAttackTimer(getAttackSpeed());
+    }
+
+    public void checkToAttack()
+    {
+        if(  isPlantsInSamePetak() &&  getAttackTimer() == 0)
+        {
+            attackPlant(GameMap.getInstance().getPetak(getPos()).getPlants());
+            setAttackTimer(getAttackSpeed());
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+    }
+
+    public void walk()
+    {
+        GameMap map = GameMap.getInstance();
+        Position pos = getPos();
+        
+        Petak currentPetak = GameMap.getInstance().getPetak(pos);
+        synchronized (currentPetak )
+        {
+            currentPetak.removeCreature(this);
+
+            pos.setY(pos.getY() - 1);
+            Petak nextPetak = GameMap.getInstance().getPetak(pos);
+            nextPetak.addCreature(this);
+           
+        }
+        setWalkTimer(getWalkSpeedInSeconds());
+    }
+
+    public void checkToWalk()
+    {
+        if (isPlantsInSamePetak())
+        {
+            checkToAttack();
+        }
+       else if(getWalkTimer() == 0)
+        {
+            walk();
+        }
+        else if(getWalkTimer() > 0)
+        {
+            setWalkTimer(getWalkTimer()-1);
+        }
+    }
+
 
     public void refreshCreature()
     {
@@ -96,9 +171,10 @@ public abstract class Zombie extends Creature{
         System.out.println("Health: " + getHealth());
         System.out.println("Attack Damage: " + getAttackDamage());
         System.out.println("Attack Speed: " + getAttackSpeed());
+        System.out.println("Attack Timer: " + getAttackTimer());
         System.out.println("Range: " + getRange());
         System.out.println("Is Aquatic: " + isAquatic());
-        System.out.println("Walk Speed: " + getWalkSpeed());
+        System.out.println("Walk Speed: " + getWalkSpeedInSeconds());
         System.out.println("Is Frozen: " + isFrozen());
         System.out.println("Frozen Timer: " + getFrozenTimer());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());

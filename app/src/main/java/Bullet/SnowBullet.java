@@ -1,4 +1,5 @@
 package Bullet;
+
 import Petak.Petak;
 import Zombies.Zombie;
 
@@ -37,13 +38,12 @@ public class SnowBullet {
             if(z.isFrozen() == false)
             {
                 z.setFrozen(true);
-                z.setWalkSpeed(z.getWalkSpeed() / 2);
+                z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
             }
             System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
-            System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-            System.out.printf("%s is frozen\n", z.getName());
-            System.out.printf("%s's walk speed is now %f\n", z.getName(), z.getWalkSpeed());
-            
+            // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+            // System.out.printf("%s is frozen\n", z.getName());
+            // System.out.printf("%s's walk speed is now %.2f seconds/Petak\n", z.getName(), z.getWalkSpeedInSeconds());
            }
            setWornOut(true);
 

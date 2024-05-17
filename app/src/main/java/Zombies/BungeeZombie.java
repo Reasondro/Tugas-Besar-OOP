@@ -13,4 +13,10 @@ public class BungeeZombie extends Zombie implements ZombieAbility {
     public void useAbility(){
         System.out.println("Bungee Zombie is destroying the house!");
     }
+
+    @Override
+    public void checkToUseAbility(){
+        System.out.println("Bentar");
+    }
+
 }

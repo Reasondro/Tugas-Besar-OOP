@@ -17,25 +17,48 @@ import Petak.Petak;
 public class Snowpea extends Plant  implements PlantAbility{
 
     private SnowBullet bullet;
+    private List<Petak> reachablePetak = new ArrayList<Petak>();
 
     public Snowpea()
     {
-        super("Snow pea", 50, 100, 25, 1, -1, 10,  new Position(0, 0));
+        super("Snow pea", 50, 100, 25, 4, -1, 10,  new Position(0, 0));
         bullet =  new SnowBullet(getAttackDamage());
+    }
+
+    public List<Petak> getReachablePetak()
+    {
+        return reachablePetak;
+    }
+
+    public void setReachablePetak(List<Petak> reachablePetak)
+    {
+        this.reachablePetak = reachablePetak;
+    }
+    
+    public boolean isZombiesInRange()
+    {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
+        for(Petak p : reachablePetak)
+        {
+            synchronized(p)
+            {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
+            }
+    }
+        return false;
     }
 
 
     @Override
     public void useAbility()
     {
-        //TODO extract reduce cooldown timer outside the useAbility method.
-        //TODO duplicate attackTimer check. One outside this class to check if to shoot.
-        //TODO The other one is to check if there's actually enemy to shoot, if there's none, then don't shoot.
-        // if(getAttackTimer() == 0)
-        // {
-            List<Petak> reachablePetak =  GameMap.getInstance().getRowBasedOnPlantRange(this);
-            for(Petak p : reachablePetak)
+        for(Petak p : reachablePetak)
             {
+                synchronized(p)
+                {
                     if(!(p.getZombies().isEmpty()))
                     {
                         if(!(bullet.isWornOut()))
@@ -45,17 +68,29 @@ public class Snowpea extends Plant  implements PlantAbility{
                         else
                         {
                             break;
-                        }
+                        }     
                     }
-            }
+                }
+        }
             setAttackTimer(getAttackSpeed()); 
             bullet = new SnowBullet(getAttackDamage());
-        // }
-        // else
-        // {
-        //     setAttackTimer(getAttackTimer()-1);
-        // }
-}
-    
+    }
+
+    @Override
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
+        {
+            useAbility();
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            System.out.printf("No zombies in range for %s\n", getName());
+        }
+    }
 
 }

@@ -26,6 +26,7 @@ public class Menu {
         listZombies.add(z);
     }
 
+<<<<<<< HEAD
     public static void clearTerminal() {
         try {
             if (System.getProperty("os.name").contains("Windows"))
@@ -36,6 +37,18 @@ public class Menu {
             e.printStackTrace();
         }
     }
+=======
+    // public static void clearTerminal() {
+    //     try {
+    //         if (System.getProperty("os.name").contains("Windows"))
+    //             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    //         else
+    //             Runtime.getRuntime().exec("clear");
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
 
     public static void setAddZombie(boolean isAddZombie) {
         Menu.isAddZombie = isAddZombie;
@@ -55,34 +68,62 @@ public class Menu {
             
             switch (input1) {
                 case 1:
+<<<<<<< HEAD
                     clearTerminal();
                     NewGameOrLoadGame();
                     break;
                 case 2:
                     clearTerminal();
+=======
+                    // clearTerminal();
+                    NewGameOrLoadGame();
+                    break;
+                case 2:
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     help();
                     showGameMenu();
                     break;
                 case 0:
+<<<<<<< HEAD
                     clearTerminal();
+=======
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     System.out.println("Terima kasih telah bermain Plant VS Zombie!");
                     System.exit(0);
                     break;
                 default:
+<<<<<<< HEAD
                     clearTerminal();
                     System.out.println("Pilihan tidak tersedia.");
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
                     clearTerminal();
+=======
+                    // clearTerminal();
+                    System.out.println("Pilihan tidak tersedia.");
+                    System.out.println("Tekan Enter untuk melanjutkan...");
+                    input.nextLine();
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     showGameMenu();
                     break;
             }
         } catch (InputMismatchException e) {
+<<<<<<< HEAD
             clearTerminal();
             System.out.println("Masukan tidak valid. Silakan masukkan angka.");
             System.out.println("Tekan Enter untuk melanjutkan...");
             input.nextLine();
             clearTerminal();
+=======
+            // clearTerminal();
+            System.out.println("Masukan tidak valid. Silakan masukkan angka.");
+            System.out.println("Tekan Enter untuk melanjutkan...");
+            input.nextLine();
+            // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
             showGameMenu();
         }
         input.close();
@@ -99,11 +140,19 @@ public class Menu {
             input.nextLine(); // hati-hati
             switch (input2) {
                 case 1:
+<<<<<<< HEAD
                     clearTerminal();
                     // addZombie();
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
                     clearTerminal();
+=======
+                    // clearTerminal();
+                    // addZombie();
+                    System.out.println("Tekan Enter untuk melanjutkan...");
+                    input.nextLine();
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     showInGameMenu();
                     break;
                 case 2:
@@ -111,26 +160,46 @@ public class Menu {
                     showInGameMenu();
                     break;
                 case 0:
+<<<<<<< HEAD
                     clearTerminal();
                     showGameMenu();
                     break;
                 default:
                     clearTerminal();
+=======
+                    // clearTerminal();
+                    showGameMenu();
+                    break;
+                default:
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     System.out.println("Pilihan tidak tersedia.");
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
                     input.nextLine();
+<<<<<<< HEAD
                     clearTerminal();
+=======
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     NewGameOrLoadGame();
                     break;
             }
         } catch (InputMismatchException e) {
+<<<<<<< HEAD
             clearTerminal();
+=======
+            // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
             System.out.println("Masukan tidak valid. Silakan masukkan angka.");
             System.out.println("Tekan Enter untuk melanjutkan...");
             input.nextLine();
             input.nextLine();
+<<<<<<< HEAD
             clearTerminal();
+=======
+            // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
             NewGameOrLoadGame();
         }
     }
@@ -151,29 +220,53 @@ public class Menu {
 
             switch (input3) {
                 case 1:
+<<<<<<< HEAD
                     clearTerminal();
                     // sesuaiin sama getMenuoption
                     System.out.println("Tekan Enter untuk melanjutkan...");
                     input.nextLine();
                     clearTerminal();
+=======
+                    // clearTerminal();
+                    // sesuaiin sama getMenuoption
+                    System.out.println("Tekan Enter untuk melanjutkan...");
+                    input.nextLine();
+                    // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                     showInGameMenu();
                     break;
                 case 2 : //tanya dulu
                 default:
+<<<<<<< HEAD
                         clearTerminal();
                         System.out.println("Pilihan tidak tersedia.");
                         System.out.println("Tekan Enter untuk melanjutkan...");
                         input.nextLine();
                         clearTerminal();
+=======
+                        // clearTerminal();
+                        System.out.println("Pilihan tidak tersedia.");
+                        System.out.println("Tekan Enter untuk melanjutkan...");
+                        input.nextLine();
+                        // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                         showInGameMenu();
                         break;
                 }
             } catch (InputMismatchException e) {
+<<<<<<< HEAD
                 clearTerminal();
                 System.out.println("Input harus berupa angka!");
                 System.out.println("Tekan Enter untuk melanjutkan...");
                 input.nextLine();
                 clearTerminal();
+=======
+                // clearTerminal();
+                System.out.println("Input harus berupa angka!");
+                System.out.println("Tekan Enter untuk melanjutkan...");
+                input.nextLine();
+                // clearTerminal();
+>>>>>>> 3e53d023249f1d81858b027eb24d490f7f648c8f
                 showInGameMenu();
             }
         }

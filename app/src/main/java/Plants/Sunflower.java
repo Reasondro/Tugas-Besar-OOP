@@ -7,7 +7,7 @@ import Sun.*;
 
 public class Sunflower extends Plant implements PlantAbility  {
 
-    // private int sunCooldown = 0;
+    private float sunCooldown = 0;
     
     public Sunflower()
     {
@@ -17,19 +17,25 @@ public class Sunflower extends Plant implements PlantAbility  {
     @Override
     public void useAbility() 
     {
-        //TODO implemetn to only use ability if cooldown is 0 (this might be needed if in the game logic this wont)
-        // if(sunCooldown > 0)
-        // {
-        //     sunCooldown--;
-        //     return;
-        // }
-        // else if(sunCooldown == 0)
-        // {
-        //     sunCooldown = 5;
-        // }
+        //TODO use synchronized block/threading
         Sun sun = Sun.getInstance();
         sun.addSunPoints(25);
     
+    }
+    @Override
+    public void checkToUseAbility()
+    {
+        if(sunCooldown == 0)
+        {
+            sunCooldown = 3;
+            useAbility();
+        }
+        else if(sunCooldown > 0)
+        {
+            sunCooldown--;
+            return;
+        }
+
     }
     
 

@@ -1,12 +1,13 @@
 package Petak;
 
-import Position.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import Creature.Creature;
 
 import Zombies.Zombie;
+import Plants.Plant;
+import Position.Position;
 
 
 
@@ -47,17 +48,18 @@ public class Petak {
         creatures.remove(creature);
     }
 
-    // public void refreshPetak() {
-    //     for (Creature creature : creatures) {
-    //         if(creature.getHealth() == 0)
-    //         {
-                // System.out.println("Creature " + creature.getName() + " has been removed from the petak");
-    //             removeCreature(creature);
-    //         }
-    //     }
-    // }
+    public void removeAllPlants() {
+        Iterator<Creature> iterator = creatures.iterator();
+        while (iterator.hasNext()) {
+            Creature creature = iterator.next();
+            if (creature instanceof Plant) {
+                iterator.remove();
+            }
+        }
+    }
 
-    public void refreshPetak() {
+    public void refreshPetak() //! obsolete, already implemented in Creature.reduceHealth()
+    {
         Iterator<Creature> iterator = creatures.iterator();
         while (iterator.hasNext()) {
             Creature creature = iterator.next();
@@ -80,6 +82,16 @@ public class Petak {
             }
         }
         return zombies;
+    }
+
+    public List<Plant> getPlants() {
+        List<Plant> plants = new ArrayList<>();
+        for (Creature creature : creatures) {
+            if (creature instanceof Plant) {
+                plants.add((Plant) creature);
+            }
+        }
+        return plants;
     }
 
     public Position getPos() {
@@ -113,7 +125,7 @@ public class Petak {
 
         System.out.print("[");
         for (int i = 0; i < creatures.size(); i++) {
-            System.out.print(creatures.get(i).getName());
+            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth());
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }
