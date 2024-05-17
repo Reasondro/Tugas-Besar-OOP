@@ -125,7 +125,7 @@ public class Petak {
 
         System.out.print("[");
         for (int i = 0; i < creatures.size(); i++) {
-            System.out.print(creatures.get(i).getName());
+            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth());
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }

@@ -135,17 +135,19 @@ public abstract class Zombie extends Creature
 
             pos.setY(pos.getY() - 1);
             Petak nextPetak = GameMap.getInstance().getPetak(pos);
-           synchronized (nextPetak)
-           {
-                nextPetak.addCreature(this);
-           }  
+            nextPetak.addCreature(this);
+           
         }
         setWalkTimer(getWalkSpeedInSeconds());
     }
 
     public void checkToWalk()
     {
-        if(getWalkTimer() == 0)
+        if (isPlantsInSamePetak())
+        {
+            checkToAttack();
+        }
+       else if(getWalkTimer() == 0)
         {
             walk();
         }
