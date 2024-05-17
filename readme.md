@@ -7,5 +7,5 @@ Cara run:
 2. Ketik gradlew run (ini kalau mau ada prompt prompt fancy dri si gradle)
 3. Ketik gradlew -q --console plain run (ini lebih bersih RECOMMENDED )
 
-UPDATE
-4. Ketik run di console. DAH INI AJA paling singkat (EXTRAAA RECOMMENDED)
+UPDATE 4. Ketik run di console. DAH INI AJA paling singkat (EXTRAAA RECOMMENDED)
+
