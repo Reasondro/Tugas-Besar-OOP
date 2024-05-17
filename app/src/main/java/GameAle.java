@@ -47,14 +47,19 @@ public class GameAle{
 
         Position posP51 = new Position(5, 1);
         map.getPetak(posP51).addCreature(mySnowpea);
-        map.getPetak(posP51).addCreature(myPeashooter2);
 
         Position posP52 = new Position(5, 2);
-        map.getPetak(posP52).addCreature(myPoleVaultingZombie);
+        map.getPetak(posP52).addCreature(myPeashooter2);
 
+        Position pos61 = new Position(6, 1);
+        
         Position posP62 = new Position(6, 2);
         map.getPetak(posP62).addCreature(myBulletPlant);
-
+        
+        
+        Position posP63 = new Position(6, 3);
+        map.getPetak(posP63).addCreature(myPoleVaultingZombie);
+        
         //? below for non thread testing
         // map.printMap(); 
 
@@ -97,26 +102,41 @@ public class GameAle{
 
 
         final long  startTime =  System.currentTimeMillis();
-        
-        Thread plantThreadTest = new Thread() {
+
+        Thread gameThreadTest = new Thread() {
             @Override
             public void run() {
                 while (true) {
-                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0)
-                    {
-                        break;
-                    }
+                    // if(map.isProtectedBaseCompromised() || myPoleVaultingZombie.getHealth() == 0 || myBulletPlant.getHealth() == 0)
+                    // {
+                    //     break;
+                    // }
                     final long currentTime = System.currentTimeMillis() - startTime;
                     final long elapsedSeconds = currentTime/1000;
                     final long secondsDisplay = elapsedSeconds % 60;
                     final long minutesDisplay = elapsedSeconds / 60;
                     System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                     map.printMap();
-                    // System.out.println("My Peashooter2 attack timer: " + mySnowpea.getAttackTimer() );
-                    // myPeashooter2.checkToUseAbility();
-                    // System.out.println("My Snowpea attack timer: " + mySnowpea.getAttackTimer());
-                    // mySnowpea.checkToUseAbility();
-                    myPeashooter.checkToUseAbility();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        
+        Thread plantThreadTest = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    if(map.isProtectedBaseCompromised() || myPoleVaultingZombie.getHealth() == 0 || myBulletPlant.getHealth() == 0)
+                    {
+                        break;
+                    }
+                    myBulletPlant.checkToUseAbility();
+                    System.out.println("looping dari plant");
+                    map.refreshMap();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -126,29 +146,18 @@ public class GameAle{
             }
         };
 
-        // plantThreadTest.start();
 
-        map.printMap();
         Thread zombieThreadTest = new Thread() {
             @Override
             public void run() {
                 while (true) {
-                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
+                    if(map.isProtectedBaseCompromised() ||  myPoleVaultingZombie.getHealth() == 0 || myBulletPlant.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
                     {
                         break;
                     }
-                    // final long currentTime = System.currentTimeMillis() - startTime;
-                    // final long elapsedSeconds = currentTime/1000;
-                    // final long secondsDisplay = elapsedSeconds % 60;
-                    // final long minutesDisplay = elapsedSeconds / 60;
-                    // System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
-                    // System.out.println("My PoleVaultingZombie attack timer: " + myPoleVaultingZombie.getAttackTimer() );
-                   
-                    // myPoleVaultingZombie.checkToWalk();
-                    // System.out.println("My PoleVaultingZombie walk timer: " + myPoleVaultingZombie.getWalkTimer());
-
-                    // myNormalZombie.checkToAttack();
-                    myNormalZombie.checkToWalk();
+                    myPoleVaultingZombie.useAbility();
+                    System.out.println("looping dari zombie");
+                    map.refreshMap();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -157,9 +166,38 @@ public class GameAle{
                 }
             }
         };
-        // zombieThreadTest.start();
+
+        plantThreadTest.start();
+        zombieThreadTest.start();
+
+        try{
+            plantThreadTest.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        try{
+            zombieThreadTest.join();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        gameThreadTest.start();
+        // map.printMap();
+        // map.getPetak(pos61).addCreature(new Sunflower());
+
+
         //? above for plant thread testing
-        myPoleVaultingZombie.useAbility();
+        // map.printMap();
+        // map.printMap();
+
+        // map.printMap();
+        // // map.isProtectedBaseCompromised();
+        // map.printMap();
+
     }
 }
 ///? Notes before adding bullet

@@ -102,10 +102,10 @@ public abstract class Zombie extends Creature
     {
         for(Plant p : plants)
         {
-            int originalHealth = p.getHealth();
+            // int originalHealth = p.getHealth();
             p.reduceHealth(getAttackDamage());
-            System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
-            System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
+            // System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
+            // System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
         }
         setAttackTimer(getAttackSpeed());
     }
@@ -125,7 +125,6 @@ public abstract class Zombie extends Creature
 
     public void walk()
     {
-        GameMap map = GameMap.getInstance();
         Position pos = getPos();
         
         Petak currentPetak = GameMap.getInstance().getPetak(pos);
