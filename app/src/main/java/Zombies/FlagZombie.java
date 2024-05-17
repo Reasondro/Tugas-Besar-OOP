@@ -13,4 +13,9 @@ public class FlagZombie extends Zombie implements ZombieAbility {
     public void useAbility(){
         System.out.println("The Flag Zombie waves its flag, rallying the undead horde to march forward relentlessly!");
     }
+
+    @Override
+    public void checkToUseAbility(){
+        System.out.println("Wait");
+    }
 }
