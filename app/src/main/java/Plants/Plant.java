@@ -11,6 +11,7 @@ public abstract class Plant extends Creature {
 
     private float cooldown;
     private float originalCooldown;
+    private Position position;
 
     // private boolean isPlanted = false;
     
@@ -85,6 +86,21 @@ public abstract class Plant extends Creature {
         System.out.println("Range: " + getRange());
         System.out.println("Cooldown: " + getCooldown());
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
+    }
+
+    public void setPos(Position newPosition){
+        if (this.position != null) {
+            this.position.getPlants().remove(this);
+        }
+        this.position = newPosition;
+        if (newPosition != null) {
+            newPosition.addPlant(this);
+        }  
+    }
+
+    
+    public void doubleBulletDamage() {
+        setAttackDamage(getAttackDamage() * 2);
     }
 
 }
