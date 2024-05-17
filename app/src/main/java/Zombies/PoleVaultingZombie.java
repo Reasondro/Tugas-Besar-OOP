@@ -58,6 +58,19 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
             System.out.printf("%S health went from %d to %d\n", plant.getName() ,originalHealth , plant.getHealth());
 
             hasUseZombieAbility = true;
+
+            Position pos = getPos();
+        
+            Petak currentPetak = GameMap.getInstance().getPetak(pos);
+            // synchronized (currentPetak )
+            // {
+            currentPetak.removeCreature(this);
+
+            pos.setY(pos.getY() - 2);
+            Petak landingPetak = GameMap.getInstance().getPetak(pos);
+            landingPetak.addCreature(this);
+           
+            // }
         }
 
      }
