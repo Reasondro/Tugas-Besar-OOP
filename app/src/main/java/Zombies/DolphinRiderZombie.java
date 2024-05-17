@@ -7,6 +7,9 @@ import Creature.Creature;
 import Plants.Plant;
 import ZombieAbility.*;
 
+// Maaf belum di tes-run juga :(
+// Bismillah bisa jalan :))
+
 public class DolphinRiderZombie extends Zombie implements ZombieAbility {
 
     private boolean hasUsedZombieAbility = false;
@@ -40,13 +43,12 @@ public class DolphinRiderZombie extends Zombie implements ZombieAbility {
             // Remove the plant from the map
             petakInFront.removeCreature(plant);
 
-            System.out.println("Dolphin Rider Zombie jumps over " + plant.getName());
-            System.out.println(plant.getName() + " has been removed from the map.");
 
             hasUsedZombieAbility = true;
         }
     }
 
+    @Override
     public void checkToUseAbility() {
         if (isInPoolArea() && !hasUsedZombieAbility && isPlantInFront()) {
             useAbility();

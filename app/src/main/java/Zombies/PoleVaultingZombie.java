@@ -3,7 +3,7 @@ package Zombies;
 import Position.Position;
 import ZombieAbility.*;
 
-import Position.Position;
+// import Position.Position;
 import Petak.Petak;
 import GameMap.GameMap;
 import Creature.Creature;
