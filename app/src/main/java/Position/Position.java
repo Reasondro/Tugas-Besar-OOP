@@ -8,11 +8,13 @@ public class Position {
     private int x;
     private int y;
     private List<Plant> plants;
+    private boolean aquatic;
 
     public Position(int x, int y)
     {
         this.x = x;
         this.y = y;
+        this.aquatic = aquatic;
         this.plants = new ArrayList<>();
     }
 
@@ -51,11 +53,7 @@ public class Position {
         return plants;
     }
 
-    // Getters and Setters...
+    public boolean isAquatic(){
+        return aquatic;
+    }
 }
-
-    // public void displayPos()
-    // {
-    //     System.out.println("X: " + x + " Y: " + y);
-    // }
-     
