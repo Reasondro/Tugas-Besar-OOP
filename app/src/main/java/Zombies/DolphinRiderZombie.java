@@ -14,7 +14,7 @@ public class DolphinRiderZombie extends Zombie implements ZombieAbility {
 
     private boolean hasUsedZombieAbility = false;
 
-    public DolphinRiderZombie(Position pos) {
+    public DolphinRiderZombie() {
         super("Dolphin Rider Zombie", 175, 100, 1, 0,true,  new Position(0, 0));
     }
 
