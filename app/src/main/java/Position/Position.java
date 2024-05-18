@@ -8,13 +8,11 @@ public class Position {
     private int x;
     private int y;
     private List<Plant> plants;
-    private boolean aquatic;
 
     public Position(int x, int y)
     {
         this.x = x;
         this.y = y;
-        this.aquatic = aquatic;
         this.plants = new ArrayList<>();
     }
 
@@ -53,7 +51,4 @@ public class Position {
         return plants;
     }
 
-    public boolean isAquatic(){
-        return aquatic;
-    }
 }
