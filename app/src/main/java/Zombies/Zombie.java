@@ -6,6 +6,7 @@ import Position.*;
 import Plants.Plant;
 import GameMap.GameMap;
 import Petak.Petak;
+import ZombieAbility.ZombieAbility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,22 +98,19 @@ public abstract class Zombie extends Creature
        }
     }
 
-    //TODO getRowBasedOnCreatureRange
+   
     public void attackPlant(List<Plant> plants)
     {
         for(Plant p : plants)
         {
-            // int originalHealth = p.getHealth();
             p.reduceHealth(getAttackDamage());
-            // System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
-            // System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
         }
         setAttackTimer(getAttackSpeed());
     }
 
     public void checkToAttack()
     {
-        if(  isPlantsInSamePetak() &&  getAttackTimer() == 0)
+        if( isPlantsInSamePetak() &&  getAttackTimer() == 0)
         {
             attackPlant(GameMap.getInstance().getPetak(getPos()).getPlants());
             setAttackTimer(getAttackSpeed());
@@ -140,7 +138,7 @@ public abstract class Zombie extends Creature
         setWalkTimer(getWalkSpeedInSeconds());
     }
 
-    public void checkToWalk()
+    public void  checkToWalk()
     {
         if (isPlantsInSamePetak())
         {
@@ -157,11 +155,21 @@ public abstract class Zombie extends Creature
     }
 
 
-    public void refreshCreature()
+    public void refreshZombie()
     {
-        super.refreshCreature();
-        //TODO implement this method with Threading
-        reduceFrozenTimer();
+        if(getHealth() > 0)
+        {
+            if(this instanceof ZombieAbility)
+            {
+                ((ZombieAbility) this).checkToUseAbility();
+            }
+
+            checkToWalk();
+            reduceFrozenTimer();
+            
+      
+        }
+
     }
 
     public void displayStatus()

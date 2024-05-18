@@ -47,35 +47,47 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
     public void useAbility()
     {
 
-        if(isPlantInFront() && !hasUseZombieAbility)
-        {
+ 
             Plant plant = petakInFront.getPlants().get(0);
 
             int originalHealth = plant.getHealth();
             plant.reduceHealth(plant.getHealth());
 
-            System.out.println("Pole Vaulting Zombie jumps over " + plant.getName());
-            System.out.printf("%S health went from %d to %d\n", plant.getName() ,originalHealth , plant.getHealth());
-
+            // System.out.println("Pole Vaulting Zombie jumps over " + plant.getName());
+            // System.out.printf("%S health went from %d to %d\n", plant.getName() ,originalHealth , plant.getHealth());
             hasUseZombieAbility = true;
 
+
+            //? vaulting logic
             Position pos = getPos();
-        
-            Petak currentPetak = GameMap.getInstance().getPetak(pos);
-            // synchronized (currentPetak )
-            // {
+            Petak currentPetak = GameMap.getInstance().getPetak(pos); 
+            synchronized (currentPetak )
+            {
             currentPetak.removeCreature(this);
 
-            pos.setY(pos.getY() - 2);
+            int currentY = pos.getY();
+            int newY = currentY - 2;
+            if(newY <1)
+            {
+                newY = -99; //? to prevent the zombie jumping out of bounds 
+            }
+            pos.setY(newY);
+
             Petak landingPetak = GameMap.getInstance().getPetak(pos);
             landingPetak.addCreature(this);
-           
-            // }
-        }
-
+            }
      }
 
     @Override
-    public void checkToUseAbility(){}
+    public void checkToUseAbility()
+    {
+        if(isPlantInFront() && !hasUseZombieAbility && getHealth() > 0)
+        {
+            useAbility();
+        }
+
+
+        
+    }
     
 }
