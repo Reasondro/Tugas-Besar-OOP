@@ -2,11 +2,21 @@ package Plants;
 
 import Position.Position;
 
-public class Piercer extends Plant{
+import PlantAbility.*;
+import Zombies.Zombie;
+import Bullet.PiercerBullet;
+
+import java.util.List;
+import java.util.ArrayList;
+import GameMap.GameMap;
+import Petak.Petak;
+
+
+public class Piercer extends Plant implements PlantAbility{
     
     public Piercer()
     {
-        super("Coffee Bean", 100, 100, 0, 0, 0, 0,  new Position(0, 0));   
+        super("Piercer", 100, 100, 0, 0, 0, 0,  new Position(0, 0));   
     }
     
     public void specialSetPosition(Position newPosition) {
