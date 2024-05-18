@@ -49,6 +49,7 @@ public class Petak {
 
     // Remove a creature from the list
     public void removeCreature(Creature creature) {
+        // System.out.println("Removing " + creature.getName() + " from petak" + pos.getX() + " " + pos.getY());
         creatures.remove(creature);
     }
 
@@ -135,13 +136,15 @@ public class Petak {
             System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
             if(creatures.get(i) instanceof Zombie)
             {
-                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer());
+                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer() +
+                 " X:" + creatures.get(i).getPos().getX() + " Y:" + creatures.get(i).getPos().getY());
             }
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }
         }
         System.out.print("]");
+        // System.out.print(",PX: " + pos.getX() + " " + "PY: " + pos.getY() + "]");
     }
 }
 

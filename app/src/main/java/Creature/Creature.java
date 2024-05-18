@@ -27,7 +27,7 @@ public abstract class Creature {
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.range = range;
-        this.pos = pos;
+        this.pos = pos.copyPos();
 
     }
     
