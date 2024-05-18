@@ -41,47 +41,59 @@ public class Deck<T extends Plant> {
         map = GameMap.getInstance();
     }
 
-    public void planting(Plant plant, Petak petakPlant, Position pos) {
-        if (plant instanceof Lilypad) {
-            LiliypadFactory lilypadfactory = new LiliypadFactory();
-            Plant lilypad = lilypadfactory.createPlant();
-            petakPlant.addCreature(lilypad);
-        } else if (plant instanceof CoffeeBean) {
-            CoffeeBeanFactory coffeeBeanFactory = new CoffeeBeanFactory();
-            Plant coffeebean = coffeeBeanFactory.createPlant();
-            petakPlant.addCreature(coffeebean);
-        } else if (plant instanceof Kernelpult) {
-            KernelpultFactory kernelpultFactory = new KernelpultFactory();
-            Plant kernelpult = kernelpultFactory.createPlant();
-            petakPlant.addCreature(kernelpult);
-        } else if (plant instanceof Peashooter) {
-            PeashooterFactory peashooterFactory = new PeashooterFactory();
-            Plant peashooter = peashooterFactory.createPlant();
-            petakPlant.addCreature(peashooter);
-        } else if (plant instanceof PotatoMine) {
-            PotatoMineFactory potatoMineFactory = new PotatoMineFactory();
-            Plant potatomine = potatoMineFactory.createPlant();
-            petakPlant.addCreature(potatomine);
-        } else if (plant instanceof Snowpea) {
-            SnowpeaFactory snowpeaFactory = new SnowpeaFactory();
-            Plant snowpea = snowpeaFactory.createPlant();
-            petakPlant.addCreature(snowpea);
-        } else if (plant instanceof Squash) {
-            SquashFactory squashFactory = new SquashFactory();
-            Plant squash = squashFactory.createPlant();
-            petakPlant.addCreature(squash);
-        } else if (plant instanceof Sunflower) {
-            SunflowerFactory sunflowerFactory = new SunflowerFactory();
-            Plant sunflower = sunflowerFactory.createPlant();
-            petakPlant.addCreature(sunflower);
-        } else if (plant instanceof Tangle) {
-            TangleFactory tangleFactory = new TangleFactory();
-            Plant tangle = tangleFactory.createPlant();
-            petakPlant.addCreature(tangle);
-        } else if (plant instanceof Wallnut) {
-            WallnutFactory wallnutFactory = new WallnutFactory();
-            Plant wallnut = wallnutFactory.createPlant();
-            petakPlant.addCreature(wallnut);
+    public void planting(Plant plant, Petak petakPlant) throws IllegalStateException {
+        List<Creature> creatures = petakPlant.getCreatures();
+        boolean planted = false;
+        for (Creature creature : creatures) {
+            if (creature instanceof Plant) {
+                planted = true;
+                return;
+            }
+        }
+        if (planted) {
+            throw new IllegalStateException();
+        } else {
+            if (plant instanceof Lilypad) {
+                LiliypadFactory lilypadfactory = new LiliypadFactory();
+                Plant lilypad = lilypadfactory.createPlant();
+                petakPlant.addCreature(lilypad);
+            } else if (plant instanceof CoffeeBean) {
+                CoffeeBeanFactory coffeeBeanFactory = new CoffeeBeanFactory();
+                Plant coffeebean = coffeeBeanFactory.createPlant();
+                petakPlant.addCreature(coffeebean);
+            } else if (plant instanceof Kernelpult) {
+                KernelpultFactory kernelpultFactory = new KernelpultFactory();
+                Plant kernelpult = kernelpultFactory.createPlant();
+                petakPlant.addCreature(kernelpult);
+            } else if (plant instanceof Peashooter) {
+                PeashooterFactory peashooterFactory = new PeashooterFactory();
+                Plant peashooter = peashooterFactory.createPlant();
+                petakPlant.addCreature(peashooter);
+            } else if (plant instanceof PotatoMine) {
+                PotatoMineFactory potatoMineFactory = new PotatoMineFactory();
+                Plant potatomine = potatoMineFactory.createPlant();
+                petakPlant.addCreature(potatomine);
+            } else if (plant instanceof Snowpea) {
+                SnowpeaFactory snowpeaFactory = new SnowpeaFactory();
+                Plant snowpea = snowpeaFactory.createPlant();
+                petakPlant.addCreature(snowpea);
+            } else if (plant instanceof Squash) {
+                SquashFactory squashFactory = new SquashFactory();
+                Plant squash = squashFactory.createPlant();
+                petakPlant.addCreature(squash);
+            } else if (plant instanceof Sunflower) {
+                SunflowerFactory sunflowerFactory = new SunflowerFactory();
+                Plant sunflower = sunflowerFactory.createPlant();
+                petakPlant.addCreature(sunflower);
+            } else if (plant instanceof Tangle) {
+                TangleFactory tangleFactory = new TangleFactory();
+                Plant tangle = tangleFactory.createPlant();
+                petakPlant.addCreature(tangle);
+            } else if (plant instanceof Wallnut) {
+                WallnutFactory wallnutFactory = new WallnutFactory();
+                Plant wallnut = wallnutFactory.createPlant();
+                petakPlant.addCreature(wallnut);
+            }
         }
     }
 
@@ -95,5 +107,11 @@ public class Deck<T extends Plant> {
 class DeckException extends Exception {
     public DeckException(String message) {
         super(message);
+    }
+}
+
+class PetakHasPlanted extends DeckException {
+    public PetakHasPlanted() {
+        super("Petak tersebut telah ditanam tanaman lain");
     }
 }

@@ -2,8 +2,15 @@ package Menu;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
+import Deck.Deck;
+import GameMap.GameMap;
+import Inventory.Inventory;
+import Petak.Petak;
+import Plants.Plant;
+import Position.Position;
 import Zombies.Zombie;
 
 public class Menu {
@@ -12,6 +19,7 @@ public class Menu {
     // private static Zombie currentZombie;
     private static Scanner input = new Scanner(System.in);
     private static boolean isAddZombie = false;
+    private static GameMap map = GameMap.getInstance();
     // private static boolean isStart = true;
 
     public static void start() {
@@ -27,14 +35,14 @@ public class Menu {
     }
 
     // public static void clearTerminal() {
-    //     try {
-    //         if (System.getProperty("os.name").contains("Windows"))
-    //             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    //         else
-    //             Runtime.getRuntime().exec("clear");
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
+    // try {
+    // if (System.getProperty("os.name").contains("Windows"))
+    // new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    // else
+    // Runtime.getRuntime().exec("clear");
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
     // }
 
     public static void setAddZombie(boolean isAddZombie) {
@@ -52,7 +60,7 @@ public class Menu {
             int input1 = input.nextInt();
             input.nextLine();
             System.out.print("Masukkan pilihan Anda (1/2/0): ");
-            
+
             switch (input1) {
                 case 1:
                     // clearTerminal();
@@ -135,8 +143,8 @@ public class Menu {
         }
     }
 
-    public static void showInGameMenu(){
-        try{ 
+    public static void showInGameMenu() {
+        try {
             System.out.println("Silakan pilih menu yang tersedia :");
             for (int i = 1; i <= 10; i++) {
                 System.out.printf("%2d. %-25s", i, getMenuOption(i));
@@ -158,26 +166,25 @@ public class Menu {
                     // clearTerminal();
                     showInGameMenu();
                     break;
-                case 2 : //tanya dulu
+                case 2: // tanya dulu
                 default:
-                        // clearTerminal();
-                        System.out.println("Pilihan tidak tersedia.");
-                        System.out.println("Tekan Enter untuk melanjutkan...");
-                        input.nextLine();
-                        // clearTerminal();
-                        showInGameMenu();
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                // clearTerminal();
-                System.out.println("Input harus berupa angka!");
-                System.out.println("Tekan Enter untuk melanjutkan...");
-                input.nextLine();
-                // clearTerminal();
-                showInGameMenu();
+                    // clearTerminal();
+                    System.out.println("Pilihan tidak tersedia.");
+                    System.out.println("Tekan Enter untuk melanjutkan...");
+                    input.nextLine();
+                    // clearTerminal();
+                    showInGameMenu();
+                    break;
             }
+        } catch (InputMismatchException e) {
+            // clearTerminal();
+            System.out.println("Input harus berupa angka!");
+            System.out.println("Tekan Enter untuk melanjutkan...");
+            input.nextLine();
+            // clearTerminal();
+            showInGameMenu();
         }
-            
+    }
 
     public static String getMenuOption(int option) {
         switch (option) {
@@ -199,6 +206,25 @@ public class Menu {
         }
     }
 
+    public static Deck<Plant> plantDeck(Inventory<Plant> inventory) {
+        Deck<Plant> myDeck = new Deck<>(inventory);
+        for (int i = 0; i < 6; i++) {
+            int input4 = input.nextInt();
+            Plant plant = inventory.getInventory().get(input4);
+            inventory.addToDeck(plant);
+        }
+        return myDeck;
+    }
+
+    public static void Planting(int option, int x, int y) {
+        Inventory<Plant> inventory = new Inventory<Plant>();
+        Position pos = new Position(x, y);
+        Deck<Plant> myDeck = Menu.plantDeck(inventory);
+        Petak petakPlant = map.getPetak(pos);
+        Plant plant = inventory.getPlantInventory(option);
+        myDeck.planting(plant, petakPlant);
+    }
+
     public static void help() {
         boolean end = false;
         int input4;
@@ -213,9 +239,9 @@ public class Menu {
 
             System.out.print("Masukkan pilihan Anda (Angka saja) : ");
             input4 = input.nextInt();
-            if (input4 == 1){
+            if (input4 == 1) {
                 System.out.println("jelasin pvz");
-            }else if (input4 == 2) {
+            } else if (input4 == 2) {
                 System.out.println("tulis tutor game");
             } else if (input4 == 3) {
                 System.out.println("mention all zombies n desc");

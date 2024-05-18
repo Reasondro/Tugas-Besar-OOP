@@ -23,8 +23,8 @@ public class Inventory<T extends Plant> {
 
     @SuppressWarnings("unchecked")
     public Inventory() {
-        inventory.add((T) new CoffeeBean());
         inventory.add((T) new Lilypad());
+        inventory.add((T) new CoffeeBean());
         inventory.add((T) new Kernelpult());
         inventory.add((T) new Peashooter());
         inventory.add((T) new PotatoMine());
@@ -74,6 +74,18 @@ public class Inventory<T extends Plant> {
 
     }
 
+    public Plant getPlantInventory(int index) {
+        return inventory.get(index);
+    }
+
+    public int getLengthinventory() {
+        Plant lastPlant = inventory.getLast();
+        return (inventory.indexOf(lastPlant) + 1);
+    }
+
+    public List<T> getInventory() {
+        return inventory;
+    }
 }
 
 class InventoryException extends Exception {
