@@ -50,7 +50,7 @@ public class Game {
         map.getPetak(posZ).addCreature(new NormalZombie());
 
         Position posZ2 = new Position(3, 8);
-        map.getPetak(posZ2).addCreature(new ConeheadZombie());
+        map.getPetak(posZ2).addCreature(new DoubleAttackZombie());
         
         Position posP = new Position(1, 1);
         map.getPetak(posP).addCreature(new Sunflower());
@@ -67,18 +67,6 @@ public class Game {
 
         System.out.println("After adding creature");
         map.printMap();
-        
-
-
-
-
-
-
-
-
-
-
-
 
     //     Game concurrency = new Game();
     //     Thread thread = new Thread(() -> {
@@ -113,5 +101,59 @@ public class Game {
 
     // public void gameLoop() {
     //     System.out.println("Game Loop");
+    // GameMap map = GameMap.getInstance();
+
+    Position pos = new Position(2, 5); // Misalnya zombie ditempatkan di petak baris 2, kolom 5
+    DoubleAttackZombie zombie = new DoubleAttackZombie();
+    map.getPetak(pos).addCreature(zombie);
+
+    zombie.useAbility();
+
+    // Memeriksa apakah useAbility telah berjalan tanpa kesalahan
+    Petak currentPetak = GameMap.getInstance().getPetak(pos);
+    if (currentPetak.getPlants().isEmpty()) {
+        System.out.println("Ability of BungeeZombie used successfully!");
+    } else {
+        System.out.println("Error: Ability of BungeeZombie not used!");
+    }
+
+    Position flagZombiePos = new Position(2, 5); // Posisi zombie
+    FlagZombie flagZombie = new FlagZombie();
+    map.getPetak(flagZombiePos).addCreature(flagZombie);
+    flagZombie.setPos(flagZombiePos);
+
+    // Membuat tanaman untuk uji coba
+    Position plantPos = new Position(2, 5); // Posisi tanaman
+    Sunflower sunflower = new Sunflower();
+    map.getPetak(plantPos).addCreature(sunflower);
+    sunflower.setPos(plantPos);
+
+    // Menampilkan peta sebelum menggunakan ability
+    System.out.println("Before using ability:");
+    map.printMap();
+
+    // Memanggil useAbility langsung
+    flagZombie.useAbility();
+
+    // Menampilkan peta setelah menggunakan ability
+    System.out.println("After using ability:");
+    map.printMap();
+
+    // Mengecek apakah ability berhasil digunakan
+    Petak petakFlagZombie = GameMap.getInstance().getPetak(flagZombiePos);
+    Petak petakNewZombie = GameMap.getInstance().getPetak(new Position(2, 0)); // Posisi zombie baru di kolom pertama
+
+    if (petakNewZombie.getCreatures().stream().anyMatch(c -> c instanceof FlagZombie)) {
+        System.out.println("Flag Zombie ability worked: New zombie spawned successfully!");
+    } else {
+        System.out.println("Error: New zombie not spawned.");
+    }
+
+    // Mengecek apakah statistik zombie telah meningkat
+    if (flagZombie.getHealth() > 150 && flagZombie.getAttackDamage() > 100) {
+        System.out.println("Flag Zombie ability worked: Zombie stats increased successfully!");
+    } else {
+        System.out.println("Error: Zombie stats not increased.");
+    }
     }
 }

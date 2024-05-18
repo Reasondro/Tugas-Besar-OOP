@@ -1,9 +1,9 @@
 
 public class App { 
     public static void main(String[] args)  {
-      // GameAle game = new GameAle();
+      // Game game = new Game();
       //   game.main(args);
-      GameAle.main(args);
+      Game.main(args);
     }
 }
 //? kita harus gradle build di file yg ada si buildny. 

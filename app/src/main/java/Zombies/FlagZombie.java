@@ -3,9 +3,9 @@ package Zombies;
 import GameMap.GameMap;
 import Position.Position;
 import ZombieAbility.*;
-import Petak.Petak;
-import Creature.Creature;
-import Plants.Plant;
+// import Petak.Petak;
+// import Creature.Creature;
+// ort Plants.Plant;
 
 // Belum di-tes dan kayanya masih ada yg yg eror di spawnNewZombie
 // Intinya bakal bikin zombie baru muncul
@@ -30,7 +30,7 @@ public class FlagZombie extends Zombie implements ZombieAbility {
     public void spawnNewZombie() {
         // Bikin zombie baru
         Position spawnPosition = new Position(getPos().getX(), 0); // Posisi yang sama kaya zombie sekarang dan spawn di kolom pertama
-        Zombie newZombie = new FlagZombie("Flag Zombie", 150, 100, 1, 1, false, spawnPosition); // Ini masih eror
+        Zombie newZombie = new FlagZombie(); // Ini masih eror
         GameMap.getInstance().getPetak(spawnPosition).addCreature(newZombie);
         System.out.println("Flag Zombie telah menghasilkan zombie baru!");
     }
