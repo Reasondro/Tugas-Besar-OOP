@@ -123,18 +123,17 @@ public abstract class Zombie extends Creature
 
     public void walk()
     {
-        Position pos = getPos();
-        
-        Petak currentPetak = GameMap.getInstance().getPetak(pos);
-        synchronized (currentPetak )
-        {
-            currentPetak.removeCreature(this);
+        // Position pos = getPos(); //! GARA2 INI HAHAHAH
+        Position pos = new Position(getPos().getX(), getPos().getY());
 
-            pos.setY(pos.getY() - 1);
-            Petak nextPetak = GameMap.getInstance().getPetak(pos);
-            nextPetak.addCreature(this);
-           
-        }
+        Petak currentPetak = GameMap.getInstance().getPetak(pos);
+        currentPetak.removeCreature(this); //? buat tinggalin petak dulu
+
+        pos.setY(pos.getY() - 1); 
+        Petak nextPetak = GameMap.getInstance().getPetak(pos);
+
+        
+        nextPetak.addCreature(this); //? buat mindahain dia jalan
         setWalkTimer(getWalkSpeedInSeconds());
     }
 
