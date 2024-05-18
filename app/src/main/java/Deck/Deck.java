@@ -8,7 +8,7 @@ import Inventory.Inventory;
 import Petak.Petak;
 import PlantFactory.CoffeeBeanFactory;
 import PlantFactory.KernelpultFactory;
-import PlantFactory.LiliypadFactory;
+import PlantFactory.LilypadFactory;
 import PlantFactory.PeashooterFactory;
 import PlantFactory.PotatoMineFactory;
 import PlantFactory.SnowpeaFactory;
@@ -41,59 +41,79 @@ public class Deck<T extends Plant> {
         map = GameMap.getInstance();
     }
 
-    public void planting(Plant plant, Petak petakPlant) throws IllegalStateException {
+    public void planting(Plant plant, Petak petakPlant) throws Exception {
         List<Creature> creatures = petakPlant.getCreatures();
         boolean planted = false;
+        boolean isAquatic = false;
+        boolean plantable = false;
+
+        if (petakPlant.getPos().getX() == 3 || petakPlant.getPos().getX() == 4) {
+            isAquatic = true;
+        }
+
         for (Creature creature : creatures) {
             if (creature instanceof Plant) {
                 planted = true;
-                return;
+                break;
             }
         }
-        if (planted) {
-            throw new IllegalStateException();
-        } else {
-            if (plant instanceof Lilypad) {
-                LiliypadFactory lilypadfactory = new LiliypadFactory();
-                Plant lilypad = lilypadfactory.createPlant();
-                petakPlant.addCreature(lilypad);
-            } else if (plant instanceof CoffeeBean) {
-                CoffeeBeanFactory coffeeBeanFactory = new CoffeeBeanFactory();
-                Plant coffeebean = coffeeBeanFactory.createPlant();
-                petakPlant.addCreature(coffeebean);
-            } else if (plant instanceof Kernelpult) {
-                KernelpultFactory kernelpultFactory = new KernelpultFactory();
-                Plant kernelpult = kernelpultFactory.createPlant();
-                petakPlant.addCreature(kernelpult);
-            } else if (plant instanceof Peashooter) {
-                PeashooterFactory peashooterFactory = new PeashooterFactory();
-                Plant peashooter = peashooterFactory.createPlant();
-                petakPlant.addCreature(peashooter);
-            } else if (plant instanceof PotatoMine) {
-                PotatoMineFactory potatoMineFactory = new PotatoMineFactory();
-                Plant potatomine = potatoMineFactory.createPlant();
-                petakPlant.addCreature(potatomine);
-            } else if (plant instanceof Snowpea) {
-                SnowpeaFactory snowpeaFactory = new SnowpeaFactory();
-                Plant snowpea = snowpeaFactory.createPlant();
-                petakPlant.addCreature(snowpea);
-            } else if (plant instanceof Squash) {
-                SquashFactory squashFactory = new SquashFactory();
-                Plant squash = squashFactory.createPlant();
-                petakPlant.addCreature(squash);
-            } else if (plant instanceof Sunflower) {
-                SunflowerFactory sunflowerFactory = new SunflowerFactory();
-                Plant sunflower = sunflowerFactory.createPlant();
-                petakPlant.addCreature(sunflower);
-            } else if (plant instanceof Tangle) {
-                TangleFactory tangleFactory = new TangleFactory();
-                Plant tangle = tangleFactory.createPlant();
-                petakPlant.addCreature(tangle);
-            } else if (plant instanceof Wallnut) {
-                WallnutFactory wallnutFactory = new WallnutFactory();
-                Plant wallnut = wallnutFactory.createPlant();
-                petakPlant.addCreature(wallnut);
+
+        for (Creature creature : creatures) {
+            if (creature instanceof Lilypad) {
+                plantable = true;
+                break;
             }
+        }
+
+        if (isAquatic && plantable && plant instanceof Lilypad) {
+            throw new Exception("tidak bisa menanam lilypad pada lilypad");
+        } else if (isAquatic && !plantable && !(plant instanceof Lilypad)) {
+            throw new Exception("tidak bisa menanam tanaman ini di air");
+        } else if (isAquatic && !plantable && plant instanceof Lilypad) {
+            LilypadFactory lilypadFactory = new LilypadFactory();
+            Plant lilypad = lilypadFactory.createPlant();
+            petakPlant.addCreature(lilypad);
+        } else if (isAquatic && plantable) {
+            plantPlant(petakPlant, plant);
+        } else if (!isAquatic && plant instanceof Lilypad) {
+            throw new Exception("Tidak bisa menanam tanaman Lilypad di tanah");
+        } else if (!isAquatic && planted) {
+            throw new Exception("Petak tersebut telah ditanam tanaman lain");
+        } else {
+            plantPlant(petakPlant, plant);
+        }
+    }
+
+    private void plantPlant(Petak petakPlant, Plant plant) throws Exception {
+        if (plant instanceof CoffeeBean) {
+            CoffeeBeanFactory factory = new CoffeeBeanFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Kernelpult) {
+            KernelpultFactory factory = new KernelpultFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Peashooter) {
+            PeashooterFactory factory = new PeashooterFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof PotatoMine) {
+            PotatoMineFactory factory = new PotatoMineFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Snowpea) {
+            SnowpeaFactory factory = new SnowpeaFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Squash) {
+            SquashFactory factory = new SquashFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Sunflower) {
+            SunflowerFactory factory = new SunflowerFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Tangle) {
+            TangleFactory factory = new TangleFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else if (plant instanceof Wallnut) {
+            WallnutFactory factory = new WallnutFactory();
+            petakPlant.addCreature(factory.createPlant());
+        } else {
+            throw new Exception("Tanaman tidak dikenal");
         }
     }
 

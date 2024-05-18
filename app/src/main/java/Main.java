@@ -5,7 +5,7 @@ import Deck.Deck;
 import GameMap.GameMap;
 import Inventory.Inventory;
 import Petak.Petak;
-import PlantFactory.LiliypadFactory;
+import PlantFactory.LilypadFactory;
 import PlantFactory.SquashFactory;
 import Plants.Lilypad;
 import Plants.Peashooter;
@@ -14,7 +14,7 @@ import Plants.Squash;
 import Position.Position;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Membuat objek Inventory
         Inventory<Plant> inventory = new Inventory<>();
         List<Plant> listinventory = new ArrayList<Plant>(inventory.getLengthinventory());
@@ -35,10 +35,11 @@ public class Main {
         Petak petakp34Petak = map.getPetak(posP34);
         Petak petakp42Petak = map.getPetak(posp42);
         Petak petakp52Petak = map.getPetak(new Position(5, 2));
+        Petak petakp63Petak = map.getPetak(new Position(6, 3));
         Plant planttt = inventory.getInventory().get(0);
 
         inventory.displayInventory();
-        myDeck.planting(inventory.getPlantInventory(1), petakp34Petak);
+        myDeck.planting(inventory.getPlantInventory(0), petakp52Petak);
         inventory.swapPlant(1, 5);
         System.out.println("--------------------------------------------------------------");
         inventory.displayInventory();
@@ -46,10 +47,13 @@ public class Main {
         for (Plant plantt : inventory.getInventory()) {
             System.out.println(plantt.getName());
         }
-        myDeck.planting((inventory.getInventory().get(4)), petakp52Petak);
-        myDeck.planting(peashooter, petakp11Petak);
-        myDeck.planting((inventory.getInventory().get(1)), petakp34Petak);
+        myDeck.planting((inventory.getInventory().get(1)), petakp63Petak);
+        // myDeck.planting(peashooter, petakp11Petak);
+        myDeck.planting((inventory.getInventory().get(0)), petakp42Petak);
+        System.out.println(petakp34Petak.getPos().getX());
         myDeck.planting((inventory.getPlantInventory(1)), petakp42Petak);
+        // petakp11Petak.addCreature(inventory.getInventory().get(0));
+        // petakp11Petak.addCreature(inventory.getPlantInventory(0));
         map.printMap();
         System.out.println("--------------------------------------------------------------");
         myDeck.digging(posP11);

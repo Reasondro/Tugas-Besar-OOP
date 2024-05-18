@@ -216,7 +216,7 @@ public class Menu {
         return myDeck;
     }
 
-    public static void Planting(int option, int x, int y) {
+    public static void Planting(int option, int x, int y) throws Exception {
         Inventory<Plant> inventory = new Inventory<Plant>();
         Position pos = new Position(x, y);
         Deck<Plant> myDeck = Menu.plantDeck(inventory);
