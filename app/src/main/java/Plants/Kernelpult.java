@@ -8,6 +8,7 @@ import Zombies.Zombie;
 import java.util.List;
 
 import Bullet.KernelBullet;
+import Bullet.PeaBullet;
 import GameMap.GameMap;
 import Petak.Petak;
 
@@ -44,37 +45,45 @@ public class Kernelpult extends Plant implements PlantAbility {
         return false;
     }
 
-    @Override
-    public void useAbility() {
-        List<Zombie> targets = getTargets(); // Assuming getTargets() is defined in Plant or PlantAbility
-        for (Zombie z : targets) {
-            if (shotCounter == 5) { // Every 5 shots, switch to butter, this butter will freeze zombie
-                z.reduceHealth(getAttackDamage()); // Apply damage
-                z.setFrozenTimer(10); // Set frozen timer for 10 seconds
-                if (!z.isFrozen()) {
-                    z.setFrozen(true);
+  @Override
+    public void useAbility()
+    {
+        for(Petak p : reachablePetak)
+            {
+                synchronized(p) //TODO add synchronized to objects that need(petak)
+                {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    if(!(bullet.isWornOut()))
+                    {
+                    bullet.hit(p);
+                    }
+                    else
+                    {
+                        break;
+                    }     
                 }
-                shotCounter = 0; // Reset counter after shooting butter
-            } else {
-                z.reduceHealth(getAttackDamage()); // Apply damage with corn kernel
+                }
             }
-        }
-        shotCounter++;
+            setAttackTimer(getAttackSpeed()); 
+            bullet = new PeaBullet(getAttackDamage());
     }
 
     @Override
-    public void checkToUseAbility() {
-        if (isZombiesInRange()) {
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
+        {
             useAbility();
         }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            System.out.printf("No zombies in range for %s\n", getName());
+        }
     }
 
-    // Assuming theres a getTargets() method that retrieves the list of zombies in range
-    private List<Zombie> getTargets() {
-        List<Zombie> targets = new ArrayList<>();
-        for (Petak p : reachablePetak) {
-            targets.addAll(p.getZombies());
-        }
-        return targets;
-    }
 }

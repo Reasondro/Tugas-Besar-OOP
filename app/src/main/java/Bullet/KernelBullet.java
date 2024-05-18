@@ -3,7 +3,7 @@ package Bullet;
 import Petak.Petak;
 import Zombies.Zombie;
 
-public class KernelBullet {
+public class KernelBullet extends Bullet {
 
     private int damage;
     private boolean stopzomb = false;
@@ -11,8 +11,7 @@ public class KernelBullet {
     private long lastShotTime; // To track the time of the last shot
 
     public KernelBullet(int damage) {
-        this.damage = damage;
-        this.lastShotTime = System.currentTimeMillis(); // Initialize the last shot time
+        super(damage);
     }
 
     public int getDamage() {
@@ -58,6 +57,7 @@ public class KernelBullet {
             } else {
                 z.reduceHealth(getDamage()); // Apply damage with corn kernel
             }
+            setWornOut(true);
             System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
         }
 
