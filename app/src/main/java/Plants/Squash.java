@@ -87,7 +87,7 @@ public class Squash  extends Plant implements PlantAbility{
         }
         else if(!(isZombiesInRange()) && getAttackTimer() == 0)
         {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 

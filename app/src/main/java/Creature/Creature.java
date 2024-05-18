@@ -121,10 +121,10 @@ public abstract class Creature {
         this.pos = pos;
     }
 
-    public void refreshCreature()
-    {
-        //TODO implement this method with Threading
-        reduceAttackTimer();
-    }
+    // public void refreshCreature()
+    // {
+    //     //TODO implement this method with Threading
+    //     reduceAttackTimer();
+    // }
     
 }

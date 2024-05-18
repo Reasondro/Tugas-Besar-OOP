@@ -119,9 +119,14 @@ public class Petak {
 
     public void printCreatures() {
 
-        if(type == "Zombie Base")  //TODO Delete thiss if when implementing the zombie spawn logic
+        if(type == "Zombie Base")
         {
             System.out.print("[Zombie Base]");
+            return;
+        }
+       else if(type == "Aquatic Zombie Base") 
+        {
+            System.out.print("[Aquatic Zombie Base]");
             return;
         }
         else if(type == "Protected") {
@@ -136,8 +141,7 @@ public class Petak {
             System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
             if(creatures.get(i) instanceof Zombie)
             {
-                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer() +
-                 " X:" + creatures.get(i).getPos().getX() + " Y:" + creatures.get(i).getPos().getY());
+                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer());
             }
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
