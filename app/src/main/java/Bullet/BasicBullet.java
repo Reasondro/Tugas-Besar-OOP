@@ -16,10 +16,7 @@ public class BasicBullet extends Bullet{
 
                for(Zombie z : p.getZombies())
                {
-                int originalHealth = z.getHealth();
                 z.reduceHealth(getDamage());
-                System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
-                System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                }
             }
 

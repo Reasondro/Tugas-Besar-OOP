@@ -182,7 +182,15 @@ public class GameMap {
 
     public Petak getPetak(Position pos)
     {
-        return map[pos.getX()-1][pos.getY()];
+        int x = pos.getX()-1;
+        int y = pos.getY();
+        
+        //? preveent horizontal movement to go out of bounds
+        if(y < 1)
+        {
+            y = 0;
+        }
+        return map[x][y];
     }
     
     public void refreshMap()
