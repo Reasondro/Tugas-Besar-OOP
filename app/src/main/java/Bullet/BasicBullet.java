@@ -13,13 +13,11 @@ public class BasicBullet extends Bullet{
         {
             synchronized(p)
             {
-
                for(Zombie z : p.getZombies())
                {
                 z.reduceHealth(getDamage());
                }
             }
-
                setWornOut(true);
            }
         //    else //? use this if want to test the bullet when there is no zombie in the petak
