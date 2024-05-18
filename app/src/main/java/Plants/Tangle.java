@@ -6,56 +6,58 @@ import PlantAbility.*;
 import Zombies.Zombie;
 
 import java.util.List;
+
+import GameMap.GameMap;
+import Petak.Petak;
+
 import java.util.ArrayList;
 
-public class Tangle extends Plant implements PlantAbility{
+public class Tangle extends Plant implements PlantAbility {
+
+    private List<Petak> reachablePetak = new ArrayList<>();
     
-    private List<Zombie> targets = new ArrayList<>();
-    private boolean aquatic;
-
-    public Tangle()
-    {
-        super("Tangle", 25, 50, 25, 1, -1, 0,  new Position(0, 0)); // ini msh gatau krn dia kerjanya nenggelemin 1 zombie trus dia jg ikutan mati
-        this.aquatic = aquatic;
+    public Tangle() {
+        super("Tangle", 25, 50, 25, 1, -1, 0, new Position(0, 0)); // Damage tentative
     }
 
-    public boolean isAquatic() {
-        return aquatic;
-    }
-    
-    public void setTargets(List<Zombie> targets)
-    {
-        this.targets = targets;
+    public List<Petak> getReachablePetak() {
+        return reachablePetak;
     }
 
-    public void addTarget(Zombie z)
-    {
-        targets.add(z);
+    public void setReachablePetak(List<Petak> reachablePetak) {
+        this.reachablePetak = reachablePetak;
     }
 
-    public void removeTarget(Zombie z)
-    {
-        targets.remove(z);
+    public boolean isZombiesInRange() {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
+        for (Petak p : reachablePetak) {
+            synchronized (p) {
+                if (!p.getZombies().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public void useAbility() {
-        if (getPos().isAquatic()) { // Memeriksa apakah tanaman berada di air
-            for (Zombie z : targets) {
-                // Mengurangi kesehatan zombie menjadi 0 (Membunuh zombie)
-                z.setHealth(0);
+        if (isZombiesInRange()) {
+            Petak currentPetak = GameMap.getInstance().getPetak(getPos());
+            List<Zombie> zombies = currentPetak.getZombies();
+            if (!zombies.isEmpty()) {
+                Zombie target = zombies.get(0); // Tangling the first zombie in the petak
+                target.setHealth(0); // Kill the zombie
+                setHealth(0); // Tangle dies right after tangling the zombie
+                System.out.println("Tangle tangles a zombie and both die!");
             }
-            // Set health of Tangle to 0 (Menghilangkan Tangle)
-            setHealth(0);
-        } else {
-            System.out.println("Tangle can only be planted in water!");
         }
     }
 
-     @Override
+    @Override
     public void checkToUseAbility() {
+        if (isZombiesInRange()) {
+            useAbility();
+        }
     }
-
-
 }
-
