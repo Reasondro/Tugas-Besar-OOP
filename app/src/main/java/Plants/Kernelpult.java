@@ -66,7 +66,7 @@ public class Kernelpult extends Plant implements PlantAbility {
                 }
             }
             setAttackTimer(getAttackSpeed()); 
-            bullet = new PeaBullet(getAttackDamage());
+            bullet = new KernelBullet(getAttackDamage());
     }
 
     @Override
