@@ -25,8 +25,8 @@ public class GameAle{
         Sunflower mySunflower = new Sunflower();
         
         Position posP11 = new Position(1, 1);
-        map.getPetak(posP11).addCreature(mySunflower);
-        map.getPetak(posP11).addCreature(myPeashooter);
+        // map.getPetak(posP11).addCreature(mySunflower);
+        // map.getPetak(posP11).addCreature(myPeashooter);
 
         ConeheadZombie myConeheadZombie = new ConeheadZombie();
         DolphinRiderZombie myDolphinRiderZombie = new DolphinRiderZombie();
@@ -35,28 +35,29 @@ public class GameAle{
         
         Position posP19 = new Position(1, 9);
         NormalZombie myNormalZombie = new NormalZombie();
-        map.getPetak(posP19).addCreature(myNormalZombie);
+        // map.getPetak(posP19).addCreature(myNormalZombie);
 
         Position posP22 = new Position(2, 2);
-        map.getPetak(posP22).addCreature(mySquash);
+        // map.getPetak(posP22).addCreature(mySquash);
 
         
         Position posP24 = new Position(2, 4);
-        map.getPetak(posP24).addCreature(myConeheadZombie);
-        map.getPetak(posP24).addCreature(myDolphinRiderZombie);
+        // map.getPetak(posP24).addCreature(myConeheadZombie);
+        // map.getPetak(posP24).addCreature(myDolphinRiderZombie);
 
         Position posP51 = new Position(5, 1);
-        map.getPetak(posP51).addCreature(mySnowpea);
+        // map.getPetak(posP51).addCreature(mySnowpea);
 
         Position posP52 = new Position(5, 2);
-        map.getPetak(posP52).addCreature(myPeashooter2);
+        // map.getPetak(posP52).addCreature(myPeashooter2);
+
+        Position posP59 = new Position(5, 9);
 
         Position posP61 = new Position(6, 1);
-        // map.getPetak(posP61).addCreature(myPeashooter2);
-        map.getPetak(posP61).addCreature(myBulletPlant);
+        map.getPetak(posP61).addCreature(myPeashooter2);
 
         Position posP62 = new Position(6, 2);
-        // map.getPetak(posP62).addCreature(myBulletPlant);
+        map.getPetak(posP62).addCreature(myBulletPlant);
 
         Position pos63 = new Position(6, 3);
         map.getPetak(pos63).addCreature(new Sunflower());
@@ -64,16 +65,24 @@ public class GameAle{
         
         NormalZombie x = new NormalZombie();
         ConeheadZombie y = new ConeheadZombie();
-        Position posP66 = new Position(6, 9);
-        map.getPetak(posP66).addCreature(myPoleVaultingZombie);
+
+        Position posP68 = new Position(6, 8);
+        map.getPetak(posP68).addCreature(myPoleVaultingZombie);
         // map.getPetak(posP66).addCreature(x);
-        map.getPetak(posP66).addCreature(y);
+        // map.getPetak(posP68).addCreature(y);
+
+        Position posP69 = new Position(6, 9);
+        map.getPetak(posP69).addCreature(y);
+        // map.getPetak(posP69).addCreature(myPoleVaultingZombie);
+        map.getPetak(posP69).addCreature(x);
+
+
 
         //? below for plant thread testing
 
         // map.printMap();
 
-        CountDownLatch latch = new CountDownLatch(2);
+        // CountDownLatch latch = new CountDownLatch(2);
 
 
         final long  startTime =  System.currentTimeMillis();
@@ -91,7 +100,7 @@ public class GameAle{
                     }
                     myBulletPlant.checkToUseAbility();
                     // myPeashooter2.checkToUseAbility();
-                    latch.countDown();
+                    // latch.countDown();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -112,9 +121,9 @@ public class GameAle{
                     }
 
                     myPoleVaultingZombie.refreshZombie();
-                    // x.refreshZombie();
-                    // y.refreshZombie();
-                    latch.countDown();
+                    x.refreshZombie();
+                    y.refreshZombie();
+                    // latch.countDown();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -127,13 +136,14 @@ public class GameAle{
         plantThreadTest.start();
         zombieThreadTest.start();
 
-        try{
-            latch.await();
-        }
-        catch(InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        // try{
+        //     latch.await();
+        // }
+        // catch(InterruptedException e)
+        // {
+        //     e.printStackTrace();
+        // }
+
         Thread gameThreadTest = new Thread() {
             @Override
             public void run() {

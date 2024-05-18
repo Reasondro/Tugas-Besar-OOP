@@ -37,6 +37,11 @@ public class Position {
         this.y = y;
     }
 
+    public Position copyPos()
+    {
+        return new Position(x, y);
+    }
+
     public void removePos()
     {
         this.x = -99;
