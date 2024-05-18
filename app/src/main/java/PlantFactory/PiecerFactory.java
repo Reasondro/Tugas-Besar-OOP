@@ -14,7 +14,7 @@ public class PiecerFactory extends PlantFactory {
         return new Piercer();
     }
 
-    public static int getCoffeeBeanCount()
+    public static int getPiercerCount()
     {
         return PiercerFactory;
     }
