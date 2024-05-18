@@ -37,9 +37,15 @@ public class Position {
         this.y = y;
     }
 
-    // public void displayPos()
-    // {
-    //     System.out.println("X: " + x + " Y: " + y);
-    // }
+    public void removePos()
+    {
+        this.x = -99;
+        this.y = -99;
+    }
+
+    public void displayPos()
+    {
+        System.out.println("X: " + x + " Y: " + y);
+    }
      
 }

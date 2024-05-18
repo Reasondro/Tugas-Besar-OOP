@@ -36,8 +36,12 @@ public class Petak {
     }
 
     // Add a creature to the list
-    public void addCreature(Creature creature) //? TODO Allow Game logic to add the creature to petak
+    public void addCreature(Creature creature)
     {
+        if(creature.getHealth() == 0)
+        {
+            return;
+        }
         creatures.add(creature);
         creature.setPos(pos);
     }
@@ -76,7 +80,8 @@ public class Petak {
 
     public List<Zombie> getZombies() {
         List<Zombie> zombies = new ArrayList<>();
-        for (Creature creature : creatures) {
+        List<Creature> creaturesCopy = new ArrayList<>(creatures);
+        for (Creature creature : creaturesCopy) {
             if (creature instanceof Zombie) {
                 zombies.add((Zombie) creature);
             }
@@ -86,7 +91,8 @@ public class Petak {
 
     public List<Plant> getPlants() {
         List<Plant> plants = new ArrayList<>();
-        for (Creature creature : creatures) {
+        List<Creature> creaturesCopy = new ArrayList<>(creatures);
+        for (Creature creature : creaturesCopy) {
             if (creature instanceof Plant) {
                 plants.add((Plant) creature);
             }
@@ -112,7 +118,7 @@ public class Petak {
 
     public void printCreatures() {
 
-        if(type == "Zombie Base")  //TODO Delete this if when implementing the zombie spawn logic
+        if(type == "Zombie Base")  //TODO Delete thiss if when implementing the zombie spawn logic
         {
             System.out.print("[Zombie Base]");
             return;
@@ -125,7 +131,12 @@ public class Petak {
 
         System.out.print("[");
         for (int i = 0; i < creatures.size(); i++) {
-            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth());
+            
+            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
+            if(creatures.get(i) instanceof Zombie)
+            {
+                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer());
+            }
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }
