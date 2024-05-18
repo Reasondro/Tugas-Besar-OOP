@@ -103,57 +103,56 @@ public class Game {
     //     System.out.println("Game Loop");
     // GameMap map = GameMap.getInstance();
 
-    Position pos = new Position(2, 5); // Misalnya zombie ditempatkan di petak baris 2, kolom 5
-    DoubleAttackZombie zombie = new DoubleAttackZombie();
-    map.getPetak(pos).addCreature(zombie);
 
-    zombie.useAbility();
+    // Menempatkan ZigzagZombie di posisi awal (2, 2)
+    ZigzagZombie zigzagZombie = new ZigzagZombie();
+    Position initialPosition = new Position(4, 4); // Disesuaikan dengan indexing 1-based
+    zigzagZombie.setPos(initialPosition);
+    Petak initialPetak = map.getPetak(initialPosition);
+    initialPetak.addCreature(zigzagZombie);
 
-    // Memeriksa apakah useAbility telah berjalan tanpa kesalahan
-    Petak currentPetak = GameMap.getInstance().getPetak(pos);
-    if (currentPetak.getPlants().isEmpty()) {
-        System.out.println("Ability of BungeeZombie used successfully!");
+    // Mencetak posisi awal
+    System.out.println("Initial Position: " + zigzagZombie.getPos().getX() + ", " + zigzagZombie.getPos().getY());
+
+    // Memanggil useAbility untuk menggerakkan zombie
+    // zigzagZombie.useAbility();
+
+    // Mencetak posisi baru setelah bergerak
+    Position newPosition = zigzagZombie.getPos();
+    System.out.println("New Position: " + newPosition.getX() + ", " + newPosition.getY());
+
+    // Verifikasi apakah posisi sesuai dengan gerakan zigzag yang diharapkan
+    if (initialPosition.getY() % 2 == 0) {
+        if (newPosition.getX() == initialPosition.getX() + 1 && newPosition.getY() == initialPosition.getY()-1) {
+            System.out.println("The zigzag movement is correct for even column.");
+        } else {
+            System.out.println("The zigzag movement is incorrect for even column.");
+        }
     } else {
-        System.out.println("Error: Ability of BungeeZombie not used!");
+        if (newPosition.getX() == initialPosition.getX() - 1 && newPosition.getY() == initialPosition.getY()-1) {
+            System.out.println("The zigzag movement is correct for odd column.");
+        } else {
+            System.out.println("The zigzag movement is incorrect for odd column.");
+        }
     }
 
-    Position flagZombiePos = new Position(2, 5); // Posisi zombie
-    FlagZombie flagZombie = new FlagZombie();
-    map.getPetak(flagZombiePos).addCreature(flagZombie);
-    flagZombie.setPos(flagZombiePos);
-
-    // Membuat tanaman untuk uji coba
-    Position plantPos = new Position(2, 5); // Posisi tanaman
-    Sunflower sunflower = new Sunflower();
-    map.getPetak(plantPos).addCreature(sunflower);
-    sunflower.setPos(plantPos);
-
-    // Menampilkan peta sebelum menggunakan ability
+    // Menampilkan peta sebelum dan sesudah pergerakan untuk verifikasi visual
     System.out.println("Before using ability:");
     map.printMap();
 
-    // Memanggil useAbility langsung
-    flagZombie.useAbility();
+    zigzagZombie.useAbility();
 
-    // Menampilkan peta setelah menggunakan ability
     System.out.println("After using ability:");
     map.printMap();
 
-    // Mengecek apakah ability berhasil digunakan
-    Petak petakFlagZombie = GameMap.getInstance().getPetak(flagZombiePos);
-    Petak petakNewZombie = GameMap.getInstance().getPetak(new Position(2, 0)); // Posisi zombie baru di kolom pertama
+    zigzagZombie.useAbility();
+    System.out.println("Kedua kali");
+    map.printMap();
 
-    if (petakNewZombie.getCreatures().stream().anyMatch(c -> c instanceof FlagZombie)) {
-        System.out.println("Flag Zombie ability worked: New zombie spawned successfully!");
-    } else {
-        System.out.println("Error: New zombie not spawned.");
+    zigzagZombie.useAbility();
+    System.out.println("Ketiga");
+    map.printMap();
     }
-
-    // Mengecek apakah statistik zombie telah meningkat
-    if (flagZombie.getHealth() > 150 && flagZombie.getAttackDamage() > 100) {
-        System.out.println("Flag Zombie ability worked: Zombie stats increased successfully!");
-    } else {
-        System.out.println("Error: Zombie stats not increased.");
+        
+   
     }
-    }
-}

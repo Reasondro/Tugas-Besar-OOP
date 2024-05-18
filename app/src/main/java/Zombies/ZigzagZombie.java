@@ -11,15 +11,11 @@ import GameMap.GameMap;
 
 public class ZigzagZombie extends Zombie implements ZombieAbility {
     
-    private boolean hasUsedZombieAbility = false;
+
     
     public ZigzagZombie()
     {
-        super("Bungee Zombie", 100, 100, 1, 1,false,  new Position(0, 0));
-    }
-
-    private boolean isPlantInSamePetak() {
-        return !GameMap.getInstance().getPetak(getPos()).getPlants().isEmpty();
+        super("Zigzag Zombie", 100, 100, 1, 1,false,  new Position(0, 0));
     }
 
     @Override
@@ -31,10 +27,10 @@ public class ZigzagZombie extends Zombie implements ZombieAbility {
 
         if (currentPosition.getY() % 2 == 0) {
             // Ke bawah kalo di kolom genap
-            nextPetak = gameMap.getPetak(new Position(currentPosition.getX() + 1, currentPosition.getY()));
+            nextPetak = gameMap.getPetak(new Position(currentPosition.getX() + 1, currentPosition.getY()-1));
         } else {
             // Ke atas kalau kolomnya ganjil
-            nextPetak = gameMap.getPetak(new Position(currentPosition.getX() - 1, currentPosition.getY()));
+            nextPetak = gameMap.getPetak(new Position(currentPosition.getX() - 1, currentPosition.getY()-1));
         }
 
         
@@ -46,9 +42,7 @@ public class ZigzagZombie extends Zombie implements ZombieAbility {
 
     @Override
     public void checkToUseAbility() {
-        if (isPlantInSamePetak() && !hasUsedZombieAbility) {
-            useAbility();
-        }
+
     }
 
 
