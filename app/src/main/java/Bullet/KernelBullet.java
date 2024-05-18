@@ -7,9 +7,12 @@ public class KernelBullet {
 
     private int damage;
     private boolean stopzomb = false;
+    private boolean isButter = false; // To track if the bullet is butter
+    private long lastShotTime; // To track the time of the last shot
 
     public KernelBullet(int damage) {
         this.damage = damage;
+        this.lastShotTime = System.currentTimeMillis(); // Initialize the last shot time
     }
 
     public int getDamage() {
@@ -28,26 +31,36 @@ public class KernelBullet {
         this.stopzomb = stopzomb;
     }
 
-    public void hit(Petak p)
-    {
-           for(Zombie z : p.getZombies())
-           {
-            int originalHealth = z.getHealth();
-            z.reduceHealth(getDamage());
-            z.setFrozenTimer(10);
-            if(z.isFrozen() == false)
-            {
-                z.setFrozen(true);
-                z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
-                z.reduceHealth(getDamage()); // ini karena kalopun dia udah freeze kena mentega, plant ini ttp akan nyerang pake peluru jagung2 kecil
+    public boolean isButter() {
+        return isButter;
+    }
+
+    public void setButter(boolean isButter) {
+        this.isButter = isButter;
+    }
+
+    public void hit(Petak p) {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - lastShotTime) >= 5000) { // Check if 5 seconds have passed
+            setButter(true);
+            lastShotTime = currentTime; // Reset the timer
+        } else {
+            setButter(false);
+        }
+
+        for (Zombie z : p.getZombies()) {
+            if (isButter()) {
+                z.reduceHealth(getDamage()); // Apply damage
+                z.setFrozenTimer(10); // Set frozen timer for 10 seconds
+                if (!z.isFrozen()) {
+                    z.setFrozen(true);
+                }
+            } else {
+                z.reduceHealth(getDamage()); // Apply damage with corn kernel
             }
             System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
-            // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-            // System.out.printf("%s is frozen\n", z.getName());
-            // System.out.printf("%s's walk speed is now %.2f seconds/Petak\n", z.getName(), z.getWalkSpeedInSeconds());
-           }
-           setStopZomb(true);
+        }
 
+        setStopZomb(true);
     }
-    
 }
