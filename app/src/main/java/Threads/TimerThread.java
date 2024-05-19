@@ -1,13 +1,14 @@
 package Threads;
 
+
+import java.util.Random;
+
 public class TimerThread implements Runnable{
     private static volatile TimerThread instance = null;
 
-    long  dayStart;
-
+   
     private TimerThread()
     {
-        dayStart = System.currentTimeMillis();
     }
 
     public static TimerThread getInstance() {
@@ -21,26 +22,66 @@ public class TimerThread implements Runnable{
         return instance;
     }
 
+    Random rand = new Random();
 
+    static long dayStart;
+    static long tempStart;
+    static long nextSunPointTime;
+    static long currentTime;
+
+
+    public static long getDayStart() {
+        return dayStart;
+    }
+
+    public static long setDayStart(long dayStart) {
+        return TimerThread.dayStart = dayStart;
+    }
+
+    public static long getTempStart() {
+        return tempStart;
+    }
+
+    public static long getNextSunPointTime() {
+        return nextSunPointTime;
+    }
+
+    public static long getCurrentTime() {
+        return currentTime;
+    }
+
+    public static long setCurrentTime(long currentTime) {
+        return TimerThread.currentTime = currentTime;
+    }
+
+    boolean gameRunning = true;
 
     @Override
     public void run()
     {
+        boolean gameRunning = true;
+
         long dayStart = System.currentTimeMillis();
-        long tempStart = dayStart;
-        long nextSunPointTime = 5 + (int)(Math.random() * 6);
-        while (true)
+        setDayStart(dayStart);
+        // long tempStart = dayStart;
+        // long nextSunPointTime = 5 + rand.nextInt(6);
+        while (gameRunning)
         {
             long currentTime = System.currentTimeMillis();
-            if (currentTime - tempStart >= 1000)
+            setCurrentTime(currentTime);
+
+            // System.out.println("Current Time from Timer Thread: " + currentTime);
+            try
             {
-                tempStart = currentTime;
-                System.out.println("Time: " + (currentTime - dayStart) / 1000 + " seconds");
+                Thread.sleep(1000);
             }
-            if (currentTime - dayStart >= nextSunPointTime * 1000)
+            catch (InterruptedException e)
             {
-                System.out.println("Sun points +25");
-                nextSunPointTime = 5 + (int)(Math.random() * 6);
+                // System.out.println("Timer Loop Interrupted");
+                setDayStart(0);
+                setCurrentTime(0);
+                gameRunning = false;
+                return;
             }
         }
     }

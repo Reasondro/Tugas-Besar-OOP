@@ -48,14 +48,12 @@ public class ZombieThread implements Runnable {
     List<ZombieFactory> zombieFactories = Arrays.asList(bucketheadZombieFactory, coneheadZombieFactory, normalZombieFactory, poleVaultingZombieFactory);
     List<ZombieFactory> aquaticZombieFactories = Arrays.asList(duckyTubeZombieFactory, dolphinRiderZombieFactory);
 
-    final long  dayStart =  System.currentTimeMillis();
-    long tempStart = dayStart;
-
-    public void removeZombies()
+    
+    public synchronized void removeZombies()
     {
         zombies.clear();
     }
-
+    
     public void resetFactories()
     {
         bucketheadZombieFactory.resetFactory();
@@ -66,16 +64,23 @@ public class ZombieThread implements Runnable {
         poleVaultingZombieFactory.resetFactory();
     }
 
+
+    boolean gameRunning;
+    
     @Override
     public void run()
-     {
-        while (true) 
+     {   
+        long  dayStart =  TimerThread.getDayStart();
+        long tempStart = dayStart;
+
+        boolean gameRunning = true;
+        while (gameRunning) 
         {
-            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            {
-                break;
-            }
-            long currentTime = System.currentTimeMillis();
+            // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            // {
+            //     break;
+            // }
+            long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 
             if (timeElapsed >= 200) 
@@ -113,18 +118,24 @@ public class ZombieThread implements Runnable {
                     }
             
             //? zombie refresh logic
+
+
             for(Zombie z : zombies)
             {
                 z.refreshZombie();
             }
-            // latch.countDown();
+            System.out.println("Zombie time elapsed: " + timeElapsed);
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e)
              {
+                // System.out.println("Zombie Loop Interrupted");
+            gameRunning = false;
             removeZombies();
             resetFactories();
-            System.out.println("Zombie Loop Interrupted");
+
+            // System.out.println("Zombie Loop Interrupted");
             return;
             }
         }

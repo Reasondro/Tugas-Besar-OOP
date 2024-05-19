@@ -78,6 +78,11 @@ public abstract class PlantFactory {
     public void reduceCooldownTimer()
     {
         cooldownTimer -= 1;
+        if(cooldownTimer <= 0)
+        {
+            cooldownTimer = 0;
+            setReady(true);
+        }
     
     }
 
@@ -88,7 +93,7 @@ public abstract class PlantFactory {
             reduceCooldownTimer();
         }
 
-        else if(cooldownTimer < factoryCooldown && !ready)
+        else if(cooldownTimer < factoryCooldown && !isReady())
         {
             addCooldownTimer();
         }
@@ -98,11 +103,6 @@ public abstract class PlantFactory {
     public void refreshFactory()
     {
         checkToChangeCooldown();
-
-        if (cooldownTimer == 0 && !ready)
-        {
-            setReady(true);
-        }
     }
 
     public void displayStatus()

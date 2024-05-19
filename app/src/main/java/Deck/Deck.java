@@ -87,14 +87,12 @@ public class Deck<T extends PlantFactory> {
         int index = 1;
         for (T card : myCards) 
         {
-            System.out.println(index + ". " + card.getFactoryName() + ": " + card.isReady());
+            System.out.println(index + ". " + card.getFactoryName() + " || Cooldown: " + card.getCooldownTimer() + " seconds left");
             index++;
         }
     }
 
-    public void clearDeck() {
-        myCards.clear();
-    }
+
 
     public void planting(int plantIndex, int Row, int Column) 
     {
@@ -122,6 +120,25 @@ public class Deck<T extends PlantFactory> {
         {
             System.out.println( card.getFactoryName() + " is still in cooldown" + " (" + card.getCooldownTimer() + " seconds left)");
         }
+    }
+
+    public void refresh() 
+    {
+        for (T card : myCards) 
+        {
+            card.checkToChangeCooldown();
+        }
+    }
+    public void clearDeck() 
+    
+    {
+        for (T card : myCards) 
+        {
+            card.setReady(true);
+            card.setCooldownTimer(0);
+        }
+        
+        myCards.clear();
     }
 
     
