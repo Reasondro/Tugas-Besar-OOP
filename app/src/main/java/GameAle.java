@@ -1,5 +1,6 @@
 import java.util.*;
 
+import Creature.Creature;
 import GameMap.GameMap;
 import Plants.*;
 import Zombies.*;
@@ -18,42 +19,40 @@ public class GameAle{
         Sun mySun = Sun.getInstance();
 
         BulletPlant myBulletPlant = new BulletPlant();
-        Squash mySquash = new Squash();
-        Snowpea mySnowpea = new Snowpea();
-        Peashooter myPeashooter = new Peashooter();
-        Peashooter myPeashooter2 = new Peashooter();
-        Sunflower mySunflower = new Sunflower();
+        Kernelpult myKernel = new Kernelpult();
+        NormalZombie myNormalZombie = new NormalZombie();
+
         
         Position posP11 = new Position(1, 1);
-        map.getPetak(posP11).addCreature(mySunflower);
-        map.getPetak(posP11).addCreature(myPeashooter);
+        map.getPetak(posP11).addCreature(myKernel);
 
-        ConeheadZombie myConeheadZombie = new ConeheadZombie();
-        DolphinRiderZombie myDolphinRiderZombie = new DolphinRiderZombie();
-        PoleVaultingZombie myPoleVaultingZombie = new PoleVaultingZombie();
-
+        mySun.displayStatus();
+        map.printMap(); 
         
-        Position posP19 = new Position(1, 9);
-        NormalZombie myNormalZombie = new NormalZombie();
+        Position posP19 = new Position(1, 2);
         map.getPetak(posP19).addCreature(myNormalZombie);
+        map.refreshMap();
+        myNormalZombie.walk();
 
-        Position posP22 = new Position(2, 2);
-        map.getPetak(posP22).addCreature(mySquash);
-
-        
-        Position posP24 = new Position(2, 4);
-        map.getPetak(posP24).addCreature(myConeheadZombie);
-        map.getPetak(posP24).addCreature(myDolphinRiderZombie);
-
-        Position posP51 = new Position(5, 1);
-        map.getPetak(posP51).addCreature(mySnowpea);
-        map.getPetak(posP51).addCreature(myPeashooter2);
 
         Position posP58 = new Position(5, 8);
-        map.getPetak(posP58).addCreature(myPoleVaultingZombie);
 
         Position posP62 = new Position(6, 2);
         map.getPetak(posP62).addCreature(myBulletPlant);
+
+        myKernel.useAbility();
+        myNormalZombie.checkToAttack();
+        myKernel.useAbility();
+
+
+        myKernel.displayStatus();
+        myNormalZombie.displayStatus();
+        map.printMap(); 
+    }
+}
+        // System.out.println(Creature.Zombie.NormalZombie.getHealth());
+
+
 
         //? below for non thread testing
         // map.printMap(); 
@@ -96,73 +95,71 @@ public class GameAle{
         // map.printMap();
 
 
-        final long  startTime =  System.currentTimeMillis();
+//         final long  startTime =  System.currentTimeMillis();
         
-        Thread plantThreadTest = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0)
-                    {
-                        break;
-                    }
-                    final long currentTime = System.currentTimeMillis() - startTime;
-                    final long elapsedSeconds = currentTime/1000;
-                    final long secondsDisplay = elapsedSeconds % 60;
-                    final long minutesDisplay = elapsedSeconds / 60;
-                    System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
-                    map.printMap();
-                    // System.out.println("My Peashooter2 attack timer: " + mySnowpea.getAttackTimer() );
-                    // myPeashooter2.checkToUseAbility();
-                    // System.out.println("My Snowpea attack timer: " + mySnowpea.getAttackTimer());
-                    // mySnowpea.checkToUseAbility();
-                    myPeashooter.checkToUseAbility();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
+//         Thread plantThreadTest = new Thread() {
+//             @Override
+//             public void run() {
+//                 while (true) {
+//                     if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0)
+//                     {
+//                         break;
+//                     }
+//                     final long currentTime = System.currentTimeMillis() - startTime;
+//                     final long elapsedSeconds = currentTime/1000;
+//                     final long secondsDisplay = elapsedSeconds % 60;
+//                     final long minutesDisplay = elapsedSeconds / 60;
+//                     System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+//                     map.printMap();
+//                     // System.out.println("My Peashooter2 attack timer: " + mySnowpea.getAttackTimer() );
+//                     // myPeashooter2.checkToUseAbility();
+//                     // System.out.println("My Snowpea attack timer: " + mySnowpea.getAttackTimer());
+//                     // mySnowpea.checkToUseAbility();
 
-        plantThreadTest.start();
+//                     try {
+//                         Thread.sleep(1000);
+//                     } catch (InterruptedException e) {
+//                         e.printStackTrace();
+//                     }
+//                 }
+//             }
+//         };
 
-        Thread zombieThreadTest = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
-                    {
-                        break;
-                    }
-                    // final long currentTime = System.currentTimeMillis() - startTime;
-                    // final long elapsedSeconds = currentTime/1000;
-                    // final long secondsDisplay = elapsedSeconds % 60;
-                    // final long minutesDisplay = elapsedSeconds / 60;
-                    // System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
-                    // System.out.println("My PoleVaultingZombie attack timer: " + myPoleVaultingZombie.getAttackTimer() );
+//         plantThreadTest.start();
+
+//         Thread zombieThreadTest = new Thread() {
+//             @Override
+//             public void run() {
+//                 while (true) {
+//                     if(map.isProtectedBaseCompromised() || myNormalZombie.getHealth() == 0) //? could use zombie factory to check if all living zombie is dead
+//                     {
+//                         break;
+//                     }
+//                     // final long currentTime = System.currentTimeMillis() - startTime;
+//                     // final long elapsedSeconds = currentTime/1000;
+//                     // final long secondsDisplay = elapsedSeconds % 60;
+//                     // final long minutesDisplay = elapsedSeconds / 60;
+//                     // System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+//                     // System.out.println("My PoleVaultingZombie attack timer: " + myPoleVaultingZombie.getAttackTimer() );
                    
-                    // myPoleVaultingZombie.checkToWalk();
-                    // System.out.println("My PoleVaultingZombie walk timer: " + myPoleVaultingZombie.getWalkTimer());
+//                     // myPoleVaultingZombie.checkToWalk();
+//                     // System.out.println("My PoleVaultingZombie walk timer: " + myPoleVaultingZombie.getWalkTimer());
 
-                    // myNormalZombie.checkToAttack();
-                    myNormalZombie.checkToWalk();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        zombieThreadTest.start();
-        //? above for plant thread testing
-    }
-}
-///? Notes before adding bullet
-
-
+//                     // myNormalZombie.checkToAttack();
+//                     myNormalZombie.checkToWalk();
+//                     try {
+//                         Thread.sleep(1000);
+//                     } catch (InterruptedException e) {
+//                         e.printStackTrace();
+//                     }
+//                 }
+//             }
+//         };
+//         zombieThreadTest.start();
+//         //? above for plant thread testing
+//     }
+// }
+// ///? Notes before adding bullet
 
 
 
@@ -184,33 +181,35 @@ public class GameAle{
 
 
 
-   //     Game concurrency = new Game();
-    //     Thread thread = new Thread(() -> {
-    //         try {
-    //             while (true) {
-    //                 concurrency.gameLoop();
-    //                 Thread.sleep(1000); // Sleep for 1 second
-    //             }
-    //         } catch (InterruptedException e) {
-    //             System.out.println("Game Loop Interrupted");
-    //         }
-    //     });
-    //     thread.start();
 
-    //     boolean isRunning = true;
-    //     Scanner scanner = new Scanner(System.in);
-    //     String userInput;
 
-    //     while (isRunning) {
-    //         userInput = scanner.nextLine();
-    //         if (userInput.equals("exit")) {
-    //             isRunning = false;
-    //             thread.interrupt();
-    //             break;
-    //         } else {
-    //             System.out.println("Hello " + userInput + "!");
-    //         }
-    //     }
+//    //     Game concurrency = new Game();
+//     //     Thread thread = new Thread(() -> {
+//     //         try {
+//     //             while (true) {
+//     //                 concurrency.gameLoop();
+//     //                 Thread.sleep(1000); // Sleep for 1 second
+//     //             }
+//     //         } catch (InterruptedException e) {
+//     //             System.out.println("Game Loop Interrupted");
+//     //         }
+//     //     });
+//     //     thread.start();
+
+//     //     boolean isRunning = true;
+//     //     Scanner scanner = new Scanner(System.in);
+//     //     String userInput;
+
+//     //     while (isRunning) {
+//     //         userInput = scanner.nextLine();
+//     //         if (userInput.equals("exit")) {
+//     //             isRunning = false;
+//     //             thread.interrupt();
+//     //             break;
+//     //         } else {
+//     //             System.out.println("Hello " + userInput + "!");
+//     //         }
+//     //     }
 
     //     scanner.close();
     // }
