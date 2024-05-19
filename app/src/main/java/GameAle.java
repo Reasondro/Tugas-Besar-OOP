@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Timer;
 
 import GameMap.GameMap;
 import Inventory.Inventory;
@@ -16,115 +17,84 @@ public class GameAle{
 
         Deck<PlantFactory> myDeck = Deck.getInstance();
 
-        long  dayStart = 0;
+        long  dayStart = TimerThread.getDayStart();
         boolean isRunning = true;
         Scanner input = new Scanner(System.in);
         String userInput;
     
+        Thread timerThread = new Thread(TimerThread.getInstance());
+        Thread plantThread = new Thread(PlantThread.getInstance());
+        Thread zombieThread = new Thread(ZombieThread.getInstance());
+
+        boolean gameStarted = false;
 
         while(isRunning)
         {
-            Thread plantThread = new Thread(PlantThread.getInstance());
-            Thread zombieThread = new Thread(ZombieThread.getInstance());
+
+            long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+            long elapsedSeconds = currentTime/1000;
+            long secondsDisplay = elapsedSeconds % 60;
+            long minutesDisplay = elapsedSeconds / 60;
+
+            if(!gameStarted)
+            {
+                System.out.println("List of commands: ");
+                System.out.println("1. START - Start the game");
+                System.out.println("2. PRINT INVENTORY - Print the inventory");
+                System.out.println("3. SWAP CARD IN INVENTORY - Swap two cards in the inventory");
+                System.out.println("4. PRINT DECK - Print the deck");
+                System.out.println("5. ADD CARD TO DECK - Add a card to the deck");
+                System.out.println("6. REMOVE CARD FROM DECK - Remove a card from the deck");
+                System.out.println("7. SWAP CARD IN DECK - Swap two cards in the deck");
+                System.out.println("8. STOP - STOP THE PROGRAM");
+            }
+            else
+            {
+                System.out.println("List of commands: ");
+                System.out.println("1. STATUS - Display the status of the game");
+                System.out.println("2. PLANTING - Plant a plant");
+                System.out.println("3. MAP - Display the map");
+                System.out.println("4. EXIT - Exit the game");
+            }
+
+            System.out.print("Enter your command: ");
             userInput = input.nextLine();
 
-           if(userInput.equalsIgnoreCase("START"))
-            {
-                plantThread = new Thread(PlantThread.getInstance());
-                zombieThread =new Thread(ZombieThread.getInstance());
-                // myInventory = Inventory.getInstance();
-                // myDeck = Deck.getInstance();
-
-                dayStart = System.currentTimeMillis();
-                plantThread.start();
-                zombieThread.start();
-            }
-            else if(userInput.equalsIgnoreCase("STATUS"))
-            {
-                Sun.displayStatus();
-            }
-            else if(userInput.equalsIgnoreCase("STOP"))
-            {
-                plantThread.interrupt();
-                zombieThread.interrupt();
-                myDeck.clearDeck();
-                map.resetMap();
-            }
-            else if(userInput.equalsIgnoreCase("PLANTING"))
+           if( ( userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
             {
 
-                if(myDeck.getMyCards().size() == 0) //todo pindahain ini ke planting di deck langsung
+                if(myDeck.getMyCards().size() < 6)
                 {
-                    System.out.println("You have no plants in your deck. Please add plants to your deck first.");
+                    System.out.println("Deck must have 6 cards to start the game.");
+                    System.out.println("You only have " + myDeck.getMyCards().size() + " cards in your deck.");
                     continue;
                 }
-
-                System.out.println("Choose the plant's index you want to plant:");
-                myDeck.printDeck();
-                System.out.print("Index: ");
-                int index = Integer.parseInt(input.nextLine());
-
-                System.out.println("Enter the row and column of the plant you want to plant: ");
-                System.out.print("Row: ");
-                int row = Integer.parseInt(input.nextLine());
-                System.out.print("Column: ");
-                int column = Integer.parseInt(input.nextLine());
-
-                myDeck.planting(index, row, column);
-                map.printMap();
-
-            }
-            else if(userInput.equalsIgnoreCase("PRINT INVENTORY"))
-            {
-                myInventory.printInventory();
-            }
-            else if(userInput.equalsIgnoreCase("ADD CARD TO DECK"))
-            {
-                myInventory.printInventory();
                 
-                System.out.println("Enter the index of the card you want to add to deck: ");
-                int index =  Integer.parseInt(input.nextLine());
-
-                myInventory.addCardToDeckWithIndex(myDeck, index);
-
-                System.out.println("After adding to deck");
-                myDeck.printDeck();
+                timerThread = new Thread(TimerThread.getInstance());
+                
+                plantThread = new Thread(PlantThread.getInstance());
+                zombieThread =new Thread(ZombieThread.getInstance());
+                myInventory = Inventory.getInstance();
+                myDeck = Deck.getInstance();
+                
+                timerThread.start();
+                plantThread.start();
+                zombieThread.start();
+                dayStart = TimerThread.getDayStart();
+                gameStarted = true;
             }
-            else if(userInput.equalsIgnoreCase("REMOVE CARD FROM DECK"))
+            else if(userInput.equalsIgnoreCase("2") && !gameStarted ) //? Print Inventory
             {
-                myDeck.printDeck();
-
-                System.out.println("Enter the index of the card you want to remove from deck: ");
-                int index = Integer.parseInt(input.nextLine());
-
-                myInventory.removeCardFromDeckWithIndex(myDeck, index);
-                System.out.println("After removing from deck");
-                myDeck.printDeck();
-
+                myInventory.printInventory();
             }
-            else if(userInput.equalsIgnoreCase("SWAP CARD IN DECK"))
-            {
-                myDeck.printDeck();
-
-                System.out.println("Enter the index of the first card you want to swap: ");
-                int index1 = Integer.parseInt(input.nextLine());
-
-                System.out.println("Enter the index of the second card you want to swap: ");
-                int index2 = Integer.parseInt(input.nextLine());
-                myInventory.swapCardInDeck(myDeck, index1, index2);
-
-                System.out.println("After swapping in deck");
-                myDeck.printDeck();
-
-            }
-            else if(userInput.equalsIgnoreCase("SWAP CARD IN INVENTORY"))
+            else if(userInput.equalsIgnoreCase("3") && !gameStarted) //? Swap Card in Inventory
             {
                 myInventory.printInventory();
 
-                System.out.println("Enter the index of the first plant you want to swap: ");
+                System.out.print("Enter the index of the first plant you want to swap: ");
                 int index1 = Integer.parseInt(input.nextLine());
 
-                System.out.println("Enter the index of the second plant you want to swap: ");
+                System.out.print("Enter the index of the second plant you want to swap: ");
                 int index2 = Integer.parseInt(input.nextLine());
                 myInventory.swapPlantInInventory(index1, index2);
 
@@ -132,31 +102,114 @@ public class GameAle{
                 myInventory.printInventory();
 
             }
-            else if(userInput.equalsIgnoreCase("PRINT DECK"))
+            else if(userInput.equalsIgnoreCase("4")  && !gameStarted) //? Print Deck
             {
                 myDeck.printDeck();
             }
-            else if(userInput.equalsIgnoreCase("PRINT MAP"))
+            else if(userInput.equalsIgnoreCase("5") && !gameStarted) //? Add Card to Deck
             {
-                final long currentTime = System.currentTimeMillis() - dayStart;
-                final long elapsedSeconds = currentTime/1000;
-                final long secondsDisplay = elapsedSeconds % 60;
-                final long minutesDisplay = elapsedSeconds / 60;
+                myInventory.printInventory();
+                
+                System.out.print("Enter the index of the card you want to add to deck: "); 
+                int index =  Integer.parseInt(input.nextLine());
+
+                myInventory.addCardToDeckWithIndex(myDeck, index);
+
+                System.out.println("After adding to deck");
+                myDeck.printDeck();
+            }
+            else if(userInput.equalsIgnoreCase("6")  && !gameStarted) //? Remove Card from Deck
+            {
+                myDeck.printDeck();
+
+                System.out.print("Enter the index of the card you want to remove from deck: ");
+                int index = Integer.parseInt(input.nextLine());
+
+                myInventory.removeCardFromDeckWithIndex(myDeck, index);
+                System.out.println("After removing from deck");
+                myDeck.printDeck();
+
+            }
+            else if(userInput.equalsIgnoreCase("7")  && !gameStarted) //? Swap Card in Deck
+            {
+                myDeck.printDeck();
+
+                System.out.print("Enter the index of the first card you want to swap: ");
+                int index1 = Integer.parseInt(input.nextLine());
+
+                System.out.print("Enter the index of the second card you want to swap: ");
+                int index2 = Integer.parseInt(input.nextLine());
+                myInventory.swapCardInDeck(myDeck, index1, index2);
+
+                System.out.println("After swapping in deck");
+                myDeck.printDeck();
+
+            }
+
+            else if(userInput.equalsIgnoreCase("8")) //? Stop the program
+            {
+                isRunning = false;
+            }
+            else if(userInput.equalsIgnoreCase("1") && gameStarted) //? Display the status of the game
+            {
+                System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+                Sun.displayStatus();
+                myDeck.printDeck();
+            }
+            else if(userInput.equalsIgnoreCase("2") && gameStarted ) //? Plant a plant
+            {
+                
+                System.out.println("Choose the plant's index you want to plant!"); 
+                myDeck.printDeck();
+                System.out.print("Index: ");
+                int index = Integer.parseInt(input.nextLine());
+                
+                System.out.println("Enter the row and column of the plant you want to plant! ");
+                System.out.print("Row: ");
+                int row = Integer.parseInt(input.nextLine());
+                System.out.print("Column: ");
+                int column = Integer.parseInt(input.nextLine());
+                
+                myDeck.planting(index, row, column);
+
+                System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+                map.printMap();
+                
+            }
+            else if(userInput.equalsIgnoreCase("3") && gameStarted) //? Display the map
+            {
+
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
             }
-            else if(userInput.equalsIgnoreCase("EXIT"))
+            else if(userInput.equalsIgnoreCase("4") && gameStarted) //? Exit the game
             {
-                isRunning = false;
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+            }
+            else if(map.isProtectedBaseCompromised() && gameStarted) //? Game Over
+            {
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+                System.out.println("Protected Base is compromised! Game Over!");
             }
             else
             {
                 System.out.println(userInput + " is not a valid command. Please try again.");
             }
-
+            
         }
         input.close();
-}
+    }
 }
 
 

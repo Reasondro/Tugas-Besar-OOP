@@ -49,7 +49,7 @@ public class ZombieThread implements Runnable {
     List<ZombieFactory> aquaticZombieFactories = Arrays.asList(duckyTubeZombieFactory, dolphinRiderZombieFactory);
 
     
-    public void removeZombies()
+    public synchronized void removeZombies()
     {
         zombies.clear();
     }
@@ -64,7 +64,7 @@ public class ZombieThread implements Runnable {
         poleVaultingZombieFactory.resetFactory();
     }
 
-    long  dayStart =  System.currentTimeMillis();
+    long  dayStart =  TimerThread.getDayStart();
     long tempStart = dayStart;
     
     @Override
@@ -72,11 +72,11 @@ public class ZombieThread implements Runnable {
      {
         while (true) 
         {
-            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            {
-                break;
-            }
-            long currentTime = System.currentTimeMillis();
+            // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            // {
+            //     break;
+            // }
+            long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 
             if (timeElapsed >= 200) 
@@ -114,18 +114,25 @@ public class ZombieThread implements Runnable {
                     }
             
             //? zombie refresh logic
+
+
             for(Zombie z : zombies)
             {
                 z.refreshZombie();
             }
+
+            // System.out.println("Current Time from Zombie Thread: " + currentTime);
+
             // latch.countDown();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e)
              {
+            map.resetMap();
             removeZombies();
             resetFactories();
-            System.out.println("Zombie Loop Interrupted");
+
+            // System.out.println("Zombie Loop Interrupted");
             return;
             }
         }

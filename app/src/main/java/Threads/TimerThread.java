@@ -23,27 +23,35 @@ public class TimerThread implements Runnable{
     }
 
     Random rand = new Random();
-    
-    long dayStart;
-    long tempStart;
-    long nextSunPointTime;
-    long currentTime;
+
+    static long dayStart;
+    static long tempStart;
+    static long nextSunPointTime;
+    static long currentTime;
 
 
-    public long getDayStart() {
+    public static long getDayStart() {
         return dayStart;
     }
 
-    public long getTempStart() {
+    public static long setDayStart(long dayStart) {
+        return TimerThread.dayStart = dayStart;
+    }
+
+    public static long getTempStart() {
         return tempStart;
     }
 
-    public long getNextSunPointTime() {
+    public static long getNextSunPointTime() {
         return nextSunPointTime;
     }
 
-    public long getCurrentTime() {
+    public static long getCurrentTime() {
         return currentTime;
+    }
+
+    public static long setCurrentTime(long currentTime) {
+        return TimerThread.currentTime = currentTime;
     }
 
 
@@ -51,20 +59,22 @@ public class TimerThread implements Runnable{
     public void run()
     {
         long dayStart = System.currentTimeMillis();
-        long tempStart = dayStart;
-        long nextSunPointTime = 5 + rand.nextInt(6);
+        setDayStart(dayStart);
+        // long tempStart = dayStart;
+        // long nextSunPointTime = 5 + rand.nextInt(6);
         while (true)
         {
             long currentTime = System.currentTimeMillis();
-            long timeElapsed = (currentTime - tempStart) / 1000; 
+            setCurrentTime(currentTime);
 
+            // System.out.println("Current Time from Timer Thread: " + currentTime);
             try
             {
                 Thread.sleep(1000);
             }
             catch (InterruptedException e)
             {
-                System.out.println("Timer Loop Interrupted");
+                // System.out.println("Timer Loop Interrupted");
                 return;
             }
         }
