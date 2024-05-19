@@ -1,13 +1,12 @@
 package Deck;
 
-import Plants.Plant;
+
 import java.util.ArrayList;
 import java.util.List;
+import PlantFactory.PlantFactory;
 
-public class Deck<T> {
+public class Deck<T extends PlantFactory> {
 
-    //TODO implement Deck class with a list of plants/cards
-    
    private List<T> myCards;
 
     public Deck() 
@@ -25,11 +24,28 @@ public class Deck<T> {
         myCards.remove(card);
     }
 
-    public void swapCard(T card1, T card2) {
-        int index1 = myCards.indexOf(card1);
-        int index2 = myCards.indexOf(card2);
-        myCards.set(index1, card2);
-        myCards.set(index2, card1);
+    public void removeCardWithIndex(int index) {
+        int formattedIndex = index - 1;
+        if (formattedIndex < 0 || formattedIndex >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+        myCards.remove(formattedIndex);
+    }
+
+    public void swapCard(int index1, int index2) {
+        int formattedIndex1 = index1 - 1;
+        int formattedIndex2 = index2 - 1;
+
+        if (formattedIndex1 < 0 || formattedIndex1 >= myCards.size() || formattedIndex2 < 0 || formattedIndex2 >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        T card1 = myCards.get(formattedIndex1); //? because we start at 1 in game
+        T card2 = myCards.get(formattedIndex2);
+        myCards.set(formattedIndex1, card2);
+        myCards.set(formattedIndex2, card1);
     }
 
     public List<T> getMyCards() {
@@ -40,10 +56,20 @@ public class Deck<T> {
         this.myCards = myCards;
     }
 
-    public void printDeck() {
-        for (T card : myCards) {
-            System.out.println(card);
+    public void printDeck() 
+    {
+        System.out.println("My Deck: ");
+
+        int index = 1;
+        for (T card : myCards) 
+        {
+            System.out.println(index + ". " + card.getFactoryName() + ": " + card.isReady());
+            index++;
         }
+    }
+
+    public void clearDeck() {
+        myCards.clear();
     }
 
     

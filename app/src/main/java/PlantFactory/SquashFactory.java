@@ -10,7 +10,7 @@ public class SquashFactory extends PlantFactory {
 
     public SquashFactory()
     {
-        super("Squash Factory", 20);
+        super("Squash Card", 20);
     }
 
     public Plant createPlant()

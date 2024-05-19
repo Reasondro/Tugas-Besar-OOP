@@ -9,7 +9,7 @@ public class WallnutFactory extends PlantFactory {
 
     public WallnutFactory()
     {
-        super("Wallnut Factory", 20);
+        super("Wallnut Card", 20);
     }
 
     public Plant createPlant()

@@ -4,48 +4,101 @@ import PlantFactory.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Map;
-import java.util.HashMap;
+
 import Deck.Deck;
 public class Inventory {
 
-    private  Map<String, PlantFactory> inventory; 
+    private List<PlantFactory> inventory;
 
     public Inventory()
     {
-        inventory = new HashMap<String, PlantFactory>();
-        inventory.put("Peashooter", new PeashooterFactory());
-        inventory.put("Sunflower", new SunflowerFactory());
-        inventory.put("Snowpea", new SnowpeaFactory());
-        inventory.put("Squash", new SquashFactory());
-        inventory.put("Wallnut", new WallnutFactory());
+        inventory = new ArrayList<PlantFactory>();
+
+        inventory.add(new PeashooterFactory());
+        inventory.add(new SunflowerFactory());
+        inventory.add(new SnowpeaFactory());
+        inventory.add(new SquashFactory());
+        inventory.add(new WallnutFactory());
+        inventory.add(new LilypadFactory());
+
     }
 
-    public PlantFactory getPlantFactory(String plantName)
+    public PlantFactory getPlantFactoryByIndex(int index)
     {
-        return inventory.get(plantName);
+        int formattedIndex = index - 1;
+        if (formattedIndex < 0 || formattedIndex >= inventory.size()) {
+            System.out.println("Invalid index");
+            return null;
+        }
+        return inventory.get(formattedIndex);
     }
 
     public void printInventory()
     {
-        for (Map.Entry<String, PlantFactory> entry : inventory.entrySet()) {
-            System.out.println(entry.getKey());
+        System.out.println("My Inventory: ");
+        int index = 1;
+        
+        for(PlantFactory plantFactory : inventory)
+        {
+            System.out.println(index + ". " + plantFactory.getFactoryName());
+            index++;
         }
+
     }
 
-    public void addToDeck(Deck<PlantFactory> deck, String plantName)
+    public boolean isInDeck(Deck<PlantFactory> deck, PlantFactory plantFactory)
     {
-        PlantFactory plantFactory = getPlantFactory(plantName);
+        return deck.getMyCards().contains(plantFactory);
+    }
+
+    public void addCardToDeckWithIndex(Deck<PlantFactory> deck, int index)
+    {
+        int formattedIndex = index - 1;
+
+        if (formattedIndex < 0 || formattedIndex >= inventory.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+        PlantFactory plantFactory = inventory.get(formattedIndex);
+        if (isInDeck(deck, plantFactory)) {
+            System.out.println( plantFactory.getFactoryName() + " already in deck");
+            return;
+        }
         deck.addCard(plantFactory);
     }
 
-    public void removeFromDeck(Deck<PlantFactory> deck, String plantName)
+    public void removeCardFromDeckWithIndex(Deck<PlantFactory> deck, int index)
     {
-        PlantFactory plantFactory = getPlantFactory(plantName);
-        deck.removeCard(plantFactory);
+        deck.removeCardWithIndex(index);
     }
 
-    
-    
+    public void swapPlantInInventory(int index1, int index2)
+    {
+        int formattedIndex1 = index1 - 1;
+        int formattedIndex2 = index2 - 1;
+
+        if (formattedIndex1 < 0 || formattedIndex1 >= inventory.size() || formattedIndex2 < 0 || formattedIndex2 >= inventory.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        PlantFactory plant1 = inventory.get(formattedIndex1); //? because we start at 1 in game
+        PlantFactory plant2 = inventory.get(formattedIndex2);
+        inventory.set(formattedIndex1, plant2);
+        inventory.set(formattedIndex2, plant1);
+
+
+    }
+
+    public void swapCardInDeck(Deck<PlantFactory> deck, int index1, int index2)
+    {
+        deck.swapCard(index1, index2);
+    }
+
+    public void clearInventory()
+    {
+        inventory.clear();
+    }
+
     
 }
