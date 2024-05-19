@@ -20,9 +20,19 @@ public class PlantThread implements Runnable
     long tempStart = dayStart;
     long nextSunPointTime = 5 + rand.nextInt(6);
 
-    public void removePlants()
+    public synchronized void addPlant(Plant p)
+    {
+        plants.add(p);
+    }
+    
+    public synchronized void removePlants()
     {
         plants.clear();
+    }
+
+    public synchronized List<Plant> getPlants()
+    {
+        return plants;
     }
 
 
@@ -60,7 +70,7 @@ public class PlantThread implements Runnable
             {
                 p.refreshPlant();
             }
-            // latch.countDown();
+    
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

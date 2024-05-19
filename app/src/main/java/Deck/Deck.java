@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import PlantFactory.PlantFactory;
 
+import GameMap.GameMap;
+import Petak.Petak;
+import Position.Position;
+
+import Threads.PlantThread;
+
 public class Deck<T extends PlantFactory> {
 
    private List<T> myCards;
@@ -70,6 +76,32 @@ public class Deck<T extends PlantFactory> {
 
     public void clearDeck() {
         myCards.clear();
+    }
+
+    public void planting(int plantIndex, int Row, int Column) 
+    {
+
+        int formattedIndex = plantIndex - 1;
+        if (formattedIndex < 0 || formattedIndex >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        T card = myCards.get(formattedIndex);
+        if (card.isReady()) 
+        {
+            GameMap map = GameMap.getInstance();
+
+            Position position = new Position(Row, Column);
+            Petak targetPetak = map.getPetak(position);
+
+            targetPetak.addCreature(card.createPlant());
+            map.printMap();
+        }
+         else 
+        {
+            System.out.println( card.getFactoryName() + " is still in cooldown" + " (" + card.getCooldownTimer() + " seconds left)");
+        }
     }
 
     
