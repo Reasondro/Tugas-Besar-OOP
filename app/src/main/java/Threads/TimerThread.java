@@ -54,15 +54,18 @@ public class TimerThread implements Runnable{
         return TimerThread.currentTime = currentTime;
     }
 
+    boolean gameRunning = true;
 
     @Override
     public void run()
     {
+        boolean gameRunning = true;
+
         long dayStart = System.currentTimeMillis();
         setDayStart(dayStart);
         // long tempStart = dayStart;
         // long nextSunPointTime = 5 + rand.nextInt(6);
-        while (true)
+        while (gameRunning)
         {
             long currentTime = System.currentTimeMillis();
             setCurrentTime(currentTime);
@@ -75,6 +78,9 @@ public class TimerThread implements Runnable{
             catch (InterruptedException e)
             {
                 // System.out.println("Timer Loop Interrupted");
+                setDayStart(0);
+                setCurrentTime(0);
+                gameRunning = false;
                 return;
             }
         }

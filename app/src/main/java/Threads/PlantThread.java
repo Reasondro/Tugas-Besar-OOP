@@ -50,16 +50,18 @@ public class PlantThread implements Runnable
     {
         return plants;
     }
-    long  dayStart =  TimerThread.getDayStart();
-    long tempStart = dayStart;
-    long nextSunPointTime = 5 + rand.nextInt(6);
     
-   
+    boolean gameRunning;
     @Override
     public void run() 
     {
+        long  dayStart =  TimerThread.getDayStart();
+        long tempStart = dayStart;
+        long nextSunPointTime = 5 + rand.nextInt(6);
+
+        gameRunning = true;
         Deck<PlantFactory> deck = Deck.getInstance();
-        while (true) 
+        while (gameRunning) 
         {
             // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
             // {
@@ -104,9 +106,9 @@ public class PlantThread implements Runnable
                 Thread.sleep(1000);
        
             } catch (InterruptedException e) {
+            gameRunning = false;
             SUN.resetSunPoints();
-            map.resetMap();
-
+        
             removePlants();
             // System.out.println("Plant Loop Interrupted");
            

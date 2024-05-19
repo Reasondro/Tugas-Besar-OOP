@@ -31,10 +31,10 @@ public class GameAle{
         while(isRunning)
         {
 
-            long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
-            long elapsedSeconds = currentTime/1000;
-            long secondsDisplay = elapsedSeconds % 60;
-            long minutesDisplay = elapsedSeconds / 60;
+            // long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+            // long elapsedSeconds = currentTime/1000;
+            // long secondsDisplay = elapsedSeconds % 60;
+            // long minutesDisplay = elapsedSeconds / 60;
 
             if(!gameStarted)
             {
@@ -46,7 +46,8 @@ public class GameAle{
                 System.out.println("5. ADD CARD TO DECK - Add a card to the deck");
                 System.out.println("6. REMOVE CARD FROM DECK - Remove a card from the deck");
                 System.out.println("7. SWAP CARD IN DECK - Swap two cards in the deck");
-                System.out.println("8. STOP - STOP THE PROGRAM");
+                System.out.println("8. FILL DECK - Fill the deck with random cards");
+                System.out.println("9. STOP - STOP THE PROGRAM");
             }
             else
             {
@@ -60,7 +61,7 @@ public class GameAle{
             System.out.print("Enter your command: ");
             userInput = input.nextLine();
 
-           if( ( userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
+           if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
             {
 
                 if(myDeck.getMyCards().size() < 6)
@@ -71,9 +72,9 @@ public class GameAle{
                 }
                 
                 timerThread = new Thread(TimerThread.getInstance());
-                
                 plantThread = new Thread(PlantThread.getInstance());
                 zombieThread =new Thread(ZombieThread.getInstance());
+
                 myInventory = Inventory.getInstance();
                 myDeck = Deck.getInstance();
                 
@@ -145,13 +146,22 @@ public class GameAle{
                 myDeck.printDeck();
 
             }
+            else if(userInput.equalsIgnoreCase("8"))
+            {
+                myInventory.addAllCardRandomly(myDeck);
+                myDeck.printDeck();
+            }
 
-            else if(userInput.equalsIgnoreCase("8")) //? Stop the program
+            else if(userInput.equalsIgnoreCase("9")) //? Stop the program
             {
                 isRunning = false;
             }
             else if(userInput.equalsIgnoreCase("1") && gameStarted) //? Display the status of the game
             {
+                long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+                long elapsedSeconds = currentTime/1000;
+                long secondsDisplay = elapsedSeconds % 60;
+                long minutesDisplay = elapsedSeconds / 60;
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 Sun.displayStatus();
                 myDeck.printDeck();
@@ -171,22 +181,30 @@ public class GameAle{
                 int column = Integer.parseInt(input.nextLine());
                 
                 myDeck.planting(index, row, column);
-
+                
+                long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+                long elapsedSeconds = currentTime/1000;
+                long secondsDisplay = elapsedSeconds % 60;
+                long minutesDisplay = elapsedSeconds / 60;
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
                 
             }
             else if(userInput.equalsIgnoreCase("3") && gameStarted) //? Display the map
             {
-
+                long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+                long elapsedSeconds = currentTime/1000;
+                long secondsDisplay = elapsedSeconds % 60;
+                long minutesDisplay = elapsedSeconds / 60;
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
             }
             else if(userInput.equalsIgnoreCase("4") && gameStarted) //? Exit the game
             {
                 timerThread.interrupt();
-                plantThread.interrupt();
+
                 zombieThread.interrupt();
+                plantThread.interrupt();
                 
                 myDeck.clearDeck();
                 map.resetMap();

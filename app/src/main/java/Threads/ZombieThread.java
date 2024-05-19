@@ -64,13 +64,17 @@ public class ZombieThread implements Runnable {
         poleVaultingZombieFactory.resetFactory();
     }
 
-    long  dayStart =  TimerThread.getDayStart();
-    long tempStart = dayStart;
+
+    boolean gameRunning;
     
     @Override
     public void run()
-     {
-        while (true) 
+     {   
+        long  dayStart =  TimerThread.getDayStart();
+        long tempStart = dayStart;
+
+        boolean gameRunning = true;
+        while (gameRunning) 
         {
             // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
             // {
@@ -120,15 +124,14 @@ public class ZombieThread implements Runnable {
             {
                 z.refreshZombie();
             }
+            System.out.println("Zombie time elapsed: " + timeElapsed);
 
-            // System.out.println("Current Time from Zombie Thread: " + currentTime);
-
-            // latch.countDown();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e)
              {
-            map.resetMap();
+                // System.out.println("Zombie Loop Interrupted");
+            gameRunning = false;
             removeZombies();
             resetFactories();
 
