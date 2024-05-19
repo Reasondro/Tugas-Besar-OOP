@@ -105,8 +105,8 @@ public class Game {
 
 
     // Menempatkan ZigzagZombie di posisi awal (2, 2)
-    ZigzagZombie zigzagZombie = new ZigzagZombie();
-    Position initialPosition = new Position(4, 4); // Disesuaikan dengan indexing 1-based
+    StinkZombie zigzagZombie = new StinkZombie();
+    Position initialPosition = new Position(1, 1); // Disesuaikan dengan indexing 1-based
     zigzagZombie.setPos(initialPosition);
     Petak initialPetak = map.getPetak(initialPosition);
     initialPetak.addCreature(zigzagZombie);

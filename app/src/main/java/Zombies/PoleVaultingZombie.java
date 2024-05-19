@@ -88,6 +88,5 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
 
         
-    }
-    
+    }    
 }

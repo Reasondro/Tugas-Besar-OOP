@@ -11,6 +11,8 @@ import Position.Position;
 import ZombieAbility.*;
 
 // Kekuatannya dikali 2 aja
+// Tapi cm bisa dipake sekali
+// Kekuatannya dipake kalo depannya ada taneman
 
 public class DoubleAttackZombie extends Zombie implements ZombieAbility{
     
