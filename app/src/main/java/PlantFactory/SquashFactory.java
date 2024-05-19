@@ -6,10 +6,20 @@ import Plants.Squash;
 public class SquashFactory extends PlantFactory {
     
     private static int squashCount = 0;
+
+
+    public SquashFactory()
+    {
+        super("Squash Factory", 20);
+    }
+
     public Plant createPlant()
     {
         squashCount++;
         PlantFactory.incrementPlantCount();
+
+        setCooldownTimer(getFactoryCooldown());
+        setReady(false);
 
         return new Squash();
     }

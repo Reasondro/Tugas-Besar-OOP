@@ -6,10 +6,19 @@ import Plants.Wallnut;
 public class WallnutFactory extends PlantFactory {
 
     private static int wallnutCount = 0;
+
+    public WallnutFactory()
+    {
+        super("Wallnut Factory", 20);
+    }
+
     public Plant createPlant()
     {
         wallnutCount++;
         PlantFactory.incrementPlantCount();
+
+        setCooldownTimer(getFactoryCooldown());
+        setReady(false);
 
         return new Wallnut();
     }
