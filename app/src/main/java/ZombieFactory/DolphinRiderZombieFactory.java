@@ -18,5 +18,11 @@ public class DolphinRiderZombieFactory extends ZombieFactory {
     {
         return dolphinRiderZombieCount;
     }
+
+    public void resetFactory()
+    {
+        super.resetFactory();
+        dolphinRiderZombieCount = 0;
+    }
     
 }

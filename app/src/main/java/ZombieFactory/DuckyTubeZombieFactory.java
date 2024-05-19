@@ -18,5 +18,11 @@ public class DuckyTubeZombieFactory  extends ZombieFactory{
     {
         return duckyTubeZombieCount;
     }
+
+    public void resetFactory()
+    {
+        super.resetFactory();
+        duckyTubeZombieCount = 0;
+    }
     
 }

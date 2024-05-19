@@ -19,4 +19,10 @@ public class ConeheadZombieFactory extends ZombieFactory {
         return coneheadZombieCount;
     }
 
+    public void resetFactory()
+    {
+        super.resetFactory();
+        coneheadZombieCount = 0;
+    }
+
 }

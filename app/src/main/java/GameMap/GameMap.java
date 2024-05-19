@@ -16,7 +16,7 @@ public class GameMap {
     private int columns = 11;
 
     private List<Petak> zombieBase = new ArrayList<>();
-    private List<Petak> zombieBaseDummy = new ArrayList<>();
+
     
     private GameMap()
     {
@@ -93,13 +93,6 @@ public class GameMap {
     //? NOTE: Petak efektif untuk player mulai dari [0][1] (baris 1 kolom 1) sampai [5][9] (baris 6 kolom 9)
     //? NOTE: Petak asli mulai dari [0][0] (baris 1 kolom -99/Protected) sampai [5][10] (baris 6 kolom 10/Zombie Base)
 
-
-    //? NOTE : This is a test function
-    // public void printTest()
-    // {
-    //     map[5][10].printPos();
-    //     map[5][10].printType();
-    // }
 
     public void printMap()
     {
@@ -252,11 +245,16 @@ public class GameMap {
         return zombieBase;
     }
 
-    public List<Petak> getZombieBaseDummy()
+    public synchronized void  resetMap()
     {
-        return zombieBaseDummy;
+        for(int i = 0; i < rows; i++) 
+        {
+            for(int j = 0; j < columns; j++) {
+                map[i][j].resetPetak();
+            }
+        }
     }
-    
+
 
 
 }
