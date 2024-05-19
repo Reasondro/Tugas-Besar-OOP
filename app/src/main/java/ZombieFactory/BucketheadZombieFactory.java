@@ -17,5 +17,11 @@ public class BucketheadZombieFactory extends ZombieFactory{
     {
         return bucketheadZombieCount;
     }
+
+    public void resetFactory()
+    {
+        super.resetFactory();
+        bucketheadZombieCount = 0;
+    }
     
 }

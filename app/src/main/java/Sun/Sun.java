@@ -43,6 +43,11 @@ public class Sun {
         Sun.sunPoints = sunPoints;
     }
 
+    public void resetSunPoints()
+    {
+        Sun.sunPoints = 50;
+    }
+
     public void displayStatus()
     {
         System.out.println("Sun points: " + sunPoints);

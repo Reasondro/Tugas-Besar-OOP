@@ -1,6 +1,7 @@
 package ZombieFactory;
 
 import Zombies.Zombie;
+
 import Zombies.PoleVaultingZombie;
 
 
@@ -18,6 +19,12 @@ public class PoleVaultingZombieFactory extends ZombieFactory {
     public static int getPoleVaultingZombieCount()
     {
         return poleVaultingZombieCount;
+    }
+
+    public void resetFactory()
+    {
+        super.resetFactory();
+        poleVaultingZombieCount = 0;
     }
 
 }

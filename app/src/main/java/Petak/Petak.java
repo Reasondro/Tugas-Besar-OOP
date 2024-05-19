@@ -47,9 +47,7 @@ public class Petak {
     }
 
 
-    // Remove a creature from the list
     public void removeCreature(Creature creature) {
-        // System.out.println("Removing " + creature.getName() + " from petak" + pos.getX() + " " + pos.getY());
         creatures.remove(creature);
     }
 
@@ -74,7 +72,12 @@ public class Petak {
         }
     }
 
-    // Get all creatures in the petak
+    public synchronized void resetPetak() {
+        creatures.clear();
+    }
+
+
+
     public List<Creature> getCreatures() {
         return creatures;
     }
@@ -112,10 +115,6 @@ public class Petak {
     public void printPos() {
         System.out.println("Petak position: (Kolom = " + pos.getY() + ", Baris = " + pos.getX() + ")");
     }
-    // public void printPos() {
-    //     System.out.println("Petak position: (Baris = " + pos.getX() + ", Kolom = " + pos.getY() + ")");
-    // }
-
 
     public void printCreatures() {
 
@@ -148,7 +147,7 @@ public class Petak {
             }
         }
         System.out.print("]");
-        // System.out.print(",PX: " + pos.getX() + " " + "PY: " + pos.getY() + "]");
+
     }
 }
 
