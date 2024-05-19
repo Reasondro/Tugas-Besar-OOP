@@ -9,7 +9,7 @@ public class Sun {
     
     private Sun()
     {
-        sunPoints = 25;
+        sunPoints = 50;
     }
 
     public static Sun getInstance() {
@@ -23,17 +23,17 @@ public class Sun {
         return instance;
     }
 
-    public int getSunPoints()
+    public synchronized int getSunPoints()
     {
         return sunPoints;
     }
     
-    public void addSunPoints(int sunPoints)
+    public synchronized void addSunPoints(int sunPoints)
     {
         Sun.sunPoints += sunPoints;
     }
     
-    public void subtractSunPoints(int sunPoints)
+    public synchronized void subtractSunPoints(int sunPoints)
     {
         Sun.sunPoints -= sunPoints;
     }
@@ -43,7 +43,12 @@ public class Sun {
         Sun.sunPoints = sunPoints;
     }
 
-    public void displayStatus()
+    public void resetSunPoints()
+    {
+        Sun.sunPoints = 50;
+    }
+
+    public static void displayStatus()
     {
         System.out.println("Sun points: " + sunPoints);
     }

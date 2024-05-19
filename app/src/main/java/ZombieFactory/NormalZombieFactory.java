@@ -19,5 +19,11 @@ public class NormalZombieFactory extends ZombieFactory {
     {
         return normalZombieCount;
     }
+
+    public void resetFactory()
+    {
+        super.resetFactory();
+        normalZombieCount = 0;
+    }
     
 }

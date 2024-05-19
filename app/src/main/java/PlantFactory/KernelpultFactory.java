@@ -1,22 +1,22 @@
-package PlantFactory;
+// package PlantFactory;
 
-import Plants.Plant;
-import Plants.Kernelpult;
+// import Plants.Plant;
+// import Plants.Kernelpult;
 
-public class KernelpultFactory extends PlantFactory {
+// public class KernelpultFactory extends PlantFactory {
 
-    private static int kernelPultCount = 0;
-    public Plant createPlant()
-    {
-        kernelPultCount++;
-        PlantFactory.incrementPlantCount();
+//     private static int kernelPultCount = 0;
+//     public Plant createPlant()
+//     {
+//         kernelPultCount++;
+//         PlantFactory.incrementPlantCount();
 
-        return new Kernelpult();
-    }
+//         return new Kernelpult();
+//     }
 
-    public static int getkernelPultCount()
-    {
-        return kernelPultCount;
-    }
+//     public static int getkernelPultCount()
+//     {
+//         return kernelPultCount;
+//     }
     
-}
+// }

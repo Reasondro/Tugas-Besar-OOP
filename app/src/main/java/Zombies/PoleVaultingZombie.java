@@ -2,8 +2,6 @@ package Zombies;
 
 import Position.Position;
 import ZombieAbility.*;
-
-// import Position.Position;
 import Petak.Petak;
 import GameMap.GameMap;
 import Creature.Creature;
@@ -49,14 +47,8 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
  
             Plant plant = petakInFront.getPlants().get(0);
-
-            int originalHealth = plant.getHealth();
             plant.reduceHealth(plant.getHealth());
-
-            // System.out.println("Pole Vaulting Zombie jumps over " + plant.getName());
-            // System.out.printf("%S health went from %d to %d\n", plant.getName() ,originalHealth , plant.getHealth());
             hasUseZombieAbility = true;
-
 
             //? vaulting logic
             Position pos = getPos();
@@ -85,8 +77,6 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
         {
             useAbility();
         }
-
-
-        
-    }    
+    }
+    
 }

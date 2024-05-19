@@ -17,9 +17,9 @@ public class Sunflower extends Plant implements PlantAbility  {
     @Override
     public void useAbility() 
     {
-        //TODO use synchronized block/threading
         Sun sun = Sun.getInstance();
         sun.addSunPoints(25);
+        System.out.println("Got sun points from sunflower " + sun.getSunPoints());
     
     }
     @Override

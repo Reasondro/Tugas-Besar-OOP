@@ -47,9 +47,7 @@ public class Petak {
     }
 
 
-    // Remove a creature from the list
     public void removeCreature(Creature creature) {
-        // System.out.println("Removing " + creature.getName() + " from petak" + pos.getX() + " " + pos.getY());
         creatures.remove(creature);
     }
 
@@ -74,7 +72,12 @@ public class Petak {
         }
     }
 
-    // Get all creatures in the petak
+    public synchronized void resetPetak() {
+        creatures.clear();
+    }
+
+
+
     public List<Creature> getCreatures() {
         return creatures;
     }
@@ -112,16 +115,17 @@ public class Petak {
     public void printPos() {
         System.out.println("Petak position: (Kolom = " + pos.getY() + ", Baris = " + pos.getX() + ")");
     }
-    // public void printPos() {
-    //     System.out.println("Petak position: (Baris = " + pos.getX() + ", Kolom = " + pos.getY() + ")");
-    // }
-
 
     public void printCreatures() {
 
-        if(type == "Zombie Base")  //TODO Delete thiss if when implementing the zombie spawn logic
+        if(type == "Zombie Base")
         {
             System.out.print("[Zombie Base]");
+            return;
+        }
+       else if(type == "Aquatic Zombie Base") 
+        {
+            System.out.print("[Aquatic Zombie Base]");
             return;
         }
         else if(type == "Protected") {
@@ -136,15 +140,14 @@ public class Petak {
             System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
             if(creatures.get(i) instanceof Zombie)
             {
-                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer() +
-                 " X:" + creatures.get(i).getPos().getX() + " Y:" + creatures.get(i).getPos().getY());
+                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer());
             }
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }
         }
         System.out.print("]");
-        // System.out.print(",PX: " + pos.getX() + " " + "PY: " + pos.getY() + "]");
+
     }
 }
 

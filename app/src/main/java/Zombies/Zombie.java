@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class Zombie extends Creature
 {
 
-    private float walkSpeedInSeconds = 5.0f;
+    private float walkSpeedInSeconds = 10.0f;
     private float walkTimer = 0;
     private boolean aquatic;
     private boolean frozen = false;
@@ -77,7 +77,7 @@ public abstract class Zombie extends Creature
         else if(frozenTimer == 0)
         {
             setFrozen(false);
-            setWalkSpeedInSeconds(5);
+            setWalkSpeedInSeconds(10); //Todo potential bug
         }
         else if(frozenTimer > 0)
         {
@@ -162,11 +162,8 @@ public abstract class Zombie extends Creature
             {
                 ((ZombieAbility) this).checkToUseAbility();
             }
-
             checkToWalk();
             reduceFrozenTimer();
-            
-      
         }
 
     }
