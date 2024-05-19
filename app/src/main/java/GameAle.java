@@ -20,22 +20,23 @@ public class GameAle{
         boolean isRunning = true;
         Scanner input = new Scanner(System.in);
         String userInput;
-
-        Thread plantThread = new Thread(PlantThread.getInstance());
-        Thread zombieThread = new Thread(ZombieThread.getInstance());
+    
 
         while(isRunning)
         {
+            Thread plantThread = new Thread(PlantThread.getInstance());
+            Thread zombieThread = new Thread(ZombieThread.getInstance());
             userInput = input.nextLine();
+
            if(userInput.equalsIgnoreCase("START"))
             {
                 plantThread = new Thread(PlantThread.getInstance());
                 zombieThread =new Thread(ZombieThread.getInstance());
-                myInventory = Inventory.getInstance();
-                myDeck = Deck.getInstance();
+                // myInventory = Inventory.getInstance();
+                // myDeck = Deck.getInstance();
 
                 dayStart = System.currentTimeMillis();
-                // plantThread.start();
+                plantThread.start();
                 zombieThread.start();
             }
             else if(userInput.equalsIgnoreCase("STATUS"))
@@ -52,7 +53,7 @@ public class GameAle{
             else if(userInput.equalsIgnoreCase("PLANTING"))
             {
 
-                if(myDeck.getMyCards().size() == 0) //TODO pindahain ini ke planting di deck langsung
+                if(myDeck.getMyCards().size() == 0) //todo pindahain ini ke planting di deck langsung
                 {
                     System.out.println("You have no plants in your deck. Please add plants to your deck first.");
                     continue;

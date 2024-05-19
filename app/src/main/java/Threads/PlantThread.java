@@ -2,10 +2,11 @@ package Threads;
 import GameMap.GameMap;
 import Plants.*;
 import Sun.Sun;
-import PlantFactory.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import Threads.TimerThread;
 
 public class PlantThread implements Runnable 
 {
@@ -33,10 +34,7 @@ public class PlantThread implements Runnable
 
     List<Plant> plants = new ArrayList<Plant>();
 
-    long  dayStart =  System.currentTimeMillis();
-    long tempStart = dayStart;
-    long nextSunPointTime = 5 + rand.nextInt(6);
-
+    
     public synchronized void addPlant(Plant p)
     {
         plants.add(p);
@@ -46,18 +44,15 @@ public class PlantThread implements Runnable
     {
         plants.clear();
     }
-
+    
     public  synchronized List<Plant> getPlants()
     {
         return plants;
     }
-
-    public void resetTime()
-    {
-        dayStart = System.currentTimeMillis();
-    }
-
-
+    long  dayStart =  System.currentTimeMillis();
+    long tempStart = dayStart;
+    long nextSunPointTime = 5 + rand.nextInt(6);
+    
     @Override
     public void run() 
     {

@@ -1,13 +1,14 @@
 package Threads;
 
+
+import java.util.Random;
+
 public class TimerThread implements Runnable{
     private static volatile TimerThread instance = null;
 
-    long  dayStart;
-
+   
     private TimerThread()
     {
-        dayStart = System.currentTimeMillis();
     }
 
     public static TimerThread getInstance() {
@@ -21,6 +22,29 @@ public class TimerThread implements Runnable{
         return instance;
     }
 
+    Random rand = new Random();
+    
+    long dayStart;
+    long tempStart;
+    long nextSunPointTime;
+    long currentTime;
+
+
+    public long getDayStart() {
+        return dayStart;
+    }
+
+    public long getTempStart() {
+        return tempStart;
+    }
+
+    public long getNextSunPointTime() {
+        return nextSunPointTime;
+    }
+
+    public long getCurrentTime() {
+        return currentTime;
+    }
 
 
     @Override
@@ -28,19 +52,20 @@ public class TimerThread implements Runnable{
     {
         long dayStart = System.currentTimeMillis();
         long tempStart = dayStart;
-        long nextSunPointTime = 5 + (int)(Math.random() * 6);
+        long nextSunPointTime = 5 + rand.nextInt(6);
         while (true)
         {
             long currentTime = System.currentTimeMillis();
-            if (currentTime - tempStart >= 1000)
+            long timeElapsed = (currentTime - tempStart) / 1000; 
+
+            try
             {
-                tempStart = currentTime;
-                System.out.println("Time: " + (currentTime - dayStart) / 1000 + " seconds");
+                Thread.sleep(1000);
             }
-            if (currentTime - dayStart >= nextSunPointTime * 1000)
+            catch (InterruptedException e)
             {
-                System.out.println("Sun points +25");
-                nextSunPointTime = 5 + (int)(Math.random() * 6);
+                System.out.println("Timer Loop Interrupted");
+                return;
             }
         }
     }

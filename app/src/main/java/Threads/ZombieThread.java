@@ -48,14 +48,12 @@ public class ZombieThread implements Runnable {
     List<ZombieFactory> zombieFactories = Arrays.asList(bucketheadZombieFactory, coneheadZombieFactory, normalZombieFactory, poleVaultingZombieFactory);
     List<ZombieFactory> aquaticZombieFactories = Arrays.asList(duckyTubeZombieFactory, dolphinRiderZombieFactory);
 
-    final long  dayStart =  System.currentTimeMillis();
-    long tempStart = dayStart;
-
+    
     public void removeZombies()
     {
         zombies.clear();
     }
-
+    
     public void resetFactories()
     {
         bucketheadZombieFactory.resetFactory();
@@ -66,6 +64,9 @@ public class ZombieThread implements Runnable {
         poleVaultingZombieFactory.resetFactory();
     }
 
+    long  dayStart =  System.currentTimeMillis();
+    long tempStart = dayStart;
+    
     @Override
     public void run()
      {
