@@ -9,6 +9,23 @@ import java.util.Random;
 
 public class PlantThread implements Runnable 
 {
+    private static volatile PlantThread instance = null;
+
+    private PlantThread()
+    {
+    }
+
+    public static PlantThread getInstance() {
+        if (instance == null) {
+            synchronized (PlantThread.class) {
+                if (instance == null) {
+                    instance = new PlantThread();
+                }
+            }
+        }
+        return instance;
+    }
+
     Random rand = new Random();
 
     GameMap map = GameMap.getInstance();
@@ -16,7 +33,7 @@ public class PlantThread implements Runnable
 
     List<Plant> plants = new ArrayList<Plant>();
 
-    final long  dayStart =  System.currentTimeMillis();
+    long  dayStart =  System.currentTimeMillis();
     long tempStart = dayStart;
     long nextSunPointTime = 5 + rand.nextInt(6);
 
@@ -30,9 +47,14 @@ public class PlantThread implements Runnable
         plants.clear();
     }
 
-    public synchronized List<Plant> getPlants()
+    public  synchronized List<Plant> getPlants()
     {
         return plants;
+    }
+
+    public void resetTime()
+    {
+        dayStart = System.currentTimeMillis();
     }
 
 

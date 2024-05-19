@@ -4,49 +4,55 @@ import GameMap.GameMap;
 import Inventory.Inventory;
 import Deck.Deck;
 import PlantFactory.PlantFactory;
-
+import Plants.Plant;
+import Sun.Sun;
 import Threads.*;
 
 public class GameAle{
     public static void main(String[] args)
     {
         GameMap map = GameMap.getInstance();
-        Inventory myInventory = new Inventory();
+        Inventory myInventory = Inventory.getInstance();
 
-        Deck<PlantFactory> myDeck = new Deck<PlantFactory>();
+        Deck<PlantFactory> myDeck = Deck.getInstance();
 
         long  dayStart = 0;
         boolean isRunning = true;
         Scanner input = new Scanner(System.in);
         String userInput;
 
-        Thread plantThread = new Thread(new PlantThread());
-        Thread zombieThread = new Thread(new ZombieThread());
+        Thread plantThread = new Thread(PlantThread.getInstance());
+        Thread zombieThread = new Thread(ZombieThread.getInstance());
 
         while(isRunning)
         {
             userInput = input.nextLine();
            if(userInput.equalsIgnoreCase("START"))
             {
-                plantThread = new Thread(new PlantThread());
-                zombieThread =new Thread(new ZombieThread());
-                myInventory = new Inventory();
-                myDeck = new Deck<PlantFactory>();
+                plantThread = new Thread(PlantThread.getInstance());
+                zombieThread =new Thread(ZombieThread.getInstance());
+                myInventory = Inventory.getInstance();
+                myDeck = Deck.getInstance();
 
                 dayStart = System.currentTimeMillis();
-                plantThread.start();
+                // plantThread.start();
                 zombieThread.start();
+            }
+            else if(userInput.equalsIgnoreCase("STATUS"))
+            {
+                Sun.displayStatus();
             }
             else if(userInput.equalsIgnoreCase("STOP"))
             {
                 plantThread.interrupt();
                 zombieThread.interrupt();
+                myDeck.clearDeck();
                 map.resetMap();
             }
             else if(userInput.equalsIgnoreCase("PLANTING"))
             {
 
-                if(myDeck.getMyCards().size() == 0)
+                if(myDeck.getMyCards().size() == 0) //TODO pindahain ini ke planting di deck langsung
                 {
                     System.out.println("You have no plants in your deck. Please add plants to your deck first.");
                     continue;
@@ -64,6 +70,7 @@ public class GameAle{
                 int column = Integer.parseInt(input.nextLine());
 
                 myDeck.planting(index, row, column);
+                map.printMap();
 
             }
             else if(userInput.equalsIgnoreCase("PRINT INVENTORY"))

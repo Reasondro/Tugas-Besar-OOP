@@ -12,6 +12,24 @@ import java.util.Random;
 
 
 public class ZombieThread implements Runnable {
+
+    private static volatile ZombieThread instance = null;
+
+    private ZombieThread() {
+    }
+
+    public static ZombieThread getInstance() {
+        if (instance == null) {
+            synchronized (ZombieThread.class) {
+                if (instance == null) {
+                    instance = new ZombieThread();
+                }
+            }
+        }
+        return instance;
+    }
+
+
     Random rand = new Random();
 
     GameMap map = GameMap.getInstance();

@@ -1,37 +1,37 @@
 
-import PlantFactory.*;
+// import PlantFactory.*;
 
 
-import Inventory.Inventory;
-import Deck.Deck;
+// import Inventory.Inventory;
+// import Deck.Deck;
 
-public class MenuTest {
+// public class MenuTest {
 
-    public static void main(String[] args)
-    {
-        Inventory myInventory = new Inventory();
-        Deck<PlantFactory> myDeck = new Deck<PlantFactory>();
+//     public static void main(String[] args)
+//     {
+//         Inventory myInventory = Inventory.getInstance();
+//         Deck<PlantFactory> myDeck = Deck.getInstance();
 
-        myInventory.printInventory();
+//         myInventory.printInventory();
 
-        myInventory.swapPlantInInventory(1, 2);
+//         myInventory.swapPlantInInventory(1, 2);
         
-        System.out.println("After swapping in inventory");
-        myInventory.printInventory();
+//         System.out.println("After swapping in inventory");
+//         myInventory.printInventory();
 
-        myInventory.addCardToDeckWithIndex(myDeck, 1);
-        myInventory.addCardToDeckWithIndex(myDeck, 2);
-        myInventory.addCardToDeckWithIndex(myDeck, 3);
+//         myInventory.addCardToDeckWithIndex(myDeck, 1);
+//         myInventory.addCardToDeckWithIndex(myDeck, 2);
+//         myInventory.addCardToDeckWithIndex(myDeck, 3);
 
-        myDeck.printDeck();
-        myInventory.swapCardInDeck(myDeck, 1, 2);
-        myInventory.addCardToDeckWithIndex(myDeck, 3);
-        myInventory.removeCardFromDeckWithIndex(myDeck, 3);
-        myDeck.printDeck();
+//         myDeck.printDeck();
+//         myInventory.swapCardInDeck(myDeck, 1, 2);
+//         myInventory.addCardToDeckWithIndex(myDeck, 3);
+//         myInventory.removeCardFromDeckWithIndex(myDeck, 3);
+//         myDeck.printDeck();
 
        
 
 
     
-    }
-}
+//     }
+// }

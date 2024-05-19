@@ -8,9 +8,12 @@ import java.util.List;
 import Deck.Deck;
 public class Inventory {
 
+    private static volatile Inventory instance = null;
+
+
     private List<PlantFactory> inventory;
 
-    public Inventory()
+    private Inventory()
     {
         inventory = new ArrayList<PlantFactory>();
 
@@ -21,6 +24,18 @@ public class Inventory {
         inventory.add(new WallnutFactory());
         inventory.add(new LilypadFactory());
 
+    }
+
+    public static Inventory getInstance()
+    {
+        if (instance == null) {
+            synchronized (Inventory.class) {
+                if (instance == null) {
+                    instance = new Inventory();
+                }
+            }
+        }
+        return instance;
     }
 
     public PlantFactory getPlantFactoryByIndex(int index)

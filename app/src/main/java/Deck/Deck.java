@@ -9,15 +9,33 @@ import GameMap.GameMap;
 import Petak.Petak;
 import Position.Position;
 
+import Plants.Plant;
 import Threads.PlantThread;
 
 public class Deck<T extends PlantFactory> {
 
+    private static volatile Deck<PlantFactory> instance = null;
+
    private List<T> myCards;
 
-    public Deck() 
+    private Deck() 
     {
         myCards = new ArrayList<T>(6);
+    }
+
+    public static Deck<PlantFactory> getInstance() 
+    {
+        if (instance == null) 
+        {
+            synchronized (Deck.class) 
+            {
+                if (instance == null) 
+                {
+                    instance = new Deck<PlantFactory>();
+                }
+            }
+        }
+        return instance;
     }
 
     public void addCard(T card) {
@@ -95,8 +113,10 @@ public class Deck<T extends PlantFactory> {
             Position position = new Position(Row, Column);
             Petak targetPetak = map.getPetak(position);
 
-            targetPetak.addCreature(card.createPlant());
-            map.printMap();
+            Plant newPlant = card.createPlant();
+            PlantThread plantThread = PlantThread.getInstance();
+            plantThread.addPlant(newPlant);
+            targetPetak.addCreature(newPlant);
         }
          else 
         {
