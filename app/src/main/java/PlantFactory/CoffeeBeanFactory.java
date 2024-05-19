@@ -1,22 +1,22 @@
-package PlantFactory;
+// package PlantFactory;
 
-import Plants.CoffeeBean;
-import Plants.Plant;
+// import Plants.CoffeeBean;
+// import Plants.Plant;
 
-public class CoffeeBeanFactory extends PlantFactory {
+// public class CoffeeBeanFactory extends PlantFactory {
 
-    private static int CoffeeBeanCount = 0;
-    public Plant createPlant()
-    {
-        CoffeeBeanCount++;
-        PlantFactory.incrementPlantCount();
+//     private static int CoffeeBeanCount = 0;
+//     public Plant createPlant()
+//     {
+//         CoffeeBeanCount++;
+//         PlantFactory.incrementPlantCount();
 
-        return new CoffeeBean();
-    }
+//         return new CoffeeBean();
+//     }
 
-    public static int getCoffeeBeanCount()
-    {
-        return CoffeeBeanCount;
-    }
+//     public static int getCoffeeBeanCount()
+//     {
+//         return CoffeeBeanCount;
+//     }
     
-}
+// }

@@ -1,137 +1,116 @@
 package Deck;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import PlantFactory.PlantFactory;
 
-import Creature.Creature;
 import GameMap.GameMap;
-import Inventory.Inventory;
 import Petak.Petak;
-import PlantFactory.CoffeeBeanFactory;
-import PlantFactory.KernelpultFactory;
-import PlantFactory.LilypadFactory;
-import PlantFactory.PeashooterFactory;
-import PlantFactory.PotatoMineFactory;
-import PlantFactory.SnowpeaFactory;
-import PlantFactory.SquashFactory;
-import PlantFactory.SunflowerFactory;
-import PlantFactory.TangleFactory;
-import PlantFactory.WallnutFactory;
-import Plants.CoffeeBean;
-import Plants.Kernelpult;
-import Plants.Lilypad;
-import Plants.Peashooter;
-import Plants.Plant;
-import Plants.PotatoMine;
-import Plants.Snowpea;
-import Plants.Squash;
-import Plants.Sunflower;
-import Plants.Tangle;
-import Plants.Wallnut;
 import Position.Position;
 
-public class Deck<T extends Plant> {
+import Plants.Plant;
+import Threads.PlantThread;
 
-    // TODO implement Deck class with a list of plants/cards
+public class Deck<T extends PlantFactory> {
 
-    List<Plant> myDeck;
-    private GameMap map;
+    private static volatile Deck<PlantFactory> instance = null;
 
-    public Deck(Inventory<T> inventory) {
-        myDeck = inventory.getDeck(inventory);
-        map = GameMap.getInstance();
+    private List<T> myCards;
+
+    private Deck() {
+        myCards = new ArrayList<T>(6);
     }
 
-    public void planting(Plant plant, Petak petakPlant) throws Exception {
-        List<Creature> creatures = petakPlant.getCreatures();
-        boolean planted = false;
-        boolean isAquatic = false;
-        boolean plantable = false;
-
-        if (petakPlant.getPos().getX() == 3 || petakPlant.getPos().getX() == 4) {
-            isAquatic = true;
-        }
-
-        for (Creature creature : creatures) {
-            if (creature instanceof Plant) {
-                planted = true;
-                break;
+    public static Deck<PlantFactory> getInstance() {
+        if (instance == null) {
+            synchronized (Deck.class) {
+                if (instance == null) {
+                    instance = new Deck<PlantFactory>();
+                }
             }
         }
+        return instance;
+    }
 
-        for (Creature creature : creatures) {
-            if (creature instanceof Lilypad) {
-                plantable = true;
-                break;
-            }
+    public void addCard(T card) {
+        if (myCards.size() < 6) {
+            myCards.add(card);
+        }
+    }
+
+    public void removeCard(T card) {
+        myCards.remove(card);
+    }
+
+    public void removeCardWithIndex(int index) {
+        int formattedIndex = index - 1;
+        if (formattedIndex < 0 || formattedIndex >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+        myCards.remove(formattedIndex);
+    }
+
+    public void swapCard(int index1, int index2) {
+        int formattedIndex1 = index1 - 1;
+        int formattedIndex2 = index2 - 1;
+
+        if (formattedIndex1 < 0 || formattedIndex1 >= myCards.size() || formattedIndex2 < 0
+                || formattedIndex2 >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
         }
 
-        if (isAquatic && plantable && plant instanceof Lilypad) {
-            throw new Exception("tidak bisa menanam lilypad pada lilypad");
-        } else if (isAquatic && !plantable && !(plant instanceof Lilypad)) {
-            throw new Exception("tidak bisa menanam tanaman ini di air");
-        } else if (isAquatic && !plantable && plant instanceof Lilypad) {
-            LilypadFactory lilypadFactory = new LilypadFactory();
-            Plant lilypad = lilypadFactory.createPlant();
-            petakPlant.addCreature(lilypad);
-        } else if (isAquatic && plantable) {
-            plantPlant(petakPlant, plant);
-        } else if (!isAquatic && plant instanceof Lilypad) {
-            throw new Exception("Tidak bisa menanam tanaman Lilypad di tanah");
-        } else if (!isAquatic && planted) {
-            throw new Exception("Petak tersebut telah ditanam tanaman lain");
+        T card1 = myCards.get(formattedIndex1); // ? because we start at 1 in game
+        T card2 = myCards.get(formattedIndex2);
+        myCards.set(formattedIndex1, card2);
+        myCards.set(formattedIndex2, card1);
+    }
+
+    public List<T> getMyCards() {
+        return myCards;
+    }
+
+    public void setMyCards(List<T> myCards) {
+        this.myCards = myCards;
+    }
+
+    public void printDeck() {
+        System.out.println("My Deck: ");
+
+        int index = 1;
+        for (T card : myCards) {
+            System.out.println(index + ". " + card.getFactoryName() + ": " + card.isReady());
+            index++;
+        }
+    }
+
+    public void clearDeck() {
+        myCards.clear();
+    }
+
+    public void planting(int plantIndex, int Row, int Column) {
+
+        int formattedIndex = plantIndex - 1;
+        if (formattedIndex < 0 || formattedIndex >= myCards.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        T card = myCards.get(formattedIndex);
+        if (card.isReady()) {
+            GameMap map = GameMap.getInstance();
+
+            Position position = new Position(Row, Column);
+            Petak targetPetak = map.getPetak(position);
+
+            Plant newPlant = card.createPlant();
+            PlantThread plantThread = PlantThread.getInstance();
+            plantThread.addPlant(newPlant);
+            targetPetak.addCreature(newPlant);
         } else {
-            plantPlant(petakPlant, plant);
+            System.out.println(card.getFactoryName() + " is still in cooldown" + " (" + card.getCooldownTimer()
+                    + " seconds left)");
         }
-    }
-
-    private void plantPlant(Petak petakPlant, Plant plant) throws Exception {
-        if (plant instanceof CoffeeBean) {
-            CoffeeBeanFactory factory = new CoffeeBeanFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Kernelpult) {
-            KernelpultFactory factory = new KernelpultFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Peashooter) {
-            PeashooterFactory factory = new PeashooterFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof PotatoMine) {
-            PotatoMineFactory factory = new PotatoMineFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Snowpea) {
-            SnowpeaFactory factory = new SnowpeaFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Squash) {
-            SquashFactory factory = new SquashFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Sunflower) {
-            SunflowerFactory factory = new SunflowerFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Tangle) {
-            TangleFactory factory = new TangleFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else if (plant instanceof Wallnut) {
-            WallnutFactory factory = new WallnutFactory();
-            petakPlant.addCreature(factory.createPlant());
-        } else {
-            throw new Exception("Tanaman tidak dikenal");
-        }
-    }
-
-    public void digging(Position pos) {
-        Petak petakDig = map.getPetak(pos);
-        petakDig.removeAllPlants();
-    }
-    // TODO add swap methods
-}
-
-class DeckException extends Exception {
-    public DeckException(String message) {
-        super(message);
-    }
-}
-
-class PetakHasPlanted extends DeckException {
-    public PetakHasPlanted() {
-        super("Petak tersebut telah ditanam tanaman lain");
     }
 }
