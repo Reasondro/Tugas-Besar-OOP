@@ -5,8 +5,8 @@ public class App {
       //   game.main(args);
       // MenuTest.main(args);
       // ThreadTest.main(args);
-      // GameAle.main(args);
-      Test.main(args);
+      GameAle.main(args);
+      // Test.main(args);
 
     }
 }

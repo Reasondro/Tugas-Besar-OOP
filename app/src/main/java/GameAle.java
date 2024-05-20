@@ -36,30 +36,19 @@ public class GameAle{
             // long secondsDisplay = elapsedSeconds % 60;
             // long minutesDisplay = elapsedSeconds / 60;
 
-            if(!gameStarted)
-            {
-                System.out.println("List of commands: ");
-                System.out.println("1. START - Start the game");
-                System.out.println("2. PRINT INVENTORY - Print the inventory");
-                System.out.println("3. SWAP CARD IN INVENTORY - Swap two cards in the inventory");
-                System.out.println("4. PRINT DECK - Print the deck");
-                System.out.println("5. ADD CARD TO DECK - Add a card to the deck");
-                System.out.println("6. REMOVE CARD FROM DECK - Remove a card from the deck");
-                System.out.println("7. SWAP CARD IN DECK - Swap two cards in the deck");
-                System.out.println("8. FILL DECK - Fill the deck with random cards");
-                System.out.println("9. STOP - STOP THE PROGRAM");
-            }
-            else
-            {
-                System.out.println("List of commands: ");
-                System.out.println("1. STATUS - Display the status of the game");
-                System.out.println("2. PLANTING - Plant a plant");
-                System.out.println("3. MAP - Display the map");
-                System.out.println("4. EXIT - Exit the game");
-            }
+            // if(!gameStarted)
+            // {
+            //     System.out.println("Click X to see the list of commands!");
+            // }
+            // else
+            // {     
+
+            // }
 
             System.out.print("Enter your command: ");
             userInput = input.nextLine();
+
+
 
            if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
             {
@@ -146,15 +135,28 @@ public class GameAle{
                 myDeck.printDeck();
 
             }
-            else if(userInput.equalsIgnoreCase("8"))
+            else if(userInput.equalsIgnoreCase("8")&& !gameStarted)
             {
                 myInventory.addAllCardRandomly(myDeck);
                 myDeck.printDeck();
             }
 
-            else if(userInput.equalsIgnoreCase("9")) //? Stop the program
+            else if((userInput.equalsIgnoreCase("quit")|| userInput.equalsIgnoreCase("9") || userInput.equalsIgnoreCase("exit")) && !gameStarted) //? Stop the program
             {
                 isRunning = false;
+            }
+            else if(userInput.equalsIgnoreCase("X") && !gameStarted) //? Stop the program
+            {
+                System.out.println("List of commands: ");
+                System.out.println("1. START - Start the game");
+                System.out.println("2. PRINT INVENTORY - Print the inventory");
+                System.out.println("3. SWAP CARD IN INVENTORY - Swap two cards in the inventory");
+                System.out.println("4. PRINT DECK - Print the deck");
+                System.out.println("5. ADD CARD TO DECK - Add a card to the deck");
+                System.out.println("6. REMOVE CARD FROM DECK - Remove a card from the deck");
+                System.out.println("7. SWAP CARD IN DECK - Swap two cards in the deck");
+                System.out.println("8. FILL DECK - Fill the deck with random cards");
+                System.out.println("9. STOP - STOP THE PROGRAM");
             }
             else if(userInput.equalsIgnoreCase("1") && gameStarted) //? Display the status of the game
             {
@@ -210,6 +212,14 @@ public class GameAle{
                 map.resetMap();
                 gameStarted = false;
             }
+            else if(userInput.equalsIgnoreCase("X") && gameStarted) //? Stop the program
+            {
+                System.out.println("List of commands: ");
+                System.out.println("1. STATUS - Display the status of the game");
+                System.out.println("2. PLANTING - Plant a plant");
+                System.out.println("3. MAP - Display the map");
+                System.out.println("4. EXIT - Exit the game");
+            }
             else if(map.isProtectedBaseCompromised() && gameStarted) //? Game Over
             {
                 timerThread.interrupt();
@@ -223,6 +233,7 @@ public class GameAle{
             else
             {
                 System.out.println(userInput + " is not a valid command. Please try again.");
+                System.out.println("You could click X to see the list of commands!");
             }
             
         }
