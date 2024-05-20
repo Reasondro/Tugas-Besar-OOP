@@ -1,15 +1,13 @@
 import java.util.Scanner;
-import java.util.Timer;
 
 import GameMap.GameMap;
 import Inventory.Inventory;
 import Deck.Deck;
 import PlantFactory.PlantFactory;
-import Plants.Plant;
 import Sun.Sun;
 import Threads.*;
 
-public class GameAle{
+public class PeeVeeZee{
     public static void main(String[] args)
     {
         GameMap map = GameMap.getInstance();
