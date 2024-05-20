@@ -93,15 +93,18 @@ public class TimerThread implements Runnable{
             if(ZombieThread.globalIsAllZombiesDead() && (timeElapsed > 21 && timeElapsed <= 160))
             {
                 gameRunning = false;
-                map.refreshMap();
+                System.out.println("");
                 System.out.println("All zombies are dead, you won!");
                 System.out.println("Press any key to go back to main menu");
+                map.refreshMap();
                 break;
             }
 
             if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
             {
                 // System.out.println("Message from timer thread");
+                gameRunning = false;
+                System.out.println("");
                 System.out.println("Protected Base is compromised, you lost!");
                 System.out.println("Press any key to go back to main menu");
                 map.refreshMap();
@@ -119,10 +122,10 @@ public class TimerThread implements Runnable{
             }
             catch (InterruptedException e)
             {
-                // System.out.println("Timer Loop Interrupted");
-                setDayStart(0);
-                setCurrentTime(0);
-                gameRunning = false;
+                System.out.println("Timer Loop Interrupted");
+                // setDayStart(0);
+                // setCurrentTime(0);
+                // gameRunning = false;
                 return;
             }
         }

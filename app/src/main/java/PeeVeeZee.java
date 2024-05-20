@@ -32,25 +32,9 @@ public class PeeVeeZee{
             System.out.print("Enter your command: ");
             userInput = input.nextLine().trim();
 
-            if((map.isProtectedBaseCompromised()) && gameStarted) //? Game Over
+            if(!gameStarted) //? Game not started yet
             {
-                timerThread.interrupt();
-                plantThread.interrupt();
-                zombieThread.interrupt();
-                myDeck.clearDeck();
-                map.resetMap();
-                gameStarted = false;
-            }
-            else if((ZombieThread.globalIsAllZombiesDead() && (TimerThread.getGlobalTimeElapsed() > 21 || TimerThread.getGlobalTimeElapsed()<= 160)) && gameStarted)
-            {
-                timerThread.interrupt();
-                plantThread.interrupt();
-                zombieThread.interrupt();
-                myDeck.clearDeck();
-                map.resetMap();
-                gameStarted = false;
-            }
-           else if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
+                if( (userInput.equalsIgnoreCase("1")) ) //? Start the game
             {
 
                 if(myDeck.getMyCards().size() < 6)
@@ -74,11 +58,11 @@ public class PeeVeeZee{
                 gameStarted = true;
                 System.out.println("Game Started!");
             }
-            else if(userInput.equalsIgnoreCase("2") && !gameStarted ) //? Print Inventory
+            else if(userInput.equalsIgnoreCase("2")  ) //? Print Inventory
             {
                 myInventory.printInventory();
             }
-            else if(userInput.equalsIgnoreCase("3") && !gameStarted) //? Swap Card in Inventory
+            else if(userInput.equalsIgnoreCase("3") ) //? Swap Card in Inventory
             {
                 myInventory.printInventory();
 
@@ -93,11 +77,11 @@ public class PeeVeeZee{
                 myInventory.printInventory();
 
             }
-            else if(userInput.equalsIgnoreCase("4")  && !gameStarted) //? Print Deck
+            else if(userInput.equalsIgnoreCase("4")  ) //? Print Deck
             {
                 myDeck.printDeck();
             }
-            else if(userInput.equalsIgnoreCase("5") && !gameStarted) //? Add Card to Deck
+            else if(userInput.equalsIgnoreCase("5") ) //? Add Card to Deck
             {
                 myInventory.printInventory();
                 
@@ -109,7 +93,7 @@ public class PeeVeeZee{
                 System.out.println("After adding to deck");
                 myDeck.printDeck();
             }
-            else if(userInput.equalsIgnoreCase("6")  && !gameStarted) //? Remove Card from Deck
+            else if(userInput.equalsIgnoreCase("6")  ) //? Remove Card from Deck
             {
                 myDeck.printDeck();
 
@@ -121,7 +105,7 @@ public class PeeVeeZee{
                 myDeck.printDeck();
 
             }
-            else if(userInput.equalsIgnoreCase("7")  && !gameStarted) //? Swap Card in Deck
+            else if(userInput.equalsIgnoreCase("7")  ) //? Swap Card in Deck
             {
                 myDeck.printDeck();
 
@@ -136,18 +120,18 @@ public class PeeVeeZee{
                 myDeck.printDeck();
 
             }
-            else if(userInput.equalsIgnoreCase("8")&& !gameStarted) //? Fill Deck with random cards
+            else if(userInput.equalsIgnoreCase("8")) //? Fill Deck with random cards
             {
                 myInventory.addAllCardRandomly(myDeck);
                 myDeck.printDeck();
             }
 
-            else if((userInput.equalsIgnoreCase("quit")|| userInput.equalsIgnoreCase("9") || userInput.equalsIgnoreCase("exit")) && !gameStarted) //? Stop the program
+            else if((userInput.equalsIgnoreCase("quit")|| userInput.equalsIgnoreCase("9") || userInput.equalsIgnoreCase("exit")) ) //? Stop the program
             {
                 isRunning = false;
             }
     
-            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) && !gameStarted) //? Stop the program
+            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) ) //? Stop the program
             {
                 System.out.println("List of commands: ");
                 System.out.println("1. START - Start the game");
@@ -160,7 +144,37 @@ public class PeeVeeZee{
                 System.out.println("8. FILL DECK - Fill the deck with random cards");
                 System.out.println("9. STOP - STOP THE PROGRAM");
             }
-            else if(userInput.equalsIgnoreCase("1") && gameStarted) //? Display the status of the game
+            else //? Invalid Command
+            {
+                System.out.println(userInput + " is not a valid command. Please try again.");
+                System.out.println("You could type X/HELP to see the list of commands!");
+            }
+        }
+        else
+        {
+            if((map.isProtectedBaseCompromised())) //? Game Over
+            {
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+                System.out.println("Nice try! You survived for " + TimerThread.getGlobalTimeElapsed() + " seconds!");
+            }
+            else if((ZombieThread.globalIsAllZombiesDead() && (TimerThread.getGlobalTimeElapsed() > 21 && TimerThread.getGlobalTimeElapsed()<= 160)))
+            {
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+                System.out.println("Well played! You survived for " + TimerThread.getGlobalTimeElapsed() + " seconds!");
+                // System.out.println(TimerThread.getGlobalTimeElapsed());
+            }
+           
+            else if(userInput.equalsIgnoreCase("1")) //? Display the status of the game
             {
                 long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
                 long elapsedSeconds = currentTime/1000;
@@ -170,7 +184,7 @@ public class PeeVeeZee{
                 Sun.displayStatus();
                 myDeck.printDeck();
             }
-            else if(userInput.equalsIgnoreCase("2") && gameStarted ) //? Plant a plant
+            else if(userInput.equalsIgnoreCase("2") ) //? Plant a plant
             {
                 myDeck.printDeck();
 
@@ -205,7 +219,7 @@ public class PeeVeeZee{
                 map.printMap();
                 
             }
-            else if(userInput.equalsIgnoreCase("3") && gameStarted) //? Display the map
+            else if(userInput.equalsIgnoreCase("3")) //? Display the map
             {
                 long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
                 long elapsedSeconds = currentTime/1000;
@@ -214,7 +228,7 @@ public class PeeVeeZee{
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
             }
-            else if(userInput.equalsIgnoreCase("4") && gameStarted) //? Exit the game
+            else if(userInput.equalsIgnoreCase("4")) //? Exit the game
             {
                 timerThread.interrupt();
 
@@ -225,7 +239,7 @@ public class PeeVeeZee{
                 map.resetMap();
                 gameStarted = false;
             }
-            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) && gameStarted) //? Stop the program
+            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") )) //? Stop the program
             {
                 System.out.println("List of commands: ");
                 System.out.println("1. STATUS - Display the status of the game");
@@ -233,16 +247,15 @@ public class PeeVeeZee{
                 System.out.println("3. MAP - Display the map");
                 System.out.println("4. EXIT - Exit the game");
             }
-  
             else //? Invalid Command
             {
                 System.out.println(userInput + " is not a valid command. Please try again.");
                 System.out.println("You could type X/HELP to see the list of commands!");
             }
-            
         }
-        input.close();
     }
+    input.close();
+}
 }
 
 
