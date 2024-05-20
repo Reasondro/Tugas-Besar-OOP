@@ -30,9 +30,11 @@ public class SnowBullet {
 
     public void hit(Petak p)
     {
+
+        synchronized(p)
+        {
            for(Zombie z : p.getZombies())
            {
-            int originalHealth = z.getHealth();
             z.reduceHealth(getDamage());
             z.setFrozenTimer(3);
             if(z.isFrozen() == false)
@@ -40,11 +42,8 @@ public class SnowBullet {
                 z.setFrozen(true);
                 z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
             }
-            System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
-            // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-            // System.out.printf("%s is frozen\n", z.getName());
-            // System.out.printf("%s's walk speed is now %.2f seconds/Petak\n", z.getName(), z.getWalkSpeedInSeconds());
            }
+        }
            setWornOut(true);
 
     }

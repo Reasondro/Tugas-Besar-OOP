@@ -17,5 +17,10 @@ public abstract class ZombieFactory {
         zombieCount++;
     }
 
-    
+    public void resetFactory()
+    {
+        zombieCount = 0;
+    }
+
+
 }

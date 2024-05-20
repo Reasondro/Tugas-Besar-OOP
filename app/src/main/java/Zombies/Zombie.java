@@ -6,6 +6,7 @@ import Position.*;
 import Plants.Plant;
 import GameMap.GameMap;
 import Petak.Petak;
+import ZombieAbility.ZombieAbility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public abstract class Zombie extends Creature
 {
 
-    private float walkSpeedInSeconds = 5.0f;
+    private float walkSpeedInSeconds = 10.0f;
     private float walkTimer = 0;
     private boolean aquatic;
     private boolean frozen = false;
@@ -76,7 +77,7 @@ public abstract class Zombie extends Creature
         else if(frozenTimer == 0)
         {
             setFrozen(false);
-            setWalkSpeedInSeconds(5);
+            setWalkSpeedInSeconds(10); //Todo potential bug
         }
         else if(frozenTimer > 0)
         {
@@ -97,22 +98,19 @@ public abstract class Zombie extends Creature
        }
     }
 
-    //TODO getRowBasedOnCreatureRange
+   
     public void attackPlant(List<Plant> plants)
     {
         for(Plant p : plants)
         {
-            int originalHealth = p.getHealth();
             p.reduceHealth(getAttackDamage());
-            System.out.printf("%s attacked %s with damage %d\n", getName(), p.getName(), getAttackDamage());
-            System.out.printf("%s went from %d HP to %d HP\n", p.getName(), originalHealth, p.getHealth());
         }
         setAttackTimer(getAttackSpeed());
     }
 
     public void checkToAttack()
     {
-        if(  isPlantsInSamePetak() &&  getAttackTimer() == 0)
+        if( isPlantsInSamePetak() &&  getAttackTimer() == 0)
         {
             attackPlant(GameMap.getInstance().getPetak(getPos()).getPlants());
             setAttackTimer(getAttackSpeed());
@@ -125,25 +123,21 @@ public abstract class Zombie extends Creature
 
     public void walk()
     {
-        GameMap map = GameMap.getInstance();
-        Position pos = getPos();
-        
-        Petak currentPetak = GameMap.getInstance().getPetak(pos);
-        synchronized (currentPetak )
-        {
-            currentPetak.removeCreature(this);
+        // Position pos = getPos(); //! GARA2 INI HAHAHAH
+        Position pos = new Position(getPos().getX(), getPos().getY());
 
-            pos.setY(pos.getY() - 1);
-            Petak nextPetak = GameMap.getInstance().getPetak(pos);
-           synchronized (nextPetak)
-           {
-                nextPetak.addCreature(this);
-           }  
-        }
+        Petak currentPetak = GameMap.getInstance().getPetak(pos);
+        currentPetak.removeCreature(this); //? buat tinggalin petak dulu
+
+        pos.setY(pos.getY() - 1); 
+        Petak nextPetak = GameMap.getInstance().getPetak(pos);
+
+        
+        nextPetak.addCreature(this); //? buat mindahain dia jalan
         setWalkTimer(getWalkSpeedInSeconds());
     }
 
-    public void checkToWalk()
+    public void  checkToWalk()
     {
         if (isPlantsInSamePetak())
         {
@@ -160,11 +154,18 @@ public abstract class Zombie extends Creature
     }
 
 
-    public void refreshCreature()
+    public void refreshZombie()
     {
-        super.refreshCreature();
-        //TODO implement this method with Threading
-        reduceFrozenTimer();
+        if(getHealth() > 0)
+        {
+            if(this instanceof ZombieAbility)
+            {
+                ((ZombieAbility) this).checkToUseAbility();
+            }
+            checkToWalk();
+            reduceFrozenTimer();
+        }
+
     }
 
     public void displayStatus()

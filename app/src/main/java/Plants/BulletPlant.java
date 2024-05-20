@@ -19,7 +19,7 @@ public class BulletPlant extends Plant implements PlantAbility{
 
     public BulletPlant()
     {
-        super("Bullet Plant", 100, 125, 175, 1, -1, 10,  new Position(0, 0));
+        super("Bullet Plant", 100, 100, 35, 2, -1, 10,  new Position(0, 0));
         bullet = new BasicBullet(getAttackDamage());
     }
 
@@ -86,7 +86,7 @@ public class BulletPlant extends Plant implements PlantAbility{
         }
         else if(!(isZombiesInRange()) && getAttackTimer() == 0)
         {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
     

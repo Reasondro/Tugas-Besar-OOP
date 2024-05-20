@@ -2,6 +2,7 @@ package Plants;
 
 import Creature.*;
 import Position.*;
+import PlantAbility.PlantAbility;
 
 
 
@@ -66,11 +67,16 @@ public abstract class Plant extends Creature {
         cooldown = originalCooldown;;
     }
 
-    public void refreshCreature()
+    public void refreshPlant()
     {
-        super.refreshCreature();
-        //TODO implement this method with Threading
-        reduceCooldown();
+        // refreshCooldown();
+        if(getHealth() > 0)
+        {
+            if(this instanceof PlantAbility)
+            {
+                ((PlantAbility) this).checkToUseAbility();
+            }
+        } 
     }
 
 

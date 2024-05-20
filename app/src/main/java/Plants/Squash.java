@@ -8,22 +8,19 @@ import Zombies.Zombie;
 import java.util.List;
 import java.util.ArrayList;
 
-import Bullet.Bullet;
-import Bullet.SquashBullet;
+
 import GameMap.GameMap;
 import Petak.Petak;
 
 
 public class Squash  extends Plant implements PlantAbility{
 
-    private SquashBullet bullet;
     private List<Petak> reachablePetak = new ArrayList<Petak>();
 
     
     public Squash()
     {
         super("Squash", 50, 100, 5000, 0, 1, 20,  new Position(0, 0));
-        bullet =  new SquashBullet(getAttackDamage());
     }
 
     public List<Petak> getReachablePetak()
@@ -64,10 +61,10 @@ public class Squash  extends Plant implements PlantAbility{
                 {
                     for(Zombie z : p.getZombies())
                     {
-                    int originalHealth = z.getHealth();
+                    // int originalHealth = z.getHealth();
                     z.reduceHealth(getAttackDamage()); //? instant kill zombie
-                    System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
-                    System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+                    // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
+                    // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                     reduceHealth(getHealth()); //? kill the squash
                     }
                 } 
@@ -87,7 +84,7 @@ public class Squash  extends Plant implements PlantAbility{
         }
         else if(!(isZombiesInRange()) && getAttackTimer() == 0)
         {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 

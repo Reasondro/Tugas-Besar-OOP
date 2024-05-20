@@ -14,6 +14,9 @@ public class GameMap {
     private Petak[][] map;
     private int rows = 6;
     private int columns = 11;
+
+    private List<Petak> zombieBase = new ArrayList<>();
+
     
     private GameMap()
     {
@@ -57,8 +60,17 @@ public class GameMap {
         for(int i = 0; i < rows; i++) 
         {
             for(int j = 0; j < 1; j++) {
-                Position pos = new Position(i+1, 99); //! 99 is a mark for zombie base
-                map[i][10] = new Petak("Zombie Base", pos);
+                int x = i+1;
+                Position pos = new Position(x, 10); //! 10 is a mark for zombie base
+                if(x  == 1 || x == 2 || x == 5 || x == 6)
+                {
+                    map[i][10] = new Petak("Zombie Base", pos);
+                }
+                else
+                {
+                    map[i][10] = new Petak("Aquatic Zombie Base", pos);
+                }
+                zombieBase.add(map[i][10]);
             }
         }   
     }
@@ -79,15 +91,8 @@ public class GameMap {
     }
 
     //? NOTE: Petak efektif untuk player mulai dari [0][1] (baris 1 kolom 1) sampai [5][9] (baris 6 kolom 9)
-    //? NOTE: Petak asli mulai dari [0][0] (baris 1 kolom -99/Protected) sampai [5][10] (baris 6 kolom 99/Zombie Base)
+    //? NOTE: Petak asli mulai dari [0][0] (baris 1 kolom -99/Protected) sampai [5][10] (baris 6 kolom 10/Zombie Base)
 
-
-    //? NOTE : This is a test function
-    // public void printTest()
-    // {
-    //     map[5][10].printPos();
-    //     map[5][10].printType();
-    // }
 
     public void printMap()
     {
@@ -133,7 +138,7 @@ public class GameMap {
 
             for(int i = column; i < columns; i++)
             {
-                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 99)
+                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 10)
                 {
                     break;
                 }
@@ -144,7 +149,7 @@ public class GameMap {
         {
           for(int i = column; i <= column+range; i++)
             {
-                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 99)
+                if(map[row][i].getPos().getY() == -99 || map[row][i].getPos().getY() == 10)
                 {
                     break;
                 }
@@ -157,12 +162,17 @@ public class GameMap {
         return rowList;
     }
 
-    //TODO getRowBasedOnCreatureRange
 
-    public Petak getPetakInFrontOfZombie() //TODO FINISH THIS 
+
+    public Petak getPetakInFrontOfZombie(Zombie z) 
     {
-        Petak petakInFront = new Petak("null", new Position(7, 2));
-        return petakInFront;
+      
+        Position zombiePos = z.getPos();
+        
+        Position inFrontOfZombiePos = new Position(zombiePos.getX(), zombiePos.getY()-1);
+        Petak inFrontOfZombiePetak = GameMap.getInstance().getPetak(inFrontOfZombiePos);
+
+        return inFrontOfZombiePetak;
     }
 
     public List<Petak> getColumn(int column)
@@ -177,7 +187,15 @@ public class GameMap {
 
     public Petak getPetak(Position pos)
     {
-        return map[pos.getX()-1][pos.getY()];
+        int x = pos.getX()-1;
+        int y = pos.getY();
+        
+        //? preveent horizontal movement to go out of bounds
+        if(y < 1)
+        {
+            y = 0;
+        }
+        return map[x][y];
     }
     
     public void refreshMap()
@@ -215,15 +233,28 @@ public class GameMap {
             if(!(map[i][0].getZombies().isEmpty()))
             {
                 compromised = true;
-                System.out.println("Protected Base is compromised! Game Over!");
+                // System.out.println("Protected Base is compromised! Game Over!");
                 break;
             }
         }
-
         return compromised;
-
-
     }
+
+    public List<Petak> getZombieBase()
+    {
+        return zombieBase;
+    }
+
+    public synchronized void  resetMap()
+    {
+        for(int i = 0; i < rows; i++) 
+        {                                                                           
+            for(int j = 0; j < columns; j++) {
+                map[i][j].resetPetak();
+            }
+        }
+    }
+
 
 
 }

@@ -36,14 +36,17 @@ public class Petak {
     }
 
     // Add a creature to the list
-    public void addCreature(Creature creature) //? TODO Allow Game logic to add the creature to petak
+    public void addCreature(Creature creature)
     {
+        if(creature.getHealth() == 0)
+        {
+            return;
+        }
         creatures.add(creature);
         creature.setPos(pos);
     }
 
 
-    // Remove a creature from the list
     public void removeCreature(Creature creature) {
         creatures.remove(creature);
     }
@@ -69,14 +72,20 @@ public class Petak {
         }
     }
 
-    // Get all creatures in the petak
+    public synchronized void resetPetak() {
+        creatures.clear();
+    }
+
+
+
     public List<Creature> getCreatures() {
         return creatures;
     }
 
     public List<Zombie> getZombies() {
         List<Zombie> zombies = new ArrayList<>();
-        for (Creature creature : creatures) {
+        List<Creature> creaturesCopy = new ArrayList<>(creatures);
+        for (Creature creature : creaturesCopy) {
             if (creature instanceof Zombie) {
                 zombies.add((Zombie) creature);
             }
@@ -86,7 +95,8 @@ public class Petak {
 
     public List<Plant> getPlants() {
         List<Plant> plants = new ArrayList<>();
-        for (Creature creature : creatures) {
+        List<Creature> creaturesCopy = new ArrayList<>(creatures);
+        for (Creature creature : creaturesCopy) {
             if (creature instanceof Plant) {
                 plants.add((Plant) creature);
             }
@@ -105,32 +115,48 @@ public class Petak {
     public void printPos() {
         System.out.println("Petak position: (Kolom = " + pos.getY() + ", Baris = " + pos.getX() + ")");
     }
-    // public void printPos() {
-    //     System.out.println("Petak position: (Baris = " + pos.getX() + ", Kolom = " + pos.getY() + ")");
-    // }
-
 
     public void printCreatures() {
 
-        if(type == "Zombie Base")  //TODO Delete this if when implementing the zombie spawn logic
+        if(type == "Zombie Base")
         {
             System.out.print("[Zombie Base]");
             return;
         }
+       else if(type == "Aquatic Zombie Base") 
+        {
+            System.out.print("[Aquatic Zombie Base]");
+            return;
+        }
         else if(type == "Protected") {
-            System.out.print("[Protected]");
+            System.out.print("[Protected, ");
+
+            for (int i = 0; i < creatures.size(); i++) {
+                System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
+                if (i < creatures.size() - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.print("]");
+
             return;
         }
         
 
         System.out.print("[");
         for (int i = 0; i < creatures.size(); i++) {
-            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth());
+            
+            System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
+            if(creatures.get(i) instanceof Zombie)
+            {
+                System.out.print(" " + ((Zombie)creatures.get(i)).getWalkTimer());
+            }
             if (i < creatures.size() - 1) {
                 System.out.print(", ");
             }
         }
         System.out.print("]");
+
     }
 }
 

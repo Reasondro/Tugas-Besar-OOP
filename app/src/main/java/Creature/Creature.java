@@ -27,7 +27,7 @@ public abstract class Creature {
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.range = range;
-        this.pos = pos;
+        this.pos = pos.copyPos();
 
     }
     
@@ -121,10 +121,10 @@ public abstract class Creature {
         this.pos = pos;
     }
 
-    public void refreshCreature()
-    {
-        //TODO implement this method with Threading
-        reduceAttackTimer();
-    }
+    // public void refreshCreature()
+    // {
+    //     //TODO implement this method with Threading
+    //     reduceAttackTimer();
+    // }
     
 }
