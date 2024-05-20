@@ -53,6 +53,31 @@ public class ZombieThread implements Runnable {
     {
         zombies.clear();
     }
+
+    public synchronized boolean isAllZombiesDead()
+    {
+        boolean isAllZombiesDead = true;
+
+        for(Zombie z : zombies)
+        {
+            if(z.getHealth() > 0)
+            {
+                isAllZombiesDead = false;
+                break;
+            }
+        }
+        return isAllZombiesDead;
+    }
+
+    public static boolean globalIsAllZombiesDead()
+    {
+        return getInstance().isAllZombiesDead();
+    }
+
+    public synchronized List<Zombie> getZombies()
+    {
+        return zombies;
+    }
     
     public void resetFactories()
     {
@@ -89,12 +114,27 @@ public class ZombieThread implements Runnable {
         boolean gameRunning = true;
         while (gameRunning) 
         {
-            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            {
-                break;
-            }
+
             long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
+
+            if(isAllZombiesDead() && (timeElapsed > 21 && timeElapsed <= 160))
+            {
+                gameRunning = false;
+                removeZombies();
+                resetFactories();
+                // System.out.println("All zombies are dead");
+                break;
+            }
+
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                gameRunning = false;
+                removeZombies();
+                resetFactories();
+                break;
+            }
+        
 
             if (timeElapsed >= 200) 
             {
@@ -159,12 +199,7 @@ public class ZombieThread implements Runnable {
                 Thread.sleep(1000);
             } catch (InterruptedException e)
              {
-                // System.out.println("Zombie Loop Interrupted");
-            gameRunning = false;
-            removeZombies();
-            resetFactories();
-
-            // System.out.println("Zombie Loop Interrupted");
+            System.out.println("Zombie Loop Interrupted");
             return;
             }
         }

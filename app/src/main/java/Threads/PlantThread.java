@@ -63,13 +63,26 @@ public class PlantThread implements Runnable
         Deck<PlantFactory> deck = Deck.getInstance();
         while (gameRunning) 
         {
-            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            {
-                break;
-            }
+
             long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 
+            if(ZombieThread.globalIsAllZombiesDead() && (timeElapsed > 21 && timeElapsed <= 160))
+            {
+                gameRunning = false;
+                map.refreshMap();
+                // System.out.println("PLANTS SAY All zombies are dead");
+                break;
+            }
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                gameRunning = false;
+                SUN.resetSunPoints();
+            
+                removePlants();
+                break;
+            }
+  
             if (timeElapsed >= 200) 
             {
                 tempStart = currentTime;
@@ -106,10 +119,10 @@ public class PlantThread implements Runnable
                 Thread.sleep(1000);
        
             } catch (InterruptedException e) {
-            gameRunning = false;
-            SUN.resetSunPoints();
+            // gameRunning = false;
+            // SUN.resetSunPoints();
         
-            removePlants();
+            // removePlants();
             // System.out.println("Plant Loop Interrupted");
            
             return;

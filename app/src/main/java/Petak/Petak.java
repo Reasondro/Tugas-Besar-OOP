@@ -129,7 +129,16 @@ public class Petak {
             return;
         }
         else if(type == "Protected") {
-            System.out.print("[Protected]");
+            System.out.print("[Protected, ");
+
+            for (int i = 0; i < creatures.size(); i++) {
+                System.out.print(creatures.get(i).getName() + " " + creatures.get(i).getHealth() + " " + creatures.get(i).getAttackTimer());
+                if (i < creatures.size() - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.print("]");
+
             return;
         }
         

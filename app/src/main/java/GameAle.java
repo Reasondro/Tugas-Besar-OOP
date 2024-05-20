@@ -34,7 +34,25 @@ public class GameAle{
             System.out.print("Enter your command: ");
             userInput = input.nextLine().trim();
 
-           if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
+            if((map.isProtectedBaseCompromised()) && gameStarted) //? Game Over
+            {
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+            }
+            else if((ZombieThread.globalIsAllZombiesDead() && (TimerThread.getGlobalTimeElapsed() > 21 || TimerThread.getGlobalTimeElapsed()<= 160)) && gameStarted)
+            {
+                timerThread.interrupt();
+                plantThread.interrupt();
+                zombieThread.interrupt();
+                myDeck.clearDeck();
+                map.resetMap();
+                gameStarted = false;
+            }
+           else if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
             {
 
                 if(myDeck.getMyCards().size() < 6)
@@ -130,6 +148,7 @@ public class GameAle{
             {
                 isRunning = false;
             }
+    
             else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) && !gameStarted) //? Stop the program
             {
                 System.out.println("List of commands: ");
@@ -216,16 +235,7 @@ public class GameAle{
                 System.out.println("3. MAP - Display the map");
                 System.out.println("4. EXIT - Exit the game");
             }
-            else if(map.isProtectedBaseCompromised() && gameStarted) //? Game Over
-            {
-                timerThread.interrupt();
-                plantThread.interrupt();
-                zombieThread.interrupt();
-                myDeck.clearDeck();
-                map.resetMap();
-                gameStarted = false;
-                System.out.println("Protected Base is compromised! Game Over!");
-            }
+  
             else //? Invalid Command
             {
                 System.out.println(userInput + " is not a valid command. Please try again.");
