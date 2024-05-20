@@ -3,6 +3,8 @@ package Threads;
 
 import java.util.Random;
 
+import GameMap.GameMap;
+
 public class TimerThread implements Runnable{
     private static volatile TimerThread instance = null;
 
@@ -56,6 +58,7 @@ public class TimerThread implements Runnable{
 
     boolean gameRunning = true;
 
+    GameMap map = GameMap.getInstance();
     @Override
     public void run()
     {
@@ -67,6 +70,13 @@ public class TimerThread implements Runnable{
         // long nextSunPointTime = 5 + rand.nextInt(6);
         while (gameRunning)
         {
+
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                // System.out.println("Message from timer thread");
+                // System.out.println("Timer say protected Base is compromised! Game Over!");
+                break;
+            }
             long currentTime = System.currentTimeMillis();
             setCurrentTime(currentTime);
 

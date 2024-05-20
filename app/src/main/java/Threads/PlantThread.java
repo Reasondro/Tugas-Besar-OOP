@@ -63,10 +63,10 @@ public class PlantThread implements Runnable
         Deck<PlantFactory> deck = Deck.getInstance();
         while (gameRunning) 
         {
-            // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            // {
-            //     break;
-            // }
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                break;
+            }
             long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 

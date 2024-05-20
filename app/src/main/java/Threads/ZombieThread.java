@@ -89,10 +89,10 @@ public class ZombieThread implements Runnable {
         boolean gameRunning = true;
         while (gameRunning) 
         {
-            // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            // {
-            //     break;
-            // }
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                break;
+            }
             long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 
@@ -146,14 +146,14 @@ public class ZombieThread implements Runnable {
                 z.refreshZombie();
             }
             //? below for testing spawn mechanism
-            // System.out.println("Zombie time elapsed: " + timeElapsed);
-            // long tempZombieTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
-            // long elapsedSeconds = tempZombieTime/1000;
-            // long secondsDisplay = elapsedSeconds % 60;
-            // long minutesDisplay = elapsedSeconds / 60;
-            // System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
-            // System.out.println("Zombie spawn timer: " + getZombieSpawnTimer());
-            // map.printMap();
+            System.out.println("Zombie time elapsed: " + timeElapsed);
+            long tempZombieTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+            long elapsedSeconds = tempZombieTime/1000;
+            long secondsDisplay = elapsedSeconds % 60;
+            long minutesDisplay = elapsedSeconds / 60;
+            System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+            System.out.println("Zombie spawn timer: " + getZombieSpawnTimer());
+            map.printMap();
 
             try {
                 Thread.sleep(1000);

@@ -21,7 +21,7 @@ public class Snowpea extends Plant  implements PlantAbility{
 
     public Snowpea()
     {
-        super("Snow pea", 50, 100, 25, 4, -1, 10,  new Position(0, 0));
+        super("Snow pea", 175, 100, 25, 4, -1, 10,  new Position(0, 0));
         bullet =  new SnowBullet(getAttackDamage());
     }
 

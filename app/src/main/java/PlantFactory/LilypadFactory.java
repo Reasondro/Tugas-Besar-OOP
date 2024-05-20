@@ -9,7 +9,7 @@ public class LilypadFactory  extends PlantFactory{
 
     public LilypadFactory()
     {
-        super("Lilypad Card", 10);
+        super("Lilypad Card", 10, true, 25);     
     }
 
     public Plant createPlant()

@@ -31,24 +31,8 @@ public class GameAle{
         while(isRunning)
         {
 
-            // long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
-            // long elapsedSeconds = currentTime/1000;
-            // long secondsDisplay = elapsedSeconds % 60;
-            // long minutesDisplay = elapsedSeconds / 60;
-
-            // if(!gameStarted)
-            // {
-            //     System.out.println("Click X to see the list of commands!");
-            // }
-            // else
-            // {     
-
-            // }
-
             System.out.print("Enter your command: ");
-            userInput = input.nextLine();
-
-
+            userInput = input.nextLine().trim();
 
            if( (userInput.equalsIgnoreCase("1")) && !gameStarted) //? Start the game
             {
@@ -72,6 +56,7 @@ public class GameAle{
                 zombieThread.start();
                 dayStart = TimerThread.getDayStart();
                 gameStarted = true;
+                System.out.println("Game Started!");
             }
             else if(userInput.equalsIgnoreCase("2") && !gameStarted ) //? Print Inventory
             {
@@ -135,7 +120,7 @@ public class GameAle{
                 myDeck.printDeck();
 
             }
-            else if(userInput.equalsIgnoreCase("8")&& !gameStarted)
+            else if(userInput.equalsIgnoreCase("8")&& !gameStarted) //? Fill Deck with random cards
             {
                 myInventory.addAllCardRandomly(myDeck);
                 myDeck.printDeck();
@@ -145,7 +130,7 @@ public class GameAle{
             {
                 isRunning = false;
             }
-            else if(userInput.equalsIgnoreCase("X") && !gameStarted) //? Stop the program
+            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) && !gameStarted) //? Stop the program
             {
                 System.out.println("List of commands: ");
                 System.out.println("1. START - Start the game");
@@ -170,19 +155,30 @@ public class GameAle{
             }
             else if(userInput.equalsIgnoreCase("2") && gameStarted ) //? Plant a plant
             {
-                
-                System.out.println("Choose the plant's index you want to plant!"); 
                 myDeck.printDeck();
-                System.out.print("Index: ");
-                int index = Integer.parseInt(input.nextLine());
+
+                int plantIndex;
+                int row;
+                int column;
                 
-                System.out.println("Enter the row and column of the plant you want to plant! ");
-                System.out.print("Row: ");
-                int row = Integer.parseInt(input.nextLine());
-                System.out.print("Column: ");
-                int column = Integer.parseInt(input.nextLine());
-                
-                myDeck.planting(index, row, column);
+                System.out.println("Your sun points: " + Sun.getInstance().getSunPoints());
+                System.out.println("Choose a plant's index, row (1-6) and column(1-9)!"); 
+                System.out.println("Example: 1 2 3 (Plant index 1, row 2, column 3)");
+
+                userInput = input.nextLine();
+                String[] parts = userInput.trim().split(" ");
+
+                if (parts.length == 3) {
+                    plantIndex = Integer.parseInt(parts[0].trim());
+                    row = Integer.parseInt(parts[1].trim());
+                    column = Integer.parseInt(parts[2].trim());
+                }
+                else
+                {
+                    System.out.println("Invalid input. Please try again.");
+                    continue;
+                }
+                myDeck.planting(plantIndex, row, column);
                 
                 long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
                 long elapsedSeconds = currentTime/1000;
@@ -212,7 +208,7 @@ public class GameAle{
                 map.resetMap();
                 gameStarted = false;
             }
-            else if(userInput.equalsIgnoreCase("X") && gameStarted) //? Stop the program
+            else if((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP") ) && gameStarted) //? Stop the program
             {
                 System.out.println("List of commands: ");
                 System.out.println("1. STATUS - Display the status of the game");
@@ -230,10 +226,10 @@ public class GameAle{
                 gameStarted = false;
                 System.out.println("Protected Base is compromised! Game Over!");
             }
-            else
+            else //? Invalid Command
             {
                 System.out.println(userInput + " is not a valid command. Please try again.");
-                System.out.println("You could click X to see the list of commands!");
+                System.out.println("You could type X/HELP to see the list of commands!");
             }
             
         }

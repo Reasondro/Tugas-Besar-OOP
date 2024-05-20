@@ -11,6 +11,8 @@ import Position.Position;
 
 import Plants.Plant;
 import Threads.PlantThread;
+import Plants.Lilypad;
+import Sun.Sun;
 
 public class Deck<T extends PlantFactory> {
 
@@ -87,7 +89,7 @@ public class Deck<T extends PlantFactory> {
         int index = 1;
         for (T card : myCards) 
         {
-            System.out.println(index + ". " + card.getFactoryName() + " || Cooldown: " + card.getCooldownTimer() + " seconds left");
+            System.out.println(index + ". " + card.getFactoryName()  + " (" + card.getCost() + ")"    + " || Cooldown: " + card.getCooldownTimer() + " seconds left");
             index++;
         }
     }
@@ -98,12 +100,28 @@ public class Deck<T extends PlantFactory> {
     {
 
         int formattedIndex = plantIndex - 1;
-        if (formattedIndex < 0 || formattedIndex >= myCards.size()) {
+        if (formattedIndex < 0 || formattedIndex >= myCards.size())  
+        {
             System.out.println("Invalid index");
             return;
         }
 
+        if( Row < 1 || Row > 6 || Column < 1 || Column >= 9)
+        {
+            System.out.println("Invalid row or column");
+            return;
+        }
+
         T card = myCards.get(formattedIndex);
+
+
+        if(card.getCost() > Sun.getInstance().getSunPoints())
+        {
+            System.out.println("Not enough sun to plant " + card.getFactoryName());
+            return;
+        }
+
+
         if (card.isReady()) 
         {
             GameMap map = GameMap.getInstance();
@@ -111,10 +129,78 @@ public class Deck<T extends PlantFactory> {
             Position position = new Position(Row, Column);
             Petak targetPetak = map.getPetak(position);
 
-            Plant newPlant = card.createPlant();
+            List<Plant> plantsInPetak = targetPetak.getPlants();
             PlantThread plantThread = PlantThread.getInstance();
-            plantThread.addPlant(newPlant);
-            targetPetak.addCreature(newPlant);
+        
+            if(targetPetak.getType().equals("Pool"))
+            {
+
+                if(plantsInPetak.size() == 1)
+                {
+                    for(Plant p : plantsInPetak)
+                    {
+                        if(p instanceof Lilypad && !(card.isAquatic()) )
+                        {
+                            Plant newPlant = card.createPlant();
+                            plantThread.addPlant(newPlant);
+
+                            newPlant.setPos(position);
+                            targetPetak.addCreature(newPlant);
+                            newPlant.setHealth(newPlant.getHealth() + p.getHealth());
+                            Sun.getInstance().subtractSunPoints(card.getCost());
+                            return;
+                        }
+                        else if(p instanceof Lilypad && card.isAquatic())
+                        {
+                            System.out.println("Cannot plant more than 1 lilypad in a pool");
+                            return;
+                        }
+                    }
+                }
+                else if(plantsInPetak.size() == 0)
+                {
+                    if(card.isAquatic())
+                    {
+                        Plant newPlant = card.createPlant();
+                        plantThread.addPlant(newPlant);
+                        newPlant.setPos(position);
+                        targetPetak.addCreature(newPlant);
+                        Sun.getInstance().subtractSunPoints(card.getCost());
+                    }
+                    else
+                    {
+                        System.out.println("Cannot plant non-aquatic plant in a pool");
+                        return;
+                    }
+                }
+                else
+                {
+                    System.out.println("Cannot plant more than 2 plants in a pool");
+                    return;
+                }
+            }
+            else //? if not pool
+            {
+                if(plantsInPetak.size() > 0)
+                {
+                    System.out.println("Cannot plant more than 1 plant in a petak");
+                    return;
+                }
+                else if(card.isAquatic())
+                {
+                    System.out.println("Cannot plant lilypad outside of pool");
+                    return;
+                }
+                else
+                {
+                    Plant newPlant = card.createPlant();
+                    plantThread.addPlant(newPlant);
+                    newPlant.setPos(position);
+                    targetPetak.addCreature(newPlant);
+                    Sun.getInstance().subtractSunPoints(card.getCost());
+
+                }
+            }
         }
          else 
         {
