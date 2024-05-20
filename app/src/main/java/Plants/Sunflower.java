@@ -19,7 +19,7 @@ public class Sunflower extends Plant implements PlantAbility  {
     {
         Sun sun = Sun.getInstance();
         sun.addSunPoints(25);
-        System.out.println("Got sun points from sunflower " + sun.getSunPoints());
+        // System.out.println("Got sun points from sunflower " + sun.getSunPoints());
     
     }
     @Override

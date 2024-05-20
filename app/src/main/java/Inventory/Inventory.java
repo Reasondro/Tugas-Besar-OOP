@@ -3,6 +3,7 @@ package Inventory;
 import PlantFactory.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Deck.Deck;
 
@@ -72,6 +73,17 @@ public class Inventory {
             return;
         }
         deck.addCard(plantFactory);
+    }
+
+    public void addAllCardRandomly(Deck<PlantFactory> deck) {
+        Random rand = new Random();
+        while (deck.getMyCards().size() < 6) {
+            int randomIndex = rand.nextInt(inventory.size());
+            PlantFactory plantFactory = inventory.get(randomIndex);
+            if (!isInDeck(deck, plantFactory)) {
+                deck.addCard(plantFactory);
+            }
+        }
     }
 
     public void removeCardFromDeckWithIndex(Deck<PlantFactory> deck, int index) {

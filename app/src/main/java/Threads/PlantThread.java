@@ -2,10 +2,12 @@ package Threads;
 import GameMap.GameMap;
 import Plants.*;
 import Sun.Sun;
-import PlantFactory.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import Deck.Deck;
+import PlantFactory.PlantFactory;
 
 public class PlantThread implements Runnable 
 {
@@ -33,10 +35,7 @@ public class PlantThread implements Runnable
 
     List<Plant> plants = new ArrayList<Plant>();
 
-    long  dayStart =  System.currentTimeMillis();
-    long tempStart = dayStart;
-    long nextSunPointTime = 5 + rand.nextInt(6);
-
+    
     public synchronized void addPlant(Plant p)
     {
         plants.add(p);
@@ -46,28 +45,29 @@ public class PlantThread implements Runnable
     {
         plants.clear();
     }
-
+    
     public  synchronized List<Plant> getPlants()
     {
         return plants;
     }
-
-    public void resetTime()
-    {
-        dayStart = System.currentTimeMillis();
-    }
-
-
+    
+    boolean gameRunning;
     @Override
     public void run() 
     {
-        while (true) 
+        long  dayStart =  TimerThread.getDayStart();
+        long tempStart = dayStart;
+        long nextSunPointTime = 5 + rand.nextInt(6);
+
+        gameRunning = true;
+        Deck<PlantFactory> deck = Deck.getInstance();
+        while (gameRunning) 
         {
-            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
-            {
-                break;
-            }
-            long currentTime = System.currentTimeMillis();
+            // if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            // {
+            //     break;
+            // }
+            long currentTime = TimerThread.getCurrentTime();
             long timeElapsed = (currentTime - tempStart) / 1000; 
 
             if (timeElapsed >= 200) 
@@ -82,23 +82,36 @@ public class PlantThread implements Runnable
                 if (timeElapsed >= nextSunPointTime) 
                 {
                     SUN.addSunPoints(25);
-                    System.out.println("Got sun points from randomizer "+ SUN.getSunPoints());
+                    // System.out.println("Got sun points from randomizer "+ SUN.getSunPoints());
                     nextSunPointTime = timeElapsed + 5 + rand.nextInt(6); //? Random delay between 5 and 10 seconds
                 }
             }
 
             //? plant refresh logic
-            for(Plant p : plants)
+
+
+            synchronized (plants) //todo test thsi
             {
-                p.refreshPlant();
+                for(Plant p : plants)
+                {
+                    p.refreshPlant();
+                }
             }
+
+
+            deck.refresh();
+            // System.out.println("Current Time from Plant Thread: " + currentTime);
     
             try {
                 Thread.sleep(1000);
+       
             } catch (InterruptedException e) {
+            gameRunning = false;
             SUN.resetSunPoints();
+        
             removePlants();
-            System.out.println("Plant Loop Interrupted");
+            // System.out.println("Plant Loop Interrupted");
+           
             return;
             }
         }

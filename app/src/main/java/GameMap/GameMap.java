@@ -233,7 +233,7 @@ public class GameMap {
             if(!(map[i][0].getZombies().isEmpty()))
             {
                 compromised = true;
-                System.out.println("Protected Base is compromised! Game Over!");
+                // System.out.println("Protected Base is compromised! Game Over!");
                 break;
             }
         }
