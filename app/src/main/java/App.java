@@ -4,8 +4,10 @@ public class App {
       // GameAle game = new GameAle();
       //   game.main(args);
       // MenuTest.main(args);
-      GameAle.main(args);
       // ThreadTest.main(args);
+      // GameAle.main(args);
+      Test.main(args);
+
     }
 }
 //? kita harus gradle build di file yg ada si buildny. 

@@ -44,11 +44,9 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
     @Override
     public void useAbility()
     {
-
- 
-            Plant plant = petakInFront.getPlants().get(0);
-            plant.reduceHealth(plant.getHealth());
-            hasUseZombieAbility = true;
+            // Plant plant = petakInFront.getPlants().get(0);
+            // plant.reduceHealth(plant.getHealth());
+            // hasUseZombieAbility = true;
 
             //? vaulting logic
             Position pos = getPos();
@@ -67,6 +65,15 @@ public class PoleVaultingZombie extends Zombie implements ZombieAbility {
 
             Petak landingPetak = GameMap.getInstance().getPetak(pos);
             landingPetak.addCreature(this);
+
+            if(landingPetak.getPlants().isEmpty())
+            {
+                return;
+            }
+
+            Plant plant = landingPetak.getPlants().get(0);
+            plant.reduceHealth(plant.getHealth());
+            hasUseZombieAbility = true;
             }
      }
 
