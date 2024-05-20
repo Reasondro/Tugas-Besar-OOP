@@ -19,12 +19,14 @@ public class GameAle{
         Sun mySun = Sun.getInstance();
 
         BulletPlant myBulletPlant = new BulletPlant();
-        Kernelpult myKernel = new Kernelpult();
+        // Kernelpult myKernel = new Kernelpult();
+        Peashooter myPeashooter = new Peashooter();
         NormalZombie myNormalZombie = new NormalZombie();
 
         
         Position posP11 = new Position(1, 1);
-        map.getPetak(posP11).addCreature(myKernel);
+        // map.getPetak(posP11).addCreature(myKernel);
+        map.getPetak(posP11).addCreature(myPeashooter);
 
         mySun.displayStatus();
         map.printMap(); 
@@ -35,17 +37,15 @@ public class GameAle{
         myNormalZombie.walk();
 
 
-        Position posP58 = new Position(5, 8);
-
         Position posP62 = new Position(6, 2);
         map.getPetak(posP62).addCreature(myBulletPlant);
 
-        myKernel.useAbility();
+        myPeashooter.useAbility();
         myNormalZombie.checkToAttack();
-        myKernel.useAbility();
+        myPeashooter.useAbility();
 
 
-        myKernel.displayStatus();
+        myPeashooter.displayStatus();
         myNormalZombie.displayStatus();
         map.printMap(); 
     }

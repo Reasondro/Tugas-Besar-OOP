@@ -7,11 +7,14 @@ public class KernelBullet extends Bullet {
 
     private int damage;
     private boolean stopzomb = false;
-    private boolean isButter = false; // To track if the bullet is butter
-    private long lastShotTime; // To track the time of the last shot
+    private boolean isButter = false; // Untuk melacak apakah peluru adalah mentega
+
+    private long lastShotTime; // TUntuk melacak waktu tembakan terakhir
 
     public KernelBullet(int damage) {
         super(damage);
+        this.damage = damage;
+        this.lastShotTime = System.currentTimeMillis(); 
     }
 
     public int getDamage() {
@@ -40,9 +43,9 @@ public class KernelBullet extends Bullet {
 
     public void hit(Petak p) {
         long currentTime = System.currentTimeMillis();
-        if ((currentTime - lastShotTime) >= 5000) { // Check if 5 seconds have passed
+        if ((currentTime - lastShotTime) >= 5000) { // Cek apakah 5 detik telah berlalu
             setButter(true);
-            lastShotTime = currentTime; // Reset the timer
+            lastShotTime = currentTime; // Reset  timer
         } else {
             setButter(false);
         }
@@ -50,15 +53,15 @@ public class KernelBullet extends Bullet {
         for (Zombie z : p.getZombies()) {
             if (isButter()) {
                 z.reduceHealth(getDamage()); // Apply damage
-                z.setFrozenTimer(10); // Set frozen timer for 10 seconds
                 if (!z.isFrozen()) {
                     z.setFrozen(true);
+                    z.setFrozenTimer(10); // Set frozen timer for 10 seconds
                 }
+                System.out.printf("Hit %s with butter causing freeze\n", z.getName());
             } else {
                 z.reduceHealth(getDamage()); // Apply damage with corn kernel
+                System.out.printf("Hit %s with corn kernel causing damage %d\n", z.getName(), getDamage());
             }
-            setWornOut(true);
-            System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
         }
 
         setStopZomb(true);
