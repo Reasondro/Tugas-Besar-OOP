@@ -13,9 +13,11 @@ import java.util.ArrayList;
 public class Kernelpult extends Plant implements PlantAbility {
    
     private List<Petak> reachablePetak = new ArrayList<>();
+    private KernelBullet bullet;
 
     public Kernelpult() {
         super("Kernelpult", 200, 300, 100, 6, -1, 10, new Position(0, 0));
+        bullet =  new KernelBullet(getAttackDamage());
     }
 
     public List<Petak> getReachablePetak() {
@@ -45,6 +47,9 @@ public class Kernelpult extends Plant implements PlantAbility {
             synchronized (p) {
                 if (!p.getZombies().isEmpty()) {
                     bullet.hit(p);
+                }
+                else{
+                    break;
                 }
             }
         }
