@@ -219,7 +219,39 @@ public class PeeVeeZee{
                 map.printMap();
                 
             }
-            else if(userInput.equalsIgnoreCase("3")) //? Display the map
+            else if(userInput.equalsIgnoreCase("3") ) //? Plant a plant
+            {
+          
+
+                int row;
+                int column;
+                
+                System.out.println("Choose the Petak's row (1-6) and column(1-9)!"); 
+                System.out.println("Example: 6 9 (Row 6, column 9)");
+
+                userInput = input.nextLine();
+                String[] parts = userInput.trim().split(" ");
+
+                if (parts.length == 2) {
+                    row = Integer.parseInt(parts[0].trim());
+                    column = Integer.parseInt(parts[1].trim());
+                }
+                else
+                {
+                    System.out.println("Invalid input. Please try again.");
+                    continue;
+                }
+                myDeck.digging(row, column);
+            
+                long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+                long elapsedSeconds = currentTime/1000;
+                long secondsDisplay = elapsedSeconds % 60;
+                long minutesDisplay = elapsedSeconds / 60;
+                System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+                map.printMap();
+                
+            }
+            else if(userInput.equalsIgnoreCase("4")) //? Display the map
             {
                 long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
                 long elapsedSeconds = currentTime/1000;
@@ -228,7 +260,7 @@ public class PeeVeeZee{
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
             }
-            else if(userInput.equalsIgnoreCase("4")) //? Exit the game
+            else if(userInput.equalsIgnoreCase("5")) //? Exit the game
             {
                 timerThread.interrupt();
 
@@ -244,8 +276,9 @@ public class PeeVeeZee{
                 System.out.println("List of commands: ");
                 System.out.println("1. STATUS - Display the status of the game");
                 System.out.println("2. PLANTING - Plant a plant");
-                System.out.println("3. MAP - Display the map");
-                System.out.println("4. EXIT - Exit the game");
+                System.out.println("3. DIGGING - Dig a petak");
+                System.out.println("4. MAP - Display the map");
+                System.out.println("5. EXIT - Exit the game");
             }
             else //? Invalid Command
             {
