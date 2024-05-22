@@ -1,15 +1,9 @@
 package Deck;
 
 
-<<<<<<< HEAD
-import Plants.Plant;
-
-public class Deck<T extends Plant> {
-=======
 import java.util.ArrayList;
 import java.util.List;
 import PlantFactory.PlantFactory;
->>>>>>> origin/main
 
 import GameMap.GameMap;
 import Petak.Petak;
@@ -223,10 +217,6 @@ public class Deck<T extends PlantFactory> {
     }
     public void clearDeck() 
     
-<<<<<<< HEAD
-    List<T> myDeck = new ArrayList<T>(10);
-  
-=======
     {
         for (T card : myCards) 
         {
@@ -236,7 +226,6 @@ public class Deck<T extends PlantFactory> {
         
         myCards.clear();
     }
->>>>>>> origin/main
 
     
 }

@@ -4,8 +4,7 @@ import Position.Position;
 import PlantAbility.*;
 import Zombies.Zombie;
 import java.util.List;
-import Bullet.KernelBullet;
-import Bullet.PeaBullet;
+import Bullet.*;
 import GameMap.GameMap;
 import Petak.Petak;
 import java.util.ArrayList;
@@ -13,11 +12,13 @@ import java.util.ArrayList;
 public class Kernelpult extends Plant implements PlantAbility {
    
     private List<Petak> reachablePetak = new ArrayList<>();
-    private KernelBullet bullet;
+    private CornBullet corn;
+    private ButterBullet butter;
+    private int changeBulletTimer = 5;
 
     public Kernelpult() {
-        super("Kernelpult", 200, 300, 100, 6, -1, 10, new Position(0, 0));
-        bullet =  new KernelBullet(getAttackDamage());
+        super("Kernelpult", 200, 200, 30, 6, -1, 10, new Position(0, 0));
+        corn = new CornBullet(getAttackDamage());
     }
 
     public List<Petak> getReachablePetak() {
@@ -42,11 +43,12 @@ public class Kernelpult extends Plant implements PlantAbility {
 
     @Override
     public void useAbility() {
-        KernelBullet bullet = new KernelBullet(getAttackDamage());
+        corn = new CornBullet(getAttackDamage());
         for (Petak p : reachablePetak) {
             synchronized (p) {
                 if (!p.getZombies().isEmpty()) {
-                    bullet.hit(p);
+                    corn.hit(p);
+                    changeBulletTimer -= 1;
                 }
                 else{
                     break;
@@ -54,13 +56,23 @@ public class Kernelpult extends Plant implements PlantAbility {
             }
         }
         setAttackTimer(getAttackSpeed()); 
-        bullet = new KernelBullet(getAttackDamage());
+
+        if(changeBulletTimer == 0)
+        {
+            butter = new ButterBullet(getAttackDamage());
+            corn = new CornBullet(getAttackDamage());
+        }
+        else 
+        {
+            corn = new CornBullet(getAttackDamage());
+        }
     }
 
     @Override
     public void checkToUseAbility() {
         if (isZombiesInRange() && getAttackTimer() == 0) {
             useAbility();
+            changeBulletTimer -= 1;
         } else if (getAttackTimer() > 0) {
             setAttackTimer(getAttackTimer() - 1);
         } else if (!isZombiesInRange() && getAttackTimer() == 0) {

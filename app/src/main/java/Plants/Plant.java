@@ -94,15 +94,15 @@ public abstract class Plant extends Creature {
         System.out.printf("Position: X = %d, Y = %d\n", getPos().getX(), getPos().getY());
     }
 
-    public void setPos(Position newPosition){
-        if (this.position != null) {
-            this.position.getPlants().remove(this);
-        }
-        this.position = newPosition;
-        if (newPosition != null) {
-            newPosition.addPlant(this);
-        }  
-    }
+    // public void setPos(Position newPosition){
+    //     if (this.position != null) {
+    //         this.position.getPlants().remove(this);
+    //     }
+    //     this.position = newPosition;
+    //     if (newPosition != null) {
+    //         newPosition.addPlant(this);
+    //     }  
+    // }
 
     
     public void doubleBulletDamage() {

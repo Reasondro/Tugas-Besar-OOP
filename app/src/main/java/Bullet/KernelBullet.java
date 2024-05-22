@@ -13,7 +13,6 @@ public class KernelBullet extends Bullet {
 
     public KernelBullet(int damage) {
         super(damage);
-        this.damage = damage;
         this.lastShotTime = System.currentTimeMillis(); 
     }
 

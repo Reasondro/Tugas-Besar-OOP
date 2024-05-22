@@ -9,14 +9,11 @@ import Petak.Petak;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class BulletPlant extends Plant implements PlantAbility{
 
     private BasicBullet bullet;
     private List<Petak> reachablePetak = new ArrayList<Petak>();
-
-
+    
     public BulletPlant()
     {
         super("Bullet Plant", 100, 100, 35, 2, -1, 10,  new Position(0, 0));

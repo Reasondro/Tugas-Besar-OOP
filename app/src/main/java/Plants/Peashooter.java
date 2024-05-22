@@ -14,9 +14,9 @@ import Petak.Petak;
 
 public class Peashooter extends Plant implements PlantAbility{
 
-    
     private PeaBullet bullet;
     private List<Petak> reachablePetak = new ArrayList<Petak>();
+    
 
     
     public Peashooter()
@@ -52,7 +52,6 @@ public class Peashooter extends Plant implements PlantAbility{
     }
 
 
-    
     @Override
     public void useAbility()
     {

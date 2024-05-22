@@ -42,18 +42,6 @@ public class Position {
         this.y = y;
     }
 
-<<<<<<< HEAD
-    // dua method di bawah ini untuk mendapatkan semua tanaman di petak yang sama --> used for coffeebean karena dia akan mengali 2 damage tanaman dipetak sama
-    public void addPlant(Plant plant) {
-        plants.add(plant);
-    }
-
-    public List<Plant> getPlants() {
-        return plants;
-    }
-
-}
-=======
     public Position copyPos()
     {
         return new Position(x, y);
@@ -71,4 +59,3 @@ public class Position {
     }
      
 }
->>>>>>> origin/main

@@ -1,22 +1,22 @@
-package PlantFactory;
+// package PlantFactory;
 
-import Plants.Piercer;
-import Plants.Plant;
+// import Plants.Piercer;
+// import Plants.Plant;
 
-public class PiecerFactory extends PlantFactory {
+// public class PiecerFactory extends PlantFactory {
 
-    private static int PiercerFactory = 0;
-    public Plant createPlant()
-    {
-        PiercerFactory++;
-        PlantFactory.incrementPlantCount();
+//     private static int PiercerFactory = 0;
+//     public Plant createPlant()
+//     {
+//         PiercerFactory++;
+//         PlantFactory.incrementPlantCount();
 
-        return new Piercer();
-    }
+//         return new Piercer();
+//     }
 
-    public static int getPiercerCount()
-    {
-        return PiercerFactory;
-    }
+//     public static int getPiercerCount()
+//     {
+//         return PiercerFactory;
+//     }
     
-}
+// }
