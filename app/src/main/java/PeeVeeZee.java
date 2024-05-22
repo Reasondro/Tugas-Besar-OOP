@@ -26,6 +26,8 @@ public class PeeVeeZee{
 
         boolean gameStarted = false;
 
+        System.out.println("Welcome to PeeVeeZee!");
+
         while(isRunning)
         {
 
@@ -73,7 +75,7 @@ public class PeeVeeZee{
                 int index2 = Integer.parseInt(input.nextLine());
                 myInventory.swapPlantInInventory(index1, index2);
 
-                System.out.println("After swapping in inventory");
+                System.out.println("After swapping in inventory!");
                 myInventory.printInventory();
 
             }
@@ -83,6 +85,13 @@ public class PeeVeeZee{
             }
             else if(userInput.equalsIgnoreCase("5") ) //? Add Card to Deck
             {
+
+                if(myDeck.getMyCards().size() == 6)
+                {
+                    System.out.println("Your deck is full!");
+                    continue;
+                }
+
                 myInventory.printInventory();
                 
                 System.out.print("Enter the index of the card you want to add to deck: "); 
@@ -90,18 +99,25 @@ public class PeeVeeZee{
 
                 myInventory.addCardToDeckWithIndex(myDeck, index);
 
-                System.out.println("After adding to deck");
+                System.out.println("After adding to deck!");
                 myDeck.printDeck();
             }
             else if(userInput.equalsIgnoreCase("6")  ) //? Remove Card from Deck
             {
+
+                if(myDeck.getMyCards().size() == 0)
+                {
+                    System.out.println("No card in deck!");
+                    continue;
+                }
+
                 myDeck.printDeck();
 
                 System.out.print("Enter the index of the card you want to remove from deck: ");
                 int index = Integer.parseInt(input.nextLine());
 
                 myInventory.removeCardFromDeckWithIndex(myDeck, index);
-                System.out.println("After removing from deck");
+                System.out.println("After removing from deck!");
                 myDeck.printDeck();
 
             }
@@ -116,7 +132,7 @@ public class PeeVeeZee{
                 int index2 = Integer.parseInt(input.nextLine());
                 myInventory.swapCardInDeck(myDeck, index1, index2);
 
-                System.out.println("After swapping in deck");
+                System.out.println("After swapping in deck!");
                 myDeck.printDeck();
 
             }
