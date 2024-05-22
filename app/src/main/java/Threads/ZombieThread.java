@@ -111,6 +111,8 @@ public class ZombieThread implements Runnable {
         long tempStart = dayStart;
         setZombieSpawnTimer(0);
 
+        int maxZombieCount = 10;
+        float zombieSpawnChance = 0.3f;
         boolean gameRunning = true;
         while (gameRunning) 
         {
@@ -141,17 +143,25 @@ public class ZombieThread implements Runnable {
                 tempStart = currentTime;
                 continue;
             }
+            
 
             //? spawn zombie logic
             if(timeElapsed >= 20 && timeElapsed <= 160)
             {
+               if(timeElapsed >=150 && timeElapsed <= 160)
+
+                {
+                     maxZombieCount = 25;
+                     zombieSpawnChance = 0.4f;
+                }
+
                 if(getZombieSpawnTimer() == 0)
                 {
                     for (Petak p : zombieBase) 
                     {
-                        if(ZombieFactory.getZombieCount() < 10)
+                        if(ZombieFactory.getZombieCount() < maxZombieCount)
                         {
-                            if(rand.nextDouble() < 0.3) 
+                            if(rand.nextDouble() < zombieSpawnChance) 
                             {
                                 if(p.getType().equals("Aquatic Zombie Base")) //? aquatic zombie base
                                 {
