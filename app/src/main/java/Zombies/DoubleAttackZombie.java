@@ -23,6 +23,7 @@ public class DoubleAttackZombie extends Zombie implements ZombieAbility{
     
     public DoubleAttackZombie(){
         super("Double Attack Zombie", 150, 100, 1, 1,false,  new Position(0, 0));
+        this.abilityUsed = false;
     }
 
     @Override
@@ -30,19 +31,19 @@ public class DoubleAttackZombie extends Zombie implements ZombieAbility{
         if (!abilityUsed) {
             int currentAttackDamage = getAttackDamage();
             setAttackDamage(currentAttackDamage * 2); // Menggandakan attack damage
-            abilityUsed = true; 
+            abilityUsed = true;
         }
     }
 
-    @Override 
+
+    @Override
     public void checkToUseAbility() {
         if (!abilityUsed) {
             GameMap gameMap = GameMap.getInstance();
-            // Position currentPosition = this.getPos();
             Petak inFrontOfZombie = gameMap.getPetakInFrontOfZombie(this);
 
-            if (!inFrontOfZombie.getPlants().isEmpty()) {
-                useAbility(); 
+            if (inFrontOfZombie != null && !inFrontOfZombie.getPlants().isEmpty()) {
+                useAbility();
             }
         }
     }

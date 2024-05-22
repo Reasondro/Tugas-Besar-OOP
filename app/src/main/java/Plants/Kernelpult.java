@@ -1,56 +1,70 @@
 package Plants;
 
 import Position.Position;
-
 import PlantAbility.*;
 import Zombies.Zombie;
-
 import java.util.List;
+import Bullet.KernelBullet;
+import Bullet.PeaBullet;
+import GameMap.GameMap;
+import Petak.Petak;
 import java.util.ArrayList;
 
-public class Kernelpult extends Plant implements PlantAbility{
+public class Kernelpult extends Plant implements PlantAbility {
    
-    private List<Zombie> targets = new ArrayList<>();
+    private List<Petak> reachablePetak = new ArrayList<>();
+    private KernelBullet bullet;
 
-    public Kernelpult()
-    {
-        super("Kernelpult", 200, 300, 100, 6, -1, 10,  new Position(0, 0)); // masih tentatif damage dia berapa
+    public Kernelpult() {
+        super("Kernelpult", 200, 300, 100, 6, -1, 10, new Position(0, 0));
+        bullet =  new KernelBullet(getAttackDamage());
     }
 
-    public void setTargets(List<Zombie> targets)
-    {
-        this.targets = targets;
+    public List<Petak> getReachablePetak() {
+        return reachablePetak;
     }
 
-    public void addTarget(Zombie z)
-    {
-        targets.add(z);
+    public void setReachablePetak(List<Petak> reachablePetak) {
+        this.reachablePetak = reachablePetak;
     }
 
-    public void removeTarget(Zombie z)
-    {
-        targets.remove(z);
+    public boolean isZombiesInRange() {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
+        for (Petak p : reachablePetak) {
+            synchronized (p) {
+                if (!p.getZombies().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
-    public void useAbility()
-    {
-        // for(Zombie z : targets)
-        // {
-        //     z.reduceHealth(getAttackDamage());
-        //     z.setFrozenTimer(10);
-        //     if(z.isFrozen() == false)
-        //     {
-        //         z.setFrozen(true);
-        //         z.setWalkSpeed(z.getWalkSpeed() / 2);
-        //     }
-        // }
-        System.out.println("Try");
-    }
-    @Override
-    public void checkToUseAbility(){
-        System.out.println("Cek");
+    public void useAbility() {
+        KernelBullet bullet = new KernelBullet(getAttackDamage());
+        for (Petak p : reachablePetak) {
+            synchronized (p) {
+                if (!p.getZombies().isEmpty()) {
+                    bullet.hit(p);
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        setAttackTimer(getAttackSpeed()); 
+        bullet = new KernelBullet(getAttackDamage());
     }
 
-    
+    @Override
+    public void checkToUseAbility() {
+        if (isZombiesInRange() && getAttackTimer() == 0) {
+            useAbility();
+        } else if (getAttackTimer() > 0) {
+            setAttackTimer(getAttackTimer() - 1);
+        } else if (!isZombiesInRange() && getAttackTimer() == 0) {
+            System.out.printf("No zombies in range for %s\n", getName());
+        }
+    }
 }

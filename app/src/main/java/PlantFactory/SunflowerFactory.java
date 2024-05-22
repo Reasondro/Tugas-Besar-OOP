@@ -9,7 +9,7 @@ public class SunflowerFactory extends PlantFactory{
 
     public SunflowerFactory()
     {
-        super("Sunflower Card", 10);
+        super("Sunflower Card", 10, false, 50);
     }
 
 

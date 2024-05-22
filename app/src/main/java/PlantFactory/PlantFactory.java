@@ -8,13 +8,17 @@ public abstract class PlantFactory {
     private float factoryCooldown;
     private float cooldownTimer;
     private boolean ready;
+    private boolean aquatic;
+    private int cost;
 
-    public PlantFactory(String factoryName, float factoryCooldown)
+    public PlantFactory(String factoryName, float factoryCooldown, boolean aquatic, int cost)
     {
         this.factoryName = factoryName;
         this.factoryCooldown = factoryCooldown;
         this.cooldownTimer = 0;
         this.ready = true;
+        this.aquatic = aquatic;
+        this.cost = cost;
     }
 
     public abstract Plant createPlant();
@@ -57,6 +61,26 @@ public abstract class PlantFactory {
     public void setReady(boolean ready)
     {
         this.ready = ready;
+    }
+
+    public boolean isAquatic()
+    {
+        return aquatic;
+    }
+
+    public void setAquatic(boolean aquatic)
+    {
+        this.aquatic = aquatic;
+    }
+
+    public int getCost()
+    {
+        return cost;
+    }
+
+    public void setCost(int cost)
+    {
+        this.cost = cost;
     }
 
     public float getCooldownTimer()

@@ -9,7 +9,7 @@ public class PeashooterFactory extends PlantFactory {
 
     public PeashooterFactory()
     {
-        super("Peashooter Card", 10);
+        super("Peashooter Card", 10, false, 100);
 
     }
 

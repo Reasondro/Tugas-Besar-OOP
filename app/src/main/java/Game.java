@@ -42,31 +42,7 @@ public class Game {
         // petak.addCreature(new Sunflower());
         // petak.addCreature(new NormalZombie());
         // petak.printCreature();
-        GameMap map = GameMap.getInstance();
-        System.out.println("Before adding creature");
-        map.printMap();
-
-        Position posZ = new Position(1, 9);
-        map.getPetak(posZ).addCreature(new NormalZombie());
-
-        Position posZ2 = new Position(3, 8);
-        map.getPetak(posZ2).addCreature(new DoubleAttackZombie());
         
-        Position posP = new Position(1, 1);
-        map.getPetak(posP).addCreature(new Sunflower());
-
-        Position posP2 = new Position(3, 2);
-        map.getPetak(posP2).addCreature(new Sunflower());
-        map.getPetak(posP2).addCreature(new Lilypad());
-        map.getPetak(posP2).addCreature(new ConeheadZombie());
-
-        Position posP3 = new Position(6, 3);
-        map.getPetak(posP3).addCreature(new Sunflower());
-
-
-
-        System.out.println("After adding creature");
-        map.printMap();
 
     //     Game concurrency = new Game();
     //     Thread thread = new Thread(() -> {
@@ -97,62 +73,37 @@ public class Game {
     //     }
 
     //     scanner.close();
-    // }
+ // Inisialisasi game map
+    GameMap gameMap = GameMap.getInstance();
 
-    // public void gameLoop() {
-    //     System.out.println("Game Loop");
-    // GameMap map = GameMap.getInstance();
+ // Buat instance Sunflower dan StingZombie
+    Kernelpult sun = new Kernelpult();
+    StingZombie stingZombie = new StingZombie();
 
+ // Set posisi Sunflower dan tambahkan ke petak
+    Position sunPosition = new Position(2, 2); // Sesuaikan dengan posisi yang diinginkan
+    sun.setPos(sunPosition);
+    gameMap.getPetak(sunPosition).addCreature(sun);
 
-    // Menempatkan ZigzagZombie di posisi awal (2, 2)
-    StinkZombie zigzagZombie = new StinkZombie();
-    Position initialPosition = new Position(1, 1); // Disesuaikan dengan indexing 1-based
-    zigzagZombie.setPos(initialPosition);
-    Petak initialPetak = map.getPetak(initialPosition);
-    initialPetak.addCreature(zigzagZombie);
+ // Set posisi StingZombie dan tambahkan ke petak
+    Position stingZombiePosition = new Position(2, 3); // Sesuaikan dengan posisi yang diinginkan
+    stingZombie.setPos(stingZombiePosition);
+    gameMap.getPetak(stingZombiePosition).addCreature(stingZombie);
 
-    // Mencetak posisi awal
-    System.out.println("Initial Position: " + zigzagZombie.getPos().getX() + ", " + zigzagZombie.getPos().getY());
+ // Cek dan gunakan ability StingZombie
+    System.out.println(sun.getHealth());
+    System.out.println(stingZombie.getHealth());
+    System.out.println("Before");
+    gameMap.printMap();
+    // kernel.useAbility();
+    stingZombie.useAbility();
+    stingZombie.walk();
 
-    // Memanggil useAbility untuk menggerakkan zombie
-    // zigzagZombie.useAbility();
+ // Tampilkan health Sunflower setelah diserang
+    System.out.println("Health Sunflo setelah diserang: " + sun.getHealth());
+    System.out.println("Health zombie " + stingZombie.getHealth());
+    gameMap.printMap();
+}
 
-    // Mencetak posisi baru setelah bergerak
-    Position newPosition = zigzagZombie.getPos();
-    System.out.println("New Position: " + newPosition.getX() + ", " + newPosition.getY());
-
-    // Verifikasi apakah posisi sesuai dengan gerakan zigzag yang diharapkan
-    if (initialPosition.getY() % 2 == 0) {
-        if (newPosition.getX() == initialPosition.getX() + 1 && newPosition.getY() == initialPosition.getY()-1) {
-            System.out.println("The zigzag movement is correct for even column.");
-        } else {
-            System.out.println("The zigzag movement is incorrect for even column.");
-        }
-    } else {
-        if (newPosition.getX() == initialPosition.getX() - 1 && newPosition.getY() == initialPosition.getY()-1) {
-            System.out.println("The zigzag movement is correct for odd column.");
-        } else {
-            System.out.println("The zigzag movement is incorrect for odd column.");
-        }
     }
 
-    // Menampilkan peta sebelum dan sesudah pergerakan untuk verifikasi visual
-    System.out.println("Before using ability:");
-    map.printMap();
-
-    zigzagZombie.useAbility();
-
-    System.out.println("After using ability:");
-    map.printMap();
-
-    zigzagZombie.useAbility();
-    System.out.println("Kedua kali");
-    map.printMap();
-
-    zigzagZombie.useAbility();
-    System.out.println("Ketiga");
-    map.printMap();
-    }
-        
-   
-    }

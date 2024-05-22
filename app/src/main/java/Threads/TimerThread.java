@@ -3,6 +3,8 @@ package Threads;
 
 import java.util.Random;
 
+import GameMap.GameMap;
+
 public class TimerThread implements Runnable{
     private static volatile TimerThread instance = null;
 
@@ -28,6 +30,7 @@ public class TimerThread implements Runnable{
     static long tempStart;
     static long nextSunPointTime;
     static long currentTime;
+    static long globalTimeElapsed;
 
 
     public static long getDayStart() {
@@ -54,8 +57,17 @@ public class TimerThread implements Runnable{
         return TimerThread.currentTime = currentTime;
     }
 
+    public static long getGlobalTimeElapsed() {
+        return globalTimeElapsed;
+    }
+
+    public static void setGlobalTimeElapsed(long globalTimeElapsed) {
+        TimerThread.globalTimeElapsed = globalTimeElapsed;
+    }
+
     boolean gameRunning = true;
 
+    GameMap map = GameMap.getInstance();
     @Override
     public void run()
     {
@@ -63,12 +75,45 @@ public class TimerThread implements Runnable{
 
         long dayStart = System.currentTimeMillis();
         setDayStart(dayStart);
-        // long tempStart = dayStart;
-        // long nextSunPointTime = 5 + rand.nextInt(6);
+        tempStart = dayStart;
+
         while (gameRunning)
         {
             long currentTime = System.currentTimeMillis();
             setCurrentTime(currentTime);
+            long timeElapsed = (currentTime - tempStart) / 1000;
+            setGlobalTimeElapsed(timeElapsed);
+
+            if (timeElapsed >= 200) 
+            {
+                tempStart = currentTime;
+                continue;
+            }
+
+            if(ZombieThread.globalIsAllZombiesDead() && (timeElapsed > 21 && timeElapsed <= 160))
+            {
+                gameRunning = false;
+                System.out.println("");
+                System.out.println("All zombies are dead, you won!");
+                System.out.println("Press any key to go back to main menu");
+                map.refreshMap();
+                break;
+            }
+
+            if(map.isProtectedBaseCompromised()) //? ini jga sama bisa pake factory cman nanti aja
+            {
+                // System.out.println("Message from timer thread");
+                gameRunning = false;
+                System.out.println("");
+                System.out.println("Protected Base is compromised, you lost!");
+                System.out.println("Press any key to go back to main menu");
+                map.refreshMap();
+                break;
+            }
+ 
+
+
+           
 
             // System.out.println("Current Time from Timer Thread: " + currentTime);
             try
@@ -77,10 +122,10 @@ public class TimerThread implements Runnable{
             }
             catch (InterruptedException e)
             {
-                // System.out.println("Timer Loop Interrupted");
-                setDayStart(0);
-                setCurrentTime(0);
-                gameRunning = false;
+                System.out.println("Timer Loop Interrupted");
+                // setDayStart(0);
+                // setCurrentTime(0);
+                // gameRunning = false;
                 return;
             }
         }

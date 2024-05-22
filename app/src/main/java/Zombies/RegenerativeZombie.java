@@ -41,6 +41,4 @@ public class RegenerativeZombie extends Zombie implements ZombieAbility {
             this.setHealth(this.getHealth() + 25);
         }
     }
-
-
 }
