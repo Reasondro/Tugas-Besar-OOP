@@ -59,6 +59,13 @@ public class PotatoMine extends Plant implements PlantAbility {
                     // int originalHealth = z.getHealth();
                     z.reduceHealth(getAttackDamage()); //? instant kill zombie
                     z.setAttackDamage(z.getAttackDamage()/2);
+                    z.setFrozenTimer(5);
+                    if(z.isFrozen() == false)
+                    {
+                        z.setFrozen(true);
+                        z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
+                    }
+
                     // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                     // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                     

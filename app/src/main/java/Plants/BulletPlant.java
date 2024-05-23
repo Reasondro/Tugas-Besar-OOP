@@ -9,8 +9,6 @@ import Petak.Petak;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class BulletPlant extends Plant implements PlantAbility{
 
     private BasicBullet bullet;
@@ -19,7 +17,7 @@ public class BulletPlant extends Plant implements PlantAbility{
 
     public BulletPlant()
     {
-        super("Bullet Plant", 100, 100, 35, 2, -1, 10,  new Position(0, 0));
+        super("Bullet Plant", 100, 100, 35, 1, -1, 10,  new Position(0, 0));
         bullet = new BasicBullet(getAttackDamage());
     }
 
