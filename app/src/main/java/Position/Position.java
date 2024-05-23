@@ -1,14 +1,19 @@
 package Position;
+import java.util.ArrayList;
+import java.util.List;
+import Plants.Plant;
 
 public class Position {
     
     private int x;
     private int y;
+    private List<Plant> plants;
 
     public Position(int x, int y)
     {
         this.x = x;
         this.y = y;
+        this.plants = new ArrayList<>();
     }
 
     public int getX()

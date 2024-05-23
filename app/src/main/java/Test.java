@@ -12,6 +12,7 @@ public class Test {
 
         Peashooter peashooter = new Peashooter();
         Sunflower sunflower = new Sunflower();
+        Kernelpult kernelpult = new Kernelpult();
         Lilypad lilypad1 = new Lilypad();
         Lilypad lilypad2 = new Lilypad();
         Snowpea snowpea = new Snowpea();
@@ -31,19 +32,53 @@ public class Test {
 
 
         // gameMap.getPetak(posP11).addCreature(sunflower);
-        gameMap.getPetak(posP12).addCreature(peashooter);
-        gameMap.getPetak(posP13).addCreature(poleVaultingZombie);
+        // gameMap.getPetak(posP12).addCreature(peashooter);
+        // gameMap.getPetak(posP12).addCreature(peashoroter);
+        gameMap.getPetak(posP12).addCreature(kernelpult);
+        gameMap.getPetak(posP15).addCreature(poleVaultingZombie);
 
         gameMap.getPetak(posP31).addCreature(lilypad1);
         gameMap.getPetak(posP31).addCreature(snowpea);
         gameMap.getPetak(posP32).addCreature(lilypad2);
         gameMap.getPetak(posP33).addCreature(dolphinRiderZombie);
 
+        System.out.println("Before testing");
         gameMap.printMap();
 
         System.out.println("After testing");
-        poleVaultingZombie.checkToUseAbility();
-        dolphinRiderZombie.checkToUseAbility();
+        // peashooter.checkToUseAbility();
+
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+
+        kernelpult.checkToUseAbility();
+        System.out.println("Should be frozen here:");
+        poleVaultingZombie.displayStatus();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+        poleVaultingZombie.refreshZombie();
+
+        kernelpult.checkToUseAbility();
+        kernelpult.checkToUseAbility();
+        kernelpult.checkToUseAbility();
+        kernelpult.checkToUseAbility();
+        kernelpult.checkToUseAbility();
+        kernelpult.checkToUseAbility();
+        // kernelpult.checkToUseAbility();
+        System.out.println("Shouldn't be frozen here:");
+        poleVaultingZombie.displayStatus();
+
+
+        // poleVaultingZombie.displayStatus();
+        // dolphinRiderZombie.checkToUseAbility();
         gameMap.printMap();
 
     

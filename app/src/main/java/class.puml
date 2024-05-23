@@ -1,0 +1,492 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Ability {
++ useAbility(): void
++ reduceCooldown() : void
+}
+
+abstract class Bullet{
+- damage: interface
+- wornOut: boolean
++ getDamage(): int
++ setDamage(damage: int): void
++ isWornOut(): boolean
++ setWornOut(wornOut: boolean): void
++ hit(petak: Petak): void
+}
+
+class ButterBullet extends Bullet{
+ }
+
+class CornBullet extends Bullet{
+}
+
+class KernelBullet extends Bullet{
+}
+
+class PeaBullet extends Bullet{
+}
+
+class PiercerBullet extends Bullet{
+}
+
+class SnowBullet extends Bullet{
+}
+
+class SquashBullet extends Bullet{
+ }
+
+abstract class "Creature"{
+- name: String
+- health: int
+- attackDamage: int
+- attackSpeed: float
+- attackTimer: float
+- pos: Posotion
+- range: int
++ getName(): String
++ setName(name : String): void
++ getHealth(): int
++ setHealth(health: int): void
++ reduceHealth(damage: int): void
++ getAttackDamage(): int
++ setAttackDamage(attackDamage: int): void
++ getAttackSpeed(): float
++ setAttackSpeed(attackSpeed: float): void
++ getAttackTimer(): float
++ setAttackTimer(attackTimer: float): void
++ reduceAttackTimer(): void
++ getRange(): int
++ setRange(range: int): void
++ getPos(): Position
++ setPos(pos: Position): void
+}
+
+class Deck extends PlantFactory{
+- instance: Deck<PlantFactory>
+- myCards: List<T>
++ getInstance(): Deck<PlantFactory>
++ addCard(card: T): void
++ removeCard(card: T): void
++ removeCardWithIndex(index: int): void
++ swapCard(index1: int, index2: int): void
++ getMyCards(): List<T>
++ setMyCards(myCards: List<T>): void
++ printDeck(): void
++ planting(plantIndex: int, Row: int, Column: int): void
++ refresh(): void
++ clearDeck(): void
+}
+
+class GameMap{
+- instance: GameMap
+- map: Petak[][]
+- rows: int
+- columns: int
+- zombieBase: List<Petak>
++ getInstance(): GameMap
++ printMap(): void
++ getRow(row: int): List<Petak>
++ getRowBasedOnPlantRange(p: Plant): List<Petak>
++ getPetakInFrontOfZombie(z: Zombie): Petak
++ getColumn(column: int): List<Petak>
++ getPetak(pos: Position): Petak
++ refreshMap(): void
++ isZombieBaseEmpty(): boolean
++ isProtectedBaseCompromised(): boolean
++ getZombieBase(): List<Petak>
+}
+
+class Inventory{
+- instance: Inventory
+- inventory: List<PlantFactory>
++ getInstance(): Inventory
++ getPlantFactoryByIndex(index: int): PlantFactory
++ printInventory(): void
++ isInDeck( deck: Deck<PlantFactory>, plantFactory: PlantFactory)
++ addCardToDeckWithIndex(deck: Deck<PlantFactory>, index: int): void
++ addAllCardRandomly(deck: Deck<PlantFactory>)
++ removeCardFromDeckWithIndex(deck: Deck<PlantFactory>, index: int): void
++ swapPlantInInventory(index1: int, index2: int): void
++ swapCardInDeck(deck: Deck<PlantFactory>, index1: int, index2: int)
+}
+
+class Petak{
+- type: String
+- pos: Position
+- creature: List<Creature>
++ getType(): String
++ setType(type: String): void
++ printType(): void
++ addCreature(creature: Creature) : void
++ removeCreature(creature: Creature) : void
++ removeAllPlants() : void
++ refreshPetak() : void
++ resetPetak(): void
++ getCreatures(): List<Creature>
++ getZombies(): List<Zombie>
++ getPlants(): List<Plant>
++ getPos(): Position
++ setPos(pos: Position): void
++ printPos(): void
++ printCreatures(): void
+}
+
+interface PlantAbility{
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+abstract class PlantFactory{
+- plantCount: int
+- factoryName: String
+- factoryCooldown: float
+- cooldownTimer: float
+- ready: boolean
+- aquatic: boolean
+- cost: int
++ createPlant(): Plant
++ getPlantCount(): Plant
++ incrementPlantCount(): void
++ decrementPlantCount(): void
++ getFactoryName(): String
++ setFactoryName(factoryName: String): void
++ getFactoryCooldown(): float
++ isReady(): boolean
++ setReady(ready: boolean)
++ isAquatic(): boolean
++ setAquatic(aquatic: boolean)
++ getCost(): int
++ setCost(cost int): void
++ getCooldownTimer(): float
++ setCooldownTimer(cooldownTimer: float)
++ addCooldownTimer(): void
++ reduceCooldownTimer(): void
++ checkToChangeCooldown(): void
++ refreshFactory(): void
++ displayStatus(): void
+}
+
+class SnowpeaFactory extends PlantFactory{
+- snowpeaCount: int
++ getSnowpeaCount(): int
+}
+
+class KernelpultFactory extends PlantFactory{
+- kernelPultCount: int
++ getkernelPultCount(): int
+}
+
+class LilypadFactory extends PlantFactory{
+- lilypadCount: int
++ getLilypadCount(): int
+}
+
+class PeashooterFactory extends PlantFactory{
+- peashooterCount: int
++ getPeashooterCount(): int
+}
+
+class SquashFactory extends PlantFactory{
+- squashCount: int
++ getSquashCount(): int
+}
+
+class SunflowerFactory extends PlantFactory{
+- sunflowerCount: int
++ getSunflowerCount(): int
+}
+
+class WallnutFactory extends PlantFactory{
+- wallnutCount: int
++ getWallnutCount(): int
+}
+
+class WallnutFactory extends PlantFactory{
+- piercerCount: int
++ getPiercerCount(): int
+}
+
+class TangleFactory extends PlantFactory{
+- tangleCount: int
++ getTangleCount(): int
+}
+
+abstract class Plant extends Creature{
+- cost: int
+- cooldown: float
+- originalCooldown: float
+- position: Position
++ getCost(): int
++ setCost(cost: int): void
++ getCooldown(): float
++ setCooldown(cooldown: float): void
++ reduceCooldown(): void
++ refreshCooldown(): void
++ refershPlant(): void
++ displayStatus(): void
+}
+
+class BulletPlant extends Plant implements PlantAbility{
+- bullet: BasicBullet
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Kernelpult extends Plant implements PlantAbility{
+- corn: CornBullet
+- butter: ButterBullet
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Lilypad extends Plant{
+}
+
+class Peashooter extends Plant implements PlantAbility{
+- bullet: PeaBullet
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Piercer extends Plant implements PlantAbility{
+- bullet: PiercerBullet
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class PotatoMine extends Plant implements PlantAbility{
+- isReady: boolean
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Snowpea extends Plant implements PlantAbility{
+- bullet: SnowBullet
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Squash extends Plant implements PlantAbility{
+- reachablePetak: List<Petak>
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Squash extends Plant implements PlantAbility{
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Tangle extends Plant implements PlantAbility{
++ getReachablePetak(): List<Petak>
++ setReachablePetak(reachablePetak: List<Petak>): void
++ isZombieInRange(): boolean
+}
+
+class Wallnut extends Plant implements PlantAbility{
+}
+
+class Position{
+- x: int
+- y: int
++ getX(): int
++ getY(): int
++ setX(x: int): void
++ setY(y: int): void
++ setPos(x: int, y: int): void
++ copyPos(): Position
++ removePos(): void
++ displayPos(): void
+}
+
+class Sun{
+- instance: Sun
+- sunPoints: int
++ getInstance(): Sun
++ getSunPoints(): int
++ addSunPoints(sunPoints: int): void
++ subtractSunPoints(sunPoints: int): void
++ setSunPoints(sunPoints: int): void
++ resetSunPoints(): void
++ displayStatus(): void
+}
+
+class PlantThread implements Runnable{
+- instance: PlantThread
++ getInstance(): PlantThread
++ addPlant(p: Plant): void
++ removePlants(): void
++ getPlants(): List<Plant>
++ run(): void
+}
+
+class TimerThread implements Runnable{
+- instance: TimerThread
++ getDayStart(): long
++ setDayStart(dayStart: long): long
++ getTempStart(): long
++ getNextSunPointTime(): long
++ getCurrentTime(): long
++ setCurrentTime(currentTime: long)
++ getGlobalTimeElapsed(): long
++ setGlobalTimeElapsed(globalTimeElapsed: long)
+}
+
+class ZombieThread implements Runnable{
+- instance: ZombieThread
++ removeZombies(): void
++ isAllZombiesDead(): boolean
++ globalIsAllZombiesDead(): boolean
++ getZombies(): List<Zombie>
++ resetFactories(): void
++ getZombieSpawnTimer(): int
++ setZombieSpawnTimer(zombieSpawnTimer: int): void
+}
+
+abstract class Bullet{
+- pos: Position
+}
+
+interface ZombieAbility{
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+abstract class ZombieFactory{
+- zombieCount: int
++ getZombieCount(): int
++ incrementZombieCount(): void
++ resetFactory(): void
+}
+
+class BucketheadZombieFactory extends ZombieFactory{
+- bucketheadZombieCount: int
++ getBucketheadZombieCount(): int
+}
+
+class ConeheadZombieFactory extends ZombieFactory{
+- coneheadZombieCount: int
++ getConeheadZombieCount(): int
+}
+
+class DolphinRiderFactory extends ZombieFactory{
+- dolphinRiderZombieCount: int
++ getDolphinRiderZombieCount(): int
+}
+
+class DuckyTubeZombieFactory extends ZombieFactory{
+- duckyTubeZombieCount: int
++ getDuckyTubeZombieCount(): int
+}
+
+class NormalZombieFactory extends ZombieFactory{
+- normalZombieCount: int
++ getNormalZombieCount(): int
+}
+
+class PoleVaultingZombieFactory extends ZombieFactory{
+- poleVaultingZombieCount: int
++ getPoleVaultingZombieCount(): int
+}
+
+abstract class Zombie extends Creature{
+- walkSpeedInSeconds: float
+- walkTimer: float
+- aquatic: boolean
+- frozen: boolean
+- frozenTimer: float
++ getWalkSpeedInSeconds(): float
++ setWalkSpeedInSeconds (walkSpeedInSeconds: float): void
++ getWalkTimer(): float
++ setWalkTimer(walkSpeedInSeconds: float)
++ isAquatic(): boolean
++ isFrozen(): boolean
++ setFrozen(frozen: boolean)
++ getFrozenTimer(): float
++ setFrozenTimer(frozenTimer: float)
++ reduceFrozenTimer(): void
++ isPlantsInSamePetak(): boolean
++ attackPlant(plants: List<Plant>): void
++ checkToAttack(): void
++ walk(): void
++ checkToWalk(): void
++ refreshZombie(): void
++ displayStatus: void
+}
+
+class BucketheadZombie extends Zombie{
+
+}
+
+class ConeheadZombie extends Zombie{
+
+}
+
+class DolphinRiderZombie extends Zombie implements ZombieAbility{
+- petakInFront: Petak
+- hasUseZombieAbility: boolean
++ getPetakInFront: Petak
++ setPetakInFront(petakInFront: Petak)
++ isPlantInFront(): boolean
+}
+
+class DucyTyubeZombie extends Zombie{
+
+}
+
+class NormalZombie extends Zombie{
+
+}
+
+class PoleVaultingZombie extends Zombie implements ZombieAbility{
+- petakInFront: Petak
+- hasUseZombieAbility: boolean
++ getPetakInFront: Petak
++ setPetakInFront(petakInFront: Petak)
++ isPlantInFront(): boolean
+}
+
+class App{
+}
+
+class Title{
+}
+
+' Relationships
+PlantFactory "1" -- "*" Plant : creates >
+ZombieFactory "1" -- "*" Zombie : creates >
+Plant "1" -- "*" Bullet : uses >
+BulletPlant -- BasicBullet
+Plant -- Petak : positioned in >
+Zombie -- Petak : positioned in >
+Petak "*" -- "*" Creature : contains >
+GameMap "1" -- "*" Petak : composed of >
+Deck "1" -- "*" Plant : contains >
+Inventory "1" -- "*" PlantFactory : contains >
+GameMap "1" -- "1" Inventory : uses >
+PlantThread "1" -- "*" Plant : manages >
+ZombieThread "1" -- "*" Zombie : manages >
+' New relationships
+Plant -- Sun : generates >
+SunflowerFactory -- Sun : creates >
+Plant -- Ability : uses >
+Creature -- Position : positioned at >
+Petak -- Position : located at >
+
+@enduml
