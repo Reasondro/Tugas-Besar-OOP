@@ -104,9 +104,4 @@ public abstract class Plant extends Creature {
     //     }  
     // }
 
-    
-    public void doubleBulletDamage() {
-        setAttackDamage(getAttackDamage() * 2);
-    }
-
 }

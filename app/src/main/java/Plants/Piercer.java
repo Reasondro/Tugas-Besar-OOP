@@ -20,7 +20,7 @@ public class Piercer extends Plant implements PlantAbility{
 
     public Piercer()
     {
-        super("Piercer", 100, 100, 0, 0, 0, 0,  new Position(0, 0));
+        super("Piercer", 120, 100, 80, 0, 0, 0,  new Position(0, 0));
         bullet =  new PiercerBullet(getAttackDamage());
     }   
     

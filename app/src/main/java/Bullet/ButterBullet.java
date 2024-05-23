@@ -3,12 +3,12 @@ package Bullet;
 import Petak.Petak;
 import Zombies.Zombie;
 
-public class ButterBullet {
+public class ButterBullet extends Bullet {
     private int damage;
     private boolean wornOut = false;
 
     public ButterBullet(int damage) {
-        this.damage = damage;
+        super(damage);
     }
 
     public int getDamage() {

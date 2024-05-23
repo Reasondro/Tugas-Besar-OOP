@@ -5,7 +5,7 @@ import Plants.Lilypad;
 
 public class LilypadFactory  extends PlantFactory{
 
-    private static int liliypadCount = 0;
+    private static int lilypadCount = 0;
 
     public LilypadFactory()
     {
@@ -15,7 +15,7 @@ public class LilypadFactory  extends PlantFactory{
     public Plant createPlant()
     {
 
-        liliypadCount++;
+        lilypadCount++;
         PlantFactory.incrementPlantCount();
 
         setCooldownTimer(getFactoryCooldown());
@@ -24,8 +24,8 @@ public class LilypadFactory  extends PlantFactory{
         return new Lilypad();
     }
 
-    public static int getLiliypadCount()
+    public static int getLilypadCount()
     {
-        return liliypadCount;
+        return lilypadCount;
     }
 }
