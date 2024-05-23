@@ -94,7 +94,25 @@ public class Deck<T extends PlantFactory> {
         }
     }
 
+    public void digging(int Row, int Column)
+    {
+        if( Row < 1 || Row > 6 || Column < 1 || Column >= 9)
+        {
+            System.out.println("Invalid row or column");
+            return;
+        }
 
+        Position digPosition = new Position(Row, Column);
+        Petak targetPetak = GameMap.getInstance().getPetak(digPosition);
+        
+        if(targetPetak.getPlants().size() == 0)
+        {
+            System.out.println("No plant to dig in this petak");
+            return;
+        }
+        targetPetak.removeAllPlants();
+
+    }
 
     public void planting(int plantIndex, int Row, int Column) 
     {

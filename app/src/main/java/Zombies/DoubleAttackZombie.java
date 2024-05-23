@@ -20,19 +20,19 @@ import ZombieAbility.*;
 public class DoubleAttackZombie extends Zombie implements ZombieAbility{
 
     private boolean abilityUsed;
-    
+    private int originalAttackDamage;
+
     public DoubleAttackZombie(){
         super("Double Attack Zombie", 150, 100, 1, 1,false,  new Position(0, 0));
         this.abilityUsed = false;
+        this.originalAttackDamage = getAttackDamage();
     }
 
     @Override
     public void useAbility() {
-        if (!abilityUsed) {
             int currentAttackDamage = getAttackDamage();
             setAttackDamage(currentAttackDamage * 2); // Menggandakan attack damage
             abilityUsed = true;
-        }
     }
 
 
@@ -45,6 +45,10 @@ public class DoubleAttackZombie extends Zombie implements ZombieAbility{
             if (inFrontOfZombie != null && !inFrontOfZombie.getPlants().isEmpty()) {
                 useAbility();
             }
+        }
+        else{
+            setAttackDamage(originalAttackDamage);
+            abilityUsed = false;
         }
     }
 }

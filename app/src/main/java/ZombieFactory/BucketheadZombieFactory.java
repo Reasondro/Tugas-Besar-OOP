@@ -4,7 +4,9 @@ import Zombies.Zombie;
 import Zombies.BucketheadZombie;
 
 public class BucketheadZombieFactory extends ZombieFactory{
+    
     private static int bucketheadZombieCount = 0;
+    
     public Zombie createZombie()
     {
         bucketheadZombieCount++;

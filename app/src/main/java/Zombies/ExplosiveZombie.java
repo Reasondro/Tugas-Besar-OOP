@@ -29,7 +29,7 @@ public class ExplosiveZombie extends Zombie implements ZombieAbility {
         Petak currentPetak = map.getPetak(currentPosition);
         Petak frontPetak = map.getPetakInFrontOfZombie(this);
 
-        if (frontPetak != null && !frontPetak.getPlants().isEmpty()) {
+        // if (frontPetak != null && !frontPetak.getPlants().isEmpty()) {
             // Ambil taneman di depan
             Plant plant = frontPetak.getPlants().get(0);
             plant.reduceHealth(plant.getHealth()); // Set health tanaman ke 0
@@ -38,7 +38,7 @@ public class ExplosiveZombie extends Zombie implements ZombieAbility {
             this.reduceHealth(this.getHealth()); // Set health zombie ke 0
             currentPetak.removeCreature(this); // Hapus zombie dari petak saat 
             // Not sure if plant harus di-remove juga nggak? Harusnya iya
-        }
+    
     }
 
     @Override

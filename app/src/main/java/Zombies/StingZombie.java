@@ -22,6 +22,25 @@ public class StingZombie extends Zombie implements ZombieAbility {
 
     @Override
     public void useAbility() {
+            GameMap gameMap = GameMap.getInstance();
+            Petak inFrontOfZombie = gameMap.getPetakInFrontOfZombie(this);
+            // Menyerang tanaman di depan
+            Plant targetPlant = inFrontOfZombie.getPlants().get(0); // Mengambil tanaman pertama di depan zombie
+            // int currentPlantHealth = targetPlant.getHealth();
+            // int damageDealt = this.getAttackDamage();
+
+            // Mengurangi kesehatan tanaman dengan serangan jarak jauh
+            targetPlant.reduceHealth(this.getAttackDamage()+50); // Langsung membunuh tanaman
+
+                // System.out.println(this.getName() + " killed " + targetPlant.getName() + " from distance.");
+
+            abilityUsed = true; // Menandai bahwa kemampuan telah digunakan
+            }
+    
+    
+
+    @Override
+    public void checkToUseAbility() {
         if (!abilityUsed) {
             // Mencari tanaman di depan zombie
             GameMap gameMap = GameMap.getInstance();
@@ -29,27 +48,9 @@ public class StingZombie extends Zombie implements ZombieAbility {
             Petak inFrontOfZombie = gameMap.getPetakInFrontOfZombie(this);
 
             if (!inFrontOfZombie.getPlants().isEmpty()) {
-                // Menyerang tanaman di depan
-                Plant targetPlant = inFrontOfZombie.getPlants().get(0); // Mengambil tanaman pertama di depan zombie
-                int currentPlantHealth = targetPlant.getHealth();
-                // int damageDealt = this.getAttackDamage();
-
-                // Mengurangi kesehatan tanaman dengan serangan jarak jauh
-                targetPlant.reduceHealth(this.getAttackDamage()+50); // Langsung membunuh tanaman
-
-                // System.out.println(this.getName() + " killed " + targetPlant.getName() + " from distance.");
-
-                abilityUsed = true; // Menandai bahwa kemampuan telah digunakan
+                useAbility();
             }
-        }
     }
-
-    @Override
-    public void checkToUseAbility() {
-        if (!abilityUsed) {
-            useAbility();
-        }
     }
-
 
 }

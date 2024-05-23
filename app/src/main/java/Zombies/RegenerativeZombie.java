@@ -11,34 +11,25 @@ import ZombieAbility.*;
 
 public class RegenerativeZombie extends Zombie implements ZombieAbility {
 
-    private long lastRegenerationTime;
-    private static final long REGENERATION_INTERVAL = 20000; // 20 detik 
+    private boolean abilityUsed;
 
     public RegenerativeZombie(){
         super("Regenerative Zombie", 150, 100, 1, 1,false,  new Position(0, 0));
-        this.lastRegenerationTime = System.currentTimeMillis();
+        this.abilityUsed = false;
     }
 
     @Override
     public void useAbility() {
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastRegenerationTime >= REGENERATION_INTERVAL) {
-            regenerate();
-            lastRegenerationTime = currentTime;
-        }
+        this.setHealth(this.getHealth() + 50); // Menambah health sebesar 50
+        abilityUsed = true;
     }
+    
 
     @Override
     public void checkToUseAbility() {
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastRegenerationTime >= REGENERATION_INTERVAL) {
+        if (!abilityUsed && getHealth() <= 50) {
             useAbility();
         }
     }
-
-    private void regenerate() {
-        if (this.getHealth() > 0) { // Pastikan zombie masih hidup
-            this.setHealth(this.getHealth() + 25);
-        }
-    }
 }
+

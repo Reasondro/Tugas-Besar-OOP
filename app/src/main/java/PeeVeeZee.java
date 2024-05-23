@@ -26,6 +26,8 @@ public class PeeVeeZee{
 
         boolean gameStarted = false;
 
+        System.out.println("Welcome to PeeVeeZee!");
+
         while(isRunning)
         {
 
@@ -73,7 +75,7 @@ public class PeeVeeZee{
                 int index2 = Integer.parseInt(input.nextLine());
                 myInventory.swapPlantInInventory(index1, index2);
 
-                System.out.println("After swapping in inventory");
+                System.out.println("After swapping in inventory!");
                 myInventory.printInventory();
 
             }
@@ -83,6 +85,13 @@ public class PeeVeeZee{
             }
             else if(userInput.equalsIgnoreCase("5") ) //? Add Card to Deck
             {
+
+                if(myDeck.getMyCards().size() == 6)
+                {
+                    System.out.println("Your deck is full!");
+                    continue;
+                }
+
                 myInventory.printInventory();
                 
                 System.out.print("Enter the index of the card you want to add to deck: "); 
@@ -90,18 +99,25 @@ public class PeeVeeZee{
 
                 myInventory.addCardToDeckWithIndex(myDeck, index);
 
-                System.out.println("After adding to deck");
+                System.out.println("After adding to deck!");
                 myDeck.printDeck();
             }
             else if(userInput.equalsIgnoreCase("6")  ) //? Remove Card from Deck
             {
+
+                if(myDeck.getMyCards().size() == 0)
+                {
+                    System.out.println("No card in deck!");
+                    continue;
+                }
+
                 myDeck.printDeck();
 
                 System.out.print("Enter the index of the card you want to remove from deck: ");
                 int index = Integer.parseInt(input.nextLine());
 
                 myInventory.removeCardFromDeckWithIndex(myDeck, index);
-                System.out.println("After removing from deck");
+                System.out.println("After removing from deck!");
                 myDeck.printDeck();
 
             }
@@ -116,7 +132,7 @@ public class PeeVeeZee{
                 int index2 = Integer.parseInt(input.nextLine());
                 myInventory.swapCardInDeck(myDeck, index1, index2);
 
-                System.out.println("After swapping in deck");
+                System.out.println("After swapping in deck!");
                 myDeck.printDeck();
 
             }
@@ -219,7 +235,39 @@ public class PeeVeeZee{
                 map.printMap();
                 
             }
-            else if(userInput.equalsIgnoreCase("3")) //? Display the map
+            else if(userInput.equalsIgnoreCase("3") ) //? Plant a plant
+            {
+          
+
+                int row;
+                int column;
+                
+                System.out.println("Choose the Petak's row (1-6) and column(1-9)!"); 
+                System.out.println("Example: 6 9 (Row 6, column 9)");
+
+                userInput = input.nextLine();
+                String[] parts = userInput.trim().split(" ");
+
+                if (parts.length == 2) {
+                    row = Integer.parseInt(parts[0].trim());
+                    column = Integer.parseInt(parts[1].trim());
+                }
+                else
+                {
+                    System.out.println("Invalid input. Please try again.");
+                    continue;
+                }
+                myDeck.digging(row, column);
+            
+                long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
+                long elapsedSeconds = currentTime/1000;
+                long secondsDisplay = elapsedSeconds % 60;
+                long minutesDisplay = elapsedSeconds / 60;
+                System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
+                map.printMap();
+                
+            }
+            else if(userInput.equalsIgnoreCase("4")) //? Display the map
             {
                 long currentTime = TimerThread.getCurrentTime() - TimerThread.getDayStart();
                 long elapsedSeconds = currentTime/1000;
@@ -228,7 +276,7 @@ public class PeeVeeZee{
                 System.out.println("Time right now "+ minutesDisplay + ":" + secondsDisplay);
                 map.printMap();
             }
-            else if(userInput.equalsIgnoreCase("4")) //? Exit the game
+            else if(userInput.equalsIgnoreCase("5")) //? Exit the game
             {
                 timerThread.interrupt();
 
@@ -244,8 +292,9 @@ public class PeeVeeZee{
                 System.out.println("List of commands: ");
                 System.out.println("1. STATUS - Display the status of the game");
                 System.out.println("2. PLANTING - Plant a plant");
-                System.out.println("3. MAP - Display the map");
-                System.out.println("4. EXIT - Exit the game");
+                System.out.println("3. DIGGING - Dig a petak");
+                System.out.println("4. MAP - Display the map");
+                System.out.println("5. EXIT - Exit the game");
             }
             else //? Invalid Command
             {
