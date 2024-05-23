@@ -1,10 +1,11 @@
 public class Title {
     public static void main(String[] args) {
         // Call the method to print ASCII art with color
-        AsciiArtWithColor.welcome();
+        Welcome.to();
         Michael.printMichael();
         Vs.printVs();
         Lalapan.printLalapan();
+        Border.to();
     }
 }
 
@@ -115,3 +116,63 @@ class Lalapan {
         }
     }
 }
+
+class Welcome {
+    public static void to() {
+        String white = "\u001B[37m";
+        String reset = "\u001B[0m";
+        
+        String[] art = {
+            " ╦ ╦┌─┐┬  ┌─┐┌─┐┌┬┐┌─┐  ╔╦╗┌─┐",
+            " ║║║├┤ │  │  │ ││││├┤    ║ │ │",
+            " ╚╩╝└─┘┴─┘└─┘└─┘┴ ┴└─┘   ╩ └─┘",
+            " ================================================================== "
+        };
+
+        // Adjust the ASCII art position
+        int consoleWidth = 80; // Assuming console width of 80 characters
+        int shiftLeft = 8; // Shift 8 characters to the left
+        for (String line : art) {
+            int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
+            System.out.print(white); // Set color to white
+            System.out.println(" ".repeat(Math.max(padding, 0)) + line);
+        }
+        System.out.print(reset); // Reset color
+    }
+
+    public static void main(String[] args) {
+        to();
+    }
+}
+
+class Border {
+    public static void to() {
+        String white = "\u001B[37m";
+        String reset = "\u001B[0m";
+        
+        String[] art = {
+            " ================================================================== "
+        };
+
+        // Adjust the ASCII art position
+        int consoleWidth = 80; // Assuming console width of 80 characters
+        int shiftLeft = 8; // Shift 8 characters to the left
+        for (String line : art) {
+            int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
+            System.out.print(white); // Set color to white
+            System.out.println(" ".repeat(Math.max(padding, 0)) + line);
+        }
+        System.out.print(reset); // Reset color
+    }
+
+    public static void main(String[] args) {
+        to();
+    }
+}
+
+
+
+
+
+
+

@@ -228,14 +228,6 @@ abstract class Plant extends Creature{
 + displayStatus(): void
 }
 
-class BulletPlant extends Plant implements PlantAbility{
-- bullet: BasicBullet
-- reachablePetak: List<Petak>
-+ getReachablePetak(): List<Petak>
-+ setReachablePetak(reachablePetak: List<Petak>): void
-+ isZombieInRange(): boolean
-}
-
 class Kernelpult extends Plant implements PlantAbility{
 - corn: CornBullet
 - butter: ButterBullet
