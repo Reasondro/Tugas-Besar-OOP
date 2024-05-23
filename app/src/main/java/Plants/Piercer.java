@@ -3,8 +3,6 @@ package Plants;
 import Position.Position;
 
 import PlantAbility.*;
-import Zombies.Zombie;
-import Bullet.PeaBullet;
 import Bullet.PiercerBullet;
 
 import java.util.List;
@@ -89,7 +87,7 @@ public class Piercer extends Plant implements PlantAbility{
         }
         else if(!(isZombiesInRange()) && getAttackTimer() == 0)
         {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 }

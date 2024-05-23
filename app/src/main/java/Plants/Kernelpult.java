@@ -2,7 +2,6 @@ package Plants;
 
 import Position.Position;
 import PlantAbility.*;
-import Zombies.Zombie;
 import java.util.List;
 
 import Bullet.Bullet;
@@ -20,7 +19,7 @@ public class Kernelpult extends Plant implements PlantAbility {
     private int changeBulletTimer = 0;
 
     public Kernelpult() {
-        super("Kernelpult", 200, 200, 30, 6, -1, 10, new Position(0, 0));
+        super("Kernelpult", 140, 200, 30, 6, -1, 10, new Position(0, 0));
         bullet = new ButterBullet(getAttackDamage());}
 
     public List<Petak> getReachablePetak() {
@@ -83,7 +82,7 @@ public class Kernelpult extends Plant implements PlantAbility {
         } else if (getAttackTimer() > 0) {
             setAttackTimer(getAttackTimer() - 1);
         } else if (!isZombiesInRange() && getAttackTimer() == 0) {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 }

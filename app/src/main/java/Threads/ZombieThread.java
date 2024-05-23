@@ -45,7 +45,14 @@ public class ZombieThread implements Runnable {
     NormalZombieFactory normalZombieFactory = new NormalZombieFactory();
     PoleVaultingZombieFactory poleVaultingZombieFactory = new PoleVaultingZombieFactory();
 
-    List<ZombieFactory> zombieFactories = Arrays.asList(bucketheadZombieFactory, coneheadZombieFactory, normalZombieFactory, poleVaultingZombieFactory);
+    //? punya @Aurasindu
+    DoubleAttackZombieFactory doubleAttackZombieFactory = new DoubleAttackZombieFactory();
+    ExplosiveZombieFactory explosiveZombieFactory = new ExplosiveZombieFactory();
+    RegenerativeZombieFactory regenerativeZombieFactory = new RegenerativeZombieFactory();
+    StingZombieFactory stingZombieFactory = new StingZombieFactory();
+
+    List<ZombieFactory> zombieFactories = Arrays.asList(bucketheadZombieFactory, coneheadZombieFactory, normalZombieFactory, poleVaultingZombieFactory
+    , doubleAttackZombieFactory, explosiveZombieFactory, regenerativeZombieFactory, stingZombieFactory);
     List<ZombieFactory> aquaticZombieFactories = Arrays.asList(duckyTubeZombieFactory, dolphinRiderZombieFactory);
 
     
@@ -87,6 +94,11 @@ public class ZombieThread implements Runnable {
         dolphinRiderZombieFactory.resetFactory();
         normalZombieFactory.resetFactory();
         poleVaultingZombieFactory.resetFactory();
+        doubleAttackZombieFactory.resetFactory();
+        explosiveZombieFactory.resetFactory();
+        regenerativeZombieFactory.resetFactory();
+        stingZombieFactory.resetFactory();
+
     }
 
     int zombieSpawnTimer;

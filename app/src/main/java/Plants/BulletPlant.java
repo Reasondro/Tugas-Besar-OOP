@@ -1,7 +1,6 @@
 package Plants;
 import Position.Position;
 import PlantAbility.*;
-import Bullet.Bullet;
 import Bullet.BasicBullet;
 import GameMap.GameMap;
 import Petak.Petak;

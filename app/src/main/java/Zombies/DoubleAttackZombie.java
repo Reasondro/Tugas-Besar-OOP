@@ -1,7 +1,9 @@
 package Zombies;
 
+import Creature.Creature;
 import GameMap.GameMap;
 import Petak.Petak;
+import Plants.Plant;
 
 // import java.util.List;
 
@@ -19,6 +21,7 @@ import ZombieAbility.*;
 
 public class DoubleAttackZombie extends Zombie implements ZombieAbility{
 
+    private Petak petakInFront;
     private boolean abilityUsed;
     private int originalAttackDamage;
 
@@ -28,6 +31,29 @@ public class DoubleAttackZombie extends Zombie implements ZombieAbility{
         this.originalAttackDamage = getAttackDamage();
     }
 
+    public Petak getPetakInFront()
+    {
+        return petakInFront;
+    }
+
+    public void setPetakInFront(Petak petakInFront)
+    {
+        this.petakInFront = petakInFront;
+    }
+
+   public boolean isPlantInFront()
+    {
+        setPetakInFront(GameMap.getInstance().getPetakInFrontOfZombie(this));
+        
+        for(Creature c : petakInFront.getCreatures())
+        {
+            if(c instanceof Plant)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void useAbility() {
             int currentAttackDamage = getAttackDamage();
@@ -38,17 +64,12 @@ public class DoubleAttackZombie extends Zombie implements ZombieAbility{
 
     @Override
     public void checkToUseAbility() {
-        if (!abilityUsed) {
-            GameMap gameMap = GameMap.getInstance();
-            Petak inFrontOfZombie = gameMap.getPetakInFrontOfZombie(this);
+        if ( isPlantInFront() && !abilityUsed) {
 
-            if (inFrontOfZombie != null && !inFrontOfZombie.getPlants().isEmpty()) {
-                useAbility();
-            }
-        }
-        else{
+            useAbility();
+            //? dibawah sini seelsai make ability.
             setAttackDamage(originalAttackDamage);
-            abilityUsed = false;
         }
+
     }
 }

@@ -41,23 +41,41 @@ public class Tangle extends Plant implements PlantAbility {
     }
 
     @Override
-    public void useAbility() {
-        if (isZombiesInRange()) {
-            Petak currentPetak = GameMap.getInstance().getPetak(getPos());
-            List<Zombie> zombies = currentPetak.getZombies();
-            if (!zombies.isEmpty()) {
-                Zombie target = zombies.get(0); // Tangling the first zombie in the petak
-                target.setHealth(0); // Kill the zombie
-                setHealth(0); // Tangle dies right after tangling the zombie
-                System.out.println("Tangle tangles a zombie and both die!");
+    public void useAbility( )
+    {
+        for(Petak p : reachablePetak)
+        {
+            synchronized(p)
+            {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    for(Zombie z : p.getZombies())
+                    {
+                    // int originalHealth = z.getHealth();
+                    z.reduceHealth(getAttackDamage()); //? instant kill zombie
+                    // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
+                    // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+                }
+                reduceHealth(getHealth()); //? kill the tanlge
+                } 
             }
         }
     }
 
     @Override
-    public void checkToUseAbility() {
-        if (isZombiesInRange()) {
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
+        {
             useAbility();
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 }

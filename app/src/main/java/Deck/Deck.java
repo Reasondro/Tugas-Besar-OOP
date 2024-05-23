@@ -12,6 +12,7 @@ import Position.Position;
 import Plants.Plant;
 import Threads.PlantThread;
 import Plants.Lilypad;
+import Plants.Tangle;
 import Sun.Sun;
 
 public class Deck<T extends PlantFactory> {
@@ -157,7 +158,7 @@ public class Deck<T extends PlantFactory> {
                 {
                     for(Plant p : plantsInPetak)
                     {
-                        if(p instanceof Lilypad && !(card.isAquatic()) )
+                        if(  p instanceof Lilypad   && !(card.isAquatic()) )
                         {
                             Plant newPlant = card.createPlant();
                             plantThread.addPlant(newPlant);
@@ -168,9 +169,9 @@ public class Deck<T extends PlantFactory> {
                             Sun.getInstance().subtractSunPoints(card.getCost());
                             return;
                         }
-                        else if(p instanceof Lilypad && card.isAquatic())
+                        else if((p instanceof Lilypad || p instanceof Tangle) && card.isAquatic())
                         {
-                            System.out.println("Cannot plant more than 1 lilypad in a pool");
+                            System.out.println("Cannot plant more than 1 aquatic plant in a pool");
                             return;
                         }
                     }
@@ -206,7 +207,7 @@ public class Deck<T extends PlantFactory> {
                 }
                 else if(card.isAquatic())
                 {
-                    System.out.println("Cannot plant lilypad outside of pool");
+                    System.out.println("Cannot plant aquatic-plant outside of pool");
                     return;
                 }
                 else

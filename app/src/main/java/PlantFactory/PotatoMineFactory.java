@@ -10,7 +10,7 @@ public class PotatoMineFactory extends PlantFactory {
 
     public PotatoMineFactory()
     {
-        super("PotatoMine Card", 10, false, 25);
+        super("PotatoMine Card", 10, false, 100);
     }
 
     public Plant createPlant()

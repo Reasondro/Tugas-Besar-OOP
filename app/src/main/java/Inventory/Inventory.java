@@ -1,7 +1,6 @@
 package Inventory;
 
 import PlantFactory.*;
-import Plants.BulletPlant;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,11 +14,10 @@ import java.util.ArrayList;
 
 public class PotatoMine extends Plant implements PlantAbility {
 
-    private boolean isReady = false;
     private List<Petak> reachablePetak = new ArrayList<>();
     
     public PotatoMine() {
-        super("PotatoMine", 25, 200, 50, 1, -1, 10, new Position(0, 0)); // Tentative damage
+        super("PotatoMine", 150, 200, 50, 1, -1, 10, new Position(0, 0)); // Tentative damage
     }
     
     // Uncomment and implement refreshCreature if needed
@@ -33,8 +32,25 @@ public class PotatoMine extends Plant implements PlantAbility {
     //     }
     // }
 
+    
     public boolean isZombiesInSamePetak() {
         return !GameMap.getInstance().getPetak(getPos()).getZombies().isEmpty();
+    }
+
+    public boolean isZombiesInRange()
+    {
+        setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
+        for(Petak p : reachablePetak)
+        {
+            synchronized(p)
+            {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    return true;
+                }
+            }
+    }
+        return false;
     }
 
     public List<Petak> getReachablePetak() {
@@ -65,6 +81,8 @@ public class PotatoMine extends Plant implements PlantAbility {
                         z.setFrozen(true);
                         z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
                     }
+                    reduceHealth(getHealth()); //? kill the squash
+
 
                     // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                     // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
@@ -77,9 +95,19 @@ public class PotatoMine extends Plant implements PlantAbility {
 
     // Implement checkToUseAbility method from PlantAbility interface
     @Override
-    public void checkToUseAbility() {
-        if (isReady && isZombiesInSamePetak()) {
+    public void checkToUseAbility()
+    {
+        if (isZombiesInRange() && getAttackTimer() == 0)
+        {
             useAbility();
+        }
+        else if(getAttackTimer() > 0)
+        {
+            setAttackTimer(getAttackTimer()-1);
+        }
+        else if(!(isZombiesInRange()) && getAttackTimer() == 0)
+        {
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 }
