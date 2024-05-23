@@ -52,7 +52,7 @@ public class Tangle extends Plant implements PlantAbility {
                     for(Zombie z : p.getZombies())
                     {
                     // int originalHealth = z.getHealth();
-                    z.reduceHealth(getAttackDamage()); //? instant kill zombie
+                    z.reduceHealth(z.getHealth()); //? instant kill zombie
                     // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                     // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
                 }
