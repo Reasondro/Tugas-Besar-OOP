@@ -11,7 +11,7 @@ public class KernelpultFactory extends PlantFactory {
     public KernelpultFactory()
     {
         super("Kernelpult Card", 10,false, 200);     
-    
+
 
     }
 

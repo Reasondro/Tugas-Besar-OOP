@@ -5,7 +5,6 @@ import Zombies.Zombie;
 
 public class KernelBullet extends Bullet {
 
-    private int damage;
 
     public KernelBullet(int damage) {
         super(damage);
