@@ -3,9 +3,8 @@ package Bullet;
 import Petak.Petak;
 import Zombies.Zombie;
 
-public class BasicBullet extends Bullet {
-
-    public BasicBullet(int damage) {
+public class CornBullet extends Bullet {
+    public CornBullet(int damage) {
         super(damage);
     }
 
@@ -18,9 +17,4 @@ public class BasicBullet extends Bullet {
         }
         setWornOut(true);
     }
-    // else //? use this if want to test the bullet when there is no zombie in the
-    // petak
-    // {
-    // System.out.println("No zombie in this petak");
-    // }
 }

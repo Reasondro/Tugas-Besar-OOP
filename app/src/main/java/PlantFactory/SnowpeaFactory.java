@@ -3,18 +3,15 @@ package PlantFactory;
 import Plants.Plant;
 import Plants.Snowpea;
 
-public class SnowpeaFactory extends PlantFactory{
+public class SnowpeaFactory extends PlantFactory {
 
     private static int snowpeaCount = 0;
 
-    public SnowpeaFactory()
-    {
-        super("Snowpea Card", 10);
+    public SnowpeaFactory() {
+        super("Snowpea Card", 10, false, 175);
     }
 
-
-    public Plant createPlant()
-    {
+    public Plant createPlant() {
         snowpeaCount++;
         PlantFactory.incrementPlantCount();
 
@@ -24,9 +21,8 @@ public class SnowpeaFactory extends PlantFactory{
         return new Snowpea();
     }
 
-    public static int getSnowpeaCount()
-    {
+    public static int getSnowpeaCount() {
         return snowpeaCount;
     }
-    
+
 }

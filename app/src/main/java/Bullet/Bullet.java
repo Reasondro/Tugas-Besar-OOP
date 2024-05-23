@@ -1,4 +1,5 @@
 package Bullet;
+
 import Petak.Petak;
 
 public abstract class Bullet {
@@ -28,5 +29,4 @@ public abstract class Bullet {
 
     public abstract void hit(Petak petak);
 
-    
 }

@@ -3,18 +3,15 @@ package PlantFactory;
 import Plants.Plant;
 import Plants.Sunflower;
 
-public class SunflowerFactory extends PlantFactory{
+public class SunflowerFactory extends PlantFactory {
 
     private static int sunflowerCount = 0;
 
-    public SunflowerFactory()
-    {
-        super("Sunflower Card", 10);
+    public SunflowerFactory() {
+        super("Sunflower Card", 10, false, 50);
     }
 
-
-    public Plant createPlant()
-    {
+    public Plant createPlant() {
         sunflowerCount++;
         PlantFactory.incrementPlantCount();
 
@@ -24,9 +21,8 @@ public class SunflowerFactory extends PlantFactory{
         return new Sunflower();
     }
 
-    public static int getSunflowerCount()
-    {
+    public static int getSunflowerCount() {
         return sunflowerCount;
     }
-    
+
 }

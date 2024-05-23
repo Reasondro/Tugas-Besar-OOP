@@ -7,13 +7,11 @@ public class WallnutFactory extends PlantFactory {
 
     private static int wallnutCount = 0;
 
-    public WallnutFactory()
-    {
-        super("Wallnut Card", 20);
+    public WallnutFactory() {
+        super("Wallnut Card", 20, false, 50);
     }
 
-    public Plant createPlant()
-    {
+    public Plant createPlant() {
         wallnutCount++;
         PlantFactory.incrementPlantCount();
 
@@ -23,9 +21,8 @@ public class WallnutFactory extends PlantFactory {
         return new Wallnut();
     }
 
-    public static int getWallnutCount()
-    {
+    public static int getWallnutCount() {
         return wallnutCount;
     }
-    
+
 }

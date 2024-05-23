@@ -4,8 +4,6 @@ import Creature.*;
 import Position.*;
 import PlantAbility.PlantAbility;
 
-
-
 public abstract class Plant extends Creature {
 
     private int cost;
@@ -14,13 +12,11 @@ public abstract class Plant extends Creature {
     private float originalCooldown;
 
     // private boolean isPlanted = false;
-    
 
+    public Plant(String name, int cost, int health, int attackDamage, float attackSpeed, int range, float cooldown,
+            Position pos) {
 
-    public Plant(String name, int cost, int health, int attackDamage, float attackSpeed, int range, float cooldown, Position pos )
-    {
-
-        super(name, health, attackDamage, attackSpeed,range , pos);
+        super(name, health, attackDamage, attackSpeed, range, pos);
         this.cost = cost;
         // this.range = range;
         this.cooldown = cooldown;
@@ -35,7 +31,6 @@ public abstract class Plant extends Creature {
         this.cost = cost;
     }
 
-
     public float getCooldown() {
         return cooldown;
     }
@@ -44,43 +39,34 @@ public abstract class Plant extends Creature {
         this.cooldown = cooldown;
     }
 
-    public void reduceCooldown()
-    {
-        if(cooldown<0)
-        {
+    public void reduceCooldown() {
+        if (cooldown < 0) {
             return;
-        }
-        else if(cooldown == 0)
-        {
+        } else if (cooldown == 0) {
             refreshCooldown();
-        }
-        else if(cooldown > 0) //TODO implement a way so if user haven't planted the plant/card yet, the cooldown will not be reduced
+        } else if (cooldown > 0) // TODO implement a way so if user haven't planted the plant/card yet, the
+                                 // cooldown will not be reduced
         {
-        cooldown--;
+            cooldown--;
         }
-        
+
     }
 
-    public void refreshCooldown()
-    {
-        cooldown = originalCooldown;;
+    public void refreshCooldown() {
+        cooldown = originalCooldown;
+        ;
     }
 
-    public void refreshPlant()
-    {
+    public void refreshPlant() {
         // refreshCooldown();
-        if(getHealth() > 0)
-        {
-            if(this instanceof PlantAbility)
-            {
+        if (getHealth() > 0) {
+            if (this instanceof PlantAbility) {
                 ((PlantAbility) this).checkToUseAbility();
             }
-        } 
+        }
     }
 
-
-    public void displayStatus()
-    {
+    public void displayStatus() {
         System.out.println("Name: " + getName());
         System.out.println("Cost: " + getCost());
         System.out.println("Health: " + getHealth());

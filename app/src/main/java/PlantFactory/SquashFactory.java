@@ -4,17 +4,14 @@ import Plants.Plant;
 import Plants.Squash;
 
 public class SquashFactory extends PlantFactory {
-    
+
     private static int squashCount = 0;
 
-
-    public SquashFactory()
-    {
-        super("Squash Card", 20);
+    public SquashFactory() {
+        super("Squash Card", 20, false, 50);
     }
 
-    public Plant createPlant()
-    {
+    public Plant createPlant() {
         squashCount++;
         PlantFactory.incrementPlantCount();
 
@@ -24,8 +21,7 @@ public class SquashFactory extends PlantFactory {
         return new Squash();
     }
 
-    public static int getSquashCount()
-    {
+    public static int getSquashCount() {
         return squashCount;
     }
 

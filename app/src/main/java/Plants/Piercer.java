@@ -5,20 +5,21 @@ import Position.Position;
 import PlantAbility.*;
 import Zombies.Zombie;
 import Bullet.PeaBullet;
+import Bullet.PiercerBullet;
 
 import java.util.List;
 import java.util.ArrayList;
 import GameMap.GameMap;
 import Petak.Petak;
 
-public class Peashooter extends Plant implements PlantAbility {
+public class Piercer extends Plant implements PlantAbility {
 
-    private PeaBullet bullet;
+    private PiercerBullet bullet;
     private List<Petak> reachablePetak = new ArrayList<Petak>();
 
-    public Peashooter() {
-        super("Peashooter", 100, 100, 25, 4, -1, 10, new Position(0, 0));
-        bullet = new PeaBullet(getAttackDamage());
+    public Piercer() {
+        super("Piercer", 120, 100, 80, 0, 0, 0, new Position(0, 0));
+        bullet = new PiercerBullet(getAttackDamage());
     }
 
     public List<Petak> getReachablePetak() {
@@ -56,7 +57,7 @@ public class Peashooter extends Plant implements PlantAbility {
             }
         }
         setAttackTimer(getAttackSpeed());
-        bullet = new PeaBullet(getAttackDamage());
+        bullet = new PiercerBullet(getAttackDamage());
     }
 
     @Override
@@ -66,8 +67,7 @@ public class Peashooter extends Plant implements PlantAbility {
         } else if (getAttackTimer() > 0) {
             setAttackTimer(getAttackTimer() - 1);
         } else if (!(isZombiesInRange()) && getAttackTimer() == 0) {
-            // System.out.printf("No zombies in range for %s\n", getName());
+            System.out.printf("No zombies in range for %s\n", getName());
         }
     }
-
 }

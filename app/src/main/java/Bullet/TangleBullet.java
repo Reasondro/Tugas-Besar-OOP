@@ -3,9 +3,9 @@ package Bullet;
 import Petak.Petak;
 import Zombies.Zombie;
 
-public class SquashBullet extends Bullet {
+public class TangleBullet extends Bullet {
 
-    public SquashBullet(int damage) {
+    public TangleBullet(int damage) {
         super(damage);
     }
 

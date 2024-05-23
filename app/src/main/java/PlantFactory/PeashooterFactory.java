@@ -7,14 +7,12 @@ public class PeashooterFactory extends PlantFactory {
 
     private static int peashooterCount = 0;
 
-    public PeashooterFactory()
-    {
-        super("Peashooter Card", 10);
+    public PeashooterFactory() {
+        super("Peashooter Card", 10, false, 100);
 
     }
 
-    public Plant createPlant()
-    {
+    public Plant createPlant() {
         peashooterCount++;
         PlantFactory.incrementPlantCount();
 
@@ -24,9 +22,8 @@ public class PeashooterFactory extends PlantFactory {
         return new Peashooter();
     }
 
-    public static int getPeashooterCount()
-    {
+    public static int getPeashooterCount() {
         return peashooterCount;
     }
-    
+
 }

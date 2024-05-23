@@ -28,24 +28,20 @@ public class SnowBullet {
         this.wornOut = wornOut;
     }
 
-    public void hit(Petak p)
-    {
+    public void hit(Petak p) {
 
-        synchronized(p)
-        {
-           for(Zombie z : p.getZombies())
-           {
-            z.reduceHealth(getDamage());
-            z.setFrozenTimer(3);
-            if(z.isFrozen() == false)
-            {
-                z.setFrozen(true);
-                z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
+        synchronized (p) {
+            for (Zombie z : p.getZombies()) {
+                z.reduceHealth(getDamage());
+                z.setFrozenTimer(3);
+                if (z.isFrozen() == false) {
+                    z.setFrozen(true);
+                    z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
+                }
             }
-           }
         }
-           setWornOut(true);
+        setWornOut(true);
 
     }
-    
+
 }
