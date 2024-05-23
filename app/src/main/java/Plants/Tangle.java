@@ -17,7 +17,7 @@ public class Tangle extends Plant implements PlantAbility {
     private List<Petak> reachablePetak = new ArrayList<>();
     
     public Tangle() {
-        super("Tangle", 50, 50, 100, 1, -1, 0, new Position(0, 0)); // Damage tentative
+        super("Tangle", 50, 50, 5000, 1, -1, 0, new Position(0, 0)); // Damage tentative
     }
 
     public List<Petak> getReachablePetak() {
