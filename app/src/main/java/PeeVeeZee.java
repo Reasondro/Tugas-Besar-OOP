@@ -31,6 +31,7 @@ public class PeeVeeZee{
         while(isRunning)
         {
 
+            Title.Main();
             System.out.print("Enter your command: ");
             userInput = input.nextLine().trim();
 
