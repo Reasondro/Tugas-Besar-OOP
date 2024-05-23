@@ -26,12 +26,10 @@ public class PeeVeeZee{
 
         boolean gameStarted = false;
 
-        System.out.println("Welcome to PeeVeeZee!");
+        Title.Main();
 
         while(isRunning)
         {
-
-            Title.Main();
             System.out.print("Enter your command: ");
             userInput = input.nextLine().trim();
 
