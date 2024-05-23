@@ -405,6 +405,27 @@ class PoleVaultingZombieFactory extends ZombieFactory{
 + getPoleVaultingZombieCount(): int
 }
 
+class StingZombieFactory extends ZombieFactory{
+- StingZombieCount: int
++ getStingZombieCount(): int
+}
+
+class RegenerativeZombieFactory extends ZombieFactory{
+- regenerativeZombieCount: int
++ getRegenerativeZombieCount(): int
+}
+
+class ExplosiveZombieFactory extends ZombieFactory{
+- explosiveZombieCount: int
++ getExplosiveZombieCount(): int
+}
+
+class DoubleAttackZombieFactory extends ZombieFactory{
+- doubleAtttackZombieCount: int
++ getDoubleAttackZombieCount(): int
+}
+
+
 abstract class Zombie extends Creature{
 - walkSpeedInSeconds: float
 - walkTimer: float
@@ -461,6 +482,32 @@ class PoleVaultingZombie extends Zombie implements ZombieAbility{
 + setPetakInFront(petakInFront: Petak)
 + isPlantInFront(): boolean
 }
+
+class DoubleAttackZombie extends Zombie implements ZombieAbility{
+- abilityUsed: boolean
+- originalAttackDamage: int
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+class StingZombie extends Zombie implements ZombieAbility{
+- abilityUsed: boolean
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+class RegenerativeZombie extends Zombie implements ZombieAbility{
+- abilityUsed: boolean
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+class ExplosiveZombie extends Zombie implements ZombieAbility{
++ useAbility(): void
++ checkToUseAbility(): void
+}
+
+
 
 class App{
 }
