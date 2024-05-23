@@ -18,7 +18,7 @@ public class PotatoMine extends Plant implements PlantAbility {
     private List<Petak> reachablePetak = new ArrayList<>();
     
     public PotatoMine() {
-        super("PotatoMine", 25, 200, 50, 1, -1, 0, new Position(0, 0)); // Tentative damage
+        super("PotatoMine", 25, 200, 50, 1, -1, 10, new Position(0, 0)); // Tentative damage
     }
     
     // Uncomment and implement refreshCreature if needed

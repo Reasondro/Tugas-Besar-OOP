@@ -1,26 +1,32 @@
-// package PlantFactory;
+package PlantFactory;
 
-// import Plants.PotatoMine;
-// import Plants.Plant;
+import Plants.Plant;
+import Plants.PotatoMine;
 
-// public class PotatoMineFactory extends PlantFactory {
-
-//     private static int potatoMineCount = 0;
-
+public class PotatoMineFactory extends PlantFactory {
     
+    private static int squashCount = 0;
 
 
-//     public Plant createPlant()
-//     {
-//         potatoMineCount++;
-//         PlantFactory.incrementPlantCount();
+    public PotatoMineFactory()
+    {
+        super("PotatoMine Card", 10, false, 25);
+    }
 
-//         return new PotatoMine();
-//     }
+    public Plant createPlant()
+    {
+        squashCount++;
+        PlantFactory.incrementPlantCount();
 
-//     public static int getPotatoMineCount()
-//     {
-//         return potatoMineCount;
-//     }
-    
-// }
+        setCooldownTimer(getFactoryCooldown());
+        setReady(false);
+
+        return new PotatoMine();
+    }
+
+    public static int getSquashCount()
+    {
+        return squashCount;
+    }
+
+}
