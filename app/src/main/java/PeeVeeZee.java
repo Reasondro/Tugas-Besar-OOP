@@ -308,3 +308,52 @@ public class PeeVeeZee{
 }
 
 
+class InvalidRowAtauColumn extends Exception {
+    public String getMessage() {
+        return "Invalid pada Row atau Column!";
+    }
+}
+
+class Decknotfull extends Exception {
+    public String getMessage() {
+        return "Deck harus mempunyai 6 kartu untuk Start!";
+    }
+}
+
+class PlantingException extends Exception {
+    public String getMessage() {
+        return ("Tidak bisa menanam 2 tanaman pada petak yang sama!");
+    }
+}
+
+class IndexOutDariBounds extends Exception {
+    public String getMessage() {
+        return ("Index tidak valid!");
+    }
+}
+
+class RemoveDeckException extends Exception {
+    public String getMessage() {
+        return ("Tidak bisa meremove deck yang kosong!");
+    }
+}
+
+class AddDeckException extends Exception {
+    public String getMessage() {
+        return ("TIdak bisa menambah deck yang penuh!");
+    }
+}
+
+class SwapCardException extends Exception {
+    public String getMessage() {
+        return ("Tidak bisa swap deck yang kosong!");
+    }
+}
+
+class DiggingException extends Exception {
+    public String getMessage() {
+        return ("Tidak bisa dig petak yang kosong!");
+    }
+}
+
+
