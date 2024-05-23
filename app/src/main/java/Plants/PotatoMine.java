@@ -18,7 +18,7 @@ public class PotatoMine extends Plant implements PlantAbility {
     private List<Petak> reachablePetak = new ArrayList<>();
     
     public PotatoMine() {
-        super("PotatoMine", 25, 400, 180, 1, -1, 0, new Position(0, 0)); // Tentative damage
+        super("PotatoMine", 25, 200, 50, 1, -1, 0, new Position(0, 0)); // Tentative damage
     }
     
     // Uncomment and implement refreshCreature if needed
@@ -45,19 +45,26 @@ public class PotatoMine extends Plant implements PlantAbility {
         this.reachablePetak = reachablePetak;
     }
 
-    // Override method from PlantAbility interface to handle using the ability
     @Override
-    public void useAbility() {
-        if (isReady && isZombiesInSamePetak()) {
-            Petak currentPetak = GameMap.getInstance().getPetak(getPos());
-            List<Zombie> zombies = currentPetak.getZombies();
-            for (Zombie z : zombies) {
-                z.reduceHealth(z.getHealth()); // Instant kill zombies --> zombies dies
+    public void useAbility( )
+    {
+        for(Petak p : reachablePetak)
+        {
+            synchronized(p)
+            {
+                if(!(p.getZombies().isEmpty()))
+                {
+                    for(Zombie z : p.getZombies())
+                    {
+                    // int originalHealth = z.getHealth();
+                    z.reduceHealth(getAttackDamage()); //? instant kill zombie
+                    z.setAttackDamage(z.getAttackDamage()/2);
+                    // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
+                    // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
+                    
+                    }
+                } 
             }
-            setHealth(0); // Set health of PotatoMine to 0 (remove PotatoMine cuz it's already exploded)
-            System.out.println("PotatoMine explodes and vanishes!");
-        } else {
-            System.out.println("PotatoMine is not ready yet!");
         }
     }
 
