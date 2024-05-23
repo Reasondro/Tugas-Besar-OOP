@@ -7,8 +7,7 @@ import Plants.Plant;
 import GameMap.GameMap;
 // import Plants.Plant;
 
-// Kalau depannya tanaman, tanamannya mati
-// Cuma bisa dipake 1 kali ability-nya
+// Kalau depannya tanaman, tanamannya kena attack damage + 50
 
 
 public class StingZombie extends Zombie implements ZombieAbility {
@@ -36,7 +35,7 @@ public class StingZombie extends Zombie implements ZombieAbility {
                 // int damageDealt = this.getAttackDamage();
 
                 // Mengurangi kesehatan tanaman dengan serangan jarak jauh
-                targetPlant.reduceHealth(currentPlantHealth); // Langsung membunuh tanaman
+                targetPlant.reduceHealth(this.getAttackDamage()+50); // Langsung membunuh tanaman
 
                 // System.out.println(this.getName() + " killed " + targetPlant.getName() + " from distance.");
 
