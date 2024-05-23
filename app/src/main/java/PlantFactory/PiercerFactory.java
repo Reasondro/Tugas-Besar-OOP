@@ -24,7 +24,7 @@ public class PiercerFactory extends PlantFactory {
         setCooldownTimer(getFactoryCooldown());
         setReady(false);
 
-        return new Kernelpult();
+        return new Piercer();
     }
 
     public static int getPiercerCount()
