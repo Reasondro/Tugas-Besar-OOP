@@ -11,22 +11,6 @@ public class ButterBullet extends Bullet {
         super(damage);
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public boolean isWornOut() {
-        return wornOut;
-    }
-
-    public void setWornOut(boolean wornOut) {
-        this.wornOut = wornOut;
-    }
-
     public void hit(Petak p)
     {
 
