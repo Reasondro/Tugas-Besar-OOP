@@ -22,6 +22,10 @@ public class Inventory {
         inventory.add(new SquashFactory());
         inventory.add(new WallnutFactory());
         inventory.add(new LilypadFactory());
+        inventory.add(new TangleFactory());
+        inventory.add(new PotatoMineFactory());
+        inventory.add(new PiercerFactory());
+        inventory.add(new KernelpultFactory());
 
     }
 
