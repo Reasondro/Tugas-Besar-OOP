@@ -9,32 +9,34 @@ public class Title {
     }
 }
 
-class AsciiArtWithColor {
-    public static final String RESET = "\033[0m";
-    public static final String RED = "\033[0;31m";
-    public static final String GREEN = "\033[0;32m";
-    public static final String YELLOW = "\033[0;33m";
-    public static final String BLUE = "\033[0;34m";
-    public static final String PURPLE = "\033[0;35m";
-    public static final String CYAN = "\033[0;36m";
-
-    public static void welcome() { // Corrected method name to lower case
-        String[] art = {
-            " __      _____________.____   _________  ________      _____  ___________._.",
-            "/  \\    /  \\_   _____/|    |  \\_   ___ \\ \\_____  \\    /     \\ \\_   _____/| |",
-            "\\   \\/\\/   /|    __)_ |    |  /    \\  \\/  /   |   \\  /  \\ /  \\ |    __)_ | |",
-            " \\        / |        \\|    |__\\     \\____/    |    \\/    Y    \\|        \\ \\|",
-            "  \\__/\\  / /_______  /|_______ \\______  /\\_______  /\\____|__  /_______  / __",
-            "       \\/          \\/         \\/      \\/         \\/         \\/        \\/  \\/"
+class Welcome {
+    public static void to() {
+        String[] asciiArt = {
+            " _    _      _                            _____     ",
+            "| |  | |    | |                          |_   _|    ",
+            "| |  | | ___| | ___ ___  _ __ ___   ___    | | ___  ",
+            "| |/\\| |/ _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\   | |/ _ \\ ",
+            "\\  /\\  /  __/ | (_| (_) | | | | | |  __/   | | (_) |",
+            " \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|   \\_/\\___/ ",
+            "                                                    ",
+            "                                                    ",
+            "============================================================================ "
         };
 
-        String[] colors = {RED, GREEN, YELLOW, BLUE, PURPLE, CYAN};
-
-        for (int i = 0; i < art.length; i++) {
-            System.out.println(colors[i % colors.length] + art[i] + RESET);
+        int consoleWidth = 80; // lebar konsol
+        int shiftLeft = 4; // jumlah karakter untuk menggeser ke kiri
+        for (String line : asciiArt) {
+            int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
+            if (padding < 0) padding = 0;
+            for (int i = 0; i < padding; i++) {
+                System.out.print(" ");
+            }
+            System.out.println(line);
         }
     }
 }
+
+
 
 class Michael {
     // ANSI escape codes for colors
@@ -117,33 +119,33 @@ class Lalapan {
     }
 }
 
-class Welcome {
-    public static void to() {
-        String white = "\u001B[37m";
-        String reset = "\u001B[0m";
+// class Welcome {
+//     public static void to() {
+//         String white = "\u001B[37m";
+//         String reset = "\u001B[0m";
         
-        String[] art = {
-            " ╦ ╦┌─┐┬  ┌─┐┌─┐┌┬┐┌─┐  ╔╦╗┌─┐",
-            " ║║║├┤ │  │  │ ││││├┤    ║ │ │",
-            " ╚╩╝└─┘┴─┘└─┘└─┘┴ ┴└─┘   ╩ └─┘",
-            " ================================================================== "
-        };
+//         String[] art = {
+//             " ╦ ╦┌─┐┬  ┌─┐┌─┐┌┬┐┌─┐  ╔╦╗┌─┐",
+//             " ║║║├┤ │  │  │ ││││├┤    ║ │ │",
+//             " ╚╩╝└─┘┴─┘└─┘└─┘┴ ┴└─┘   ╩ └─┘",
+//             " ================================================================== "
+//         };
 
-        // Adjust the ASCII art position
-        int consoleWidth = 80; // Assuming console width of 80 characters
-        int shiftLeft = 8; // Shift 8 characters to the left
-        for (String line : art) {
-            int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
-            System.out.print(white); // Set color to white
-            System.out.println(" ".repeat(Math.max(padding, 0)) + line);
-        }
-        System.out.print(reset); // Reset color
-    }
+//         // Adjust the ASCII art position
+//         int consoleWidth = 80; // Assuming console width of 80 characters
+//         int shiftLeft = 8; // Shift 8 characters to the left
+//         for (String line : art) {
+//             int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
+//             System.out.print(white); // Set color to white
+//             System.out.println(" ".repeat(Math.max(padding, 0)) + line);
+//         }
+//         System.out.print(reset); // Reset color
+//     }
 
-    public static void main(String[] args) {
-        to();
-    }
-}
+//     public static void main(String[] args) {
+//         to();
+//     }
+// }
 
 class Border {
     public static void to() {
