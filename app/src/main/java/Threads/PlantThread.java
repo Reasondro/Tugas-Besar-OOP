@@ -123,7 +123,7 @@ public class PlantThread implements Runnable
             // SUN.resetSunPoints();
         
             // removePlants();
-            System.out.println("Plant Loop Interrupted");
+            // System.out.println("Plant Loop Interrupted");
            
             return;
             }

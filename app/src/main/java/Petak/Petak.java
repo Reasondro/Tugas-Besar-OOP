@@ -18,7 +18,7 @@ public class Petak {
     private List<Creature> creatures =  new ArrayList<>();
 
     public Petak(String type ,Position pos) {
-        this.type = type; //? TODO initialize pas generate map
+        this.type = type;
         this.pos = pos;
         this.creatures = new ArrayList<>();
     }

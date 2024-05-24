@@ -9,7 +9,7 @@ public class TangleFactory  extends PlantFactory{
 
     public TangleFactory()
     {
-        super("Tanlge Card", 10, true, 50);     
+        super("Tangle Card", 10, true, 50);     
     }
 
     public Plant createPlant()
@@ -28,4 +28,8 @@ public class TangleFactory  extends PlantFactory{
     {
         return tangleCount;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b

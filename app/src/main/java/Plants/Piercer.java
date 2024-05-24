@@ -3,8 +3,11 @@ package Plants;
 import Position.Position;
 
 import PlantAbility.*;
+<<<<<<< HEAD
 import Zombies.Zombie;
 import Bullet.PeaBullet;
+=======
+>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
 import Bullet.PiercerBullet;
 
 import java.util.List;
@@ -20,7 +23,11 @@ public class Piercer extends Plant implements PlantAbility{
 
     public Piercer()
     {
+<<<<<<< HEAD
         super("Piercer", 120, 100, 80, 0, 0, 0,  new Position(0, 0));
+=======
+        super("Piercer", 120, 100, 15, 0, -1, 10,  new Position(0, 0));
+>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
         bullet =  new PiercerBullet(getAttackDamage());
     }   
     
@@ -89,7 +96,7 @@ public class Piercer extends Plant implements PlantAbility{
         }
         else if(!(isZombiesInRange()) && getAttackTimer() == 0)
         {
-            System.out.printf("No zombies in range for %s\n", getName());
+            // System.out.printf("No zombies in range for %s\n", getName());
         }
     }
 }

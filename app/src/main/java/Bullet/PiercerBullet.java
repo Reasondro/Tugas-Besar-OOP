@@ -14,7 +14,11 @@ public class PiercerBullet extends Bullet{
         {
                for(Zombie z : p.getZombies())
                {
+<<<<<<< HEAD
                 int originalHealth = z.getHealth();
+=======
+                // int originalHealth = z.getHealth();
+>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
                 z.reduceHealth(getDamage());
                 // System.out.printf("Hit %s with damage %d\n", z.getName(), getDamage());
                 // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
@@ -25,5 +29,14 @@ public class PiercerBullet extends Bullet{
         //        System.out.println("No zombie in this petak");
         //    }
         }
+<<<<<<< HEAD
         
 }
+=======
+<<<<<<<< HEAD:app/src/main/java/Bullet/SquashBullet.java
+    
+========
+        
+>>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b:app/src/main/java/Bullet/PiercerBullet.java
+}
+>>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b

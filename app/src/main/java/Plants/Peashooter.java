@@ -3,7 +3,6 @@ package Plants;
 import Position.Position;
 
 import PlantAbility.*;
-import Zombies.Zombie;
 import Bullet.PeaBullet;
 
 import java.util.List;

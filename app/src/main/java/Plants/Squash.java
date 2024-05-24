@@ -65,8 +65,8 @@ public class Squash  extends Plant implements PlantAbility{
                     z.reduceHealth(getAttackDamage()); //? instant kill zombie
                     // System.out.printf("Hit %s with damage %d\n", z.getName(), getAttackDamage());
                     // System.out.printf("%s went from %d HP to %d HP\n", z.getName(), originalHealth, z.getHealth());
-                    reduceHealth(getHealth()); //? kill the squash
-                    }
+                }
+                reduceHealth(getHealth()); //? kill the squash
                 } 
             }
         }
