@@ -28,8 +28,4 @@ public class TangleFactory  extends PlantFactory{
     {
         return tangleCount;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b

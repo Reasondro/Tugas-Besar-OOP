@@ -41,17 +41,6 @@ public class Tangle extends Plant implements PlantAbility {
     }
 
     @Override
-<<<<<<< HEAD
-    public void useAbility() {
-        if (isZombiesInRange()) {
-            Petak currentPetak = GameMap.getInstance().getPetak(getPos());
-            List<Zombie> zombies = currentPetak.getZombies();
-            if (!zombies.isEmpty()) {
-                Zombie target = zombies.get(0); // Tangling the first zombie in the petak
-                target.setHealth(0); // Kill the zombie
-                setHealth(0); // Tangle dies right after tangling the zombie
-                System.out.println("Tangle tangles a zombie and both die!");
-=======
     public void useAbility( )
     {
         for(Petak p : reachablePetak)
@@ -69,18 +58,11 @@ public class Tangle extends Plant implements PlantAbility {
                 }
                 reduceHealth(getHealth()); //? kill the tanlge
                 } 
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
             }
         }
     }
 
     @Override
-<<<<<<< HEAD
-    public void checkToUseAbility() {
-        if (isZombiesInRange()) {
-            useAbility();
-        }
-=======
     public void checkToUseAbility()
     {
         if (isZombiesInRange() && getAttackTimer() == 0)
@@ -95,6 +77,5 @@ public class Tangle extends Plant implements PlantAbility {
         {
             // System.out.printf("No zombies in range for %s\n", getName());
         }
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
     }
 }

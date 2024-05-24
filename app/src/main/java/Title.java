@@ -36,11 +36,8 @@ class Welcome {
     }
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
 class Michael {
     // ANSI escape codes for colors
     public static final String RESET = "\033[0m";
@@ -122,35 +119,6 @@ class Lalapan {
     }
 }
 
-<<<<<<< HEAD
-class Welcome {
-    public static void to() {
-        String white = "\u001B[37m";
-        String reset = "\u001B[0m";
-        
-        String[] art = {
-            " ╦ ╦┌─┐┬  ┌─┐┌─┐┌┬┐┌─┐  ╔╦╗┌─┐",
-            " ║║║├┤ │  │  │ ││││├┤    ║ │ │",
-            " ╚╩╝└─┘┴─┘└─┘└─┘┴ ┴└─┘   ╩ └─┘",
-            " ================================================================== "
-        };
-
-        // Adjust the ASCII art position
-        int consoleWidth = 80; // Assuming console width of 80 characters
-        int shiftLeft = 8; // Shift 8 characters to the left
-        for (String line : art) {
-            int padding = (consoleWidth - line.length()) / 2 - shiftLeft;
-            System.out.print(white); // Set color to white
-            System.out.println(" ".repeat(Math.max(padding, 0)) + line);
-        }
-        System.out.print(reset); // Reset color
-    }
-
-    public static void main(String[] args) {
-        to();
-    }
-}
-=======
 // class Welcome {
 //     public static void to() {
 //         String white = "\u001B[37m";
@@ -178,7 +146,6 @@ class Welcome {
 //         to();
 //     }
 // }
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
 
 class Border {
     public static void to() {
@@ -203,15 +170,4 @@ class Border {
     public static void main(String[] args) {
         to();
     }
-<<<<<<< HEAD
 }
-
-
-
-
-
-
-
-=======
-}
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b

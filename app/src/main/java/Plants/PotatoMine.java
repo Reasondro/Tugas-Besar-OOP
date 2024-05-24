@@ -32,20 +32,11 @@ public class PotatoMine extends Plant implements PlantAbility {
     //     }
     // }
 
-<<<<<<< HEAD
-=======
     
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
     public boolean isZombiesInSamePetak() {
         return !GameMap.getInstance().getPetak(getPos()).getZombies().isEmpty();
     }
 
-<<<<<<< HEAD
-    public List<Petak> getReachablePetak() {
-        return reachablePetak;
-    }
-
-=======
     public boolean isZombiesInRange()
     {
         setReachablePetak(GameMap.getInstance().getRowBasedOnPlantRange(this));
@@ -66,26 +57,12 @@ public class PotatoMine extends Plant implements PlantAbility {
         return reachablePetak;
     }
 
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
     public void setReachablePetak(List<Petak> reachablePetak) {
         this.reachablePetak = reachablePetak;
     }
 
     // Override method from PlantAbility interface to handle using the ability
     @Override
-<<<<<<< HEAD
-    public void useAbility() {
-        if (isReady && isZombiesInSamePetak()) {
-            Petak currentPetak = GameMap.getInstance().getPetak(getPos());
-            List<Zombie> zombies = currentPetak.getZombies();
-            for (Zombie z : zombies) {
-                z.reduceHealth(z.getHealth()); // Instant kill zombies --> zombies dies
-            }
-            setHealth(0); // Set health of PotatoMine to 0 (remove PotatoMine cuz it's already exploded)
-            System.out.println("PotatoMine explodes and vanishes!");
-        } else {
-            System.out.println("PotatoMine is not ready yet!");
-=======
     public void useAbility( )
     {
         for(Petak p : reachablePetak)
@@ -114,20 +91,11 @@ public class PotatoMine extends Plant implements PlantAbility {
                     }
                 } 
             }
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
         }
     }
 
     // Implement checkToUseAbility method from PlantAbility interface
     @Override
-<<<<<<< HEAD
-    public void checkToUseAbility() {
-        if (isReady && isZombiesInSamePetak()) {
-            useAbility();
-        }
-    }
-}
-=======
     public void checkToUseAbility()
     {
         if (isZombiesInRange() && getAttackTimer() == 0)
@@ -144,4 +112,3 @@ public class PotatoMine extends Plant implements PlantAbility {
         }
     }
 }
->>>>>>> d1d3d9d98fedf774e86cd3e8fb13c850b32fde4b
