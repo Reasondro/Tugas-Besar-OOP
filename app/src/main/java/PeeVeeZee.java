@@ -31,8 +31,8 @@ public class PeeVeeZee {
 
         boolean gameStarted = false;
 
-        System.out.println("Welcome to PeeVeeZee!");
-
+        // System.out.println("Welcome to PeeVeeZee!");
+        Title.Main();
         while (isRunning) {
 
             System.out.print("Enter your command: ");
@@ -297,7 +297,8 @@ public class PeeVeeZee {
                                 plantIndex = Integer.parseInt(parts[0].trim());
                                 row = Integer.parseInt(parts[1].trim());
                                 column = Integer.parseInt(parts[2].trim());
-                            } else {
+                            } 
+                            else {
                                 System.out.println("Invalid input. Please try again.");
                                 continue;
                             }
@@ -305,18 +306,19 @@ public class PeeVeeZee {
                             if (row < 1 || row > 6 || column < 1 || column >= 9) {
                                 throw new InvalidRowAtauColumn();
                             }
-                            Position pos = new Position(row, column);
-                            Petak targetPetak = map.getPetak(pos);
-                            if (targetPetak.getPlants().size() == 1) {
-                                throw new PlantingException();
-                            }
+                            // Position pos = new Position(row, column);
+                            // Petak targetPetak = map.getPetak(pos);
+                            // if (targetPetak.getPlants().size() == 1) {
+                            //     throw new PlantingException();
+                            // }
                         } catch (InvalidRowAtauColumn e) {
                             System.out.println(e.getMessage());
                             continue;
-                        } catch (PlantingException e) {
-                            System.out.println(e.getMessage());
-                            continue;
-                        }
+                        } 
+                        // catch (PlantingException e) {
+                        //     System.out.println(e.getMessage());
+                        //     continue;
+                        // }
 
                         myDeck.planting(plantIndex, row, column);
 
@@ -387,6 +389,7 @@ public class PeeVeeZee {
                         myDeck.clearDeck();
                         map.resetMap();
                         gameStarted = false;
+                        System.out.println("Game session ended by user!");
                     } else if ((userInput.equalsIgnoreCase("X") || userInput.equalsIgnoreCase("HELP"))) // ? Stop the
                                                                                                         // program
                     {
@@ -449,7 +452,7 @@ class AddDeckException extends Exception {
 
 class SwapCardException extends Exception {
     public String getMessage() {
-        return ("cannot swap an empty decks!");
+        return ("Cannot swap an empty decks!");
     }
 }
 

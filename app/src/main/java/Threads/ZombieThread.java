@@ -211,7 +211,7 @@ public class ZombieThread implements Runnable {
                 Thread.sleep(1000);
             } catch (InterruptedException e)
              {
-            System.out.println("Zombie Loop Interrupted");
+            // System.out.println("Zombie Loop Interrupted");
             return;
             }
         }

@@ -122,7 +122,7 @@ public class TimerThread implements Runnable{
             }
             catch (InterruptedException e)
             {
-                System.out.println("Timer Loop Interrupted");
+                // System.out.println("Timer Loop Interrupted");
                 // setDayStart(0);
                 // setCurrentTime(0);
                 // gameRunning = false;
