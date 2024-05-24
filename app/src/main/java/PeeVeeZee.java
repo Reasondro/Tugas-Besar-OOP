@@ -31,7 +31,7 @@ public class PeeVeeZee {
 
         boolean gameStarted = false;
 
-        System.out.println("Welcome to PeeVeeZee!");
+        Title.Main();
 
         while (isRunning) {
 
