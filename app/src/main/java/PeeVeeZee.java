@@ -31,13 +31,8 @@ public class PeeVeeZee {
 
         boolean gameStarted = false;
 
-<<<<<<< HEAD
         // System.out.println("Welcome to PeeVeeZee!");
         Title.Main();
-=======
-        Title.Main();
-
->>>>>>> 226718f1e6b2bc609a33a4e9f8dab8ce52f87b5b
         while (isRunning) {
 
             System.out.print("Enter your command: ");
