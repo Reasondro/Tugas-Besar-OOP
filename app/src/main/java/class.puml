@@ -535,10 +535,51 @@ class Border {
     +to()
 }
 
-class PeeVeeZee{
-'class menu utama
+@startuml
 
+class PeeVeeZee {
+' class utama
+    +void main(String[] args)
 }
+
+class InvalidRowAtauColumn {
+    +String getMessage()
+}
+
+class Decknotfull {
+    +String getMessage()
+}
+
+class PlantingException {
+    +String getMessage()
+}
+
+class IndexOutDariBounds {
+    +String getMessage()
+}
+
+class RemoveDeckException {
+    +String getMessage()
+}
+
+class AddDeckException {
+    +String getMessage()
+}
+
+class SwapCardException {
+    +String getMessage()
+}
+
+class DiggingException {
+    +String getMessage()
+}
+
+class InvalidCommand {
+    +String getMessage()
+}
+
+@enduml
+
 
 ' Relationships
 PlantFactory "1" -- "*" Plant : creates >
@@ -564,5 +605,26 @@ Title -> Michael : printMichael()
 Title -> Vs : printVs()
 Title -> Lalapan : printLalapan()
 Title -> Border : to()
+PeeVeeZee ..> InvalidRowAtauColumn : throws
+PeeVeeZee ..> Decknotfull : throws
+PeeVeeZee ..> PlantingException : throws
+PeeVeeZee ..> IndexOutDariBounds : throws
+PeeVeeZee ..> RemoveDeckException : throws
+PeeVeeZee ..> AddDeckException : throws
+PeeVeeZee ..> SwapCardException : throws
+PeeVeeZee ..> DiggingException : throws
+PeeVeeZee ..> InvalidCommand : throws
+PeeVeeZee ..> Creature.Creature : uses
+PeeVeeZee ..> GameMap.GameMap : uses
+PeeVeeZee ..> Inventory.Inventory : uses
+PeeVeeZee ..> Petak.Petak : uses
+PeeVeeZee ..> Deck.Deck : uses
+PeeVeeZee ..> PlantFactory.PlantFactory : uses
+PeeVeeZee ..> Position.Position : uses
+PeeVeeZee ..> Sun.Sun : uses
+PeeVeeZee ..> Threads.TimerThread : uses
+PeeVeeZee ..> Threads.PlantThread : uses
+PeeVeeZee ..> Threads.ZombieThread : uses
+PeeVeeZee ..> Title : uses
 
 @enduml
