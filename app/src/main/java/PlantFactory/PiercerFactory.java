@@ -7,7 +7,7 @@ import Plants.Piercer;
 
 public class PiercerFactory extends PlantFactory {
 
-    private static int   piercerCount = 0;
+    private static int  piercerCount = 0;
 
     public PiercerFactory()
     {
