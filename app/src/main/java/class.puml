@@ -34,9 +34,6 @@ class PiercerBullet extends Bullet{
 class SnowBullet extends Bullet{
 }
 
-class SquashBullet extends Bullet{
- }
-
 abstract class "Creature"{
 - name: String
 - health: int
@@ -527,5 +524,6 @@ SunflowerFactory -- Sun : creates >
 Plant -- Ability : uses >
 Creature -- Position : positioned at >
 Petak -- Position : located at >
+
 
 @enduml
