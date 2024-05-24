@@ -22,7 +22,7 @@ public class ButterBullet extends Bullet {
                 z.setFrozen(true);
                 z.setWalkSpeedInSeconds(z.getWalkSpeedInSeconds() * 2);
             }
-            System.out.println("Zombie is frozen");
+            // System.out.println("Zombie is frozen");
            }
         }
            setWornOut(true);
